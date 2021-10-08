@@ -50,7 +50,7 @@ const Container = styled.div`
         outline: none;
         border: none;
         background: transparent;
-        font-size: 1rem;
+        font-size: 1.15rem;
         padding: 5px 0 5px 5px;
         position: relative;
         border-bottom: 2px solid #666;
