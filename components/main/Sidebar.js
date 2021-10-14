@@ -1,10 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Logo from "../Logo";
+import {SetThemeContext} from "../../pages/_app"
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 
 const Sidebar = ({ excludePath }) => {
+  const {currentTheme, setCurrentTheme} = useContext(SetThemeContext)
   const router = useRouter();
   const isHidden = excludePath?.find((value) => value === router.pathname);
   if (isHidden) {
@@ -36,10 +39,16 @@ const Sidebar = ({ excludePath }) => {
             <p>IAM Users</p>
           </button>
         </Menu>
+        <div>
+        <button className="" onClick={() => setCurrentTheme(currentTheme === "light" ? "dark" : "light")}>
+          <FontAwesomeIcon icon={["fas", currentTheme === "light" ? "moon" :"sun"]} size="2x" />
+          <p>{currentTheme === "light" ? "Dark Mode" :  "Light Mode"}</p>
+        </button>
         <button className="">
           <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x" />
           <p>ออกจากระบบ</p>
         </button>
+        </div>
       </Container>
     );
   }

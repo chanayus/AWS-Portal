@@ -1,17 +1,19 @@
-import '../styles/globals.css'
-import 'tailwindcss/tailwind.css'
+import "../styles/globals.css";
+import "tailwindcss/tailwind.css";
 
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 
-import Layout from "../components/main/Layout"
+import Layout from "../components/main/Layout";
+import React from "react";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {theme} from "../styles/theme"
-import { useState } from 'react';
+import { theme } from "../styles/theme";
+import { useState } from "react";
 
 library.add(fas, fab, far);
+const SetThemeContext = React.createContext();
 
 function MyApp({ Component, pageProps }) {
   const [currentTheme, setCurrentTheme] = useState("dark");
@@ -21,7 +23,7 @@ function MyApp({ Component, pageProps }) {
       box-sizing: border-box !important;
     }
     body {
-      background:  ${props => props.theme.mainColor};
+      background:  ${(props) => props.theme.mainColor};
     }
     h1{
         font-size:clamp(40px,8vmin,45px);
@@ -53,13 +55,16 @@ function MyApp({ Component, pageProps }) {
     }
   `;
   return (
-    <ThemeProvider theme={theme[currentTheme]}>
-      <GlobalStyle/> 
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <SetThemeContext.Provider value={{currentTheme, setCurrentTheme}}>
+      <ThemeProvider theme={theme[currentTheme]}>
+        <GlobalStyle />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </SetThemeContext.Provider>
   );
 }
 
-export default MyApp
+export {SetThemeContext};
+export default MyApp;
