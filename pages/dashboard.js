@@ -19,21 +19,21 @@ const Dashboard = () => {
         <DataCard color="#F49292">
           <FontAwesomeIcon icon="users" size="4x" className="mr-4" />
           <div>
-            <h2>IAM ที่กำลังใช้ Resource</h2>
+            <h2>IAM ทั้งหมด</h2>
             <h1>255</h1>
           </div>
         </DataCard>
         <DataCard color="#8C9CEE">
-          <FontAwesomeIcon icon="money-bill" size="4x" className="mr-4" />
+          <FontAwesomeIcon icon="money-check-alt" size="4x" className="mr-4" />
           <div>
-            <h2>IAM ที่กำลังใช้ Resource</h2>
+            <h2>ค่าใช้จ่าย</h2>
             <h1>255</h1>
           </div>
         </DataCard>
-        <DataCard color="#8C9CEE">
-          <FontAwesomeIcon icon="money-bill" size="4x" className="mr-4" />
+        <DataCard color="#ebb96f">
+          <FontAwesomeIcon icon="server" size="4x" className="mr-4" />
           <div>
-            <h2>IAM ที่กำลังใช้ Resource</h2>
+            <h2>Resource ที่กำลังใช้งาน</h2>
             <h1>255</h1>
           </div>
         </DataCard>
@@ -91,25 +91,24 @@ const Dashboard = () => {
 };
 
 const DataCard = styled.div`
-  ${tw`flex justify-evenly items-center rounded mr-0 mt-5 md:mr-0 p-5 lg:p-3`}
-  background: linear-gradient(101.2deg, #1f1f1f 22.98%, #6A6A6A 92.57%);
+  ${tw`flex justify-center flex-col rounded pl-5 mt-5 md:px-6 md:mr-0 relative overflow-hidden`}
+  background: ${(props) => props.color};
   height: 150px;
-  border-bottom: 10px solid ${(props) => props.color};
-  color: #fff !important;
+  color: #111 !important;
   svg{
-    ${tw`block sm:hidden`}
-    font-size: clamp(2.8rem,1.3vw, 3.1rem);
+    ${tw`opacity-40 absolute -bottom-2 -right-2 block sm:hidden`}
+    font-size: clamp(4.8rem,7vw, 6rem);
   }
   h2 {
     font-size: clamp(1rem,1.5vw,1.3rem);
     font-weight: 300;
-    color: #fff;
+    color: #111;
   }
   h1 {
     font-size: clamp(2.5rem,2vw,1.3rem);
     line-height: 1;
     font-weight: 600;
-    color: #fff;
+    color: #111;
   }
 `;
 
