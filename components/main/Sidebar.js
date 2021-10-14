@@ -1,61 +1,89 @@
-import styled from "styled-components"
-import tw from 'twin.macro';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Logo from "../Logo";
+import styled from "styled-components";
+import tw from "twin.macro";
+import { useRouter } from "next/router";
 
-const Sidebar = () =>{
-    return(
-        <Container>
-            <FontAwesomeIcon icon={["fab", "aws"]} size="3x"/>
-            <Menu>
-               <button>
-                    <FontAwesomeIcon icon="home" size="2x"/>
-                    หน้าหลัก
-                </button> 
-               <button>
-                    <FontAwesomeIcon icon="history" size="2x"/>
-                   ประวัติ
-                </button> 
-               <button>
-                    <FontAwesomeIcon icon="server" size="2x"/>
-                   Resource <br/>ที่ถูกใช้งาน
-                </button> 
-            </Menu>
-            <button>
-                <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x"/>
-                ออกจากระบบ
-            </button>
-        </Container>
-    )
-}
+const Sidebar = ({ excludePath }) => {
+  const router = useRouter();
+  const isHidden = excludePath?.find((value) => value === router.pathname);
+  if (isHidden) {
+    return <></>;
+  } else {
+    return (
+      <Container>
+        <div className="logo">
+          <Logo />
+        </div>
+        <Menu>
+          <button>
+            <FontAwesomeIcon icon="home" />
+            <p>หน้าหลัก</p>
+          </button>
+          <button>
+            <FontAwesomeIcon icon="history" />
+            <p>ประวัติ</p>
+          </button>
+          <button>
+            <FontAwesomeIcon icon="server" />
+            <p>
+              Resource <br />
+              ที่ถูกใช้งาน
+            </p>
+          </button>
+          <button>
+            <FontAwesomeIcon icon="user" />
+            <p>IAM Users</p>
+          </button>
+        </Menu>
+        <button className="">
+          <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x" />
+          <p>ออกจากระบบ</p>
+        </button>
+      </Container>
+    );
+  }
+};
 
 const Container = styled.div`
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 130px;
-    height: 100vh; 
-    background: ${props => props.theme.white};
-    z-index: 10;
-    ${tw`flex flex-col justify-between items-center py-7 pb-2 flex-shrink-0`}
-    svg{
-        width: 100%;
+  ${tw` flex flex-col justify-between py-7 pb-2 flex-shrink-0 h-screen md:w-0 md:p-0 px-2.5 overflow-hidden duration-200 z-50`}
+  width: 200px;
+  background: ${(props) => props.theme.subColor};
+  .logo {
+    ${tw`duration-75 self-center`}
+    svg { 
+      width: 135px;
+      fill: ${(props) => props.theme.textColor};
+      path {
+        stroke: ${(props) => props.theme.textColor};
+      }
     }
-    button{
-        ${tw`flex flex-col justify-center items-center rounded flex-shrink-0`}
-        width: 100px;
-        height: 85px;    
-        color: ${props => props.theme.black};
-        margin: 10px 0;
-        transition: 0.25s;
-        line-height: 1.3;
-        :hover{
-            background: ${props => props.theme.black};
-            color: #FFF;
-        }
+  }
+  button {
+    ${tw`flex items-center self-stretch flex-shrink-0 duration-75 leading-tight text-left rounded`}
+    width: 100%;
+    height: 60px;
+    color: ${(props) => props.theme.textColor};
+    margin: 10px 0;
+    svg {
+      margin-right: 10px;
+      font-size: 28px;
+      flex: 1;
     }
-`
-const Menu = styled.div`
-    ${tw`flex flex-col justify-start items-center flex-1 pt-14 flex-shrink-0`}
-`
+    p {
+      flex: 2;
+    }
+    :hover {
+      background: ${(props) => props.theme.textColor};
+      p, svg {
+        color: ${(props) => props.theme.subColor};
+      }
+    }
+  }
+`;
 
-export default Sidebar
+const Menu = styled.div`
+  ${tw`flex flex-col flex-1 pt-14 flex-shrink-0`}
+`;
+
+export default Sidebar;

@@ -10,7 +10,7 @@ export const theme = {
     },
     dark: {
         textColor : "#FFF",
-        mainColor: "#242424",
+        mainColor: "#262626",
         subColor: "#050505",
         blue: "#2E75DF",
         red: "#E82424",
