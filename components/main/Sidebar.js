@@ -81,7 +81,8 @@ const Container = styled.div`
     }
     p {
       flex: 2;
-      font-size: clamp(0.85rem,0.9vw,1rem);
+      font-size: clamp(0.9rem,0.9vw,1rem);
+      text-align: left;
     }
     :hover {
       background: ${(props) => props.theme.textColor};

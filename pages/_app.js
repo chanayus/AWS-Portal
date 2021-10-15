@@ -26,12 +26,13 @@ function MyApp({ Component, pageProps }) {
       background:  ${(props) => props.theme.mainColor};
     }
     h1{
-        font-size:clamp(32px,5vmin,45px);
+        font-size:clamp(24px,5vmin,36px);
         font-weight: 700;
     }
-    p,h1,h2,h3,h4,h5,h6{
+    p,h1,h2,h3,h4,h5,h6,td,th{
       color: ${(props) => props.theme.textColor};
     }
+    p,td,th
     a{
       text-align: center;
     }
@@ -42,17 +43,18 @@ function MyApp({ Component, pageProps }) {
       width: 100%;
       text-align: center;
       td, th{
-        padding: 15px 0;
+        padding: 17.5px 0;
+        font-size: clamp(12px,2vw,16px);
       }
       th{
         padding-top: 0;
       }
       thead{
-        border-bottom: 2px solid #050505;
+        border-bottom: 2px solid ${(props) => props.theme.textColor}
       }
       tbody{
         tr{
-          border-bottom: 2px solid rgba(0,0,0,0.30);
+          border-bottom: 2px solid #8181817f;
         }
       }
     }

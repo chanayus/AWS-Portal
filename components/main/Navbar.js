@@ -20,7 +20,7 @@ const Navbar = ({excludePath}) => {
         </div>
         <Menu>
           <button className="user-button mr-5 md:mr-3">
-            <div className="bg-red-900 rounded-full w-10 h-10 flex justify-center items-center mr-2">
+            <div className="bg-gray-400 rounded-full text-gray-500rounded-full w-10 h-10 flex justify-center items-center mr-2">
               <FontAwesomeIcon icon="user" size="2x" />
             </div>
             <p className="md:hidden">Username</p>
