@@ -55,7 +55,7 @@ const Sidebar = ({ excludePath }) => {
 };
 
 const Container = styled.div`
-  ${tw` flex flex-col justify-between py-7 pb-2 flex-shrink-0 h-screen md:w-0 md:p-0 px-2.5 overflow-hidden duration-200 z-50`}
+  ${tw` flex flex-col justify-between py-7 pb-2 flex-shrink-0 h-screen overflow-hidden duration-200 z-50 px-2.5 xl:px-0 md:w-0 md:p-0`}
   width: clamp(160px,10vw,200px);
   background: ${(props) => props.theme.subColor};
   .logo {
@@ -71,17 +71,17 @@ const Container = styled.div`
   button {
     ${tw`flex items-center self-stretch flex-shrink-0 duration-75 leading-tight text-left rounded`}
     width: 100%;
-    height: 5.75vmin;
+    height: 55px;
     color: ${(props) => props.theme.textColor};
     margin: 1vh 0;
     svg {
       margin-right: 10px;
-      font-size: clamp(1.35rem,1.75vw,2rem);
+      font-size: clamp(1.35rem,1.5vw,2rem);
       flex: 1;
     }
     p {
       flex: 2;
-      font-size: clamp(0.85rem,1vw,1rem);
+      font-size: clamp(0.85rem,0.9vw,1rem);
     }
     :hover {
       background: ${(props) => props.theme.textColor};

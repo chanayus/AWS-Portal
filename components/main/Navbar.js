@@ -59,7 +59,7 @@ const Menu = styled.div`
     ${tw`flex items-center`}
   }
   svg{
-    font-size: clamp(17px,6vw,28px);
+    font-size: clamp(17px,1.725vw,28px);
   }
   .notification-button {
     position: relative;
