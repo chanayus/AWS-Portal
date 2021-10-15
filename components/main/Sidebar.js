@@ -32,7 +32,7 @@ const Sidebar = ({ excludePath }) => {
               <p>ประวัติ</p>
             </a>
           </Link>
-          <Link href="/runningResource">
+          <Link href="/resource">
             <a>
               <FontAwesomeIcon icon="server" />
               <p>
