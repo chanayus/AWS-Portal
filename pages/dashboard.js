@@ -41,7 +41,7 @@ const Dashboard = () => {
       <div className="flex justify-between mt-20 gap-10 lg:flex-col">
         <div className="flex-1">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl md:text-lg">Resource ในแต่ละ Region</h2>
+            <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
           <div className="bg-white p-6 mt-5 rounded md:flex-none md:w-full">
@@ -63,7 +63,7 @@ const Dashboard = () => {
         </div>
         <div className="flex-1 lg:mt-10">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl md:text-lg">Resource ที่ถูกสร้างล่าสุด</h2>
+            <h2 className="text-xl md:text-lg">Resource ที่ถูกสร้างล่าสุด</h2>
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
           <div className="bg-white p-6 mt-5 rounded md:flex-none md:w-full">
@@ -93,19 +93,19 @@ const Dashboard = () => {
 const DataCard = styled.div`
   ${tw`flex justify-center flex-col rounded pl-5 mt-5 md:px-6 md:mr-0 relative overflow-hidden`}
   background: ${(props) => props.color};
-  height: 150px;
+  height: 140px;
   color: #111 !important;
   svg{
     ${tw`opacity-40 absolute -bottom-2 -right-2 block sm:hidden`}
     font-size: clamp(4.8rem,7vw, 6rem);
   }
   h2 {
-    font-size: clamp(1rem,1.5vw,1.3rem);
+    font-size: clamp(1rem,1.25vw,1.3rem);
     font-weight: 300;
     color: #111;
   }
   h1 {
-    font-size: clamp(2.5rem,2vw,1.3rem);
+    font-size: clamp(2.25rem,1.25vw,1.3rem);
     line-height: 1;
     font-weight: 600;
     color: #111;

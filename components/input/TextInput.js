@@ -3,7 +3,7 @@ import styled from "styled-components"
 const TextInput = (props) => {
     return (
         <Container>                     
-            <input type={props.type} required={props.required} className="text-input"/>
+            <input type={props.type} required={props.required} className="text-input rounded-none"/>
             <label>{props.title}</label>
             <div className="bar"></div>
         </Container>

@@ -11,7 +11,7 @@ const Login = () =>{
                    <Logo/>
                 </LogoWrapper>
                 <LoginForm className="backdrop-filter backdrop-blur">
-                    <h1 className="text-black">Sign In</h1>
+                    <h1 className="text-black md:text-white">Sign In</h1>
                     <div className="form-group">
                         <TextInput type="text" name="" id="" required={true} title="Username"/>
                         <TextInput type="password" name="" id="" required={true} title="Password" />
@@ -53,11 +53,12 @@ const LogoWrapper = styled.div`
 `
 
 const LoginForm = styled.form`
-    ${tw`flex flex-col justify-between ml-24 w-full duration-200 bg-white px-8 py-12`}
+    ${tw`flex flex-col justify-between ml-24 w-full duration-200 bg-white px-8 py-12 md:py-0`}
     max-width: 550px;
     @media(max-width: 960px){
         background: rgba(0,0,0,0.7);
-        ${tw`justify-evenly max-w-full m-0 text-white`}
+        height: 100vh;
+        ${tw`justify-center max-w-full m-0 text-white`}
         input, label{
             color: #CCC;
             :focus~label, :valid~label, :-webkit-autofill~label {
@@ -71,7 +72,7 @@ const LoginForm = styled.form`
         }
     }
     .form-group{
-        ${tw`flex flex-col`}        
+        ${tw`flex flex-col md:my-20 sm:my-0`}        
     }
     .button-group{
         ${tw`flex justify-around items-center flex-wrap gap-y-7`}
@@ -84,7 +85,7 @@ const LoginForm = styled.form`
             color: #FFF;
         }
         a{
-            ${tw`min-w-max`}
+            ${tw`min-w-max xs:mt-7`}
         }
     }
 `

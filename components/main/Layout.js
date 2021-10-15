@@ -13,7 +13,7 @@ const Layout = ({children}) =>{
             <div className="w-full">
                 <Navbar excludePath={excludePath}/>
                 {isHidden ? children :
-                    <div className="div mx-auto max-w-screen-2xl px-4 mt-7 md:mt-24">
+                    <div className="div mx-auto max-w-screen-2xl px-4 mt-7 md:mt-28">
                         {children}
                     </div>
                 }

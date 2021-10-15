@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
       background:  ${(props) => props.theme.mainColor};
     }
     h1{
-        font-size:clamp(40px,8vmin,45px);
+        font-size:clamp(32px,5vmin,45px);
         font-weight: 700;
     }
     p,h1,h2,h3,h4,h5,h6{
@@ -34,6 +34,9 @@ function MyApp({ Component, pageProps }) {
     }
     a{
       text-align: center;
+    }
+    button{
+      font-size: clamp(13px,1vw,16px);
     }
     table{
       width: 100%;
