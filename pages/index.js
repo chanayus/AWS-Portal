@@ -55,7 +55,7 @@ const Index = ({ regionList }) => {
             </div>
           </DataCard>
         </Link>
-        <Link href="">
+        <Link href="/runningResource">
           <DataCard color="#ebb96f">
             <FontAwesomeIcon icon="server" size="4x" className="mr-4" />
             <div>

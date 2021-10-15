@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import Logo from "../Logo";
-import {SetThemeContext} from "../../pages/_app"
+import { SetThemeContext } from "../../pages/_app";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 
 const Sidebar = ({ excludePath }) => {
-  const {currentTheme, setCurrentTheme} = useContext(SetThemeContext)
+  const { currentTheme, setCurrentTheme } = useContext(SetThemeContext);
   const router = useRouter();
   const isHidden = excludePath?.find((value) => value === router.pathname);
   if (isHidden) {
@@ -19,35 +20,43 @@ const Sidebar = ({ excludePath }) => {
           <Logo />
         </div>
         <Menu>
-          <button>
-            <FontAwesomeIcon icon="home" />
-            <p>หน้าหลัก</p>
-          </button>
-          <button>
-            <FontAwesomeIcon icon="history" />
-            <p>ประวัติ</p>
-          </button>
-          <button>
-            <FontAwesomeIcon icon="server" />
-            <p>
-              Resource <br />
-              ที่ถูกใช้งาน
-            </p>
-          </button>
-          <button>
-            <FontAwesomeIcon icon="user" />
-            <p>IAM Users</p>
-          </button>
+          <Link href="/">
+            <a>
+              <FontAwesomeIcon icon="home" />
+              <p>หน้าหลัก</p>
+            </a>
+          </Link>
+          <Link href="">
+            <a>
+              <FontAwesomeIcon icon="history" />
+              <p>ประวัติ</p>
+            </a>
+          </Link>
+          <Link href="/runningResource">
+            <a>
+              <FontAwesomeIcon icon="server" />
+              <p>
+                Resource <br />
+                ที่ถูกใช้งาน
+              </p>
+            </a>
+          </Link>
+          <Link href="">
+            <a>
+              <FontAwesomeIcon icon="user" />
+              <p>IAM Users</p>
+            </a>
+          </Link>
         </Menu>
         <div>
-        <button className="" onClick={() => setCurrentTheme(currentTheme === "light" ? "dark" : "light")}>
-          <FontAwesomeIcon icon={["fas", currentTheme === "light" ? "moon" :"sun"]} size="2x" />
-          <p>{currentTheme === "light" ? "Dark Mode" :  "Light Mode"}</p>
-        </button>
-        <button className="">
-          <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x" />
-          <p>ออกจากระบบ</p>
-        </button>
+          <button className="" onClick={() => setCurrentTheme(currentTheme === "light" ? "dark" : "light")}>
+            <FontAwesomeIcon icon={["fas", currentTheme === "light" ? "moon" : "sun"]} size="2x" />
+            <p>{currentTheme === "light" ? "Dark Mode" : "Light Mode"}</p>
+          </button>
+          <button className="">
+            <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x" />
+            <p>ออกจากระบบ</p>
+          </button>
         </div>
       </Container>
     );
@@ -60,15 +69,15 @@ const Container = styled.div`
   background: ${(props) => props.theme.subColor};
   .logo {
     ${tw`duration-75 self-center`}
-    svg { 
-      width: clamp(120px, 1vw,135px);
+    svg {
+      width: clamp(120px, 1vw, 135px);
       fill: ${(props) => props.theme.textColor};
       path {
         stroke: ${(props) => props.theme.textColor};
       }
     }
   }
-  button {
+  a, button {
     ${tw`flex items-center self-stretch flex-shrink-0 duration-75 leading-tight text-left rounded`}
     width: 100%;
     height: 55px;
@@ -76,17 +85,18 @@ const Container = styled.div`
     margin: 1vh 0;
     svg {
       margin-right: 10px;
-      font-size: clamp(1.35rem,1.5vw,2rem);
+      font-size: clamp(1.35rem, 1.5vw, 2rem);
       flex: 1;
     }
     p {
       flex: 2;
-      font-size: clamp(0.9rem,0.9vw,1rem);
+      font-size: clamp(0.9rem, 0.9vw, 1rem);
       text-align: left;
     }
     :hover {
       background: ${(props) => props.theme.textColor};
-      p, svg {
+      p,
+      svg {
         color: ${(props) => props.theme.subColor};
       }
     }

@@ -12,7 +12,7 @@ export const getStaticProps = async () => {
   };
 };
 
-const RunningResource = ({ resourcesData }) => {
+const Resource = ({ resourcesData }) => {
   const [ resources, setResources ] = useState(resourcesData)
   const [ isSelectAll, setIsSelectAll ] = useState(false)
   const chooseHandle = (valueItem) => {
@@ -77,4 +77,4 @@ const RunningResource = ({ resourcesData }) => {
   );
 };
 
-export default RunningResource;
+export default Resource;
