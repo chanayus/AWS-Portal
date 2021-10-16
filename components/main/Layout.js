@@ -1,21 +1,23 @@
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
+import tw from "twin.macro";
 import { useRouter } from "next/router";
 
 const Layout = ({children}) =>{
     const router = useRouter();
-    const excludePath = ['/login']
+    const excludePath = ['/login',"/_error"]
     const isHidden = excludePath?.find((value) => value === router.pathname);
+    console.log(router.pathname)
     return(
         <div className="flex">
             <Sidebar excludePath={excludePath}/>
             <div className="w-full">
                 <Navbar excludePath={excludePath}/>
                 {isHidden ? children :
-                    <div className="div mx-auto max-w-screen-2xl px-4 mt-7 md:mt-28">
+                    <Content >
                         {children}
-                    </div>
+                    </Content>
                 }
             </div>
         </div>
@@ -23,4 +25,8 @@ const Layout = ({children}) =>{
 
 }
 
+const Content = styled.div`
+    margin-left: clamp(160px,10vw,200px);
+    ${tw`mt-7 px-24 xl:px-4 md:mt-28 md:ml-0`}
+`
 export default Layout;

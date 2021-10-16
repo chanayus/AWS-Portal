@@ -36,7 +36,7 @@ const Navbar = ({excludePath}) => {
 };
 
 const Container = styled.div`
-  ${tw`flex items-center py-4 px-5 justify-end z-50 md:justify-between md:fixed md:top-0 md:w-full sm:py-2`}
+  ${tw`flex items-center py-4 pr-6 pl-4 justify-end z-50 md:justify-between md:fixed md:top-0 md:w-full sm:py-2`}
   color: ${(props) => props.theme.textColor};
   @media(max-width: 960px){
     background: ${(props) => props.theme.subColor};

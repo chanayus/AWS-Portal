@@ -12,8 +12,8 @@ export const theme = {
     dark: {
         bodyColor: "#E6E9EE",
         textColor : "#FFF",
-        mainColor: "#272830",
-        subColor: "#151515",
+        mainColor: "#2b2c33",
+        subColor: "#1d1d1d",
         blue: "#2E75DF",
         red: "#E82424",
         tabletScreen: "(max-width: 960px)"

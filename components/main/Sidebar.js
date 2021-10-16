@@ -64,10 +64,9 @@ const Sidebar = ({ excludePath }) => {
 };
 
 const Container = styled.div`
-  ${tw` flex flex-col justify-between py-7 pb-2 flex-shrink-0 h-screen overflow-hidden duration-200 z-50 px-2.5 xl:px-0 md:w-0 md:p-0`}
+  ${tw`fixed left-0 flex flex-col justify-between py-7 pb-2 flex-shrink-0 h-screen overflow-hidden duration-200 z-50 px-2.5 xl:px-0 md:w-0 md:p-0`}
   width: clamp(160px,10vw,200px);
-
-  background: linear-gradient(176.38deg, #2e362a 20%, #19221e 48.81%);
+  background: linear-gradient(176.38deg, #2b314b 20%, #191c22 48.81%);
   .logo {
     ${tw`duration-75 self-center`}
     svg {
@@ -79,29 +78,25 @@ const Container = styled.div`
     }
   }
   a, button {
-    ${tw`flex items-center self-stretch flex-shrink-0 duration-75 leading-tight text-left rounded`}
-    width: 100%;
-    height: 55px;
-    color: #FFF;
+    ${tw`relative w-full flex items-center self-stretch flex-shrink-0 leading-tight text-left`}
+    height: 50px;
+    color: #efefef;
     margin: 1vh 0;
     svg {
       margin-right: 10px;
-      font-size: clamp(1.375rem, 1.5vw, 2rem);
+      font-size: clamp(1.4rem, 1.5vw, 1.65rem);
       flex: 1;
     }
     p {
       flex: 2;
       font-size: clamp(0.925rem, 0.9vw, 1.025rem);
       text-align: left;
-      color: #FFF;
+      color: #efefef;
       font-weight: 300;
     }
     :hover {
       background: #FFF;
-      p,
-      svg {
-        color: #111;
-      }
+      p, svg { color: #111; }
     }
   }
 `;

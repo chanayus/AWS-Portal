@@ -8,8 +8,8 @@ module.exports = {
       xs: {'raw': '(max-width: 480px)'},
       sm: {'raw': '(max-width: 640px)'},
       md: {'max': '960px'},
-      lg: {'max': '1024px'},
-      xl: {'max': '1280px'},
+      lg: {'raw': '(max-width: 1024px)'}, 
+      xl: {'raw': '(max-width: 1280px)'},
       '2xl': '1536px',
     },
     colors: {
