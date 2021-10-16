@@ -86,14 +86,15 @@ const Container = styled.div`
     margin: 1vh 0;
     svg {
       margin-right: 10px;
-      font-size: clamp(1.35rem, 1.5vw, 2rem);
+      font-size: clamp(1.375rem, 1.5vw, 2rem);
       flex: 1;
     }
     p {
       flex: 2;
-      font-size: clamp(0.9rem, 0.9vw, 1rem);
+      font-size: clamp(0.925rem, 0.9vw, 1.025rem);
       text-align: left;
       color: #FFF;
+      font-weight: 300;
     }
     :hover {
       background: #FFF;
