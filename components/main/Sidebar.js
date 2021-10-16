@@ -66,14 +66,15 @@ const Sidebar = ({ excludePath }) => {
 const Container = styled.div`
   ${tw` flex flex-col justify-between py-7 pb-2 flex-shrink-0 h-screen overflow-hidden duration-200 z-50 px-2.5 xl:px-0 md:w-0 md:p-0`}
   width: clamp(160px,10vw,200px);
-  background: ${(props) => props.theme.subColor};
+
+  background: linear-gradient(176.38deg, #2e362a 20%, #19221e 48.81%);
   .logo {
     ${tw`duration-75 self-center`}
     svg {
       width: clamp(120px, 1vw, 135px);
-      fill: ${(props) => props.theme.textColor};
+      fill: #FFF;
       path {
-        stroke: ${(props) => props.theme.textColor};
+        stroke: #FFF;
       }
     }
   }
@@ -81,7 +82,7 @@ const Container = styled.div`
     ${tw`flex items-center self-stretch flex-shrink-0 duration-75 leading-tight text-left rounded`}
     width: 100%;
     height: 55px;
-    color: ${(props) => props.theme.textColor};
+    color: #FFF;
     margin: 1vh 0;
     svg {
       margin-right: 10px;
@@ -92,12 +93,13 @@ const Container = styled.div`
       flex: 2;
       font-size: clamp(0.9rem, 0.9vw, 1rem);
       text-align: left;
+      color: #FFF;
     }
     :hover {
-      background: ${(props) => props.theme.textColor};
+      background: #FFF;
       p,
       svg {
-        color: ${(props) => props.theme.subColor};
+        color: #111;
       }
     }
   }

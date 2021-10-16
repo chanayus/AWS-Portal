@@ -24,7 +24,7 @@ const Index = ({ regionList }) => {
       <h1 className="font-bold">Dashboard</h1>
       <div className="grid grid-cols-4 gap-8 xl:gap-3 lg:grid-cols-2  mt-6">
         <Link href="/">
-          <DataCard color="#98E2A4">
+          <DataCard color="#7fe490">
             <FontAwesomeIcon icon="user" size="4x" className="mr-4" />
             <div>
               <h2>IAM ที่กำลังใช้ Resource</h2>
@@ -33,7 +33,7 @@ const Index = ({ regionList }) => {
           </DataCard>
         </Link>
         <Link href="">
-          <DataCard color="#F49292">
+          <DataCard color="#e07272">
             <FontAwesomeIcon icon="users" size="4x" className="mr-4" />
             <div>
               <h2>IAM ทั้งหมด</h2>
@@ -42,7 +42,7 @@ const Index = ({ regionList }) => {
           </DataCard>
         </Link>
         <Link href="">
-          <DataCard color="#8C9CEE">
+          <DataCard color="#778bf0">
             <FontAwesomeIcon
               icon="money-check-alt"
               size="4x"
@@ -55,7 +55,7 @@ const Index = ({ regionList }) => {
           </DataCard>
         </Link>
         <Link href="/resource">
-          <DataCard color="#ebb96f">
+          <DataCard color="#e2a54a">
             <FontAwesomeIcon icon="server" size="4x" className="mr-4" />
             <div>
               <h2>Resource ที่กำลังใช้งาน</h2>
@@ -123,25 +123,27 @@ const Index = ({ regionList }) => {
 };
 
 const DataCard = styled.a`
-  ${tw`flex justify-center flex-col rounded pl-5 md:px-4 md:mr-0 relative overflow-hidden`}
-  background: ${(props) => props.color};
+  ${tw`flex justify-center flex-col rounded-2xl pl-5 md:px-4 md:mr-0 relative overflow-hidden duration-200 shadow-lg hover:shadow-2xl`}
+  background: ${(props) => props.theme.subColor};
   height: 140px;
-  color: #111 !important;
   cursor: pointer;
   svg {
-    ${tw`opacity-30 absolute -bottom-2 -right-2 block sm:-right-5`}
-    font-size: clamp(4.8rem,7vw, 6rem);
+    ${tw`absolute -bottom-4 -right-5 block xs:hidden bg-red-900 p-4 rounded-2xl `}
+    background: ${(props) => props.color};
+    transform: rotate(-20deg);
+    font-size: clamp(5.25rem,11vw, 5.75rem);
+    color: #fff;
   }
   h2 {
     font-size: clamp(1rem, 1.25vw, 1.3rem);
     font-weight: 300;
-    color: #111;
+    color: #888;
   }
   h1 {
     font-size: clamp(2.25rem, 1.25vw, 1.3rem);
     line-height: 1;
     font-weight: 600;
-    color: #111;
+    color:  ${(props) => props.theme.textColor};;
   }
 `;
 
