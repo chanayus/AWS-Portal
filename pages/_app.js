@@ -16,7 +16,7 @@ library.add(fas, fab, far);
 const SetThemeContext = React.createContext();
 
 function MyApp({ Component, pageProps }) {
-  const [currentTheme, setCurrentTheme] = useState("dark");
+  const [currentTheme, setCurrentTheme] = useState("light");
 
   const GlobalStyle = createGlobalStyle`
     *{
