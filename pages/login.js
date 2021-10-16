@@ -1,5 +1,6 @@
 import tw, {styled} from 'twin.macro';
 
+import Link from "next/link";
 import Logo from '../components/Logo';
 import TextInput from "../components/input/TextInput";
 
@@ -11,13 +12,13 @@ const Login = () =>{
                    <Logo/>
                 </LogoWrapper>
                 <LoginForm className="backdrop-filter backdrop-blur">
-                    <h1 className="text-black md:text-white">Sign In</h1>
+                    <h1 className="text-black md:text-white text-5xl xs:text-4xl">Sign In</h1>
                     <div className="form-group">
                         <TextInput type="text" name="" id="" required={true} title="Username"/>
                         <TextInput type="password" name="" id="" required={true} title="Password" />
                     </div>
                     <div className="button-group">
-                        <button type="submit">Log in</button>
+                        <Link href="/"><a>Log in</a></Link>
                         <a href="">Forgot Password ?</a>
                     </div>
                 </LoginForm>
@@ -76,15 +77,16 @@ const LoginForm = styled.form`
     }
     .button-group{
         ${tw`flex justify-around items-center flex-wrap gap-y-7`}
-        button{
+        a:first-child{
             flex: 1;
             max-width: 250px;
             min-width: 250px;
             padding: 10px 30px;
             background: ${(props) => props.theme.blue};
             color: #FFF;
+            text-align: center;
         }
-        a{
+        a:last-child{
             ${tw`min-w-max xs:mt-7`}
         }
     }
