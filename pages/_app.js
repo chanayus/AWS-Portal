@@ -30,6 +30,7 @@ function MyApp({ Component, pageProps, router }) {
     storage.setItem("theme", value);
     setCurrentTheme(value)
   }
+  console.log(currentTheme)
   return (
       loaded ? 
       <SetThemeContext.Provider value={{ currentTheme, themeHandle }}>
@@ -47,5 +48,9 @@ function MyApp({ Component, pageProps, router }) {
   );
 }
 
+// MyApp.getInitialProps = () =>{
+//   console.log(storage.getItem('theme'))
+//   return {LocalTheme: storage.getItem('theme') ? storage.getItem('theme') : "light"};
+// }
 export { SetThemeContext };
 export default MyApp;

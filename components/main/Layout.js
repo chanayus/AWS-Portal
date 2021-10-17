@@ -8,19 +8,18 @@ const Layout = ({children}) =>{
     const router = useRouter();
     const excludePath = ['/login',"/_error"]
     const isHidden = excludePath?.find((value) => value === router.pathname);
-    console.log(router.pathname)
     return(
-        <div className="flex">
+        <>
             <Sidebar excludePath={excludePath}/>
-            <div className="w-full">
+            {/* <div className="w-full"> */}
                 <Navbar excludePath={excludePath}/>
                 {isHidden ? children :
                     <Content >
                         {children}
                     </Content>
                 }
-            </div>
-        </div>
+            {/* </div> */}
+        </>
     );
 
 }
