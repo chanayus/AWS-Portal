@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 
+import {dark, light} from "../styles/theme"
 import { useEffect, useState } from "react";
 
 import { GlobalStyle } from "../styles/globalStyle";
@@ -34,7 +35,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
       loaded ? 
       <SetThemeContext.Provider value={{ currentTheme, themeHandle }}>
-      <ThemeProvider theme={theme[currentTheme]}>
+      <ThemeProvider theme={currentTheme === "light" ? light : dark}>
         <GlobalStyle />
         <Layout>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={router.route}>
