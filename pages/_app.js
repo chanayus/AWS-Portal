@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 
-import {dark, light} from "../styles/theme"
+import { dark, light } from "../styles/theme";
 import { useEffect, useState } from "react";
 
 import { GlobalStyle } from "../styles/globalStyle";
@@ -12,41 +12,46 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {motion} from "framer-motion"
-import storage from 'local-storage-fallback'
+import { motion } from "framer-motion";
+import storage from "local-storage-fallback";
 import { theme } from "../styles/theme";
-import { useLoaded } from "../lib/useLoaded"
+import { useLoaded } from "../lib/useLoaded";
 
 library.add(fas, fab, far);
 const SetThemeContext = React.createContext();
 
-const getLocalTheme = () =>{
-  return storage.getItem('theme') ? storage.getItem('theme') : "light";
-}
+const getLocalTheme = () => { 
+  return storage.getItem("theme") ? storage.getItem("theme") : "light";
+};
 
 function MyApp({ Component, pageProps, router }) {
   const [currentTheme, setCurrentTheme] = useState(getLocalTheme);
-  const loaded = useLoaded
+  const [mounted, setMounted] = useState(false)
   const themeHandle = (value) => {
     storage.setItem("theme", value);
-    setCurrentTheme(value)
-  }
-  console.log(currentTheme)
-  return (
-      loaded ? 
+    setCurrentTheme(value);
+  };
+  console.log(currentTheme);
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  if (mounted) {
+    return (
       <SetThemeContext.Provider value={{ currentTheme, themeHandle }}>
-      <ThemeProvider theme={currentTheme === "light" ? light : dark}>
-        <GlobalStyle />
-        <Layout>
-          <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={router.route}>
-            <Component {...pageProps} />
-          </motion.div>
-        </Layout>
-      </ThemeProvider>
-    </SetThemeContext.Provider>
-    : null
-    
-  );
+        <ThemeProvider theme={currentTheme === "light" ? light : dark}>
+          <GlobalStyle />
+          <Layout>
+            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={router.route}>
+              <Component {...pageProps} />
+            </motion.div>
+          </Layout>
+        </ThemeProvider>
+      </SetThemeContext.Provider>
+    );
+  }
+  else{
+    return <></>
+  }
 }
 
 // MyApp.getInitialProps = () =>{

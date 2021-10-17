@@ -20,34 +20,7 @@ const duplicateCount = (data) => {
   return result;
 }; // count duplicate value in array
 
-const DataCard = styled.div`
-  ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-200 shadow-lg hover:shadow-2xl`}
-  background: ${(props) => props.theme.subColor};
-  height: 140px;
-  svg {
-    ${tw`absolute -bottom-4 -right-5 block xs:opacity-50 xs:-right-10 bg-red-900 p-4 rounded-2xl `}
-    background: ${(props) => props.color};
-    transform: rotate(-20deg);
-    font-size: clamp(4.75rem, 18vw, 5.75rem);
-    color: #fff;
-    z-index: 1;
-  }
-  h2 {
-    font-size: clamp(1rem, 1.25vw, 1.3rem);
-    font-weight: 300;
-    color: #888;
-    position: relative;
-    z-index: 2;
-  }
-  h1 {
-    font-size: clamp(2.25rem, 1.25vw, 1.3rem);
-    line-height: 1;
-    font-weight: 600;
-    position: relative;
-    z-index: 2;
-    color: ${(props) => props.theme.textColor};
-  }
-`;
+
 
 const Index = ({ regionList }) => {
   const cardlist = [
@@ -126,4 +99,36 @@ const Index = ({ regionList }) => {
   );
 };
 
+
+const DataCard = styled.div`
+  ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-200 shadow-lg hover:shadow-2xl`}
+  background: ${(props) => { 
+    console.log(props.theme.subColor) 
+    return props.theme.subColor
+  }};
+  height: 140px;
+  svg {
+    ${tw`absolute -bottom-4 -right-5 block xs:opacity-50 xs:-right-10 bg-red-900 p-4 rounded-2xl `}
+    background: ${(props) => props.color};
+    transform: rotate(-20deg);
+    font-size: clamp(4.75rem, 18vw, 5.75rem);
+    color: #fff;
+    z-index: 1;
+  }
+  h2 {
+    font-size: clamp(1rem, 1.25vw, 1.3rem);
+    font-weight: 300;
+    color: #888;
+    position: relative;
+    z-index: 2;
+  }
+  h1 {
+    font-size: clamp(2.25rem, 1.25vw, 1.3rem);
+    line-height: 1;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+    color: ${(props) => props.theme.textColor};
+  }
+`;
 export default Index;
