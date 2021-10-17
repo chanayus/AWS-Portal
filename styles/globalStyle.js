@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         background: ${(props) => props.theme.mainColor};
+        transition: 0.1s;
     }
     h1{
         font-size:clamp(24px,5vmin,32px);
@@ -32,7 +33,7 @@ export const GlobalStyle = createGlobalStyle`
         }
         td, th{
             padding: 17.5px 0;
-            font-size: clamp(12px,2vw,16px);
+            font-size: clamp(13px,2vw,16px);
         }
         th{
         padding-top: 0;

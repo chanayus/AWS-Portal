@@ -27,6 +27,6 @@ const Layout = ({children}) =>{
 
 const Content = styled.div`
     margin-left: clamp(160px,10vw,200px);
-    ${tw`mt-7 px-24 xl:px-4 md:mt-28 md:ml-0`}
+    ${tw`mt-7 px-24 pb-10 xl:px-4 md:mt-28 md:ml-0`}
 `
 export default Layout;

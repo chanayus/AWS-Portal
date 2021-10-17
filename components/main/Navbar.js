@@ -1,29 +1,38 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import Logo from "../Logo";
+import { SetThemeContext } from "../../pages/_app";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 
 const Navbar = ({excludePath}) => {
   const router = useRouter();
   const isHidden = excludePath?.find((value) => value === router.pathname);
+  const { currentTheme, themeHandle } = useContext(SetThemeContext);
   if (isHidden) {
     return <></>;
   } else {
     return (
       <Container>
         <div className="hidden md:flex w-44 logo">
-          <button className="" onClick={() => console.log("asd")}>
+          {/* <button onClick={() => console.log("asd")}>
             <FontAwesomeIcon icon="bars" size="2x" className="mr-4 md:mr-2" />
-          </button>
-          <Logo />
+          </button> */}
+          <Link href="/">
+            <a><Logo /></a>
+          </Link>    
         </div>
         <Menu>
-          <button className="user-button mr-5 md:mr-3">
-            <div className="bg-gray-400 rounded-full text-gray-500rounded-full w-10 h-10 flex justify-center items-center mr-2">
+          <button className="user-button">
+            <div className="bg-gray-400 rounded-full text-gray-500rounded-full w-10 h-10 flex justify-center items-center">
               <FontAwesomeIcon icon="user" size="2x" />
             </div>
-            <p className="md:hidden">Username</p>
+            <p className="ml-2 md:hidden">Username</p>
+          </button>
+          <button className="mx-5" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}>
+            <FontAwesomeIcon icon={["fas", currentTheme === "light" ? "moon" : "sun"]} size="2x" />
           </button>
           <button className="notification-button">
             <FontAwesomeIcon icon={["fas", "bell"]} size="2x" />
@@ -54,7 +63,7 @@ const Container = styled.div`
 `;
 
 const Menu = styled.div`
-  ${tw`flex justify-start items-center `}
+  ${tw`flex justify-start items-center`}
   button {
     ${tw`flex items-center`}
   }

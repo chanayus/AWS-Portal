@@ -97,7 +97,7 @@ const Index = ({ regionList }) => {
   );
 };
 
-const DataCard = styled.a`
+const DataCard = styled.div`
   ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-200 shadow-lg hover:shadow-2xl`}
   background: ${(props) => props.theme.subColor};
   height: 140px;

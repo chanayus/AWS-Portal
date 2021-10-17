@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 
 const Sidebar = ({ excludePath }) => {
-  const { currentTheme, setCurrentTheme } = useContext(SetThemeContext);
+  const { currentTheme, themeHandle } = useContext(SetThemeContext);
   const router = useRouter();
   const isHidden = excludePath?.find((value) => value === router.pathname);
   if (isHidden) {
@@ -26,7 +26,7 @@ const Sidebar = ({ excludePath }) => {
               <p>หน้าหลัก</p>
             </a>
           </Link>
-          <Link href="">
+          <Link href="/history">
             <a>
               <FontAwesomeIcon icon="history" />
               <p>ประวัติ</p>
@@ -41,7 +41,7 @@ const Sidebar = ({ excludePath }) => {
               </p>
             </a>
           </Link>
-          <Link href="">
+          <Link href="/">
             <a>
               <FontAwesomeIcon icon="user" />
               <p>IAM Users</p>
@@ -49,14 +49,16 @@ const Sidebar = ({ excludePath }) => {
           </Link>
         </Menu>
         <div>
-          <button className="" onClick={() => setCurrentTheme(currentTheme === "light" ? "dark" : "light")}>
+          <button className="" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}>
             <FontAwesomeIcon icon={["fas", currentTheme === "light" ? "moon" : "sun"]} size="2x" />
             <p>{currentTheme === "light" ? "Dark Mode" : "Light Mode"}</p>
           </button>
-          <button className="">
-            <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x" />
-            <p>ออกจากระบบ</p>
-          </button>
+          <Link href="/login">
+            <a>
+              <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="2x" />
+              <p>ออกจากระบบ</p>
+            </a>
+          </Link>
         </div>
       </Container>
     );
@@ -64,34 +66,34 @@ const Sidebar = ({ excludePath }) => {
 };
 
 const Container = styled.div`
-  ${tw`fixed left-0 flex flex-col justify-between py-7 pb-2 flex-shrink-0 h-screen overflow-hidden duration-200 z-50 px-2.5 xl:px-0 md:w-0 md:p-0`}
+  ${tw`fixed left-0 flex flex-col overflow-hidden justify-between py-7 pb-2 min-h-full duration-200 z-50 px-2.5 xl:px-0 md:w-0 md:p-0`}
   width: clamp(160px,10vw,200px);
-  background: linear-gradient(176.38deg, #2b314b 20%, #191c22 48.81%);
+  background: #111;
   .logo {
     ${tw`duration-75 self-center`}
     svg {
-      width: clamp(120px, 1vw, 135px);
-      fill: #FFF;
+      width: clamp(100px, 1vw, 135px);
+      fill: #ddd;
       path {
-        stroke: #FFF;
+        stroke: #ddd;
       }
     }
   }
   a, button {
-    ${tw`relative w-full flex items-center self-stretch flex-shrink-0 leading-tight text-left`}
-    height: 50px;
-    color: #efefef;
-    margin: 1vh 0;
+    ${tw`relative w-full flex items-center self-stretch leading-tight text-left`}
+    height: 45px;
+    color: #ddd;
+    margin: 0.75vh 0;
     svg {
       margin-right: 10px;
-      font-size: clamp(1.4rem, 1.5vw, 1.65rem);
+      font-size: 1.25rem;
       flex: 1;
     }
     p {
       flex: 2;
-      font-size: clamp(0.925rem, 0.9vw, 1.025rem);
+      font-size: clamp(0.925rem, 0.9vw, 1rem);
       text-align: left;
-      color: #efefef;
+      color: #ddd;
       font-weight: 300;
     }
     :hover {
@@ -102,7 +104,7 @@ const Container = styled.div`
 `;
 
 const Menu = styled.div`
-  ${tw`flex flex-col flex-1 pt-14 flex-shrink-0`}
+  ${tw`flex flex-col flex-1 pt-14 `}
 `;
 
 export default Sidebar;
