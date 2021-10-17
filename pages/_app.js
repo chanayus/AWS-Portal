@@ -15,7 +15,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { motion } from "framer-motion";
 import storage from "local-storage-fallback";
 import { theme } from "../styles/theme";
-import { useLoaded } from "../lib/useLoaded";
 
 library.add(fas, fab, far);
 const SetThemeContext = React.createContext();
