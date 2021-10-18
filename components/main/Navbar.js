@@ -13,18 +13,19 @@ const Navbar = ({ excludePath }) => {
   const router = useRouter();
   const isHidden = excludePath?.find((value) => value === router.pathname);
   const { currentTheme, themeHandle } = useContext(SetThemeContext);
-  const [lastScroll, setLastScroll] = useState(window.scrollY);
+  const [lastScroll, setLastScroll] = useState(window.pageYOffset);
   const navRef = useRef();
+  const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight
   useEffect(() => {
     const handleScroll = (e) => {
       const scrollTop = window.pageYOffset || navRef.current.scrollTop;
-      if(scrollTop > lastScroll){
+      if(lastScroll > window.pageYOffset || window.pageYOffset <= 0){
         navRef.current.style.top = "0px"
       }
-      else{
+      else if(lastScroll < window.pageYOffset || window.pageYOffset >= maxScroll){
         navRef.current.style.top = "-80px"
       }
-      setLastScroll(window.scrollY);
+      setLastScroll(window.pageYOffset);
     };
     if(window.innerWidth <= 960){
       window.addEventListener("scroll", (e) => handleScroll(e));
