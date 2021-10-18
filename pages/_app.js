@@ -14,7 +14,6 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { motion } from "framer-motion";
 import storage from "local-storage-fallback";
-import { theme } from "../styles/theme";
 
 library.add(fas, fab, far);
 const SetThemeContext = React.createContext();
@@ -30,7 +29,6 @@ function MyApp({ Component, pageProps, router }) {
     storage.setItem("theme", value);
     setCurrentTheme(value);
   };
-  console.log(currentTheme);
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -40,7 +38,7 @@ function MyApp({ Component, pageProps, router }) {
         <ThemeProvider theme={currentTheme === "light" ? light : dark}>
           <GlobalStyle />
           <Layout>
-            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={router.route}>
+            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} key={router.route}>
               <Component {...pageProps} />
             </motion.div>
           </Layout>
@@ -53,9 +51,5 @@ function MyApp({ Component, pageProps, router }) {
   }
 }
 
-// MyApp.getInitialProps = () =>{
-//   console.log(storage.getItem('theme'))
-//   return {LocalTheme: storage.getItem('theme') ? storage.getItem('theme') : "light"};
-// }
 export { SetThemeContext };
 export default MyApp;
