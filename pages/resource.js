@@ -98,17 +98,30 @@ const Resource = ({ resourcesData }) => {
             {resources.map((value, index) => {
               return (
                 <tr key={index}>
-                  <td>
+                  <td className="sm:pr-3">
                     <button className={`w-6 h-6 sm:w-5 sm:h-5 flex justify-center items-center ${value.isChoose ? "bg-blue-500" : "bg-gray-400"}`} onClick={() => chooseHandle(value)}>
                       {value.isChoose ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
                     </button>
                   </td>
-                  <td>
-                    <p className="sm:text-right">{value.resourceName}</p>
-                    <p className="hidden sm:block my-1 text-right">{value.region}</p>
-                    <p className="hidden sm:block my-1 text-right">-</p>
-                    <p className="hidden sm:block my-1 text-right">{value.owner ? value.owner : "-"}</p>
+                  <td className="hidden sm:block">
+                    <div className="hidden sm:flex justify-between">
+                      <b>Resource</b>
+                      {value.resourceName}
+                    </div>
+                    <div className="hidden sm:flex justify-between my-1">
+                      <b>Region</b>
+                      {value.region}
+                    </div>
+                    <div className="hidden sm:flex justify-between my-1">
+                      <b>สร้างเมื่อ</b>
+                      -
+                    </div>
+                    <div className="hidden sm:flex justify-between my-1">
+                      <b>สร้างโดย</b>
+                      {value.owner ? value.owner : "-"}
+                    </div>
                   </td>
+                  <td className="sm:hidden">{value.resourceName}</td>
                   <td className="sm:hidden">{value.region}</td>
                   <td className="sm:hidden">-</td>
                   <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
