@@ -100,11 +100,11 @@ const Index = ({ regionList }) => {
 
 
 const DataCard = styled.div`
-  ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-200 shadow-lg hover:shadow-2xl`}
+  ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-100 shadow-lg hover:shadow-2xl`}
   background: ${props => props.theme.subColor};
   height: 140px;
   svg {
-    ${tw`absolute -bottom-4 -right-5 block xs:opacity-50 xs:-right-10 bg-red-900 p-4 rounded-2xl `}
+    ${tw`absolute -bottom-4 -right-5 block xs:opacity-80 xs:-right-10 bg-red-900 p-4 rounded-2xl `}
     background: ${(props) => props.color};
     transform: rotate(-20deg);
     font-size: clamp(4.75rem, 18vw, 5.75rem);

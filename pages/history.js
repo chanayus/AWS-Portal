@@ -1,4 +1,5 @@
-import { TableWrapper } from "../styles/styleComponents";
+import { Button, TableWrapper } from "../styles/styleComponents";
+
 import fetch from "isomorphic-unfetch";
 import { useState } from "react";
 
@@ -60,11 +61,14 @@ const History = ({ resourcesData }) => {
   };
   return (
     <>
-      <div className="flex justify-between items-center md:flex-col md:items-start">
-        <h1>ประวัติ</h1>
-        <input type="text" className="h-fit p-2 shadow rounded md:w-48 md:self-end md:mt-5" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
+      <h1>ประวัติ</h1>
+      <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
+        <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)}/>
+        <div className="flex md:mb-3">
+          <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button>
+        </div>
       </div>
-      <TableWrapper className="mt-16">
+      <TableWrapper className="mt-5">
         <table>
           <thead className="sm:hidden">
             <tr>
