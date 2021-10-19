@@ -8,26 +8,19 @@ import tw from "twin.macro";
 export const getStaticProps = async () => {
   const res = await fetch("https://6bum1uds90.execute-api.ap-southeast-1.amazonaws.com/api/get-resources");
   const data = await res.json();
-  let regionList = data.filter((value) => value.ResourceARN.split(":")[3] !== "").map((value) => value.ResourceARN.split(":")[3]);
   return {
-    props: { regionList: duplicateCount(regionList) },
+    props: { resourcesData: data },
   };
 };
 
-const duplicateCount = (data) => {
-  const unique = [...new Set(data)];
-  const result = unique.map((value) => [value, data.filter((str) => str === value).length]);
-  return result;
-}; // count duplicate value in array
-
-
-const Index = ({ regionList }) => {
+const Index = ({ resourcesData }) => {
   const cardlist = [
     { color: "#7fe490", url: "/", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
     { color: "#e07272", url: "/", title: "IAM ทั้งหมด", value: "255", icon: "users" },
     { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: "255", icon: "money-check-alt" },
     { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: "255", icon: "server" },
   ];
+  console.log(resourcesData)
   return (
     <>
       <h1>Dashboard</h1>
@@ -50,7 +43,7 @@ const Index = ({ regionList }) => {
             <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
-          <TableWrapper className="mt-4">
+          <TableWrapper className="mt-4 md:pt-6">
             <table>
               <thead>
                 <tr>
@@ -59,10 +52,10 @@ const Index = ({ regionList }) => {
                 </tr>
               </thead>
               <tbody>
-                {regionList.map((value, index) => (
+                {Object.keys(resourcesData).map((value, index) => (
                   <tr key={index}>
-                    <td>{value[0]}</td>
-                    <td>{value[1]}</td>
+                    <td>{value}</td>
+                    <td>{resourcesData[value].length}</td>
                   </tr>
                 ))}
               </tbody>

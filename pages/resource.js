@@ -5,44 +5,26 @@ import fetch from "isomorphic-unfetch";
 import { useState } from "react";
 
 export const getStaticProps = async () => {
-  // const res = await fetch("http://localhost:3000/api/hello");
-  // const data = await res.json();
+  const res = await fetch("https://6bum1uds90.execute-api.ap-southeast-1.amazonaws.com/api/get-resources");
+  const data = await res.json();
+  const finalData = []
+  Object.keys(data).map((value) => 
+  {
+    data[value].map((value, index)=>{
+      value.region = value.ResourceARN.split(":")[3]
+      value.resourceName = value.ResourceARN.split(":")[2]
+      value.Tags.map((tagValue) => {
+        if(tagValue.Key === "owner"){
+          value.owner = tagValue.Value
+        }
+      })
+      value.isChoose = false,
+      finalData.push(value)
+    })
+  })
   return {
     props: {
-      resourcesData: [
-        {
-          id: "1",
-          name: "CloudWatch",
-          region: "Europe (London)",
-          createAt: "10/4/2021 11:09AM",
-          createBy: "IAM User 1",
-          isChoose: false,
-        },
-        {
-          id: "2",
-          name: "CloudWatch",
-          region: "Europe (London)",
-          createAt: "10/4/2021 11:09AM",
-          createBy: "IAM User 2",
-          isChoose: false,
-        },
-        {
-          id: "3",
-          name: "CloudWatch",
-          region: "Europe (London)",
-          createAt: "10/4/2021 11:09AM",
-          createBy: "IAM User 3",
-          isChoose: false,
-        },
-        {
-          id: "4",
-          name: "CloudWatch",
-          region: "Europe (London)",
-          createAt: "10/4/2021 11:09AM",
-          createBy: "IAM User 4",
-          isChoose: false,
-        },
-      ],
+      resourcesData: finalData,
     },
   };
 };
@@ -53,7 +35,7 @@ const Resource = ({ resourcesData }) => {
   const chooseHandle = (valueItem) => {
     setResources(
       resources.map((value) => {
-        if (valueItem.id === value.id) {
+        if (valueItem.resourceId === value.resourceId) {
           value.isChoose = !value.isChoose;
         }
         return value;
@@ -63,35 +45,38 @@ const Resource = ({ resourcesData }) => {
   const chooseAllHandle = () => {
     setResources(
       resources.map((value) => {
-        value.isChoose = !value.isChoose;
+        value.isChoose = isSelectAll ? false : true;
         return value;
       })
     );
     setIsSelectAll(!isSelectAll);
   };
 
-  const filterHandle = (value) =>{ 
-    if(value === ""){
-      setResources(resourcesData)
-    }
-    else{
+  const filterHandle = (value) => {
+    if (value === "") {
+      setResources(resourcesData);
+    } else {
       setResources(
         resourcesData.filter((item) => {
           return item.createBy.toUpperCase().includes(value.toUpperCase());
         })
-      )
+      );
     }
-  }
+  };
   return (
     <>
       <h1>Resource ที่กำลังใช้งาน</h1>
 
       <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
-        <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)}/>
+        <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
         <div className="flex md:mb-3">
           <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button>
-          <Button className="py-1 px-2 mx-1"><FontAwesomeIcon icon="grip-horizontal" size="lg" /></Button>
-          <Button className="py-1 px-2 mx-1"><FontAwesomeIcon icon="list" size="lg" /></Button>
+          <Button className="py-1 px-2 mx-1">
+            <FontAwesomeIcon icon="grip-horizontal" size="lg" />
+          </Button>
+          <Button className="py-1 px-2 mx-1">
+            <FontAwesomeIcon icon="list" size="lg" />
+          </Button>
         </div>
       </div>
       <TableWrapper className="mt-5">
@@ -119,14 +104,14 @@ const Resource = ({ resourcesData }) => {
                     </button>
                   </td>
                   <td>
-                    <p className="sm:text-right">{value.name}</p>
+                    <p className="sm:text-right">{value.resourceName}</p>
                     <p className="hidden sm:block my-1 text-right">{value.region}</p>
-                    <p className="hidden sm:block my-1 text-right">{value.createAt}</p>
-                    <p className="hidden sm:block my-1 text-right">{value.createBy}</p>
+                    <p className="hidden sm:block my-1 text-right">-</p>
+                    <p className="hidden sm:block my-1 text-right">{value.owner ? value.owner : "-"}</p>
                   </td>
                   <td className="sm:hidden">{value.region}</td>
-                  <td className="sm:hidden">{value.createAt}</td>
-                  <td className="sm:hidden">{value.createBy}</td>
+                  <td className="sm:hidden">-</td>
+                  <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
                 </tr>
               );
             })}
@@ -135,7 +120,7 @@ const Resource = ({ resourcesData }) => {
       </TableWrapper>
       <div className="flex mt-10 justify-end">
         <button className="bg-red-500 h-12 w-40 text-white flex justify-evenly items-center">
-          <FontAwesomeIcon icon="trash" size="lg" color="white"/>
+          <FontAwesomeIcon icon="trash" size="lg" color="white" />
           ลบ Resource
         </button>
       </div>
