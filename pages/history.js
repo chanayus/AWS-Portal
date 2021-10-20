@@ -108,7 +108,7 @@ const History = ({ resourcesData }) => {
                     </div>
                   </td>
                   <td className="sm:hidden flex items-center">
-                    <img className="w-10 mr-2 rounded" src={`/images/resourceIcon/${value.name}.png`} alt="" />
+                    <img className="w-10 mr-2 rounded" src={`/images/resourceIcon/cloudwatch.png`} alt="" />
                     {value.name}
                   </td>
                   <td className="sm:hidden">{value.region}</td>
