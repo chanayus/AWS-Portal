@@ -34,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
         border: 1px solid #8181817f;
         background: ${(props) => props.theme.subColor};
         td, th{
-            padding: 17.5px 2.1vw;
+            padding: 15px 2.1vw;
             font-size: clamp(13px,2vw,16px);
         }
         thead{
