@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import tw from "twin.macro";
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -34,6 +35,7 @@ export const GlobalStyle = createGlobalStyle`
         border: 1px solid #8181817f;
         background: ${(props) => props.theme.subColor};
         td, th{
+            ${tw`sm:px-3`}
             padding: 15px 1.25vw;
             font-size: clamp(13px,2vw,16px);
         }

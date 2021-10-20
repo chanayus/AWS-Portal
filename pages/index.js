@@ -25,7 +25,7 @@ const Index = ({ resourcesData }) => {
   return (
     <>
       <h1>Dashboard</h1>
-      <div className="grid grid-cols-4 gap-8 xl:gap-3 lg:grid-cols-2  mt-6">
+      <div className="grid grid-cols-4 gap-8 xl:gap-3 lg:grid-cols-2 mt-6">
         {cardlist.map((value, index) => (
           <Link href={value.url} key={index}>
             <DataCard color={value.color} whileHover={{y: 5}} transition={{ duration: 0.1 }} >
@@ -38,13 +38,13 @@ const Index = ({ resourcesData }) => {
           </Link>
         ))}
       </div>
-      <div className="flex justify-between mt-20 gap-10 lg:flex-col">
+      <div className="flex justify-between mt-16 gap-10 lg:flex-col">
         <div className="flex-1">
           <div className="flex justify-between items-center">
             <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
-          <TableWrapper className="mt-4 md:pt-6">
+          <TableWrapper className="mt-4">
             <table>
               <thead>
                 <tr>
