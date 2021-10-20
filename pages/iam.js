@@ -61,7 +61,7 @@ const IamUser = ({ iamData }) => {
       <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
         <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)}/>
         <div className="flex md:mb-3">
-          <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button>
+          {/* <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button> */}
         </div>
       </div>
       <TableWrapper className="mt-5">

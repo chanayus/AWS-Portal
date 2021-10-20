@@ -65,7 +65,7 @@ const History = ({ resourcesData }) => {
       <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
         <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)}/>
         <div className="flex md:mb-3">
-          <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button>
+          {/* <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button> */}
         </div>
       </div>
       <TableWrapper className="mt-5">
@@ -102,17 +102,20 @@ const History = ({ resourcesData }) => {
                     </div>
                     <div className="hidden my-1 sm:flex justify-between ">
                       <b>สถานะ</b>
-                      <div className={`text-white border w-24 ${value.status === "running" ? "bg-green-500 border-green-800" : "bg-gray-400 border-gray-500"}`}>
+                      <div className={`text-white w-20 p-0.5 text-center rounded-full ${value.status === "running" ? "bg-green-400" : "bg-gray-400"}`}>
                         {value.status === "running" ? "กำลังรัน" : "ถูกลบแล้ว"}
                       </div>
                     </div>
                   </td>
-                  <td className="sm:hidden">{value.name}</td>
+                  <td className="sm:hidden flex items-center">
+                    <img className="w-10 mr-2 rounded" src={`/images/resourceIcon/${value.name}.png`} alt="" />
+                    {value.name}
+                  </td>
                   <td className="sm:hidden">{value.region}</td>
                   <td className="sm:hidden">{value.createAt}</td>
                   <td className="sm:hidden">{value.createBy}</td>
                   <td className="sm:hidden">
-                    <div className={`text-white border w-24 mx-auto ${value.status === "running" ? "bg-green-500 border-green-800" : "bg-gray-400 border-gray-500"}`}>
+                    <div className={`text-white w-24 text-center rounded-full ${value.status === "running" ? "bg-green-400" : "bg-gray-400"}`}>
                       {value.status === "running" ? "กำลังรัน" : "ถูกลบแล้ว"}
                     </div>
                   </td>

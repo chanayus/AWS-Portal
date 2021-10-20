@@ -12,6 +12,9 @@ export const GlobalStyle = createGlobalStyle`
         background: ${(props) => props.theme.mainColor};
         transition: 0.1s;
     }
+    img{
+        image-rendering: -webkit-optimize-contrast;
+    }
     h1{
         font-size:clamp(24px,5vmin,32px);
         font-weight: 700;
@@ -19,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     p,h1,h2,h3,h4,h5,h6,td,th{
         color: ${(props) => props.theme.textColor};
     }
-    p,td,th{
+    p{
         text-align: center;
     }
     button{
@@ -27,23 +30,20 @@ export const GlobalStyle = createGlobalStyle`
     }
     table{
         width: 100%;
-        text-align: center;
-        @media (max-width: 640px){
-            display: inline-table;
-        }
+        text-align: left;
+        border: 1px solid #8181817f;
+        background: ${(props) => props.theme.subColor};
         td, th{
-            padding: 17.5px 0;
+            padding: 17.5px 2.1vw;
             font-size: clamp(13px,2vw,16px);
         }
-        th{
-        padding-top: 0;
-        }
         thead{
-            border-bottom: 1px solid ${(props) => props.theme.textColor}
+            border-bottom: 1px solid #8181817f;
+            background: ${(props) => props.theme.tableHeader};
         }
         tbody{
             tr{
-                border-bottom: 1px solid #8181817f;
+                border-bottom: 1px solid #8181817f;        
                 td{
                     font-weight: 300;
                 }

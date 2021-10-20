@@ -1,5 +1,5 @@
 export const light =  {
-    bodyColor: "#E6E9EE",
+    tableHeader: "#f0f1f3",
     textColor : "#050505",
     mainColor: "#E6E9EE",
     subColor: "#FFF",
@@ -9,7 +9,7 @@ export const light =  {
 }
 
 export const dark = {
-    bodyColor: "#E6E9EE",
+    tableHeader: "#1f1f1f",
     textColor : "#FFF",
     mainColor: "#2b2c33",
     subColor: "#0f0f0f",

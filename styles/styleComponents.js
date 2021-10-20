@@ -2,11 +2,22 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const TableWrapper = styled.div`
-    background: ${(props) => props.theme.subColor};
-    ${tw`p-6 rounded md:flex-none md:w-full md:px-4 md:p-5 duration-100`}
+    /* background: ${(props) => props.theme.subColor};
+    ${tw`p-6 rounded-md md:flex-none md:w-full md:px-4 md:p-5 duration-100`}
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
 `;
 
 export const Button = styled.button`
+    ${tw`rounded flex justify-center items-center`}
     background: ${(props) => props.theme.subColor};
     color: ${(props) => props.theme.textColor};
 `
+
+export const CheckBox = styled.button`
+    ${tw`w-6 h-6 sm:w-5 sm:h-5 flex justify-center items-center rounded-md duration-100`}
+    border: 2px solid #8f8f8f;
+    &.checked{
+        background: #2E75DF;
+        border: none;
+    }
+`  

@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { TableWrapper } from "../styles/styleComponents";
 import fetch from "isomorphic-unfetch";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -27,8 +28,8 @@ const Index = ({ resourcesData }) => {
       <div className="grid grid-cols-4 gap-8 xl:gap-3 lg:grid-cols-2  mt-6">
         {cardlist.map((value, index) => (
           <Link href={value.url} key={index}>
-            <DataCard color={value.color}>
-              <FontAwesomeIcon icon={value.icon} size="4x" className="mr-4" />
+            <DataCard color={value.color} whileHover={{y: 5}} transition={{ duration: 0.1 }} >
+              <FontAwesomeIcon icon={value.icon} size="4x" className="mr-4"/>
               <div>
                 <h2>{value.title}</h2>
                 <h1>{value.value}</h1>
@@ -78,7 +79,10 @@ const Index = ({ resourcesData }) => {
               </thead>
               <tbody>
                 <tr>
-                  <td>EC2</td>
+                  <td className="flex items-center">
+                    <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/ec2.png`} alt="" />
+                    EC2
+                  </td>
                   <td>10/4/2021 11:09AM</td>
                   <td>IAM User 1</td>
                 </tr>
@@ -92,8 +96,8 @@ const Index = ({ resourcesData }) => {
 };
 
 
-const DataCard = styled.div`
-  ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-100 shadow-lg hover:shadow-2xl`}
+const DataCard = styled(motion.div)`
+  ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-300 shadow-lg hover:shadow-xl`}
   background: ${props => props.theme.subColor};
   height: 140px;
   svg {
