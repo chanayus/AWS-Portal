@@ -22,9 +22,9 @@ export const GlobalStyle = createGlobalStyle`
     p,h1,h2,h3,h4,h5,h6,td,th{
         color: ${(props) => props.theme.textColor};
     }
-    p{
+    /* p{
         text-align: center;
-    }
+    } */
     button{
         font-size: clamp(13px,1vw,16px);
     }
@@ -34,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
         border: 1px solid #8181817f;
         background: ${(props) => props.theme.subColor};
         td, th{
-            padding: 15px 2.1vw;
+            padding: 15px 1.25vw;
             font-size: clamp(13px,2vw,16px);
         }
         thead{

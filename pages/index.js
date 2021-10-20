@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch("https://6bum1uds90.execute-api.ap-southeast-1.amazonaws.com/api/get-resources");
   const data = await res.json();
   return {

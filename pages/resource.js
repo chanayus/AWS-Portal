@@ -4,15 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import fetch from "isomorphic-unfetch";
 import { useState } from "react";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch("https://6bum1uds90.execute-api.ap-southeast-1.amazonaws.com/api/get-resources");
   const data = await res.json();
   const finalData = []
+  const serviceCondition = {
+    events: "eventbridge"
+  }
   Object.keys(data).map((value) => 
   {
-    data[value].map((value, index)=>{
+    data[value].map((value)=>{
       value.region = value.ResourceARN.split(":")[3]
-      value.resourceName = value.ResourceARN.split(":")[2]
+      value.serviceName = serviceCondition[value.ResourceARN.split(":")[2]] ?? value.ResourceARN.split(":")[2]
+      value.resourceType = value.ResourceARN.split(":")[5].split("/")[0]
       value.Tags.map((tagValue) => {
         if(tagValue.Key === "owner"){
           value.owner = tagValue.Value
@@ -67,7 +71,6 @@ const Resource = ({ resourcesData }) => {
   return (
     <>
       <h1>Resource ที่กำลังใช้งาน</h1>
-
       <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
         <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
         <div className="flex md:mb-3">
@@ -90,6 +93,7 @@ const Resource = ({ resourcesData }) => {
                   {isSelectAll ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
                 </CheckBox>
               </th>
+              <th>id</th>
               <th>Resource</th>
               <th>Region</th>
               <th>สร้างเมื่อ</th>
@@ -106,9 +110,13 @@ const Resource = ({ resourcesData }) => {
                     </CheckBox>
                   </td>
                   <td className="hidden sm:block">
-                    <div className="hidden sm:flex justify-between">
-                      <b>Resource</b>
-                      {value.resourceName}
+                    <div className="hidden sm:flex justify-between my-1">
+                      <b>Service Name</b>
+                      {value.serviceName}
+                    </div>
+                    <div className="hidden sm:flex justify-between my-1">
+                      <b>Resource Type</b>
+                      {value.resourceType ? value.resourceType : "-"}
                     </div>
                     <div className="hidden sm:flex justify-between my-1">
                       <b>Region</b>
@@ -122,10 +130,20 @@ const Resource = ({ resourcesData }) => {
                       <b>สร้างโดย</b>
                       {value.owner ? value.owner : "-"}
                     </div>
+                    <div className="hidden sm:flex justify-between my-1">
+                      <b>id</b>
+                      {`${value.resourceId.substring(0,10)}${value.resourceId.length > 10 ? "..." : ""}`}
+                    </div>
+                  </td>
+                  <td className="sm:hidden">
+                    {`${value.resourceId.substring(0,8)}${value.resourceId.length > 8 ? "..." : ""}`}
                   </td>
                   <td className="flex items-center sm:hidden">
-                    <img className="w-10 mr-2 rounded" src={`/images/resourceIcon/${value.resourceName}.png`} alt="" />
-                    {value.resourceName}
+                    <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
+                    <div className="flex flex-col">
+                      <p className="text-left font-medium">{value.serviceName}</p> 
+                      <p className="text-left text-gray-500">{value.resourceType}</p>
+                    </div>
                   </td>
                   <td className="sm:hidden">{value.region}</td>
                   <td className="sm:hidden">-</td>
