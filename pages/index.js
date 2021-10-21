@@ -40,7 +40,7 @@ const Index = () => {
           {loading ? (
             <p>loading...</p>
           ) : (
-            <TableWrapper className="mt-4">
+            <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} >
               <table>
                 <thead>
                   <tr>
@@ -68,7 +68,7 @@ const Index = () => {
           {loading ? (
             <p>loading...</p>
           ) : (
-            <TableWrapper className="mt-4">
+            <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} >
               <table>
                 <thead>
                   <tr>

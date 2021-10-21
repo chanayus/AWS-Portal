@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-export const TableWrapper = styled.div`
+export const TableWrapper = styled(motion.div)`
     /* background: ${(props) => props.theme.subColor};
     ${tw`p-6 rounded-md md:flex-none md:w-full md:px-4 md:p-5 duration-100`}
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
