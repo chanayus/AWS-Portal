@@ -54,15 +54,19 @@ const Resource = () => {
               {resources.map((value, index) => {
                 return (
                   <tr key={index}>
-                    <td className="sm:pr-2">
+                    <td className="sm:pr-2 xs:pl-2">
                       <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, resources, setResources)}>
                         {value.isChoose ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
                       </CheckBox>
                     </td>
-                    <td className="hidden sm:block">
-                      <div className="hidden sm:flex justify-between my-1">
+                    <td className="hidden sm:block xs:pl-0">
+                      <div className="hidden sm:flex justify-between items-center my-1">
                         <b>Service Name</b>
-                        {value.serviceName}
+                        <div className="flex items-center">
+                         
+                          <p>{value.serviceName}</p>
+                          <img className="w-6 ml-1 rounded 2xs:hidden" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
+                        </div>
                       </div>
                       <div className="hidden sm:flex justify-between my-1">
                         <b>Resource Type</b>
