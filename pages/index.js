@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { TableWrapper } from "../styles/styleComponents";
@@ -5,16 +7,22 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useFetch } from "../lib/useFetch";
-
-const cardlist = [
-  { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
-  { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
-  { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: "255", icon: "money-check-alt" },
-  { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: "255", icon: "server" },
-];
+import { useFormat } from "../lib/useFormat";
 
 const Index = () => {
-  const { loading, error, data: resources } = useFetch("/api/resources",() => {}, false);
+  const { loading, data: resources } = useFetch("/api/resources",() => {}, false);
+  const [dataFormatted, setDataFormatted] = useState([])
+
+  useEffect(() =>{
+    loading ? null : setDataFormatted(useFormat(resources))
+  },[loading])
+ 
+  const cardlist = [
+    { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
+    { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
+    { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: "255", icon: "money-check-alt" },
+    { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: `${loading ? "loading" : dataFormatted.length}`, icon: "server" },
+  ];
   return (
     <>
       <h1>Dashboard</h1>
