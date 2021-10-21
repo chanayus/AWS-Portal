@@ -10,12 +10,14 @@ const Resource = () => {
   const [resources, setResources] = useState();
   const [isSelectAll, setIsSelectAll] = useState(false);
   useEffect(() => {
+    const ac = new AbortController();
     const fetchData = async () => {
-      const res = await fetch("https://6bum1uds90.execute-api.ap-southeast-1.amazonaws.com/api/get-resources");
+      const res = await fetch("/api/hello");
       const data = await res.json();
       setResources(useFormat(data));
     };
     fetchData();
+    return () => ac.abort();
   }, []);
 
   const filterHandle = (value) => {
