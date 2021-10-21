@@ -73,7 +73,8 @@ const Resource = () => {
                         {value.region}
                       </div>
                       <div className="hidden sm:flex justify-between my-1">
-                        <b>สร้างเมื่อ</b>-
+                        <b>สร้างเมื่อ</b>
+                        {value.createdAt ? value.createdAt : "-"}
                       </div>
                       <div className="hidden sm:flex justify-between my-1">
                         <b>สร้างโดย</b>
@@ -93,7 +94,7 @@ const Resource = () => {
                       </div>
                     </td>
                     <td className="sm:hidden">{value.region}</td>
-                    <td className="sm:hidden">-</td>
+                    <td className="sm:hidden">{value.createdAt ? value.createdAt : "-"}</td>
                     <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
                   </tr>
                 );
