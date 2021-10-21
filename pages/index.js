@@ -1,35 +1,28 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { TableWrapper } from "../styles/styleComponents";
-import fetch from "isomorphic-unfetch";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useFetch } from "../lib/useFetch";
 
-export const getServerSideProps = async () => {
-  const res = await fetch("https://6bum1uds90.execute-api.ap-southeast-1.amazonaws.com/api/get-resources");
-  const data = await res.json();
-  return {
-    props: { resourcesData: data },
-  };
-};
+const cardlist = [
+  { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
+  { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
+  { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: "255", icon: "money-check-alt" },
+  { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: "255", icon: "server" },
+];
 
-const Index = ({ resourcesData }) => {
-  const cardlist = [
-    { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
-    { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
-    { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: "255", icon: "money-check-alt" },
-    { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: "255", icon: "server" },
-  ];
-  console.log(resourcesData)
+const Index = () => {
+  const { loading, error, data: resources } = useFetch("/api/resources",() => {}, false);
   return (
     <>
       <h1>Dashboard</h1>
       <div className="grid grid-cols-4 gap-8 xl:gap-3 lg:grid-cols-2 mt-6">
         {cardlist.map((value, index) => (
           <Link href={value.url} key={index}>
-            <DataCard color={value.color} whileHover={{y: 5}} transition={{ duration: 0.1 }} >
-              <FontAwesomeIcon icon={value.icon} size="4x" className="mr-4"/>
+            <DataCard color={value.color} whileHover={{ y: 5 }} transition={{ duration: 0.1 }}>
+              <FontAwesomeIcon icon={value.icon} size="4x" className="mr-4" />
               <div>
                 <h2>{value.title}</h2>
                 <h1>{value.value}</h1>
@@ -44,61 +37,68 @@ const Index = ({ resourcesData }) => {
             <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
-          <TableWrapper className="mt-4">
-            <table>
-              <thead>
-                <tr>
-                  <th>Region</th>
-                  <th>จำนวน Resource</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.keys(resourcesData).map((value, index) => (
-                  <tr key={index}>
-                    <td>{value}</td>
-                    <td>{resourcesData[value].length}</td>
+          {loading ? (
+            <p>loading...</p>
+          ) : (
+            <TableWrapper className="mt-4">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Region</th>
+                    <th>จำนวน Resource</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </TableWrapper>
+                </thead>
+                <tbody>
+                  {Object.keys(resources).map((value, index) => (
+                    <tr key={index}>
+                      <td>{value}</td>
+                      <td>{resources[value].length}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </TableWrapper>
+          )}
         </div>
         <div className="flex-1 lg:mt-5">
           <div className="flex justify-between items-center">
             <h2 className="text-xl md:text-lg">Resource ที่ถูกสร้างล่าสุด</h2>
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
-          <TableWrapper className="mt-4">
-            <table>
-              <thead>
-                <tr>
-                  <th>Resource</th>
-                  <th>สร้างเมื่อ</th>
-                  <th>สร้างโดย</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="flex items-center">
-                    <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/ec2.png`} alt="" />
-                    EC2
-                  </td>
-                  <td>10/4/2021 11:09AM</td>
-                  <td>IAM User 1</td>
-                </tr>
-              </tbody>
-            </table>
-          </TableWrapper>
+          {loading ? (
+            <p>loading...</p>
+          ) : (
+            <TableWrapper className="mt-4">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Resource</th>
+                    <th>สร้างเมื่อ</th>
+                    <th>สร้างโดย</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="flex items-center">
+                      <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/ec2.png`} alt="" />
+                      EC2
+                    </td>
+                    <td>10/4/2021 11:09AM</td>
+                    <td>IAM User 1</td>
+                  </tr>
+                </tbody>
+              </table>
+            </TableWrapper>
+          )}
         </div>
       </div>
     </>
   );
 };
 
-
 const DataCard = styled(motion.div)`
   ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-300 shadow-lg hover:shadow-xl`}
-  background: ${props => props.theme.subColor};
+  background: ${(props) => props.theme.subColor};
   height: 140px;
   svg {
     ${tw`absolute -bottom-4 -right-5 block xs:opacity-80 xs:-right-10 bg-red-900 p-4 rounded-2xl `}

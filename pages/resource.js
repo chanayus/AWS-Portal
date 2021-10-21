@@ -1,38 +1,29 @@
 import { Button, CheckBox, TableWrapper } from "../styles/styleComponents";
 import { chooseAllHandle, chooseHandle } from "../lib/selectHandle"
-import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
-import { useFormat } from "../lib/useFormat";
+import { useFetch } from "../lib/useFetch";
+import { useState } from "react";
 
 const Resource = () => {
-  const [resources, setResources] = useState();
+  const [resources, setResources] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
-  useEffect(() => {
-    const ac = new AbortController();
-    const fetchData = async () => {
-      const res = await fetch("/api/hello");
-      const data = await res.json();
-      setResources(useFormat(data));
-    };
-    fetchData();
-    return () => ac.abort();
-  }, []);
-
+  const { loading, data } = useFetch("/api/resources", setResources, true);
+  
   const filterHandle = (value) => {
     if (value === "") {
-      setResources(resourcesData);
+      setResources(data);
     } else {
-      setResources(
-        resourcesData.filter((item) => {
-          return item.createBy.toUpperCase().includes(value.toUpperCase());
-        })
-      );
+      // setResources(
+      //   data.filter((item) => {
+      //     return item.owner.toUpperCase().includes(value.toUpperCase());
+      //   })
+      // );
     }
   };
 
-  if (!resources) {
+  if (loading) {
     return <h1>loading...</h1>;
   } 
   else {
