@@ -1,5 +1,5 @@
 import { Button, CheckBox, TableWrapper } from "../styles/styleComponents";
-import { chooseAllHandle, chooseHandle } from "../lib/selectHandle"
+import { chooseAllHandle, chooseHandle } from "../lib/selectHandle";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
@@ -10,7 +10,7 @@ const Resource = () => {
   const [resources, setResources] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const { loading, data } = useFetch("/api/resources", setResources, true);
-  
+
   const filterHandle = (value) => {
     if (value === "") {
       setResources(data);
@@ -25,10 +25,9 @@ const Resource = () => {
 
   if (loading) {
     return <h1>loading...</h1>;
-  } 
-  else {
+  } else {
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <h1>Resource ที่กำลังใช้งาน</h1>
         <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
           <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
@@ -63,7 +62,6 @@ const Resource = () => {
                       <div className="hidden sm:flex justify-between items-center my-1">
                         <b>Service Name</b>
                         <div className="flex items-center">
-                         
                           <p>{value.serviceName}</p>
                           <img className="w-6 ml-1 rounded 2xs:hidden" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                         </div>
@@ -89,11 +87,18 @@ const Resource = () => {
                         {`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}
                       </div>
                     </td>
-                    <td className="sm:hidden">{`${value.resourceId.substring(0, 8)}${value.resourceId.length > 8 ? "..." : ""}`}</td>
+                    <td className="sm:hidden">
+                      <div className="flex justify-between items-center" >
+                        {`${value.resourceId.substring(0, 8)}${value.resourceId.length > 8 ? "..." : ""}`}
+                        <button onClick={() => navigator.clipboard.writeText(value.resourceId)}>
+                          <FontAwesomeIcon icon="clipboard" size="1x"  className="text-gray-400" />{" "}
+                        </button>
+                      </div>
+                    </td>
                     <td className="flex items-center sm:hidden">
                       <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
-                      <div className="flex flex-col">
-                        <p className="text-left font-medium">{value.serviceName}</p>
+                      <div className="flex flex-col overflow-hidden">
+                        <p className="text-left font-medium truncate">{value.serviceName}</p>
                         <p className="text-left text-gray-500">{value.resourceType}</p>
                       </div>
                     </td>
