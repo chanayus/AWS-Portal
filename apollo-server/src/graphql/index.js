@@ -1,4 +1,3 @@
-
 import { schemaComposer } from 'graphql-compose'
 
 import './relations'

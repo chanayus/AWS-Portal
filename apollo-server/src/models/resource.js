@@ -11,8 +11,8 @@ const ResourceSchema = new Schema({
     userId: { type: String, require: true, ref: 'User' }
 })
 
-export const ResourceMoel = mongoose.models.Resource || mongoose.model('Resource', ResourceSchema)
+export const ResourceMoel = mongoose.model('Resource', ResourceSchema)
 
-export const ResourceTC = composeWithMongoose(ResourceMoel, { schemaComposer: gqlSchemaComposer })
+export const ResourceTC = composeWithMongoose(ResourceMoel)
 
 export default ResourceMoel

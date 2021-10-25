@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
-import schema from '../../apollo-server/graphql'
+import schema from '../../apollo-server/src/graphql'
 
-import '../../apollo-server/mongoose-connect'
+import '../../apollo-server/src/mongoose-connect'
 
 export const config = {
   api: {
@@ -9,4 +9,4 @@ export const config = {
   }
 };
 
-export default new ApolloServer({ schema, playground: true, }).createHandler({ path: "/api/graphql" })
+export default new ApolloServer({ schema, playground: true, introspection: true}).createHandler({ path: "/api/graphql" })
