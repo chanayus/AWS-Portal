@@ -12,7 +12,7 @@ const enumUserType = {
 }
 
 const UserSchema = new Schema({
-  principalId: { type: String },
+  principalId: { type: String, unique: true },
   username: { type: String, required: true, index: true, unique: true },
 })
 
