@@ -7,7 +7,7 @@ const resourceInput = schemaComposer.createInputTC({
     name: 'resourceInput',
     fields: {
         resourceARN: 'String!',
-        principalId: 'String'
+        roleId: 'String'
     }
 })
 
@@ -38,6 +38,7 @@ export const createResources = schemaComposer.createResolver({
     },
     type: [ResourceTC],
     resolve: async ({ args }) => {
+        console.log(args.records)
         const { userInfo, createdAt, eventName } = args.records
         let owner
         if (userInfo.userType === 'IAMUser')
@@ -62,7 +63,7 @@ export const createResources = schemaComposer.createResolver({
             await RoleUserModel.create({
                 username: new_resources[0].resourceARN.split('/')[3],
                 owner: owner._id,
-                principalId: new_resources[0].principalId
+                principalId: new_resources[0].roleId
             })
         }
 

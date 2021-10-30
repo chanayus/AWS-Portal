@@ -1,8 +1,11 @@
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
+console.log(process.env.DB_HOST)
 
 mongoose.Promise = Promise
 mongoose.connect(
-  'mongodb://localhost:27017',
+  process.env.DB_HOST,
   {
     dbName: 'aws-portal',
     promiseLibrary: Promise,
