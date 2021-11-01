@@ -79,7 +79,7 @@ const Container = styled.div`
   }
   .logo {
     svg.portal-logo {
-      width: clamp(80px, 20vw, 130px);
+      width: clamp(80px, 20vw, 100px);
       height: 50px;
       fill: ${(props) => props.theme.textColor};
       path {

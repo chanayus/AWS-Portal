@@ -1,6 +1,7 @@
-import { Button, CheckBox, TableWrapper } from "../styles/styleComponents";
+import { CheckBox, Select, TableWrapper } from "../styles/styleComponents";
 import { chooseAllHandle, chooseHandle } from "../lib/selectHandle";
 
+import Filter from "../components/filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useFetch } from "../lib/useFetch";
@@ -29,9 +30,11 @@ const Resource = () => {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <h1>Resource ที่กำลังใช้งาน</h1>
-        <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
-          <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
-          <div className="flex md:mb-3"></div>
+        <div className="flex mt-12 md:mt-8 md:flex-col-reverse justify-between">
+          <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-trasparent font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
+          <div className="flex md:mb-3">
+            <Filter/>
+          </div>
         </div>
         <TableWrapper className="mt-5">
           <table>
@@ -88,10 +91,10 @@ const Resource = () => {
                       </div>
                     </td>
                     <td className="sm:hidden">
-                      <div className="flex justify-between items-center" >
+                      <div className="flex justify-between items-center">
                         {`${value.resourceId.substring(0, 8)}${value.resourceId.length > 8 ? "..." : ""}`}
                         <button onClick={() => navigator.clipboard.writeText(value.resourceId)}>
-                          <FontAwesomeIcon icon="clipboard" size="1x"  className="text-gray-400" />{" "}
+                          <FontAwesomeIcon icon="clipboard" size="1x" className="text-gray-400" />{" "}
                         </button>
                       </div>
                     </td>

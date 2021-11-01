@@ -22,3 +22,12 @@ export const CheckBox = styled.button`
         border: none;
     }
 `  
+
+export const Select = styled.select`
+    ${tw`mx-2 bg-transparent md:ml-0 font-light`}
+    width: 130px;
+    background: #fff;
+    option{
+        background: ${(props) => props.theme.subColor};
+    }
+`
