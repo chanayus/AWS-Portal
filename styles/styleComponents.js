@@ -31,3 +31,7 @@ export const Select = styled.select`
         background: ${(props) => props.theme.subColor};
     }
 `
+
+export const Div = styled(motion.div)`
+    background: ${(props) => props.theme.subColor};
+`

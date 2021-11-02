@@ -1,7 +1,7 @@
 import { CheckBox, Select, TableWrapper } from "../styles/styleComponents";
 import { chooseAllHandle, chooseHandle } from "../lib/selectHandle";
 
-import Filter from "../components/filter";
+import Filter from "../components/Filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useFetch } from "../lib/useFetch";
@@ -11,7 +11,6 @@ const Resource = () => {
   const [resources, setResources] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const { loading, data } = useFetch("/api/resources", setResources, true);
-
   const filterHandle = (value) => {
     if (value === "") {
       setResources(data);

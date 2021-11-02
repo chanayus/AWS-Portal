@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
         font-size:clamp(24px,5vmin,32px);
         font-weight: 700;
     }
-    p,h1,h2,h3,h4,h5,h6,td,th{
+    p,h1,h2,h3,h4,h5,h6,td,th,label{
         color: ${(props) => props.theme.textColor};
     }
     /* p{
