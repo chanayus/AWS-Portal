@@ -1,5 +1,5 @@
 import { schemaComposer } from 'graphql-compose'
-import { ResourceTC, ResourceMoel, IAMUserModel, RoleUserModel } from '../../models'
+import { ResourceTC, ResourceMoel, IAMUserModel, RoleUserModel, UserModel } from '../../models'
 
 // export const createResource = ResourceTC.getResolver('createOne')
 
@@ -24,7 +24,8 @@ const createResourcesInput = schemaComposer.createInputTC({
     fields: {
         resources: [resourceInput],
         createdAt: 'Date!',
-        userInfo: userInfoInput,
+        // userInfo: userInfoInput,
+        ownerPrincipalId: 'String!',
         eventName: 'String!'
     }
 })
@@ -38,14 +39,10 @@ export const createResources = schemaComposer.createResolver({
     },
     type: [ResourceTC],
     resolve: async ({ args }) => {
-        console.log(args.records)
-        const { userInfo, createdAt, eventName } = args.records
-        let owner
-        if (userInfo.userType === 'IAMUser')
-            owner = await IAMUserModel.findOne({ username: userInfo.username })
-        else{
-            const roleUser = await RoleUserModel.findOne({ username: userInfo.username })
-            owner = await IAMUserModel.findById(roleUser.owner)
+        const { ownerPrincipalId, createdAt, eventName } = args.records
+        let owner = await UserModel.findOne({ principalId: ownerPrincipalId })
+        if (owner.type === 'Role'){
+            owner = await IAMUserModel.findById(owner?.owner)
         }
 
         const new_resources = args.records.resources
