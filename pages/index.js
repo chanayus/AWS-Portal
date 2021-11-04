@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import Loading from "../components/main/loading";
 import { TableWrapper } from "../styles/styleComponents";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -21,7 +22,7 @@ const Index = () => {
     { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
     { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
     { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: "255", icon: "money-check-alt" },
-    { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: `${loading ? "loading" : dataFormatted.length}`, icon: "server" },
+    { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: dataFormatted.length, icon: "server" },
   ];
   return (
     <>
@@ -33,7 +34,7 @@ const Index = () => {
               <FontAwesomeIcon icon={value.icon} size="4x" className="mr-4" />
               <div>
                 <h2>{value.title}</h2>
-                <h1>{value.value}</h1>
+                <h1>{loading ? <Loading/> : value.value}</h1>
               </div>
             </DataCard>
           </Link>
@@ -46,7 +47,7 @@ const Index = () => {
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
           {loading ? (
-            <p>loading...</p>
+            <div className="flex justify-center mt-5"><Loading/></div>
           ) : (
             <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} >
               <table>
@@ -74,7 +75,7 @@ const Index = () => {
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
           {loading ? (
-            <p>loading...</p>
+             <div className="flex justify-center mt-5"><Loading/></div>
           ) : (
             <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} >
               <table>

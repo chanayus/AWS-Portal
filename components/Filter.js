@@ -15,7 +15,7 @@ const Filter = () => {
       </button>
       <AnimatePresence>
         {visible ? (
-          <Div className="fixed w-1/5 xl:w-1/4 sm:w-1/2 right-0 top-0 bg-white h-screen p-5" initial={{ x: 300 }} animate={{ x: 0 }} exit={{ x: 300 }} transition={{ duration: 0.2 }}>
+          <Div className="z-50 fixed w-1/5 xl:w-1/2 sm:w-1/2 right-0 top-0 h-screen p-5 px-4" initial={{ x: 550 }} animate={{ x: 0 }} exit={{ x: 550 }} transition={{ duration: 0.25 }}>
             <div>
               <div className="flex justify-between items-center mb-8">
                 <h1>Filter</h1>

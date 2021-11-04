@@ -1,8 +1,9 @@
 import { CheckBox, Select, TableWrapper } from "../styles/styleComponents";
 import { chooseAllHandle, chooseHandle } from "../lib/selectHandle";
 
-import Filter from "../components/Filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loading from "../components/main/loading";
+import SelectInput from "../components/input/SelectInput";
 import { motion } from "framer-motion";
 import { useFetch } from "../lib/useFetch";
 import { useState } from "react";
@@ -11,6 +12,7 @@ const Resource = () => {
   const [resources, setResources] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const { loading, data } = useFetch("/api/resources", setResources, true);
+  const [state, SetState] = useState(false);
   const filterHandle = (value) => {
     if (value === "") {
       setResources(data);
@@ -24,16 +26,48 @@ const Resource = () => {
   };
 
   if (loading) {
-    return <h1>loading...</h1>;
+    return <div className="flex items-center"><Loading/><h1 className="ml-3">loading</h1></div>;
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+        
+        {/* {state ? (
+          <div className="bg-red-900 w-full h-screen relative top-0 left-0 p-50">
+            <div className="pt-50 h-full">
+              <SelectInput
+                title="Resource"
+                dataSelect={["cloudwatch", "ec2", "eventbridge", "rds", "cloudformation", "elasticbeanstalk", "elasticloadbalancing", "apigateway"]}
+                data={() => {}}
+                setData={() => {}}
+                dataType={null}
+                resourceImg={true}
+              />
+              <SelectInput title="Region" dataSelect={["us-east-1", "ap-southeast-1	", "us-west-2"]} data={() => {}} setData={() => {}} dataType={null} resourceImg={false} />
+              <SelectInput title="เรียงโดย" dataSelect={["สร้างล่าสุด", "สร้างเก่าสุด"]} data={() => {}} setData={() => {}} dataType={null} resourceImg={false} />
+            </div>
+          </div>
+        ) : null} */}
+
         <h1>Resource ที่กำลังใช้งาน</h1>
         <div className="flex mt-12 md:mt-8 md:flex-col-reverse justify-between">
-          <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-trasparent font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
-          <div className="flex md:mb-3">
-            <Filter/>
+          <div className="flex">
+            <input type="text" className="h-fit py-1 px-2 mr-1 rounded-full md:w-full bg-trasparent font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
+            <div className="flex lg:hidden">
+              <SelectInput
+                title="Resource"
+                dataSelect={["cloudwatch", "ec2", "eventbridge", "rds", "cloudformation", "elasticbeanstalk", "elasticloadbalancing", "apigateway"]}
+                data={() => {}}
+                setData={() => {}}
+                dataType={null}
+                resourceImg={true}
+              />
+              <SelectInput title="Region" dataSelect={["us-east-1", "ap-southeast-1	", "us-west-2"]} data={() => {}} setData={() => {}} dataType={null} resourceImg={false} />
+              <SelectInput title="เรียงโดย" dataSelect={["สร้างล่าสุด", "สร้างเก่าสุด"]} data={() => {}} setData={() => {}} dataType={null} resourceImg={false} />
+            </div>
+            {/* <button onClick={() => SetState(!state)}>filter</button> */}
           </div>
+
+          <div className="flex md:mb-3">{/* <Filter/> */}</div>
         </div>
         <TableWrapper className="mt-5">
           <table>
