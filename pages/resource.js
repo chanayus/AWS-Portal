@@ -51,8 +51,8 @@ const Resource = () => {
         <h1>Resource ที่กำลังใช้งาน</h1>
         <div className="flex mt-12 md:mt-8 md:flex-col-reverse justify-between">
           <div className="flex">
-            <input type="text" className="h-fit py-1 px-2 mr-1 rounded-full md:w-full bg-trasparent font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
-            <div className="flex lg:hidden">
+            <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-trasparent font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
+            <div className="flex lg:hidden gap-4 ml-4">
               <SelectInput
                 title="Resource"
                 dataSelect={["cloudwatch", "ec2", "eventbridge", "rds", "cloudformation", "elasticbeanstalk", "elasticloadbalancing", "apigateway"]}

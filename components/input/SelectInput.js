@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import tw from "twin.macro";
 
 const SelectInput = ({ title, dataSelect, dataType, data, setData, resourceImg }) => {
   const [titleText, setTitleText] = useState(title);
@@ -40,7 +41,7 @@ const SelectInput = ({ title, dataSelect, dataType, data, setData, resourceImg }
   };
   return (
     <Container ref={wrapperRef}>
-      <MenuToggle onClick={() => menuToggleHandle()} fontSize={"clamp(11px,4vmin,15px)"} type="button">
+      <MenuToggle onClick={() => menuToggleHandle()} isOpen={showMenu} type="button">
         {(resourceImg && title !== titleText) ? <img src={`/images/resourceIcon/${titleText}.png`} alt="" className="mx-2" /> : null}
         {data[dataType] === "" ? title : titleText}
         <FontAwesomeIcon icon={["fas", "chevron-down"]} />
@@ -48,6 +49,7 @@ const SelectInput = ({ title, dataSelect, dataType, data, setData, resourceImg }
       <AnimatePresence>
       {showMenu ? (
         <MenuList ref={menuRef} isVisible="false" initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }}>
+          <h2 className="ml-2 mb-2">{title}</h2>
           {dataSelect.map((value, index) => {
             return (
               <Button onClick={() => dataHandle(value)} selected={value === titleText}>
@@ -64,38 +66,20 @@ const SelectInput = ({ title, dataSelect, dataType, data, setData, resourceImg }
 };
 
 const Container = styled.div`
-  position: relative;
-  width: 100%;
+  ${tw`relative w-full mr-1.5`}
   min-width: 190px;
-  margin-right: 5px;
 `;
 const MenuToggle = styled.div`
+ ${tw`overflow-hidden flex justify-center items-center duration-200 cursor-pointer font-light w-full px-6 rounded hover:bg-gray-900`}
   border: 1px solid #d0d0d0;
   background: ${(props) => props.theme.subColor};
-  width: 100%;
-  height: 40px;
-  border-radius: 5px;
-  font-weight: 300;
-  font-size: ${(props) => props.fontSize};
   color: ${(props) => props.theme.textColor};
-  overflow: hidden;
+  height: 38px;
   z-index: 10000;
-  padding: 0 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.25s;
-  &:hover {
-    background: #353535;
-    color: #fff;
-    svg {
-      color: #fff;
-    }
-  }
   svg {
-    color: #606060;
     margin: 0 7px;
+    transition: 0.25s;
+    transform: rotate(${props => props.isOpen ? "180deg" : "0deg"});
   }
   img {
     width: 30px;
@@ -125,13 +109,17 @@ const MenuList = styled(motion.div)`
     background: #909090;
     border-radius: 5px 30px 30px 5px;
   }
-  
+  h2{
+    font-size: 1.4rem;
+    color: #000;
+    font-weight: 600;
+  }
 `;
 
 const Button = styled.button`
     display: flex;
     align-items: center;
-    border: 2px solid #d4d4d4;
+    border: 1.5px solid #d4d4d4;
     margin: 5px;
     padding: 5px;
     border-radius: 5px;
