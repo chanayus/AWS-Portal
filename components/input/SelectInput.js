@@ -5,24 +5,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-const SelectInput = ({ title, dataSelect, dataType, data, setData, resourceImg }) => {
+const SelectInput = ({ title, dataSelect, dataKey, data, setData, resourceImg }) => {
   const [titleText, setTitleText] = useState(title);
   const [showMenu, setShowMenu] = useState(false);
   const wrapperRef = useRef(null); // dom ตัว wrapper
   const menuRef = useRef(); // dom ตัว menu option
   
   const dataHandle = (value) => {
-    if (value === data[dataType]) {
+    if (value === data[dataKey]) {
       setTitleText(title);
-      setData({ ...data, [dataType]: "" });
+      setData({ ...data, [dataKey]: "" });
     } else {
       setTitleText(value);
-      data[dataType] = value;
-      setData({ ...data, [dataType]: value });
+      data[dataKey] = value;
+      setData({ ...data, [dataKey]: value });
     }
   };
-
- 
 
   // เปิด-ปิด selection
   const menuToggleHandle = () => {
@@ -43,7 +41,7 @@ const SelectInput = ({ title, dataSelect, dataType, data, setData, resourceImg }
     <Container ref={wrapperRef}>
       <MenuToggle onClick={() => menuToggleHandle()} isOpen={showMenu} type="button">
         {(resourceImg && title !== titleText) ? <img src={`/images/resourceIcon/${titleText}.png`} alt="" className="mx-2" /> : null}
-        {data[dataType] === "" ? title : titleText}
+        {data[dataKey] === "" ? title : titleText}
         <FontAwesomeIcon icon={["fas", "chevron-down"]} />
       </MenuToggle>
       <AnimatePresence>
@@ -66,19 +64,20 @@ const SelectInput = ({ title, dataSelect, dataType, data, setData, resourceImg }
 };
 
 const Container = styled.div`
-  ${tw`relative w-full mr-1.5`}
+  ${tw`relative mr-1.5`}
   min-width: 190px;
 `;
 const MenuToggle = styled.div`
- ${tw`overflow-hidden flex justify-center items-center duration-200 cursor-pointer font-light w-full px-6 rounded hover:bg-gray-900`}
+ ${tw`overflow-hidden flex justify-center items-center duration-100 cursor-pointer font-light w-full px-2  rounded hover:bg-blue-400 hover:text-white`}
   border: 1px solid #d0d0d0;
   background: ${(props) => props.theme.subColor};
   color: ${(props) => props.theme.textColor};
   height: 38px;
   z-index: 10000;
+  white-space: nowrap;
   svg {
     margin: 0 7px;
-    transition: 0.25s;
+    transition: 0.2s;
     transform: rotate(${props => props.isOpen ? "180deg" : "0deg"});
   }
   img {
