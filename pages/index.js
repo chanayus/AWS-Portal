@@ -11,13 +11,13 @@ import { useFetch } from "../lib/useFetch";
 import { useFormat } from "../lib/useFormat";
 
 const Index = () => {
-  const { loading, data: resources } = useFetch("/api/resources",() => {}, false);
-  const [dataFormatted, setDataFormatted] = useState([])
+  const { loading, data: resources } = useFetch("/api/resources", () => {}, false);
+  const [dataFormatted, setDataFormatted] = useState([]);
 
-  useEffect(() =>{
-    loading ? null : setDataFormatted(useFormat(resources))
-  },[loading])
- 
+  useEffect(() => {
+    loading ? null : setDataFormatted(useFormat(resources));
+  }, [loading]);
+  
   const cardlist = [
     { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
     { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
@@ -34,7 +34,7 @@ const Index = () => {
               <FontAwesomeIcon icon={value.icon} size="4x" className="mr-4" />
               <div>
                 <h2>{value.title}</h2>
-                <h1>{loading ? <Loading/> : value.value}</h1>
+                <h1>{loading ? <Loading /> : value.value}</h1>
               </div>
             </DataCard>
           </Link>
@@ -47,9 +47,11 @@ const Index = () => {
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
           {loading ? (
-            <div className="flex justify-center mt-5"><Loading/></div>
+            <div className="flex justify-center mt-5">
+              <Loading />
+            </div>
           ) : (
-            <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} >
+            <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
               <table>
                 <thead>
                   <tr>
@@ -75,9 +77,11 @@ const Index = () => {
             <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
           </div>
           {loading ? (
-             <div className="flex justify-center mt-5"><Loading/></div>
+            <div className="flex justify-center mt-5">
+              <Loading />
+            </div>
           ) : (
-            <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} >
+            <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
               <table>
                 <thead>
                   <tr>
@@ -87,14 +91,18 @@ const Index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="flex items-center">
-                      <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/ec2.png`} alt="" />
-                      EC2
-                    </td>
-                    <td>10/4/2021 11:09AM</td>
-                    <td>IAM User 1</td>
-                  </tr>
+                  {dataFormatted
+                    .slice(0, 3)
+                    .map((value, index) => (
+                      <tr key={index}>
+                        <td className="flex items-center capitalize">
+                          <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
+                          {value.serviceName}
+                        </td>
+                        <td>{value.createdAt}</td>
+                        <td>{value.owner}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </TableWrapper>

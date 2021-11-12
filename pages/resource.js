@@ -15,7 +15,19 @@ const Resource = () => {
   const [isSelectAll, setIsSelectAll] = useState(false);
   const { loading, data } = useFetch("/api/resources", setResources, true);
   const [filterData, setFilterData] = useState({ resource: "", region: "" });
-  const [displasyType, setDisplayType] = useState("card");
+  const [displayType, setDisplayType] = useState("card");
+
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.25,
+        staggerChildren: 0.065,
+      },
+    },
+  };
 
   if (loading) {
     return (
@@ -28,7 +40,7 @@ const Resource = () => {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <h1>Resource ที่กำลังใช้งาน</h1>
-        {displasyType === "table" ? (
+        {displayType === "table" ? (
           <AnimatePresence exitBeforeEnter>
             <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
               <div className="flex mt-12 md:mt-8 md:flex-col-reverse justify-between">
@@ -40,10 +52,10 @@ const Resource = () => {
                   </div>
                 </div>
                 <div className="flex md:mb-3">
-                  <button className="w-9 min-h-5 bg-white" onClick={() => setDisplayType("table")}>
-                    <FontAwesomeIcon icon="list" size="1x" color="black" />
+                  <button className="w-9 h-9 bg-white border-4 border-blue-600 shadow" onClick={() => setDisplayType("table")}>
+                    <FontAwesomeIcon icon="list" size="1x" color="blue" />
                   </button>
-                  <button className="w-9 min-h-5 bg-white ml-3" onClick={() => setDisplayType("card")}>
+                  <button className="w-9 h-9 bg-white ml-3 shadow" onClick={() => setDisplayType("card")}>
                     <FontAwesomeIcon icon="th" size="1x" color="black" />
                   </button>
                 </div>
@@ -87,7 +99,7 @@ const Resource = () => {
                             </div>
                             <div className="hidden sm:flex justify-between my-1">
                               <b>Region</b>
-                              {value.region}
+                              {value.region ? value.region : "-"}
                             </div>
                             <div className="hidden sm:flex justify-between my-1">
                               <b>สร้างเมื่อ</b>
@@ -136,20 +148,28 @@ const Resource = () => {
           </AnimatePresence>
         ) : (
           <AnimatePresence exitBeforeEnter>
-            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"card"}>
-              <div className="flex my-5 md:mb-3 justify-end">
-                <button className="w-9 h-9 bg-white" onClick={() => setDisplayType("table")}>
-                  <FontAwesomeIcon icon="list" size="1x" color="black" />
-                </button>
-                <button className="w-9 h-9 bg-white ml-3" onClick={() => setDisplayType("card")}>
-                  <FontAwesomeIcon icon="th" size="1x" color="black" />
-                </button>
-              </div>
-              <div className="mt-12 flex flex-wrap justify-between gap-y-16 gap-x-2 md:justify-center">
-                {getUniqueData(data, "serviceName").map((value, index) => (
-                  <ResourceType key={index} title={value} total={data.filter((resource) => resource.serviceName === value).length} />
-                ))}
-              </div>
+            <div className="flex my-5 md:mb-3 justify-end">
+              <button className="w-9 h-9 bg-white shadow" onClick={() => setDisplayType("table")}>
+                <FontAwesomeIcon icon="list" size="1x" color="black" />
+              </button>
+              <button className="w-9 h-9 bg-white shadow ml-3 border-4 border-blue-600" onClick={() => setDisplayType("card")}>
+                <FontAwesomeIcon icon="th" size="1x" color="blue" />
+              </button>
+            </div>
+            <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 xl:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible">
+              {getUniqueData(data, "serviceName").map((value, index) => (
+                <ResourceType
+                  key={index}
+                  title={value}
+                  totalResource={data.filter((resource) => resource.serviceName === value).length}
+                  totalRegion={
+                    getUniqueData(
+                      data.filter((resource) => resource.serviceName === value),
+                      "region"
+                    ).length
+                  }
+                />
+              ))}
             </motion.div>
           </AnimatePresence>
         )}

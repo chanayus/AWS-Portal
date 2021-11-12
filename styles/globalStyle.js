@@ -57,7 +57,7 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
     button{
-        border: none;
+        /* border: none; */
         cursor: pointer;
     }
 `;
