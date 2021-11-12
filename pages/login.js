@@ -30,7 +30,7 @@ const Login = () =>{
 export default Login
 
 const Container = styled.div`
-    background: url('https://images.unsplash.com/photo-1618388810903-840bb0d15ea5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    background: url('https://images.unsplash.com/photo-1591478209132-e32752b9af43?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2072&q=80');
     ${tw`flex justify-around items-center w-full min-h-screen duration-200 bg-center bg-cover`}
 `
 

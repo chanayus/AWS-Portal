@@ -50,7 +50,7 @@ const SelectInput = ({ title, dataSelect, dataKey, data, setData, resourceImg })
           <h2 className="ml-2 mb-2">{title}</h2>
           {dataSelect.map((value, index) => {
             return (
-              <Button onClick={() => dataHandle(value)} selected={value === titleText}>
+              <Button onClick={() => dataHandle(value)} selected={value === titleText} key={index}>
                 {resourceImg ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2"  /> : null}
                 <p>{value}</p>
               </Button>

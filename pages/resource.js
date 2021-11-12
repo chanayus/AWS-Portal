@@ -8,13 +8,14 @@ import Loading from "../components/main/loading";
 import ResourceType from "../components/resource/ResourceType";
 import SelectInput from "../components/input/SelectInput";
 import { getUniqueData } from "../lib/getUniqueData";
+import { selectFilterHandle } from "../lib/useFilter"
 import { useFetch } from "../lib/useFetch";
 
 const Resource = () => {
   const [resources, setResources] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const { loading, data } = useFetch("/api/resources", setResources, true);
-  const [filterData, setFilterData] = useState({ resource: "", region: "" });
+  const [filterData, setFilterData] = useState({ resource: "", region: "", searchText: "" });
   const [displayType, setDisplayType] = useState("card");
 
   const container = {
@@ -23,11 +24,19 @@ const Resource = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        delayChildren: 0.25,
-        staggerChildren: 0.065,
+        delayChildren: 0.05,
+        staggerChildren: 0.05,
       },
     },
   };
+
+  useEffect(() => {
+    selectFilterHandle(data, setResources,filterData)
+  }, [filterData])
+
+  const filterHandle = (textValue) =>{
+    setFilterData({...filterData, searchText: textValue})
+  }
 
   if (loading) {
     return (
@@ -147,7 +156,7 @@ const Resource = () => {
             </motion.div>
           </AnimatePresence>
         ) : (
-          <AnimatePresence exitBeforeEnter>
+          <>
             <div className="flex my-5 md:mb-3 justify-end">
               <button className="w-9 h-9 bg-white shadow" onClick={() => setDisplayType("table")}>
                 <FontAwesomeIcon icon="list" size="1x" color="black" />
@@ -156,7 +165,7 @@ const Resource = () => {
                 <FontAwesomeIcon icon="th" size="1x" color="blue" />
               </button>
             </div>
-            <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 xl:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible">
+            <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 xl:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible" key={"card"}>
               {getUniqueData(data, "serviceName").map((value, index) => (
                 <ResourceType
                   key={index}
@@ -171,7 +180,7 @@ const Resource = () => {
                 />
               ))}
             </motion.div>
-          </AnimatePresence>
+          </>
         )}
       </motion.div>
     );
