@@ -31,11 +31,11 @@ const ResourceType = ({ title, totalResource, totalRegion }) => {
 };
 
 const Card = styled(motion.div)`
-  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end rounded-xl shadow md:px-3 sm:pb-6`}
+  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end rounded-lg shadow md:px-3 sm:pb-6`}
   width: 400px;
   max-width: 100%;
   height: 140px;
-  background: #111;
+  background: linear-gradient(189.63deg, #262626 24.44%, #000000 86.76%);
   cursor: pointer;
   img {
     ${tw`absolute w-14 -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 `}
