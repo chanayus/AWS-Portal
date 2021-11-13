@@ -15,7 +15,7 @@ const ResourceType = ({ title, totalResource, totalRegion }) => {
     }
   }
   return (
-    <Link href={"https://www.instagram.com/"}>
+    <Link href={`/resource/[serviceName]`} as={`/resource/${title.toLowerCase()}`}>
       <Card variants={item} whileHover={{scale: 0.965}}>
         <img className="" src={`/images/resourceIcon/${title}.png`} alt="" />
         <div className="flex justify-between items-center w-full">

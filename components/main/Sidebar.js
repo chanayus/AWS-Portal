@@ -33,7 +33,7 @@ const Sidebar = ({ excludePath }) => {
           </Link>
           <Link href="/resource">
             <a>
-              {router.asPath === "/resource" ?  <HiServer /> : <HiOutlineServer />}
+              {router.asPath.includes("/resource") ?  <HiServer /> : <HiOutlineServer />}
               <p>
                 Resource<br/>
                 ที่กำลังใช้งาน

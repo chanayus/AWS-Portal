@@ -1,15 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckBox, TableWrapper } from "../styles/styleComponents";
-import { chooseAllHandle, chooseHandle } from "../lib/selectHandle";
+import { CheckBox, TableWrapper } from "../../styles/styleComponents";
+import { chooseAllHandle, chooseHandle } from "../../lib/selectHandle";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Loading from "../components/main/loading";
-import ResourceType from "../components/resource/ResourceType";
-import SelectInput from "../components/input/SelectInput";
-import { getUniqueData } from "../lib/getUniqueData";
-import { selectFilterHandle } from "../lib/useFilter"
-import { useFetch } from "../lib/useFetch";
+import Loading from "../../components/main/loading";
+import ResourceType from "../../components/resource/ResourceType";
+import SelectInput from "../../components/input/SelectInput";
+import { getUniqueData } from "../../lib/getUniqueData";
+import { selectFilterHandle } from "../../lib/useFilter"
+import { useFetch } from "../../lib/useFetch";
 
 const Resource = () => {
   const [resources, setResources] = useState([]);
