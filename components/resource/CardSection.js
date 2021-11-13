@@ -21,7 +21,7 @@ const CardSection = ({ data, setDisplayType }) => {
 
   return (
     <>
-      <div className="flex mt-12 mb-16 md:mb-3 md:flex-col-reverse md:items-stretch justify-between items-center">
+      <div className="flex mt-12 mb-10 md:mb-3 md:flex-col-reverse md:items-stretch justify-between items-center">
         <div className="flex items-center font-light md:mt-4">
           {/* <p className="mr-3">แสดงตาม </p>
           <button className="bg-white shadow w-24 h-9">Service</button>
