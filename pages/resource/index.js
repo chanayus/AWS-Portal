@@ -10,13 +10,17 @@ import SelectInput from "../../components/input/SelectInput";
 import { getUniqueData } from "../../lib/getUniqueData";
 import { selectFilterHandle } from "../../lib/useFilter"
 import { useFetch } from "../../lib/useFetch";
+import { useRouter } from 'next/router'
 
 const Resource = () => {
+  const router = useRouter()
+  const { displayProps } = router.query
+
   const [resources, setResources] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const { loading, data } = useFetch("/api/resources", setResources, true);
   const [filterData, setFilterData] = useState({ resource: "", region: "", searchText: "" });
-  const [displayType, setDisplayType] = useState("card");
+  const [displayType, setDisplayType] = useState(displayProps ? displayProps : "card");
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -165,7 +169,7 @@ const Resource = () => {
                 <FontAwesomeIcon icon="th" size="1x" color="blue" />
               </button>
             </div>
-            <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 xl:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible" key={"card"}>
+            <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 xl:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible">
               {getUniqueData(data, "serviceName").map((value, index) => (
                 <ResourceType
                   key={index}

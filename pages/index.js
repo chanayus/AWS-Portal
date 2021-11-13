@@ -9,17 +9,19 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { useFetch } from "../lib/useFetch";
 import { useFormat } from "../lib/useFormat";
+import { useRouter } from 'next/router'
 
 const Index = () => {
   const { loading, data: resources } = useFetch("/api/resources", () => {}, false);
   const [dataFormatted, setDataFormatted] = useState([]);
-
+  const router = useRouter()
   useEffect(() => {
     loading ? null : setDataFormatted(useFormat(resources));
   }, [loading]);
-  
+ 
+  const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length
   const cardlist = [
-    { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: "255", icon: "user" },
+    { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
     { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
     { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: (<>255<span className="text-xl"> บาท</span></>), icon: "money-check-alt" },
     { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: dataFormatted.length, icon: "server" },
@@ -74,7 +76,7 @@ const Index = () => {
         <div className="flex-1 lg:mt-5">
           <div className="flex justify-between items-center">
             <h2 className="text-xl md:text-lg">Resource ที่ถูกสร้างล่าสุด</h2>
-            <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
+            <button className="text-white bg-black px-3 py-2 rounded md:text-xs"  onClick={() => {router.push({ pathname: '/resource', query: { displayProps: 'table' }})}} >ดูทั้งหมด</button>
           </div>
           {loading ? (
             <div className="flex justify-center mt-5">

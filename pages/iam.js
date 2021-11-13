@@ -1,113 +1,78 @@
-import { Button, TableWrapper } from "../styles/styleComponents";
+import { useEffect, useState } from "react";
 
-import fetch from "isomorphic-unfetch";
-import { useState } from "react";
+import Loading from "../components/main/loading";
+import { TableWrapper } from "../styles/styleComponents";
+import { motion } from "framer-motion";
+import { useFetch } from "../lib/useFetch";
 
-export const getServerSideProps = async () => {
-  // const res = await fetch("http://localhost:3000/api/hello");
-  // const data = await res.json();
-  return {
-    props: {
-      iamData: [
-        {
-          id: "1",
-          username: "IAM-01",
-          usingResource: 0,
-          usingRegion: 0,
-          expenses: 0,
-        },
-        {
-          id: "2",
-          username: "IAM-02",
-          usingResource: 0,
-          usingRegion: 0,
-          expenses: 0,
-        },
-        {
-          id: "3",
-          username: "IAM-03",
-          usingResource: 0,
-          usingRegion: 0,
-          expenses: 0,
-        },
-        {
-          id: "4",
-          username: "IAM-04",
-          usingResource: 0,
-          usingRegion: 0,
-          expenses: 0,
-        },
-      ],
-    },
-  };
-};
-
-const IamUser = ({ iamData }) => {
-  const [iamUsers, setIamUsers] = useState(iamData);
-  const filterHandle = (value) => {
-    if (value === "") {
-        setIamUsers(iamData);
-    } else {
-        setIamUsers(
-        iamData.filter((item) => {
-          return item.username.toUpperCase().includes(value.toUpperCase());
-        })
-      );
-    }
-  };
-  return (
-    <>
-      <h1>IAM Users ทั้งหมด</h1>
-      <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
-        <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)}/>
-        <div className="flex md:mb-3">
-          {/* <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button> */}
-        </div>
+const IamUser = () => {
+  const { loading, data } = useFetch("/api/resources", () => {}, true);
+  const [iamUsers, setIamUsers] = useState([]);
+  useEffect(() => {
+    loading ? null : setIamUsers([...new Set(data.map((value) => value.owner))].filter((value) => value));
+  }, [loading]);
+  if (loading) {
+    return (
+      <div className="flex items-center">
+        <Loading />
+        <h1 className="ml-3">loading</h1>
       </div>
-      <TableWrapper className="mt-5">
-        <table>
-          <thead className="sm:hidden">
-            <tr>
-              <th>Username</th>
-              <th>จำนวน Resource ที่กำลังใช้</th>
-              <th>จำนวน Region ที่กำลังใช้</th>
-              <th>ค่าใช้จ่ายโดยรวม</th>
-            </tr>
-          </thead>
-          <tbody>
-            {iamUsers.map((value, index) => {
-              return (
-                <tr key={index}>
-                  <td className="hidden sm:block">
-                    <div className="hidden sm:flex justify-between">
-                      <b>Username</b>
-                      {value.username}
-                    </div>
-                    <div className="hidden sm:flex justify-between my-1">
-                      <b>จำนวน Resource ที่กำลังใช้</b>
-                      {value.usingResource}
-                    </div>
-                    <div className="hidden sm:flex justify-between my-1">
-                      <b>จำนวน Region ที่กำลังใช้</b>
-                      {value.usingRegion}
-                    </div>
-                    <div className="hidden sm:flex justify-between my-1">
-                      <b>ค่าใช้จ่ายโดยรวม</b>
-                      {value.expenses}
-                    </div>
-                  </td>
-                  <td className="sm:hidden">{value.username}</td>
-                  <td className="sm:hidden">{value.usingResource}</td>
-                  <td className="sm:hidden">{value.usingRegion}</td>
-                  <td className="sm:hidden">{value.expenses}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </TableWrapper>
-    </>
-  );
+    );
+  } else {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+        <h1>IAM Users ทั้งหมด</h1>
+        <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
+          <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={() => {}} />
+          <div className="flex md:mb-3">{/* <Button className="py-1 px-2 mx-1 md:ml-0 font-light">เรียงโดย</Button> */}</div>
+        </div>
+        <TableWrapper className="mt-5">
+          <table>
+            <thead className="sm:hidden">
+              <tr>
+                <th>Username</th>
+                <th>จำนวน Resource ที่กำลังใช้</th>
+                <th>จำนวน Region ที่กำลังใช้</th>
+                <th>ค่าใช้จ่ายโดยรวม</th>
+              </tr>
+            </thead>
+            <tbody>
+              {iamUsers.map((iamName, index) => {
+                const totalResource = data.filter((value) => value.owner === iamName)
+                const totalRegion = [...new Set(totalResource.map((value) => value.region))].length
+                return (
+                  <tr key={index}>
+                    <td className="hidden sm:block">
+                      <div className="hidden sm:flex justify-between">
+                        <b>Username</b>
+                        {iamName}
+                      </div>
+                      <div className="hidden sm:flex justify-between my-1">
+                        <b>จำนวน Resource ที่กำลังใช้</b>
+                        {totalResource.length}
+                      </div>
+                      <div className="hidden sm:flex justify-between my-1">
+                        <b>จำนวน Region ที่กำลังใช้</b>
+                        {totalRegion}
+                      </div>
+                      <div className="hidden sm:flex justify-between my-1">
+                        <b>ค่าใช้จ่ายโดยรวม</b>
+                        0
+                      </div>
+                    </td>
+                    <td className="sm:hidden">{iamName}</td>
+                    <td className="sm:hidden">{totalResource.length}</td>
+                    <td className="sm:hidden">{totalRegion}</td>
+                    <td className="sm:hidden">0</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </TableWrapper>
+      </motion.div>
+    );
+  }
 };
 
 export default IamUser;
