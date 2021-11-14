@@ -1,18 +1,22 @@
+import { useEffect, useState } from "react";
+
 import CardSection from "../../components/resource/CardSection";
 import Loading from "../../components/main/loading";
 import TableSection from "../../components/resource/TableSection";
 import { motion } from "framer-motion";
 import { useFetch } from "../../lib/useFetch";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 const Resource = () => {
   const router = useRouter();
-  const { displayProps } = router.query;
-
+  const { display, cardType } = router.query;
   const [resources, setResources] = useState([]);
   const { loading, data } = useFetch("/api/resources", setResources, true);
-  const [displayType, setDisplayType] = useState(displayProps ? displayProps : "card");
+  const [displayType, setDisplayType] = useState("");
+
+  useEffect(() => {
+    loading ? null : setDisplayType(display)
+  }, [loading])
 
   if (loading) {
     return (
@@ -28,7 +32,7 @@ const Resource = () => {
         {displayType === "table" ? (
           <TableSection data={data} resources={resources} setResources={setResources} setDisplayType={setDisplayType}/>
         ) : (
-          <CardSection data={data} setDisplayType={setDisplayType}/>
+          <CardSection data={data} setDisplayType={setDisplayType} type={cardType ? cardType : "service"}/>
         )}
       </motion.div>
     );

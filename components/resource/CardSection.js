@@ -4,8 +4,8 @@ import { getUniqueData } from "../../lib/getUniqueData";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const CardSection = ({ data, setDisplayType }) => {
-  const [cardType, setCardType] = useState("service");
+const CardSection = ({ data, setDisplayType, type }) => {
+  const [cardType, setCardType] = useState(["service", "region", "iam"].includes(type) ? type : "service");
   const typeCondition = {
     service: "serviceName",
     region: "region",

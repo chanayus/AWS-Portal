@@ -9,17 +9,17 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { useFetch } from "../lib/useFetch";
 import { useFormat } from "../lib/useFormat";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const Index = () => {
   const { loading, data: resources } = useFetch("/api/resources", () => {}, false);
   const [dataFormatted, setDataFormatted] = useState([]);
-  const router = useRouter()
+  const router = useRouter();
+
   useEffect(() => {
     loading ? null : setDataFormatted(useFormat(resources));
   }, [loading]);
- 
-  const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length
+  const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length;
   const cardlist = [
     { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
     { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
@@ -44,45 +44,63 @@ const Index = () => {
       </div>
       <div className="flex justify-between mt-16 gap-10 lg:flex-col">
         <div className="flex-1">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
-            <button className="text-white bg-black px-3 py-2 rounded md:text-xs">ดูทั้งหมด</button>
-          </div>
           {loading ? (
             <div className="flex justify-center mt-5">
               <Loading />
             </div>
           ) : (
-            <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Region</th>
-                    <th>จำนวน Resource</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(resources).map((value, index) => (
-                    <tr key={index}>
-                      <td>{value}</td>
-                      <td>{resources[value].length}</td>
+            <>
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
+                <button
+                  className="text-white bg-black px-3 py-2 rounded md:text-xs"
+                  onClick={() => {
+                    router.push({ pathname: "/resource", query: { display: "card", cardType: "region" } });
+                  }}
+                >
+                  ดูทั้งหมด
+                </button>
+              </div>
+              <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Region</th>
+                      <th>จำนวน Resource</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </TableWrapper>
+                  </thead>
+                  <tbody>
+                    {Object.keys(resources).map((value, index) => (
+                      <tr key={index}>
+                        <td>{value}</td>
+                        <td>{resources[value].length}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </TableWrapper>
+            </>
           )}
         </div>
         <div className="flex-1 lg:mt-5">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl md:text-lg">Resource ที่ถูกสร้างล่าสุด</h2>
-            <button className="text-white bg-black px-3 py-2 rounded md:text-xs"  onClick={() => {router.push({ pathname: '/resource', query: { displayProps: 'table' }})}} >ดูทั้งหมด</button>
-          </div>
+         
           {loading ? (
             <div className="flex justify-center mt-5">
               <Loading />
             </div>
           ) : (
+            <>
+            <div className="flex justify-between items-center">
+            <h2 className="text-xl md:text-lg">Resource ที่ถูกสร้างล่าสุด</h2>
+            <button
+              className="text-white bg-black px-3 py-2 rounded md:text-xs"
+              onClick={() => {
+                router.push({ pathname: "/resource", query: { display: "table" } });
+              }}
+            >
+              ดูทั้งหมด
+            </button>
+          </div>
             <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
               <table>
                 <thead>
@@ -93,21 +111,20 @@ const Index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {dataFormatted
-                    .slice(0, 3)
-                    .map((value, index) => (
-                      <tr key={index}>
-                        <td className="flex items-center capitalize">
-                          <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
-                          {value.serviceName}
-                        </td>
-                        <td>{value.createdAt}</td>
-                        <td>{value.owner}</td>
-                      </tr>
-                    ))}
+                  {dataFormatted.slice(0, 3).map((value, index) => (
+                    <tr key={index}>
+                      <td className="flex items-center capitalize">
+                        <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
+                        {value.serviceName}
+                      </td>
+                      <td>{value.createdAt}</td>
+                      <td>{value.owner}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </TableWrapper>
+            </>
           )}
         </div>
       </div>
