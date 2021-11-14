@@ -32,7 +32,7 @@ export const GlobalStyle = createGlobalStyle`
     table{
         width: 100%;
         text-align: left;
-        border: 1px solid #8181817f;
+        border: 1px solid rgba(129, 129, 129, 0.35);
         background: ${(props) => props.theme.subColor};
         td, th{
             ${tw`sm:px-3`}
@@ -40,12 +40,12 @@ export const GlobalStyle = createGlobalStyle`
             font-size: clamp(13px,2vw,16px);
         }
         thead{
-            border-bottom: 1px solid #8181817f;
+            border-bottom: 1px solid rgba(129, 129, 129, 0.35);
             background: ${(props) => props.theme.tableHeader};
         }
         tbody{
             tr{
-                border-bottom: 1px solid #8181817f;        
+                border-bottom: 1px solid rgba(129, 129, 129, 0.35);        
                 td{
                     font-weight: 300;
                 }

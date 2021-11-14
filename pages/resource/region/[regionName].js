@@ -71,23 +71,23 @@ const SpecificResource = () => {
                           </div>
                           <div className="hidden sm:flex justify-between my-1">
                             <b>Resource Type</b>
-                            {value.resourceType ? value.resourceType : "-"}
+                            <p className="text-right">{value.resourceType ? value.resourceType : "-"}</p>
                           </div>
                           <div className="hidden sm:flex justify-between my-1">
                             <b>Region</b>
-                            {value.region ? value.region : "-"}
+                            <p className="text-right">{value.region ? value.region : "-"}</p>
                           </div>
                           <div className="hidden sm:flex justify-between my-1">
                             <b>สร้างเมื่อ</b>
-                            {value.createdAt ? value.createdAt : "-"}
+                            <p className="text-right">{value.createdAt ? value.createdAt : "-"}</p>
                           </div>
                           <div className="hidden sm:flex justify-between my-1">
                             <b>สร้างโดย</b>
-                            {value.owner ? value.owner : "-"}
+                            <p className="text-right">{value.owner ? value.owner : "-"}</p>
                           </div>
                           <div className="hidden sm:flex justify-between my-1">
                             <b>id</b>
-                            {`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}
+                            <p className="text-right">{`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}</p>
                           </div>
                         </td>
                         <td className="sm:hidden">

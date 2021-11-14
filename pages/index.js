@@ -132,7 +132,7 @@ const Index = () => {
   );
 };
 
-const DataCard = styled(motion.div)`
+const DataCard = styled(motion.a)`
   ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-300 shadow-lg hover:shadow-xl`}
   background: ${(props) => props.theme.subColor};
   height: 140px;

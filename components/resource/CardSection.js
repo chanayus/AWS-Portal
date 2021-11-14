@@ -33,7 +33,6 @@ const CardSection = ({ data, setDisplayType, type }) => {
     <>
       <div className="flex mt-12 mb-10 sm:mb-3 sm:flex-col-reverse sm:items-stretch justify-between items-center">
         <div className="flex items-center font-light sm:mt-4">
-          <p className="mr-3 md:hidden">แสดงตาม </p>
           <button className={`bg-white shadow w-24 sm:w-full h-9 ${cardType === "service" ? "border-2 border-blue-600 text-blue-600" : null}`} onClick={() => setCardType("service")}>
             Service
           </button>
@@ -57,7 +56,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
         {getUniqueData(data, typeCondition[cardType]).map((value, index) => (
           <ResourceType
             key={index}
-            title={value ? value : "-"}
+            title={value}
             type={cardType}
             totalResource={data.filter((resource) => resource[typeCondition[cardType]] === value).length}
             totalRegion={

@@ -31,7 +31,7 @@ const ResourceType = ({ title , totalResource, totalRegion, type }) => {
           </div>
         }
         <div className="flex justify-between items-center w-full">
-          <h1 className="service-name">{title !== "-" ? title : "ไม่มีการระบุ"}</h1>
+          <h1 className="service-name">{title === "-" ? "ไม่มีการระบุ" : title}</h1>
           <h1 className="font-light">{totalResource}</h1>
         </div>
         <h2 className={`text-gray-300 mt-2 font-light`}>
@@ -42,7 +42,7 @@ const ResourceType = ({ title , totalResource, totalRegion, type }) => {
   );
 };
 
-const Card = styled(motion.div)`
+const Card = styled(motion.a)`
   ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end rounded-lg shadow md:px-3 sm:pb-6`}
   width: 400px;
   max-width: 100%;
