@@ -15,14 +15,7 @@ const SpecificResource = () => {
   const { loading, data } = useFetch("/api/resources", setResources, true);
   const [isSelectAll, setIsSelectAll] = useState(false);
   useEffect(() => {
-    setResources(data.filter((value) => {
-      if(iamName === "-"){
-        return !value.owner
-      }
-      else{
-        return value.owner === iamName
-      }
-    }));
+    setResources(data.filter((value) => value.owner === iamName));
   }, [data]);
 
   if (loading) {
