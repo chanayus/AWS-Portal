@@ -19,6 +19,8 @@ const Index = () => {
   useEffect(() => {
     loading ? null : setDataFormatted(useFormat(resources));
   }, [loading]);
+
+  const regionTableData = Object.keys(resources).sort((a,b) => b.length - a.length)
   const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length;
   const cardlist = [
     { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
@@ -70,7 +72,7 @@ const Index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.keys(resources).map((value, index) => (
+                    {regionTableData.map((value, index) => (
                       <tr key={index}>
                         <td>{value}</td>
                         <td>{resources[value].length}</td>
