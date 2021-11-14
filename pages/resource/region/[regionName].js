@@ -1,22 +1,21 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckBox, TableWrapper } from "../../styles/styleComponents";
-import { chooseAllHandle, chooseHandle } from "../../lib/selectHandle";
+import { CheckBox, TableWrapper } from "../../../styles/styleComponents";
+import { chooseAllHandle, chooseHandle } from "../../../lib/selectHandle";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
-import Loading from "../../components/main/loading";
-import { useFetch } from "../../lib/useFetch";
+import Loading from "../../../components/main/loading";
+import { useFetch } from "../../../lib/useFetch";
 import { useRouter } from "next/router";
 
 const SpecificResource = () => {
   const router = useRouter();
   const [resources, setResources] = useState([]);
-  const { serviceName } = router.query;
+  const { regionName } = router.query;
   const { loading, data } = useFetch("/api/resources", setResources, true);
   const [isSelectAll, setIsSelectAll] = useState(false);
   useEffect(() => {
-    setResources(data.filter((value) => value.serviceName === serviceName));
+    setResources(data.filter((value) => value.region === regionName));
   }, [data]);
 
   if (loading) {
@@ -30,8 +29,10 @@ const SpecificResource = () => {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <div className="flex items-center mb-16">
-          <Image className="rounded" src={`/images/resourceIcon/${serviceName}.png`} alt="service-Img" width={50} height={50} />
-          <h1 className="ml-3 capitalize">{serviceName}</h1>
+          <div className=" w-12 h-12 rounded-md bg-gray-400 flex items-center justify-center">
+            <h2 className="text-white text-2xl">{regionName ? regionName.charAt(0).toUpperCase() : "?"}</h2>
+          </div>
+          <h1 className="ml-3 capitalize">{regionName}</h1>
         </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>

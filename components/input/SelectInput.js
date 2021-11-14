@@ -47,7 +47,7 @@ const SelectInput = ({ title, dataSelect, dataKey, data, setData, resourceImg })
       <AnimatePresence>
       {showMenu ? (
         <MenuList ref={menuRef} isVisible="false" initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }}>
-          <h2 className="ml-2 mb-2">{title}</h2>
+          <h2 className="py-2 px-3 pb-1 border-b-2 border-gray-300">{title}</h2>
           {dataSelect.map((value, index) => {
             return (
               <Button onClick={() => dataHandle(value)} selected={value === titleText} key={index}>
@@ -68,7 +68,7 @@ const Container = styled.div`
   min-width: 190px;
 `;
 const MenuToggle = styled.div`
- ${tw`overflow-hidden flex justify-center items-center duration-100 cursor-pointer font-light w-full px-2  rounded hover:bg-blue-400 hover:text-white`}
+ ${tw`overflow-hidden flex justify-center items-center duration-100 cursor-pointer font-light w-full rounded hover:bg-blue-600 hover:text-white`}
   border: 1px solid #d0d0d0;
   background: ${(props) => props.theme.subColor};
   color: ${(props) => props.theme.textColor};
@@ -90,10 +90,9 @@ const MenuList = styled(motion.div)`
   position: absolute;
   background: #fff;
   border: 1px solid #d0d0d0;
-  padding: 10px;
   z-index: 1;
   margin-top: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   top: 45px;
   max-height: 223px;
   overflow-y: scroll;
@@ -118,10 +117,9 @@ const MenuList = styled(motion.div)`
 const Button = styled.button`
     display: flex;
     align-items: center;
-    border: 1.5px solid #d4d4d4;
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 7px 5px;
+    margin: 0 10px;
     overflow: hidden;
     min-width: 200px;
     font-weight: 300;
