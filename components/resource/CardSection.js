@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ResourceType from "../../components/resource/ResourceType";
+import ResourceCard from "../../components/resource/ResourceCard";
 import { getUniqueData } from "../../lib/getUniqueData";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -54,7 +54,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
       </div>
       <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 xl:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible">
         {getUniqueData(data, typeCondition[cardType]).map((value, index) => (
-          <ResourceType
+          <ResourceCard
             key={index}
             title={value}
             type={cardType}
