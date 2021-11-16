@@ -36,7 +36,7 @@ const Container = styled.div`
 
 const FlexBox = styled.div`
     ${tw`flex justify-around w-full duration-200`}
-    height: 500px;
+    height: clamp(450px,25vw,500px);
     @media(max-width: 960px){
         ${tw`justify-center w-full duration-200 h-screen`}
     }
@@ -45,7 +45,7 @@ const FlexBox = styled.div`
 const LogoWrapper = styled.div`
     ${tw`flex items-center justify-center md:hidden ml-3`}
     svg{
-        width: clamp(320px,40vw,450px);
+        width: clamp(320px,25vw,450px);
         fill: #FFF;
         path{
             stroke: #FFF;
@@ -55,7 +55,7 @@ const LogoWrapper = styled.div`
 
 const LoginForm = styled.form`
     ${tw`flex flex-col justify-between ml-24 w-full duration-200 bg-white px-8 py-12 md:py-0`}
-    max-width: 550px;
+    max-width: 500px;
     @media(max-width: 960px){
         background: rgba(0,0,0,0.7);
         height: 100vh;

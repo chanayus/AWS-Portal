@@ -52,7 +52,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
           </button>
         </div>
       </div>
-      <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 xl:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible">
+      <motion.div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 md:grid-cols-2 md:gap-x-4" variants={container} initial="hidden" animate="visible">
         {getUniqueData(data, typeCondition[cardType]).map((value, index) => (
           <ResourceCard
             key={index}

@@ -17,8 +17,8 @@ const ResourceTable = ({ resources, setResources }) => {
                   {isSelectAll ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
                 </CheckBox>
               </th>
-              <th className="pl-0">id</th>
-              <th>Resource</th>
+              <th className="pl-1" width="10%">id</th>
+              <th width="22.5%">Resource</th>
               <th>Region</th>
               <th>สร้างเมื่อ</th>
               <th>สร้างโดย</th>
@@ -65,7 +65,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <p className="text-right">{`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}</p>
                     </div>
                   </td>
-                  <td className="sm:hidden pl-0">
+                  <td className="sm:hidden pl-1">
                     <div className="flex justify-between items-center">
                       {`${value.resourceId.substring(0, 8)}${value.resourceId.length > 8 ? "..." : ""}`}
                       <button onClick={() => navigator.clipboard.writeText(value.resourceId)}>
@@ -73,11 +73,11 @@ const ResourceTable = ({ resources, setResources }) => {
                       </button>
                     </div>
                   </td>
-                  <td className="flex items-center sm:hidden">
+                  <td className="flex items-center sm:hidden" >
                     <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                     <div className="flex flex-col overflow-hidden w-1/2">
                       <p className="text-left font-medium truncate">{value.serviceName}</p>
-                      <p className="text-left text-gray-500">{value.resourceType}</p>
+                      <p className="text-left text-gray-500 truncate">{`${value.resourceType.substring(0, 25)}${value.resourceType.length > 30 ? "..." : ""}`}</p>
                     </div>
                   </td>
                   <td className="sm:hidden">{value.region}</td>

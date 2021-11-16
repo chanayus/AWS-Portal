@@ -11,7 +11,7 @@ module.exports = {
       md: {'max': '960px'},
       lg: {'raw': '(max-width: 1024px)'}, 
       xl: {'raw': '(max-width: 1280px)'},
-      '2xl': '1536px',
+      "2xl" : {'raw': '(max-width: 1366px)'},
     },
     colors: {
       transparent: 'transparent',

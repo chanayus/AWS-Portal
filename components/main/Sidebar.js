@@ -2,6 +2,7 @@ import { HiClock, HiHome, HiOutlineClock, HiOutlineHome, HiOutlineLogout, HiOutl
 
 import Link from "next/link";
 import Logo from "../Logo";
+import LogoNoText from "../LogoNoText";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useRouter } from "next/router";
@@ -16,25 +17,26 @@ const Sidebar = ({ excludePath }) => {
     return (
       <Container>
         <div className="logo md:hidden">
-          <Logo />
+          <div className="2xl:hidden"><Logo /></div>
+          <div className="w-10 hidden 2xl:flex"><LogoNoText /></div>
         </div>
         <Menu>
           <Link href="/">
             <a>
               {router.asPath === "/" ?  <HiHome /> : <HiOutlineHome />}
-              <p>หน้าหลัก</p>
+              <p className="2xl:hidden">หน้าหลัก</p>
             </a>
           </Link>
           <Link href="/history">
             <a>
               {router.asPath === "/history" ?  <HiClock /> : <HiOutlineClock />}
-              <p>ประวัติ</p>
+              <p className="2xl:hidden">ประวัติ</p>
             </a>
           </Link>
           <Link href="/resource">
             <a>
               {router.asPath.includes("/resource") ?  <HiServer /> : <HiOutlineServer />}
-              <p>
+              <p className="2xl:hidden">
                 Resource<br/>
                 ที่กำลังใช้งาน
               </p>
@@ -43,13 +45,13 @@ const Sidebar = ({ excludePath }) => {
           <Link href="/iam">
             <a>
               {router.asPath === "/iam" ?  <HiUser/> : <HiOutlineUser/>}
-              <p>IAM Users</p>
+              <p className="2xl:hidden">IAM Users</p>
             </a>
           </Link>
           <Link href="/login">
             <a>
               <HiOutlineLogout/>
-              <p>ออกจากระบบ</p>
+              <p className="2xl:hidden">ออกจากระบบ</p>
             </a>
           </Link>
         </Menu>
@@ -57,7 +59,7 @@ const Sidebar = ({ excludePath }) => {
           <Link href="/login">
             <a>
               <HiOutlineLogout/>
-              <p>ออกจากระบบ</p>
+              <p className="2xl:hidden">ออกจากระบบ</p>
             </a>
           </Link>
         </div>
@@ -68,9 +70,15 @@ const Sidebar = ({ excludePath }) => {
 
 const Container = styled.div`
   ${tw`fixed left-0 flex flex-col overflow-hidden justify-between py-7 pb-2 min-h-full z-50 px-2.5 xl:px-0 md:w-full md:p-0 md:flex-row md:h-16 md:min-h-0 md:bottom-0`}
-  width: clamp(160px,10vw,200px); 
-  background: #111;
+  width: clamp(150px,10vw,200px); 
+  background: #111; 
+  @media(max-width: 1366px){
+    width: fit-content;
+    ${tw`pr-5 pl-5`}
+  }
   @media(max-width: 960px){
+    padding: 0;
+    width: 100%;
     background: ${(props) => props.theme.subColor};
   }
   .logo {
@@ -90,12 +98,9 @@ const Container = styled.div`
     margin: 0.7vh 0;
     @media(max-width: 960px){
       color: ${(props) => props.theme.textColor};
-      :hover{
-      }
     }
     svg {
-      ${tw`flex-1 md:m-0 duration-200`}
-      margin-right: 10px;
+      ${tw`flex-1 mr-2 2xl:mr-0 duration-200`}
       font-size: 1.3rem;
     }
     p {

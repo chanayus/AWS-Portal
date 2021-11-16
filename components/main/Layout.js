@@ -18,7 +18,10 @@ const Layout = ({ children }) => {
 };
 
 const Content = styled.div`
-  margin-left: clamp(160px, 10vw, 200px);
-  ${tw`mt-7 px-24 pb-24 xl:px-4 md:mt-24 md:ml-0`}
+  margin-left: clamp(85px, 9vw, 200px);
+  ${tw`mt-7 px-24 pb-24 2xl:px-4 2xl:mr-4 md:mx-0 md:mt-24`}
+  @media(max-width: 960px){
+    ${tw`mx-0`}
+  }
 `;
 export default Layout;
