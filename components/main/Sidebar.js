@@ -22,19 +22,19 @@ const Sidebar = ({ excludePath }) => {
         </div>
         <Menu>
           <Link href="/">
-            <a>
+            <a aria-label="home">
               {router.asPath === "/" ?  <HiHome /> : <HiOutlineHome />}
               <p className="2xl:hidden">หน้าหลัก</p>
             </a>
           </Link>
           <Link href="/history">
-            <a>
+            <a aria-label="history">
               {router.asPath === "/history" ?  <HiClock /> : <HiOutlineClock />}
               <p className="2xl:hidden">ประวัติ</p>
             </a>
           </Link>
           <Link href="/resource">
-            <a>
+            <a aria-label="resource">
               {router.asPath.includes("/resource") ?  <HiServer /> : <HiOutlineServer />}
               <p className="2xl:hidden">
                 Resource<br/>
@@ -43,13 +43,13 @@ const Sidebar = ({ excludePath }) => {
             </a>
           </Link>
           <Link href="/iam">
-            <a>
+            <a aria-label="iam">
               {router.asPath === "/iam" ?  <HiUser/> : <HiOutlineUser/>}
               <p className="2xl:hidden">IAM Users</p>
             </a>
           </Link>
           <Link href="/login">
-            <a>
+            <a aria-label="signout">
               <HiOutlineLogout/>
               <p className="2xl:hidden">ออกจากระบบ</p>
             </a>
@@ -57,7 +57,7 @@ const Sidebar = ({ excludePath }) => {
         </Menu>
         <div className="md:hidden">
           <Link href="/login">
-            <a>
+            <a aria-label="signout">
               <HiOutlineLogout/>
               <p className="2xl:hidden">ออกจากระบบ</p>
             </a>

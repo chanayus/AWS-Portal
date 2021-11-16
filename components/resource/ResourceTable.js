@@ -12,7 +12,7 @@ const ResourceTable = ({ resources, setResources }) => {
         <table>
           <thead className="sm:hidden">
             <tr>
-              <th>
+              <th width="80px">
                 <CheckBox className={`${isSelectAll ? "checked" : null}`} onClick={() => chooseAllHandle(resources, setResources, isSelectAll, setIsSelectAll)}>
                   {isSelectAll ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
                 </CheckBox>

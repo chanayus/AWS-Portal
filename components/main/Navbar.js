@@ -1,8 +1,11 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { HiBell, HiMoon, HiSun, HiUser } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Logo from "../Logo";
+import LogoNoText from "../LogoNoText";
 import { SetThemeContext } from "../../pages/_app";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -15,26 +18,24 @@ const Navbar = ({ excludePath }) => {
   const { currentTheme, themeHandle } = useContext(SetThemeContext);
   const [lastScroll, setLastScroll] = useState(window.pageYOffset);
   const navRef = useRef();
-  const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight
+  const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   useEffect(() => {
     const handleScroll = (e) => {
       const scrollTop = window.pageYOffset || navRef.current.scrollTop;
-      if(lastScroll > window.pageYOffset || window.pageYOffset <= 0){
-        navRef.current.style.top = "0px"
-      }
-      else if(lastScroll < window.pageYOffset || window.pageYOffset >= maxScroll){
-        navRef.current.style.top = "-80px"
+      if (lastScroll > window.pageYOffset || window.pageYOffset <= 0) {
+        navRef.current.style.top = "0px";
+      } else if (lastScroll < window.pageYOffset || window.pageYOffset >= maxScroll) {
+        navRef.current.style.top = "-80px";
       }
       setLastScroll(window.pageYOffset);
     };
-    if(window.innerWidth <= 960){
+    if (window.innerWidth <= 960) {
       window.addEventListener("scroll", (e) => handleScroll(e));
-    } 
+    }
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScroll]);
-
 
   if (isHidden) {
     return <></>;
@@ -42,28 +43,35 @@ const Navbar = ({ excludePath }) => {
     return (
       <Container ref={navRef}>
         <div className="hidden md:flex w-44 logo">
-          {/* <button onClick={() => console.log("asd")}>
-            <FontAwesomeIcon icon="bars" size="2x" className="mr-4 md:mr-2" />
-          </button> */}
           <Link href="/">
             <a>
-              <Logo />
+              <LogoNoText />
             </a>
           </Link>
         </div>
         <Menu>
           <button className="user-button">
-            <div className="bg-gray-400 rounded-full text-gray-500rounded-full w-9 h-9 flex justify-center items-center">
-              <FontAwesomeIcon icon="user" size="2x" />
+            <div className=" bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-9 h-9 flex justify-center items-center">
+              <HiUser size="1.7rem" color="#FFF" />
             </div>
             <p className="ml-2 md:hidden">Username</p>
           </button>
-          <button className="mx-6 sm:mx-5" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}>
-            <FontAwesomeIcon icon={["fas", currentTheme === "light" ? "moon" : "sun"]} size="2x" />
+          <button className="mx-6 sm:mx-4 darkmode-toggle" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}>
+            <AnimatePresence exitBeforeEnter>
+              {currentTheme === "light" ? (
+                <motion.div initial={{ scale: 0 }} animate={{ rotate: 360, scale: 1 }} key="dark">
+                  <HiMoon size="1.7rem" />
+                </motion.div>
+              ) : (
+                <motion.div initial={{ scale: 0 }} animate={{ rotate: 180, scale: 1 }} key="light">
+                  <HiSun size="1.7rem" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
           <button className="notification-button">
-            <FontAwesomeIcon icon={["fas", "bell"]} size="2x" />
-            <div className="notification-badge">9</div>
+            <HiBell size="1.7rem" />
+            <div className="notification-badge"></div>
           </button>
         </Menu>
       </Container>
@@ -72,15 +80,14 @@ const Navbar = ({ excludePath }) => {
 };
 
 const Container = styled.div`
-  ${tw`flex items-center overflow-hidden py-4 pr-12 pl-4 justify-end duration-100 z-50 md:justify-between md:fixed md:top-0 md:w-full sm:py-2 lg:pr-6 md:shadow`}
+  ${tw`flex items-center overflow-hidden py-4 pr-12 pl-4 justify-end duration-100 z-50 md:justify-between md:fixed md:top-0 md:w-full sm:py-2 lg:pr-4 md:shadow`}
   color: ${(props) => props.theme.textColor};
   @media (max-width: 960px) {
     background: ${(props) => props.theme.subColor};
   }
   .logo {
     svg.portal-logo {
-      width: clamp(80px, 20vw, 100px);
-      height: 50px;
+      height: 35px;
       fill: ${(props) => props.theme.textColor};
       path {
         stroke: ${(props) => props.theme.textColor};
@@ -101,11 +108,11 @@ const Menu = styled.div`
     position: relative;
     .notification-badge {
       ${tw`flex items-center justify-center p-0.5 rounded-full absolute`}
-      top: -10px;
-      right: -13px;
+      top: -7px;
+      right: -7px;
       background: ${(props) => props.theme.red};
-      min-width: 20px;
-      height: 20px;
+      min-width: 15px;
+      height: 15px;
       color: #fff;
     }
   }

@@ -11,6 +11,7 @@ const LogoNoText = () => {
       viewBox="0 0 221 241.7"
       style={{ enableBackground: "new 0 0 221 241.7" }}
       xmlSpace="preserve"
+      className="portal-logo"
     >
       <path
         className="st0"

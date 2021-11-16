@@ -37,7 +37,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
     <>
       <div className="flex mt-12 mb-10 sm:mb-3 sm:flex-col-reverse sm:items-stretch justify-between items-center">
         <AnimateSharedLayout>
-          <div className="flex items-center font-light p-1 sm:mt-4 relative rounded shadow-sm dymamic-bg">
+          <div className="flex items-center font-light p-1 sm:mt-4 relative rounded-lg shadow-sm dymamic-bg">
             <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "service" ? "text-white" : null}`} onClick={() => setCardType("service")}>
               <HiTerminal className="mr-1" size={"1.5rem"} />
               Service
@@ -56,11 +56,11 @@ const CardSection = ({ data, setDisplayType, type }) => {
           </div>
         </AnimateSharedLayout>
         <div className="flex md:justify-end">
-          <button className="w-9 h-9 bg-white shadow" onClick={() => setDisplayType("table")}>
+          <button className="w-9 h-9 shadow bg-white" onClick={() => setDisplayType("table")}>
             <FontAwesomeIcon icon="list" size="1x" color="black" />
           </button>
-          <button className="w-9 h-9 bg-white shadow ml-3 border-4 border-blue-600" onClick={() => setDisplayType("card")}>
-            <FontAwesomeIcon icon="th" size="1x" color="blue" />
+          <button className="w-9 h-9 shadow ml-3 bg-white border-4 border-blue-500" onClick={() => setDisplayType("card")}>
+            <FontAwesomeIcon icon="th" size="1x" color="#2E75DF" />
           </button>
         </div>
       </div>

@@ -5,15 +5,19 @@ export const light =  {
     subColor: "#FFF",
     blue: "#2E75DF",
     red: "#E82424",
-    tabletScreen: "(max-width: 960px)"
+    tabletScreen: "(max-width: 960px)",
+    bodyColor:"#E6E9EE",
+    themeName: "light"
 }
 
 export const dark = {
     tableHeader: "#1f1f1f",
-    textColor : "#FFF",
+    textColor : "#efefef",
     mainColor: "#2a2c30",
     subColor: "#0f0f0f",
     blue: "#2E75DF",
     red: "#E82424",
-    tabletScreen: "(max-width: 960px)"
+    tabletScreen: "(max-width: 960px)",
+    bodyColor:"#2a2c30",
+    themeName: "dark"
 }

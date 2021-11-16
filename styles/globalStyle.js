@@ -20,19 +20,18 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        /* font-family: 'Montserrat','Prompt', sans-serif; */
         font-family: 'Prompt', sans-serif;
     }
     body {
-        background: ${(props) => props.theme.mainColor};
+        background: ${(props) => props.theme.bodyColor};
         transition: 0.1s;
     }
     img{
         image-rendering: -webkit-optimize-contrast;
     }
     h1{
-        font-size:clamp(24px,5vmin,32px);
-        font-weight: 700;
+        font-size:clamp(23px,5vmin,30px);
+        font-weight: 400;
     }
     p,h1,h2,h3,h4,h5,h6,td,th,label{
         color: ${(props) => props.theme.textColor};
@@ -46,7 +45,6 @@ export const GlobalStyle = createGlobalStyle`
     table{
         width: 100%;
         text-align: left;
-        border: 1px solid rgba(129, 129, 129, 0.35);
         background: ${(props) => props.theme.subColor};
         td, th{
             ${tw`sm:px-3`}
@@ -76,7 +74,7 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.textColor};
     }
     .highlight {
-        ${tw`w-full h-full absolute -bottom-0 rounded`}
+        ${tw`w-full h-full absolute -bottom-0 rounded-lg`}
         z-index: -1;
         background:  ${props => props.theme.blue};
     }
@@ -85,7 +83,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     .skeleton{
         background: ${props => props.theme.subColor === "#0f0f0f" ? "#595959" : "#ccc"};
-        animation: ${skeletonAnim} 2s infinite linear;
+        animation: ${skeletonAnim} 1.25s infinite linear;
     }
 `;
 

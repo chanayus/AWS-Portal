@@ -29,10 +29,10 @@ const TableSection = ({ data, resources, setResources, setDisplayType }) => {
             </div>
           </div>
           <div className="flex md:mb-3 md:justify-end">
-            <button className="w-9 h-9 bg-white border-4 border-blue-600 shadow" onClick={() => setDisplayType("table")}>
+            <button className="w-9 h-9 border-4 bg-white border-blue-600 shadow" onClick={() => setDisplayType("table")}>
               <FontAwesomeIcon icon="list" size="1x" color="blue" />
             </button>
-            <button className="w-9 h-9 bg-white ml-3 shadow" onClick={() => setDisplayType("card")}>
+            <button className="w-9 h-9 ml-3 shadow bg-white" onClick={() => setDisplayType("card")}>
               <FontAwesomeIcon icon="th" size="1x" color="black" />
             </button>
           </div>
