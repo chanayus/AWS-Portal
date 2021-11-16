@@ -1,7 +1,9 @@
+import { AnimateSharedLayout, motion } from "framer-motion";
+import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ResourceCard from "../../components/resource/ResourceCard";
 import { getUniqueData } from "../../lib/getUniqueData";
-import { motion } from "framer-motion";
 import { useState } from "react";
 
 const CardSection = ({ data, setDisplayType, type }) => {
@@ -16,6 +18,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
     region: "owner",
     iam: "region",
   };
+
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -28,21 +31,30 @@ const CardSection = ({ data, setDisplayType, type }) => {
       },
     },
   };
+  console.log(cardType === "service");
 
   return (
     <>
       <div className="flex mt-12 mb-10 sm:mb-3 sm:flex-col-reverse sm:items-stretch justify-between items-center">
-        <div className="flex items-center font-light sm:mt-4">
-          <button className={`bg-white shadow w-24 sm:w-full h-9 ${cardType === "service" ? "border-2 border-blue-600 text-blue-600" : null}`} onClick={() => setCardType("service")}>
-            Service
-          </button>
-          <button className={`bg-white shadow w-24 sm:w-full h-9 mx-3 ${cardType === "region" ? "border-2 border-blue-600 text-blue-600" : null}`} onClick={() => setCardType("region")}>
-            Region
-          </button>
-          <button className={`bg-white shadow w-24 sm:w-full h-9 ${cardType === "iam" ? "border-2 border-blue-600 text-blue-600" : null}`} onClick={() => setCardType("iam")}>
-            IAM
-          </button>
-        </div>
+        <AnimateSharedLayout>
+          <div className="flex items-center font-light p-1 sm:mt-4 relative rounded shadow-sm dymamic-bg">
+            <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "service" ? "text-white" : null}`} onClick={() => setCardType("service")}>
+              <HiTerminal className="mr-1" size={"1.5rem"} />
+              Service
+              {cardType === "service" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
+            </button>
+            <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 mx-3  ${cardType === "region" ? "text-white" : null}`} onClick={() => setCardType("region")}>
+              <HiGlobe className="mr-1" size={"1.5rem"} />
+              Region
+              {cardType === "region" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
+            </button>
+            <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "iam" ? "text-white" : null}`} onClick={() => setCardType("iam")}>
+              <HiUser className="mr-1" size={"1.5rem"} />
+              IAM
+              {cardType === "iam" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
+            </button>
+          </div>
+        </AnimateSharedLayout>
         <div className="flex md:justify-end">
           <button className="w-9 h-9 bg-white shadow" onClick={() => setDisplayType("table")}>
             <FontAwesomeIcon icon="list" size="1x" color="black" />

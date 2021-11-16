@@ -1,5 +1,19 @@
 import { createGlobalStyle } from "styled-components";
+import { keyframes } from "styled-components";
 import tw from "twin.macro";
+
+const skeletonAnim = keyframes`
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -59,5 +73,20 @@ export const GlobalStyle = createGlobalStyle`
     button{
         /* border: none; */
         cursor: pointer;
+        color: ${props => props.theme.textColor};
+    }
+    .highlight {
+        ${tw`w-full h-full absolute -bottom-0 rounded`}
+        z-index: -1;
+        background:  ${props => props.theme.blue};
+    }
+    .dymamic-bg{
+        background:  ${props => props.theme.subColor};
+    }
+    .skeleton{
+        background: ${props => props.theme.subColor === "#0f0f0f" ? "#595959" : "#ccc"};
+        animation: ${skeletonAnim} 2s infinite linear;
     }
 `;
+
+

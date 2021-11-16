@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Loading from "../components/main/loading";
+import SkeletonTable from "../components/main/SkeletonTable";
 import { TableWrapper } from "../styles/styleComponents";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -47,9 +48,7 @@ const Index = () => {
       <div className="flex justify-between mt-16 gap-10 lg:flex-col">
         <div className="flex-1">
           {loading ? (
-            <div className="flex justify-center mt-5">
-              <Loading />
-            </div>
+             <SkeletonTable/>
           ) : (
             <>
               <div className="flex justify-between items-center">
@@ -84,12 +83,9 @@ const Index = () => {
             </>
           )}
         </div>
-        <div className="flex-1 lg:mt-5">
-         
+        <div className="flex-1 lg:mt-5">     
           {loading ? (
-            <div className="flex justify-center mt-5">
-              <Loading />
-            </div>
+            <SkeletonTable/>
           ) : (
             <>
             <div className="flex justify-between items-center">
