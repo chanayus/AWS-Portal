@@ -15,7 +15,7 @@ const Breadcrumb = () => {
                         <Link href={`/${value}`} >
                             <a>{value === "" ? "home" : value}</a>
                         </Link>
-                        { index === (asPath.split("/").length-1) ? null : <HiChevronRight size="1.5rem" />}
+                        { index === (asPath.split("/").length-1) ? null : <HiChevronRight size="1.5rem" style={{margin: "0 7px"}} />}
                     </div>
                 ))}
             </div>

@@ -110,10 +110,13 @@ const Index = () => {
                 </thead>
                 <tbody>
                   {dataFormatted.slice(0, 3).map((value, index) => (
-                    <tr key={index}>
+                    <tr key={index} >
                       <td className="flex items-center capitalize">
                         <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
-                        {value.serviceName}
+                        <div className="flex flex-col overflow-hidden w-1/2">
+                          <p className="text-left font-medium truncate">{value.serviceName}</p>
+                          <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 25)}${value.resourceType.length > 30 ? "..." : ""}`}</p>
+                        </div>
                       </td>
                       <td>{value.createdAt}</td>
                       <td>{value.owner}</td>
