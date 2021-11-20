@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+import Breadcrumb from "../../../components/main/Breadcrumb";
 import Loading from "../../../components/main/loading";
 import ResourceTable from "../../../components/resource/ResourceTable";
 import { useFetch } from "../../../lib/useFetch";
@@ -26,6 +27,7 @@ const SpecificResource = () => {
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+        <Breadcrumb/>
         <div className="flex items-center mb-16">
           <div className=" w-12 h-12 rounded-md bg-gray-400 flex items-center justify-center">
             <h2 className="text-white text-2xl">{iamName !== "-" ? iamName.charAt(0).toUpperCase() : "?"}</h2>

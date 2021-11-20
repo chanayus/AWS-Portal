@@ -1,5 +1,6 @@
 import { Button, TableWrapper } from "../styles/styleComponents";
 
+import Breadcrumb from "../components/main/Breadcrumb";
 import fetch from "isomorphic-unfetch";
 import { useState } from "react";
 
@@ -61,6 +62,7 @@ const History = ({ resourcesData }) => {
   };
   return (
     <>
+      <Breadcrumb />
       <h1>ประวัติ</h1>
       <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
         <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)}/>

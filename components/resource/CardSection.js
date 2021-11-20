@@ -31,7 +31,6 @@ const CardSection = ({ data, setDisplayType, type }) => {
       },
     },
   };
-  console.log(cardType === "service");
 
   return (
     <>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import Breadcrumb from "../components/main/Breadcrumb";
 import Loading from "../components/main/loading";
 import { TableWrapper } from "../styles/styleComponents";
 import { motion } from "framer-motion";
@@ -21,6 +22,7 @@ const IamUser = () => {
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+        <Breadcrumb />
         <h1>IAM Users ทั้งหมด</h1>
         <div className="flex mt-12 md:mt-8 md:flex-col-reverse">
           <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-white-100 font-light" placeholder="ค้นหาชื่อ resource" onChange={() => {}} />

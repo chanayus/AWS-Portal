@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import Breadcrumb from "../../components/main/Breadcrumb";
 import CardSection from "../../components/resource/CardSection";
 import Loading from "../../components/main/loading";
 import TableSection from "../../components/resource/TableSection";
@@ -28,6 +29,7 @@ const Resource = () => {
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+        <Breadcrumb/>
         <h1>Resource ที่กำลังใช้งาน</h1>
         {displayType === "table" ? (
           <TableSection data={data} resources={resources} setResources={setResources} setDisplayType={setDisplayType}/>

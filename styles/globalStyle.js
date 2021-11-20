@@ -81,6 +81,9 @@ export const GlobalStyle = createGlobalStyle`
     .dymamic-bg{
         background:  ${props => props.theme.subColor};
     }
+    .dynamic-text{
+        color:  ${props => props.theme.textColor};
+    }
     .skeleton{
         background: ${props => props.theme.subColor === "#0f0f0f" ? "#595959" : "#ccc"};
         animation: ${skeletonAnim} 1.25s infinite linear;
