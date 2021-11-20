@@ -9,7 +9,7 @@ const ResourceTable = ({ resources, setResources }) => {
   const router = useRouter();
   const { pathname } = router;
   const isServicePage = pathname === "/resource/[serviceName]"
-  console.log(pathname)
+
   const [isSelectAll, setIsSelectAll] = useState(false);
   return (
     <>
