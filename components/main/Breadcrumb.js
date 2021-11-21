@@ -1,5 +1,5 @@
-import { HiChevronRight } from "react-icons/hi";
 import Link from "next/link";
+import { VscChevronRight } from "react-icons/vsc";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useRouter } from "next/router";
@@ -32,17 +32,18 @@ const Breadcrumb = () => {
         <>
             <div className="flex items-center mb-4">
                 {path.map((value, index) => (
-                    <div className="flex items-center dynamic-text font-light" key={index}>
+                    <div className="flex items-center dynamic-text font-light " key={index}>
                         <Link href={`${value.pathName}`} >
-                            <a>{value.displayLink === "" ? "home" : value.displayLink}</a>
+                            <a className={`capitalize ${index === (path.length-1) ? "text-blue-400 font-medium" : null}`}>{value.displayLink === "" ? "home" : value.displayLink}</a>
                         </Link>
-                        { index === (path.length-1) ? null : <HiChevronRight size="1.5rem" style={{margin: "0 7px"}} />}
+                        { index === (path.length-1) ? null : <VscChevronRight size="1.5rem" style={{margin: "0 8px"}} />}
                     </div>
                 ))}
             </div>
         </>
     );
 };
+
 
 
 export default Breadcrumb;

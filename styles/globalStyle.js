@@ -51,9 +51,21 @@ export const GlobalStyle = createGlobalStyle`
             padding: 15px 1.25vw;
             font-size: clamp(13px,2vw,16px);
         }
+           
         thead{
             border-bottom: 1px solid rgba(129, 129, 129, 0.35);
             background: ${(props) => props.theme.tableHeader};
+            position: sticky;
+            top: 0;      
+            &::before{
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 1px;
+                bottom: 0;
+                background: rgba(129, 129, 129, 0.35);
+            }
+            
         }
         tbody{
             tr{
@@ -78,7 +90,7 @@ export const GlobalStyle = createGlobalStyle`
         z-index: -1;
         background:  ${props => props.theme.blue};
     }
-    .dymamic-bg{
+    .dynamic-bg{
         background:  ${props => props.theme.subColor};
     }
     .dynamic-text{
