@@ -3,10 +3,14 @@ import Link from "next/link";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 const Breadcrumb = () => {
     let fullPath = "/"
+
+    const pathCondition = {
+        "/resource/region" : "/resource?cardType=region",
+        "/resource/iam" : "/resource?cardType=iam",
+    }
     const router = useRouter();
     const { asPath } = router;
     const path = []
@@ -14,7 +18,7 @@ const Breadcrumb = () => {
     asPath.split("/").map((value, index) => {
         const obj = {}
         fullPath = index > 1 ? fullPath+"/"+value : fullPath+value
-        obj.pathName = fullPath
+        obj.pathName = pathCondition[fullPath] ?? fullPath;
         if(value.indexOf("?") >= 0){      
             obj.displayLink = value.slice(0, value.indexOf("?"))
         }
@@ -28,7 +32,7 @@ const Breadcrumb = () => {
         <>
             <div className="flex items-center mb-4">
                 {path.map((value, index) => (
-                    <div className="flex items-center dynamic-text" key={index}>
+                    <div className="flex items-center dynamic-text font-light" key={index}>
                         <Link href={`${value.pathName}`} >
                             <a>{value.displayLink === "" ? "home" : value.displayLink}</a>
                         </Link>
