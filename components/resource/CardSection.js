@@ -15,7 +15,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
     router.push({
       pathname: '/resource',
       query: { cardType: cardType },
-  })
+  },{ shallow: true })
   },[cardType])
 
   const typeCondition = {
