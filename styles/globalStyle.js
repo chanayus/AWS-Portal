@@ -36,13 +36,11 @@ export const GlobalStyle = createGlobalStyle`
     p,h1,h2,h3,h4,h5,h6,td,th,label{
         color: ${(props) => props.theme.textColor};
     }
-    /* p{
-        text-align: center;
-    } */
     button{
         font-size: clamp(13px,1vw,16px);
     }
     table{
+        ${tw`shadow-md`}
         width: 100%;
         text-align: left;
         background: ${(props) => props.theme.subColor};
@@ -51,9 +49,14 @@ export const GlobalStyle = createGlobalStyle`
             padding: 15px 1.25vw;
             font-size: clamp(13px,2vw,16px);
         }
-           
-        thead{
-            border-bottom: 1px solid rgba(129, 129, 129, 0.35);
+        tr{
+            border-radius: 10px;
+            transition: 0.25s;
+            &.selected{
+                background: rgba(129, 129, 129, 0.25);
+            }
+        }
+        thead{ 
             background: ${(props) => props.theme.tableHeader};
             position: sticky;
             top: 0;      
@@ -69,7 +72,10 @@ export const GlobalStyle = createGlobalStyle`
         }
         tbody{
             tr{
-                border-bottom: 1px solid rgba(129, 129, 129, 0.35);        
+                border-bottom: 1px solid rgba(129, 129, 129, 0.30);   
+                &:last-child{
+                    border: none;
+                }     
                 td{
                     font-weight: 300;
                 }

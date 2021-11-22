@@ -32,7 +32,7 @@ const ResourceTable = ({ resources, setResources }) => {
           <tbody>
             {resources.map((value, index) => {
               return (
-                <tr key={index}>
+                <tr key={index} className={`${value.isChoose ? "selected" :null}`}>
                   <td className="sm:hidden px-0">
                     <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, resources, setResources)}>
                       {value.isChoose ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
