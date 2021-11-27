@@ -1,14 +1,16 @@
-import { AnimateSharedLayout, motion } from "framer-motion";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import { useRef, useState } from "react";
 
 import { HiFilter } from "react-icons/hi";
 import { getUniqueData } from "../../lib/getUniqueData";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { useState } from "react";
 
 const Filter = ({ filterData, setFilterData, allData }) => {
   const [enable, setEnable] = useState(false);
   const [type, setType] = useState("serviceName");
+  const wrapperRef = useRef(null); 
+  const menuRef = useRef(); 
 
   const filterKey = {
     serviceName: "resource",
@@ -21,18 +23,34 @@ const Filter = ({ filterData, setFilterData, allData }) => {
     }
   };
 
+  const filterToggle = () => {
+    setEnable(!enable)
+    document.body.addEventListener(
+      "click",
+      (e) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+          setEnable(false)
+        }
+      },
+      {
+        once: false,
+      }
+    );
+  };
+
   return (
-    <div className="relative">
-      <button className="dynamic-bg dynamic-text w-32 h-10 rounded flex justify-center items-center shadow mb-2" onClick={() => setEnable(!enable)}>
+    <div className="relative" ref={wrapperRef}>
+      <button className="dynamic-bg dynamic-text w-32 h-9 rounded flex justify-center items-center shadow mr-2" onClick={() => filterToggle()}>
         <HiFilter size="1.25rem" />
         Add Filter
       </button>
 
+      <AnimatePresence>
       {enable ? (
-        <motion.div className="absolute top-full z-20 dynamic-bg  pr-0 rounded-xl w-96 xs:w-72 shadow-md overflow-hidden">
+        <motion.div className="absolute top-full z-20 dynamic-bg  pr-0 rounded-xl w-96 xs:w-72 shadow-md overflow-hidden mt-3"  initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }}>
           <AnimateSharedLayout>
             <div className="flex items-center font-light pb-3 relative  border-b border-gray-500 p-4">
-              <button onClick={() => setType("serviceName")} className="relative px-2">
+              <button onClick={() => setType("serviceName")} className="relative px-2 ">
                 Service
                 {type === "serviceName" ? <Highlight className="filter-highlight" layoutId="filter-highlight" transition={{ duration: 0.25 }} /> : null}
               </button>
@@ -60,6 +78,7 @@ const Filter = ({ filterData, setFilterData, allData }) => {
           </div>
         </motion.div>
       ) : null}
+      </AnimatePresence>
     </div>
   );
 };

@@ -57,14 +57,14 @@ const Resource = () => {
         <h1>Resource ที่กำลังใช้งาน</h1>
         <div className="flex items-center mt-4">
           <Filter filterData={filterData} setFilterData={setFilterData} allData={data} />
-          <div className="flex flex-wrap items-center ml-3">
+          <div className="flex flex-wrap ">
             {filterData["resource"].map((value, index) => (
               <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-yellow-200 w-max py-1 px-2 mr-2 border-2 border-yellow-400 mb-1 flex justify-between items-center"
+                className="rounded-md bg-yellow-200 w-max py-1 px-2 mr-2 border-2 border-yellow-400 my-1 flex justify-between items-center"
               >
                 <p className="text-yellow-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("resource", value)} className="text-yellow-200 bg-yellow-600 rounded-full w-4 h-4 flex items-center justify-center">
@@ -78,7 +78,7 @@ const Resource = () => {
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-green-200 border-2 border-green-400 w-max py-1 px-2 mr-2 mb-1 flex justify-between items-center"
+                className="rounded-md bg-green-200 border-2 border-green-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
               >
                 <p className="text-green-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("region", value)} className="text-green-200 bg-green-600 rounded-full w-4 h-4 flex items-center justify-center">
@@ -92,7 +92,7 @@ const Resource = () => {
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-red-200 border-2 border-red-400 w-max py-1 px-2 mr-2 mb-1 flex justify-between items-center"
+                className="rounded-md bg-red-200 border-2 border-red-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
               >
                 <p className="text-red-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("owner", value)} className="text-red-200 bg-red-600 rounded-full w-4 h-4 flex items-center justify-center">

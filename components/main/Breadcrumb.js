@@ -1,7 +1,5 @@
+import { IoChevronForward } from "react-icons/io5";
 import Link from "next/link";
-import { VscChevronRight } from "react-icons/vsc";
-import styled from "styled-components";
-import tw from "twin.macro";
 import { useRouter } from "next/router";
 
 const Breadcrumb = () => {
@@ -36,7 +34,7 @@ const Breadcrumb = () => {
                         <Link href={`${value.pathName}`} >
                             <a className={`capitalize ${index === (path.length-1) ? "text-blue-400 font-medium" : null}`}>{value.displayLink === "" ? "home" : value.displayLink}</a>
                         </Link>
-                        { index === (path.length-1) ? null : <VscChevronRight size="1.5rem" style={{margin: "0 8px"}} />}
+                        { index === (path.length-1) ? null : <IoChevronForward size="1.1rem" style={{margin: "0 8px"}} />}
                     </div>
                 ))}
             </div>
