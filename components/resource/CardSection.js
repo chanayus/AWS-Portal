@@ -44,7 +44,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
 
   return (
     <>
-      <div className="flex mt-12 mb-10 sm:mb-3 sm:flex-col-reverse sm:items-stretch justify-between items-center">
+      <div className="flex mt-6 mb-10 sm:mb-3 sm:flex-col-reverse sm:items-stretch justify-between items-center">
         <AnimateSharedLayout>
           <div className="flex items-center font-light p-1 sm:mt-4 relative rounded-lg shadow-sm dynamic-bg">
             <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "service" ? "text-white" : null}`} onClick={() => setCardType("service")}>

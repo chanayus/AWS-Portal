@@ -6,7 +6,6 @@ const skeletonAnim = keyframes`
   0% {
     opacity: 1;
   }
-
   50% {
     opacity: 0.4;
   }
@@ -25,6 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background: ${(props) => props.theme.bodyColor};
         transition: 0.1s;
+        min-height: 100vh;
     }
     img{
         image-rendering: -webkit-optimize-contrast;
@@ -59,7 +59,8 @@ export const GlobalStyle = createGlobalStyle`
         thead{ 
             background: ${(props) => props.theme.tableHeader};
             position: sticky;
-            top: 0;      
+            top: 0;     
+            z-index: 1;
             &::before{
                 content: "";
                 position: absolute;
@@ -87,9 +88,12 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
     button{
-        /* border: none; */
         cursor: pointer;
         color: ${props => props.theme.textColor};
+    }
+    input[type="text"], input[type="search"]{
+        /* ${tw`shadow`} */
+        outline: none;
     }
     .highlight {
         ${tw`w-full h-full absolute -bottom-0 rounded-lg`}

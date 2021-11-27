@@ -2,13 +2,14 @@ import { CheckBox, TableWrapper } from "../../styles/styleComponents";
 import { chooseAllHandle, chooseHandle } from "../../lib/selectHandle";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 const ResourceTable = ({ resources, setResources }) => {
   const router = useRouter();
   const { pathname } = router;
-  const isServicePage = pathname === "/resource/[serviceName]"
+  const isServicePage = pathname === "/resource/[serviceName]";
 
   const [isSelectAll, setIsSelectAll] = useState(false);
   return (
@@ -22,7 +23,9 @@ const ResourceTable = ({ resources, setResources }) => {
                   {isSelectAll ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
                 </CheckBox>
               </th>
-              <th className="pl-1" width="10%">id</th>
+              <th className="pl-1" width="10%">
+                id
+              </th>
               <th width="22.5%">Resource</th>
               <th>Region</th>
               <th>สร้างเมื่อ</th>
@@ -32,7 +35,7 @@ const ResourceTable = ({ resources, setResources }) => {
           <tbody>
             {resources.map((value, index) => {
               return (
-                <tr key={index} className={`${value.isChoose ? "selected" :null}`}>
+                <tr key={index} className={`${value.isChoose ? "selected" : null}`}>
                   <td className="sm:hidden px-0">
                     <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, resources, setResources)}>
                       {value.isChoose ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
@@ -71,19 +74,22 @@ const ResourceTable = ({ resources, setResources }) => {
                     </div>
                   </td>
                   <td className="sm:hidden pl-1">
-                    <div className="flex justify-between items-center">
-                      {`${value.resourceId.substring(0, 8)}${value.resourceId.length > 8 ? "..." : ""}`}
+                    <div className="flex justify-between items-center cursor-pointer relative">
+                      <ResourceId>{`${value.resourceId.substring(0, 8)}${value.resourceId.length > 8 ? "..." : ""}`}</ResourceId>
+                      <p className="text-white">{value.resourceId}</p>
                       <button onClick={() => navigator.clipboard.writeText(value.resourceId)}>
                         <FontAwesomeIcon icon="clipboard" size="1x" className="text-gray-400" />{" "}
                       </button>
                     </div>
                   </td>
-                  <td className="flex items-center sm:hidden" >
+                  <td className="flex items-center sm:hidden">
                     <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                     <div className="flex flex-col overflow-hidden w-1/2">
-                      {isServicePage ? null : <p className="text-left font-medium truncate">{value.serviceName}</p> }
+                      {isServicePage ? null : <p className="text-left font-medium truncate">{value.serviceName}</p>}
                       {isServicePage && value.resourceType === "" ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
-                      <p className={`text-left ${isServicePage ? "dynamic-text" : " text-gray-500"} truncate`}>{`${value.resourceType.substring(0, 25)}${value.resourceType.length > 30 ? "..." : ""}`}</p>
+                      <p className={`text-left ${isServicePage ? "dynamic-text" : " text-gray-500"} truncate`}>{`${value.resourceType.substring(0, 25)}${
+                        value.resourceType.length > 30 ? "..." : ""
+                      }`}</p>
                     </div>
                   </td>
                   <td className="sm:hidden">{value.region}</td>
@@ -95,14 +101,30 @@ const ResourceTable = ({ resources, setResources }) => {
           </tbody>
         </table>
       </TableWrapper>
-      <div className="flex mt-10 justify-end">
-        <button className="bg-red-500 h-12 w-40 text-white flex justify-evenly items-center">
-          <FontAwesomeIcon icon="trash" size="lg" color="white" />
-          ลบ Resource
-        </button>
-      </div>
     </>
   );
 };
+
+const ResourceId = styled.p`
+  & ~ p {
+    position: absolute;
+    white-space: nowrap;
+    background: rgba(64, 64, 64, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 3px;
+    top: -27px;
+    padding: 0 5px;
+    transition: 0.25s;
+    opacity: 0;
+    :hover {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    & ~ p {
+      opacity: 1;
+    }
+  }
+`;
 
 export default ResourceTable;
