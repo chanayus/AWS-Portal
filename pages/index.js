@@ -24,7 +24,7 @@ const Index = () => {
   const regionTableData = Object.keys(resources).sort((a,b) => b.length - a.length)
   const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length;
   const cardlist = [
-    { color: "#7fe490", url: "/iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
+    { color: "#7fe490", url: "/resource?cardType=iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
     { color: "#e07272", url: "/iam", title: "IAM ทั้งหมด", value: "255", icon: "users" },
     { color: "#778bf0", url: "/", title: "ค่าใช้จ่าย", value: (<>255<span className="text-xl"> บาท</span></>), icon: "money-check-alt" },
     { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: dataFormatted.length, icon: "server" },

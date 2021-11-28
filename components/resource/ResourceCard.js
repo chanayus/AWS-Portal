@@ -27,7 +27,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
           <img className="" src={`/images/resourceIcon/${title}.png`} alt="" />
         ) : (
           <div className="absolute w-14 h-14 -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r from-red-500 to-red-400 flex items-center justify-center">
-            <h2 className="text-white text-2xl">{title !== "-" ? title.charAt(0).toUpperCase() : "?"}</h2>
+            <h2 className="text-white text-2xl">{title.charAt(0).toUpperCase()}</h2>
           </div>
         )}
         <div className="flex justify-between items-center w-full">

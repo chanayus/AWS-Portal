@@ -30,7 +30,7 @@ const SpecificResource = () => {
         <Breadcrumb/>
         <div className="flex items-center mb-16">
           <div className=" w-12 h-12 rounded-md bg-gray-400 flex items-center justify-center">
-            <h2 className="text-white text-2xl">{iamName !== "-" ? iamName.charAt(0).toUpperCase() : "?"}</h2>
+            <h2 className="text-white text-2xl uppercase">{iamName ? iamName[0]  : null}</h2>
           </div>
           <h1 className="ml-3 capitalize">{iamName !== "-" ? iamName : "ไม่มีการระบุ IAM"}</h1>
         </div>

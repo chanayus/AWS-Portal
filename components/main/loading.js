@@ -13,8 +13,8 @@ const rotate = keyframes`
 const Loader = styled.div`
   width: 38px;
   height: 38px;
-  border: 4px #d4d4d4 solid;
-  border-top: 4px ${props => props.theme.blue} solid;
+  border: 4px ${props => props.theme.textColor} solid;
+  border-top: 4px ${props => props.theme.bodyColor} solid;
   border-radius: 50%;
   animation: ${rotate} 0.6s infinite linear;
 `;

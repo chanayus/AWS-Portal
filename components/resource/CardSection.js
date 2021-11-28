@@ -12,10 +12,10 @@ const CardSection = ({ data, setDisplayType, type }) => {
   const [cardType, setCardType] = useState(["service", "region", "iam"].includes(type) ? type : "service");
   
   useEffect(() =>{
-    router.push({
+    router.replace({
       pathname: '/resource',
       query: { cardType: cardType },
-  },{ shallow: true })
+  })
   },[cardType])
 
   const typeCondition = {

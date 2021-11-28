@@ -107,7 +107,7 @@ export const GlobalStyle = createGlobalStyle`
         color:  ${props => props.theme.textColor};
     }
     .skeleton{
-        background: ${props => props.theme.subColor === "#0f0f0f" ? "#575757" : "#ccc"};
+        background: ${props => props.theme.themeName === "dark" ? "#555" : "#ccc"};
         animation: ${skeletonAnim} 1.25s infinite linear;
     }
 `;
