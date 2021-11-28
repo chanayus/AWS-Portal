@@ -12,7 +12,7 @@ const Login = () =>{
                    <Logo/>
                 </LogoWrapper>
                 <LoginForm className="backdrop-filter backdrop-blur">
-                    <h1 className="text-black md:text-white text-5xl xs:text-4xl">Sign In</h1>
+                    <h1 className="text-black md:text-white text-5xl xs:text-4xl font-bold">Sign In</h1>
                     <div className="form-group">
                         <TextInput type="text" name="" id="" required={true} title="Username"/>
                         <TextInput type="password" name="" id="" required={true} title="Password" />
