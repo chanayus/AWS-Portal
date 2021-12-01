@@ -48,14 +48,14 @@ const Filter = ({ filterData, setFilterData, allData }) => {
       <AnimatePresence>
         {enable ? (
           <motion.div
-            className="absolute top-full z-20 dynamic-bg border border-gray-500 border-opacity-40 pr-0 rounded-xl w-96 xs:w-72 shadow-xl overflow-hidden mt-3"
+            className="absolute top-full z-20 dynamic-bg border border-gray-500 border-opacity-30 pr-0 rounded-xl w-96 xs:w-72 shadow-xl overflow-hidden mt-3"
             initial={{ opacity: 0 }}
             exit={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.25 }}
           >
             <AnimateSharedLayout>
-              <div className="flex items-center font-light pb-3 relative  border-b border-gray-500 border-opacity-40 p-4">
+              <div className="flex items-center font-light pb-3 relative  border-b border-gray-500 border-opacity-20 p-4">
                 <button onClick={() => setType("serviceName")} className="relative px-2 ">
                   Service
                   {type === "serviceName" ? <Highlight className="filter-highlight" layoutId="filter-highlight" transition={{ duration: 0.25 }} /> : null}
@@ -74,7 +74,7 @@ const Filter = ({ filterData, setFilterData, allData }) => {
             </AnimateSharedLayout>
             <div className="flex items-center dynamic-bg :w-full relative py-3 px-4 ">
                 <label htmlFor="search" className="absolute left-6"> <BsSearch className="text-gray-500 mr-1" size="1.25rem"/></label>
-                <input type="search" id="search" className="bg-transparent h-fit py-1 pr-2 pl-10 rounded w-full dynamic-text border border-gray-500 border-opacity-40" autoComplete="off" placeholder="ค้นหา" onChange={(e) => setSearchText(e.target.value)} />
+                <input type="search" id="search" className="bg-transparent h-fit py-1 pr-2 pl-10 rounded w-full dynamic-text border border-gray-500 border-opacity-20" autoComplete="off" placeholder="ค้นหา" onChange={(e) => setSearchText(e.target.value)} />
               </div>
             <div className="overflow-y-scroll max-h-96">
               {getUniqueData(allData, type).filter((value) => value.includes(searchText)).map((value, index) =>

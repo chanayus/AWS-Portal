@@ -130,4 +130,23 @@ export const GlobalStyle = createGlobalStyle`
         background: ${(props) => (props.theme.themeName === "dark" ? "#555" : "#ccc")};
         animation: ${skeletonAnim} 1.25s infinite linear;
     }
+    /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: ${(props) => props.theme.mainColor}; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    }
 `;
