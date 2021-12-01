@@ -1,5 +1,5 @@
 export const light =  {
-    tableHeader: "#f0f1f3",
+    tableHeader: "#f7f7f7",
     textColor : "#2a2a2a",
     mainColor: "#E6E9EE",
     subColor: "#FFF",

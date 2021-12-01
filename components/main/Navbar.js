@@ -2,9 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { HiBell, HiMoon, HiSun, HiUser } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import Logo from "../Logo";
 import LogoNoText from "../LogoNoText";
 import { SetThemeContext } from "../../pages/_app";
 import styled from "styled-components";
@@ -21,7 +19,6 @@ const Navbar = ({ excludePath }) => {
   const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   useEffect(() => {
     const handleScroll = (e) => {
-      const scrollTop = window.pageYOffset || navRef.current.scrollTop;
       if (lastScroll > window.pageYOffset || window.pageYOffset <= 0) {
         navRef.current.style.top = "0px";
       } else if (lastScroll < window.pageYOffset || window.pageYOffset >= maxScroll) {
@@ -80,7 +77,7 @@ const Navbar = ({ excludePath }) => {
 };
 
 const Container = styled.div`
-  ${tw`flex items-center overflow-hidden py-4 pr-12 pl-4 justify-end duration-100 z-50 md:justify-between md:fixed md:top-0 md:w-full sm:py-2 lg:pr-4 md:shadow`}
+  ${tw`flex items-center overflow-hidden py-4 pr-12 pl-4 justify-end duration-100 z-50 md:justify-between md:fixed md:top-0 md:w-full sm:py-2 lg:pr-4`}
   color: ${(props) => props.theme.textColor};
   @media (max-width: 960px) {
     background: ${(props) => props.theme.subColor};

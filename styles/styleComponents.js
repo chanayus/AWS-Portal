@@ -21,7 +21,7 @@ export const Button = styled.button`
 
 export const CheckBox = styled.button`
     ${tw`w-6 h-6 sm:w-5 sm:h-5 flex justify-center items-center rounded-md duration-100 mx-auto`}
-    border: 2px solid #8f8f8f;
+    border: 0.12rem solid #8f8f8f;
     &.checked{
         background: #2E75DF;
         border: none;

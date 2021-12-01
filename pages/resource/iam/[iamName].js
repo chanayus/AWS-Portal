@@ -21,7 +21,7 @@ const SpecificResource = () => {
     return (
       <div className="flex items-center">
         <Loading />
-        <h1 className="ml-3">loading</h1>
+        <h1 className="ml-3">Loading</h1>
       </div>
     );
   } else {

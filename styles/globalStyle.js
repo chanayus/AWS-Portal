@@ -20,6 +20,8 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Prompt', sans-serif;
+        -webkit-text-stroke: .01em rgba(51,51,51,0.50);
+        -webkit-font-smoothing:antialiased !important;
     }
     body {
         background: ${(props) => props.theme.bodyColor};
@@ -35,19 +37,21 @@ export const GlobalStyle = createGlobalStyle`
     }
     p,h1,h2,h3,h4,h5,h6,td,th,label{
         color: ${(props) => props.theme.textColor};
+
+
     }
     button{
         font-size: clamp(13px,1vw,16px);
     }
     table{
-        ${tw`shadow-md`}
+        ${tw`shadow-sm`}
         width: 100%;
         text-align: left;
         background: ${(props) => props.theme.subColor};
         td, th{
             ${tw`sm:px-3`}
             padding: 15px 1.25vw;
-            font-size: clamp(13px,2vw,16px);
+            font-size: clamp(14px,2vw,16px);
         }
         tr{
             border-radius: 10px;
@@ -89,27 +93,41 @@ export const GlobalStyle = createGlobalStyle`
     }
     button{
         cursor: pointer;
-        color: ${props => props.theme.textColor};
+        color: ${(props) => props.theme.textColor};
     }
     input[type="text"], input[type="search"]{
         /* ${tw`shadow`} */
         outline: none;
+        transition: 0.1s;
+        box-sizing: border-box;
+        &:focus {
+            box-shadow: 0 0 3px 2px ${(props) => props.theme.blue};
+        }
+        ::-webkit-search-cancel-button{
+            position:relative;
+            transition: 0.2s;
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius:10px;       
+            background: #bdbdbd url('https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times.svg') no-repeat 50% 50%;
+            background-size: 12px 12px;
+            cursor: pointer;
+        }
     }
     .highlight {
         ${tw`w-full h-full absolute -bottom-0 rounded-lg`}
         z-index: -1;
-        background:  ${props => props.theme.blue};
+        background:  ${(props) => props.theme.blue};
     }
     .dynamic-bg{
-        background:  ${props => props.theme.subColor};
+        background:  ${(props) => props.theme.subColor};
     }
     .dynamic-text{
-        color:  ${props => props.theme.textColor};
+        color:  ${(props) => props.theme.textColor};
     }
     .skeleton{
-        background: ${props => props.theme.themeName === "dark" ? "#555" : "#ccc"};
+        background: ${(props) => (props.theme.themeName === "dark" ? "#555" : "#ccc")};
         animation: ${skeletonAnim} 1.25s infinite linear;
     }
 `;
-
-

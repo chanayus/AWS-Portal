@@ -37,8 +37,7 @@ const Sidebar = ({ excludePath }) => {
             <a aria-label="resource">
               {router.asPath.includes("/resource") ?  <HiServer /> : <HiOutlineServer />}
               <p className="2xl:hidden">
-                Resource<br/>
-                ที่กำลังใช้งาน
+                Resources
               </p>
             </a>
           </Link>

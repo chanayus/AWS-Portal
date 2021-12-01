@@ -1,22 +1,23 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
 import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi";
-import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ResourceCard from "../../components/resource/ResourceCard";
 import { getUniqueData } from "../../lib/getUniqueData";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const CardSection = ({ data, setDisplayType, type }) => {
   const router = useRouter();
   const [cardType, setCardType] = useState(["service", "region", "iam"].includes(type) ? type : "service");
-  
-  useEffect(() =>{
+
+  const changeCardType = (value) => {
     router.replace({
-      pathname: '/resource',
-      query: { cardType: cardType },
-  })
-  },[cardType])
+      pathname: "/resource",
+      query: { cardType: value },
+    });
+    setCardType(value);
+  };
 
   const typeCondition = {
     service: "serviceName",
@@ -47,29 +48,38 @@ const CardSection = ({ data, setDisplayType, type }) => {
       <div className="flex mt-6 mb-10 sm:mb-3 sm:flex-col-reverse sm:items-stretch justify-between items-center">
         <AnimateSharedLayout>
           <div className="flex items-center font-light p-1 sm:mt-4 relative rounded-lg shadow-sm dynamic-bg">
-            <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "service" ? "text-white" : null}`} onClick={() => setCardType("service")}>
+            <button
+              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "service" ? "text-white" : null}`}
+              onClick={() => changeCardType("service")}
+            >
               <HiTerminal className="mr-1" size={"1.5rem"} />
               Service
               {cardType === "service" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
             </button>
-            <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 mx-3  ${cardType === "region" ? "text-white" : null}`} onClick={() => setCardType("region")}>
+            <button
+              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 mx-3  ${cardType === "region" ? "text-white" : null}`}
+              onClick={() => changeCardType("region")}
+            >
               <HiGlobe className="mr-1" size={"1.5rem"} />
               Region
               {cardType === "region" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
             </button>
-            <button className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "iam" ? "text-white" : null}`} onClick={() => setCardType("iam")}>
+            <button
+              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${cardType === "iam" ? "text-white" : null}`}
+              onClick={() => changeCardType("iam")}
+            >
               <HiUser className="mr-1" size={"1.5rem"} />
               IAM
               {cardType === "iam" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
             </button>
           </div>
         </AnimateSharedLayout>
-        <div className="flex md:justify-end">
-          <button className="w-9 h-9 shadow bg-white" onClick={() => setDisplayType("table")}>
-            <FontAwesomeIcon icon="list" size="1x" color="black" />
+        <div className="flex md:mb-3 md:justify-end ">
+          <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
+            <FontAwesomeIcon icon="list" size="lg" color="#bdbdbd" />
           </button>
-          <button className="w-9 h-9 shadow ml-3 bg-white border-4 border-blue-500" onClick={() => setDisplayType("card")}>
-            <FontAwesomeIcon icon="th" size="1x" color="#2E75DF" />
+          <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("card")}>
+            <FontAwesomeIcon icon="th" size="lg" color="#468ffd" />
           </button>
         </div>
       </div>

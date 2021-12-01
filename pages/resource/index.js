@@ -1,13 +1,14 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
+import { BsSearch } from "react-icons/bs";
 import CardSection from "../../components/resource/CardSection";
 import Filter from "../../components/resource/Filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HiOutlineX } from "react-icons/hi";
 import Loading from "../../components/main/loading";
 import TableSection from "../../components/resource/TableSection";
+import { motion } from "framer-motion";
 import { selectFilterHandle } from "../../lib/useFilter";
 import { useFetch } from "../../lib/useFetch";
 import { useRouter } from "next/router";
@@ -47,7 +48,7 @@ const Resource = () => {
     return (
       <div className="flex items-center">
         <Loading />
-        <h1 className="ml-3">loading</h1>
+        <h1 className="ml-3">Loading</h1>
       </div>
     );
   } else {
@@ -55,16 +56,16 @@ const Resource = () => {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
         <h1>Resource ที่กำลังใช้งาน</h1>
-        <div className="flex items-center mt-4">
+        <div className="flex items-center mt-10">
           <Filter filterData={filterData} setFilterData={setFilterData} allData={data} />
-          <div className="flex flex-wrap ">
+          <div className="flex flex-wrap ml-3">
             {filterData["resource"].map((value, index) => (
               <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-yellow-200 w-max py-1 px-2 mr-2 border-2 border-yellow-400 my-1 flex justify-between items-center"
+                className="rounded-md bg-yellow-200 w-max py-1 px-2 mr-2 border border-yellow-400 my-1 flex justify-between items-center"
               >
                 <p className="text-yellow-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("resource", value)} className="text-yellow-200 bg-yellow-600 rounded-full w-4 h-4 flex items-center justify-center">
@@ -78,7 +79,7 @@ const Resource = () => {
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-green-200 border-2 border-green-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
+                className="rounded-md bg-green-200 border border-green-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
               >
                 <p className="text-green-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("region", value)} className="text-green-200 bg-green-600 rounded-full w-4 h-4 flex items-center justify-center">
@@ -92,7 +93,7 @@ const Resource = () => {
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-red-200 border-2 border-red-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
+                className="rounded-md bg-red-200 border border-red-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
               >
                 <p className="text-red-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("owner", value)} className="text-red-200 bg-red-600 rounded-full w-4 h-4 flex items-center justify-center">
@@ -105,15 +106,16 @@ const Resource = () => {
         {displayType === "table" ? (
           <>
             <div className="flex mt-6 md:mt-8 md:flex-col-reverse justify-between">
-              <div className="flex">
-                <input type="text" className="h-fit py-1 px-2 mr-1 rounded md:w-full bg-trasparent font-light" placeholder="ค้นหาชื่อ resource" onChange={(e) => filterHandle(e.target.value)} />
+              <div className="flex items-center dynamic-bg rounded-md w-96 md:w-full shadow-sm relative">
+                <label htmlFor="search" className="absolute left-3"> <BsSearch className="text-gray-500 mr-2" size="1.25rem"/></label>
+                <input type="search" id="search" className="bg-transparent h-fit py-2 pr-2 pl-11 rounded w-full dynamic-text" autoComplete="off" placeholder="ค้นหา Resource" onChange={(e) => filterHandle(e.target.value)} />
               </div>
-              <div className="flex md:mb-3 md:justify-end">
-                <button className="w-9 h-9 border-4 bg-white border-blue-600 shadow" onClick={() => setDisplayType("table")}>
-                  <FontAwesomeIcon icon="list" size="1x" color="blue" />
+              <div className="flex md:mb-3 md:justify-end ">
+                <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
+                  <FontAwesomeIcon icon="list" size="lg" color="#468ffd" />
                 </button>
-                <button className="w-9 h-9 ml-3 shadow bg-white" onClick={() => setDisplayType("card")}>
-                  <FontAwesomeIcon icon="th" size="1x" color="black" />
+                <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("card")}>
+                  <FontAwesomeIcon icon="th" size="lg" color="#bdbdbd" />
                 </button>
               </div>
             </div>
