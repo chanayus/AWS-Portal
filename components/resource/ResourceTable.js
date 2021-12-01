@@ -46,7 +46,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <div className="flex items-center ">
                         <img className="w-7 mr-1 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                         <div className="flex flex-col justify-center">
-                          <p className="font-medium">{value.serviceName}</p>
+                          <p className="font-medium capitalize">{value.serviceName}</p>
                           <p>{value.resourceType}</p>
                         </div>
                       </div>
@@ -85,7 +85,7 @@ const ResourceTable = ({ resources, setResources }) => {
                   <td className="flex items-center sm:hidden">
                     <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                     <div className="flex flex-col overflow-hidden w-1/2">
-                      {isServicePage ? null : <p className="text-left font-medium truncate">{value.serviceName}</p>}
+                      {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                       {isServicePage && value.resourceType === "" ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
                       <p className={`text-left ${isServicePage ? "dynamic-text" : " text-gray-500"} truncate`}>{`${value.resourceType.substring(0, 25)}${
                         value.resourceType.length > 30 ? "..." : ""

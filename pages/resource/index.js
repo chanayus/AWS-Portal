@@ -56,7 +56,7 @@ const Resource = () => {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
         <h1>Resource ที่กำลังใช้งาน</h1>
-        <div className="flex items-center mt-10">
+        <div className="flex items-start mt-10">
           <Filter filterData={filterData} setFilterData={setFilterData} allData={data} />
           <div className="flex flex-wrap ml-3">
             {filterData["resource"].map((value, index) => (
@@ -65,7 +65,7 @@ const Resource = () => {
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-yellow-200 w-max py-1 px-2 mr-2 border border-yellow-400 my-1 flex justify-between items-center"
+                className="rounded-md bg-yellow-200 w-max py-1 px-2 mr-2 border border-yellow-400 mb-1 flex justify-between items-center"
               >
                 <p className="text-yellow-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("resource", value)} className="text-yellow-200 bg-yellow-600 rounded-full w-4 h-4 flex items-center justify-center">
@@ -79,7 +79,7 @@ const Resource = () => {
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-green-200 border border-green-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
+                className="rounded-md bg-green-200 border border-green-400 w-max py-1 px-2 mr-2 mb-1 flex justify-between items-center"
               >
                 <p className="text-green-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("region", value)} className="text-green-200 bg-green-600 rounded-full w-4 h-4 flex items-center justify-center">
@@ -93,7 +93,7 @@ const Resource = () => {
                 animate="visible"
                 variants={variants}
                 key={index}
-                className="rounded-md bg-red-200 border border-red-400 w-max py-1 px-2 mr-2 my-1 flex justify-between items-center"
+                className="rounded-md bg-red-200 border border-red-400 w-max py-1 px-2 mr-2 mb-1 flex justify-between items-center"
               >
                 <p className="text-red-600 mr-2">{value}</p>
                 <button onClick={() => removeFilter("owner", value)} className="text-red-200 bg-red-600 rounded-full w-4 h-4 flex items-center justify-center">

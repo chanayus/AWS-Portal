@@ -2,7 +2,7 @@ import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import { useRef, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
-import { HiFilter } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi";
 import { getUniqueData } from "../../lib/getUniqueData";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -40,9 +40,9 @@ const Filter = ({ filterData, setFilterData, allData }) => {
 
   return (
     <div className="relative" ref={wrapperRef}>
-      <button className="dynamic-bg dynamic-text shadow-sm w-32 h-9 rounded flex justify-center items-center" onClick={() => filterToggle()}>
-        <HiFilter size="1.25rem" />
-        Add Filter
+      <button className="dynamic-bg dynamic-text shadow-sm w-24 h-9 rounded flex justify-evenly items-center" onClick={() => filterToggle()}>
+        <HiPlus size="1.25rem" />
+        Filter
       </button>
 
       <AnimatePresence>
