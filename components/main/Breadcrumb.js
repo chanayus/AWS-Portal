@@ -30,11 +30,11 @@ const Breadcrumb = () => {
         <>
             <div className="flex items-center mb-4">
                 {path.map((value, index) => (
-                    <div className="flex items-center dynamic-text font-light " key={index}>
+                    <div className="flex items-center dynamic-text" key={index}>
                         <Link href={`${value.pathName}`} >
-                            <a className={`capitalize ${index === (path.length-1) ? "text-blue-400 font-medium" : null}`}>{value.displayLink === "" ? "home" : value.displayLink}</a>
+                            <a className={`capitalize ${index === (path.length-1) ? null : "opacity-70"}`}>{value.displayLink === "" ? "home" : value.displayLink}</a>
                         </Link>
-                        { index === (path.length-1) ? null : <IoChevronForward size="1.1rem" style={{margin: "0 8px"}} />}
+                        { index === (path.length-1) ? null : <IoChevronForward size="1.1rem" className="opacity-70" style={{margin: "0 8px"}} />}
                     </div>
                 ))}
             </div>
