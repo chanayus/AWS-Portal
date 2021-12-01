@@ -1,3 +1,4 @@
+import { AnimateSharedLayout, motion } from "framer-motion";
 import { HiClock, HiHome, HiOutlineClock, HiOutlineHome, HiOutlineLogout, HiOutlineServer, HiOutlineUser, HiServer, HiUser } from "react-icons/hi";
 
 import Link from "next/link";
@@ -17,47 +18,57 @@ const Sidebar = ({ excludePath }) => {
     return (
       <Container>
         <div className="logo md:hidden">
-          <div className="2xl:hidden"><Logo /></div>
-          <div className="w-10 hidden 2xl:flex"><LogoNoText /></div>
+          <div className="2xl:hidden">
+            <Logo />
+          </div>
+          <div className="w-10 hidden 2xl:flex">
+            <LogoNoText />
+          </div>
         </div>
+
         <Menu>
-          <Link href="/">
-            <a aria-label="home">
-              {router.asPath === "/" ?  <HiHome /> : <HiOutlineHome />}
-              <p className="2xl:hidden">หน้าหลัก</p>
-            </a>
-          </Link>
-          <Link href="/history">
-            <a aria-label="history">
-              {router.asPath === "/history" ?  <HiClock /> : <HiOutlineClock />}
-              <p className="2xl:hidden">ประวัติ</p>
-            </a>
-          </Link>
-          <Link href="/resource">
-            <a aria-label="resource">
-              {router.asPath.includes("/resource") ?  <HiServer /> : <HiOutlineServer />}
-              <p className="2xl:hidden">
-                Resources
-              </p>
-            </a>
-          </Link>
-          <Link href="/iam">
-            <a aria-label="iam">
-              {router.asPath === "/iam" ?  <HiUser/> : <HiOutlineUser/>}
-              <p className="2xl:hidden">IAM Users</p>
-            </a>
-          </Link>
-          <Link href="/login">
-            <a aria-label="signout">
-              <HiOutlineLogout/>
-              <p className="2xl:hidden">ออกจากระบบ</p>
-            </a>
-          </Link>
+          <AnimateSharedLayout>
+            <Link href="/">
+              <a aria-label="home">
+                {router.asPath === "/" ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
+                {router.asPath === "/" ? <HiHome /> : <HiOutlineHome />}
+                <p className="2xl:hidden">หน้าหลัก</p>
+              </a>
+            </Link>
+            <Link href="/history">
+              <a aria-label="history">
+                {router.asPath === "/history" ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
+                {router.asPath === "/history" ? <HiClock /> : <HiOutlineClock />}
+                <p className="2xl:hidden">ประวัติ</p>
+              </a>
+            </Link>
+            <Link href="/resource">
+              <a aria-label="resource">
+                {router.asPath.includes("/resource") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
+                {router.asPath.includes("/resource") ? <HiServer /> : <HiOutlineServer />}
+                <p className="2xl:hidden">Resources</p>
+              </a>
+            </Link>
+            <Link href="/iam">
+              <a aria-label="iam">
+                {router.asPath === "/iam" ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
+                {router.asPath === "/iam" ? <HiUser /> : <HiOutlineUser />}
+                <p className="2xl:hidden">IAM Users</p>
+              </a>
+            </Link>
+            <Link href="/login">
+              <a aria-label="signout">
+                <HiOutlineLogout />
+                <p className="2xl:hidden">ออกจากระบบ</p>
+              </a>
+            </Link>
+          </AnimateSharedLayout>
         </Menu>
+
         <div className="md:hidden">
           <Link href="/login">
             <a aria-label="signout">
-              <HiOutlineLogout/>
+              <HiOutlineLogout />
               <p className="2xl:hidden">ออกจากระบบ</p>
             </a>
           </Link>
@@ -69,13 +80,13 @@ const Sidebar = ({ excludePath }) => {
 
 const Container = styled.div`
   ${tw`fixed left-0 flex flex-col overflow-hidden justify-between py-7 pb-2 min-h-full z-50 px-2.5 xl:px-0 md:w-full md:p-0 md:flex-row md:h-16 md:min-h-0 md:bottom-0`}
-  width: clamp(150px,10vw,200px); 
-  background: #111; 
-  @media(max-width: 1366px){
+  width: clamp(150px,10vw,200px);
+  background: #111;
+  @media (max-width: 1366px) {
     width: fit-content;
     ${tw`pr-5 pl-5`}
   }
-  @media(max-width: 960px){
+  @media (max-width: 960px) {
     padding: 0;
     width: 100%;
     background: ${(props) => props.theme.subColor};
@@ -90,12 +101,13 @@ const Container = styled.div`
       }
     }
   }
-  a, button {
+  a,
+  button {
     ${tw`relative w-full flex items-center self-stretch leading-tight text-left md:m-0 md:flex-col md:justify-center md:h-full duration-200`}
     height: 45px;
     color: #ddd;
     margin: 0.7vh 0;
-    @media(max-width: 960px){
+    @media (max-width: 960px) {
       color: ${(props) => props.theme.textColor};
     }
     svg {
@@ -110,22 +122,20 @@ const Container = styled.div`
       color: #ddd;
       font-weight: 300;
     }
-    :hover {
-      background: rgba(255,255,255,0.15);
-      ${tw`md:bg-transparent`}
-      p, svg { 
-        color: #FFF;
-        ${tw`md:text-gray-600`}
-      }
-    }
   }
 `;
 
 const Menu = styled.div`
   ${tw`flex flex-col flex-1 pt-14 md:flex-row md:pt-0`}
-  a:last-child{
+  a:last-child {
     ${tw`hidden md:flex`}
   }
 `;
+
+const Hilight = styled(motion.div)`
+  ${tw`absolute w-full bg-white h-full rounded`}
+  background: rgba(255, 255, 255, 0.18);
+
+`
 
 export default Sidebar;

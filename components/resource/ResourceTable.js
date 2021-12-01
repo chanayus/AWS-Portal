@@ -13,7 +13,10 @@ const ResourceTable = ({ resources, setResources }) => {
   const [isSelectAll, setIsSelectAll] = useState(false);
   return (
     <>
-      <TableWrapper className="mt-5">
+      <div className="mt-6 mb-3 flex justify-start">
+        <p className="opacity-80">ผลการค้นหา {resources.length} รายการ</p>
+      </div>
+      <TableWrapper>
         <table>
           <thead className="sm:hidden">
             <tr>
