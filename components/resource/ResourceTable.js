@@ -2,7 +2,6 @@ import { CheckBox, TableWrapper } from "../../styles/styleComponents";
 import { chooseAllHandle, chooseHandle } from "../../lib/selectHandle";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -74,9 +73,8 @@ const ResourceTable = ({ resources, setResources }) => {
                     </div>
                   </td>
                   <td className="sm:hidden pl-1">
-                    <div className="flex justify-between items-center cursor-pointer relative">
-                      <ResourceId>{`${value.resourceId.substring(0, 8)}${value.resourceId.length > 8 ? "..." : ""}`}</ResourceId>
-                      <p className="text-white">{value.resourceId}</p>
+                    <div className="flex justify-between items-center relative">
+                      <p>{`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}</p>
                       <button onClick={() => navigator.clipboard.writeText(value.resourceId)}>
                         <FontAwesomeIcon icon="clipboard" size="1x" className="text-gray-400" />{" "}
                       </button>
@@ -105,26 +103,5 @@ const ResourceTable = ({ resources, setResources }) => {
   );
 };
 
-const ResourceId = styled.p`
-  & ~ p {
-    position: absolute;
-    white-space: nowrap;
-    background: rgba(64, 64, 64, 0.5);
-    backdrop-filter: blur(10px);
-    border-radius: 3px;
-    top: -27px;
-    padding: 0 5px;
-    transition: 0.25s;
-    opacity: 0;
-    :hover {
-      opacity: 1;
-    }
-  }
-  &:hover {
-    & ~ p {
-      opacity: 1;
-    }
-  }
-`;
 
 export default ResourceTable;

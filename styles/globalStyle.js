@@ -116,7 +116,7 @@ export const GlobalStyle = createGlobalStyle`
         }
     }
     .highlight {
-        ${tw`w-full h-full absolute -bottom-0 rounded-lg`}
+        ${tw`w-full h-full absolute -bottom-0 rounded`}
         z-index: -1;
         background:  ${(props) => props.theme.blue};
     }
