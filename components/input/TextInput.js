@@ -16,6 +16,7 @@ const Container = styled.div`
     width: 100%;
     margin: 0 0 20px 0;
     padding-top: 20px;
+   
     .bar{
         &::after{
             right: 0;
@@ -47,6 +48,7 @@ const Container = styled.div`
     }
     input{
         width: 100%;     
+        box-shadow: none !important;
         outline: none;
         border: none;
         background: transparent;

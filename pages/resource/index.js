@@ -56,7 +56,7 @@ const Resource = () => {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
         <h1>Resource ที่กำลังใช้งาน</h1>
-        <div className="flex items-start mt-10">
+        <div className="flex items-start mt-6">
           <Filter filterData={filterData} setFilterData={setFilterData} allData={data} />
           <div className="flex flex-wrap ml-3">
             {filterData["resource"].map((value, index) => (

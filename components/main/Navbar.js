@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { HiBell, HiMoon, HiSun, HiUser } from "react-icons/hi";
+import { HiBell, HiMoon, HiOutlineChevronLeft, HiOutlineChevronRight, HiSun, HiUser } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
 
+import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import LogoNoText from "../LogoNoText";
 import { SetThemeContext } from "../../pages/_app";
@@ -77,8 +78,10 @@ const Navbar = ({ excludePath }) => {
 };
 
 const Container = styled.div`
-  ${tw`flex items-center overflow-hidden py-4 pr-12 pl-4 justify-end duration-100 z-50 md:justify-between md:fixed md:top-0 md:w-full sm:py-2 lg:pr-4`}
+  ${tw`flex sticky top-0 items-center justify-end overflow-hidden py-3 pr-12 pl-14 xl:pl-3 duration-100 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2 lg:pr-4`}
   color: ${(props) => props.theme.textColor};
+  background: ${props => props.theme.bodyColor};
+  backdrop-filter: blur(10px) opacity(0);
   @media (max-width: 960px) {
     background: ${(props) => props.theme.subColor};
   }

@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Prompt', sans-serif;
+        
         -webkit-text-stroke: .01em rgba(51,51,51,0.50);
         -webkit-font-smoothing:antialiased !important;
     }
@@ -33,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     h1{
         font-size:clamp(23px,5vmin,30px);
-        font-weight: 400;
+        font-weight: 500;
     }
     p,h1,h2,h3,h4,h5,h6,td,th,label{
         color: ${(props) => props.theme.textColor};
@@ -50,21 +51,22 @@ export const GlobalStyle = createGlobalStyle`
         background: ${(props) => props.theme.subColor};
         td, th{
             ${tw`sm:px-3`}
-            padding: 15px 1.25vw;
+            padding: 13px 1.25vw;
+            font-weight: 400;
             font-size: clamp(14px,2vw,16px);
         }
         tr{
-            border-radius: 10px;
             transition: 0.25s;
             &.selected{
                 background: rgba(129, 129, 129, 0.25);
             }
         }
-        thead{ 
-            background: ${(props) => props.theme.tableHeader};
+        thead{       
             position: sticky;
-            top: 0;     
+            top: 60px;     
             z-index: 1;
+            background: ${(props) => props.theme.tableHeader};
+            white-space: nowrap;
             &::before{
                 content: "";
                 position: absolute;
@@ -72,17 +74,16 @@ export const GlobalStyle = createGlobalStyle`
                 height: 1px;
                 bottom: 0;
                 background: rgba(129, 129, 129, 0.2);
-            }
-            
+            }         
         }
         tbody{
-            tr{
-                border-bottom: 1px solid rgba(129, 129, 129, 0.20);   
+            tr{          
+                border-bottom: 1px solid rgba(129, 129, 129, 0.20);
                 &:last-child{
                     border: none;
                 }     
                 td{
-                    font-weight: 300;
+                    font-weight: 400;
                 }
             }
         }

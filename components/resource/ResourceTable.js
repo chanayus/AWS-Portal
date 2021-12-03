@@ -17,33 +17,31 @@ const ResourceTable = ({ resources, setResources }) => {
         <p className="opacity-80">ผลการค้นหา {resources.length} รายการ</p>
       </div>
       <TableWrapper>
-        <table>
+        <table >
           <thead className="sm:hidden">
             <tr>
-              <th width="80px">
+              <th className="w-2">
                 <CheckBox className={`${isSelectAll ? "checked" : null}`} onClick={() => chooseAllHandle(resources, setResources, isSelectAll, setIsSelectAll)}>
                   {isSelectAll ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
                 </CheckBox>
-              </th>
-              <th className="pl-1" width="10%">
-                id
-              </th>
-              <th width="22.5%">Resource</th>
+              </th>    
+              <th width="20%">Resource</th>
               <th>Region</th>
               <th>สร้างเมื่อ</th>
               <th>สร้างโดย</th>
+              <th className="pl-1">Resource id</th>
             </tr>
           </thead>
           <tbody>
             {resources.map((value, index) => {
               return (
                 <tr key={index} className={`${value.isChoose ? "selected" : null}`}>
-                  <td className="sm:hidden px-0">
+                  <td className="sm:hidden">
                     <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, resources, setResources)}>
-                      {value.isChoose ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
+                      {value.isChoose ? <FontAwesomeIcon icon="check" size="sm" color="white" /> : null}
                     </CheckBox>
                   </td>
-                  <td className="hidden sm:block pt-3">
+                  <td className="hidden sm:block pt-3 px-3">
                     <div className="hidden sm:flex justify-between items-center my-1 pb-1">
                       <div className="flex items-center ">
                         <img className="w-7 mr-1 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
@@ -75,14 +73,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <p className="text-right">{`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}</p>
                     </div>
                   </td>
-                  <td className="sm:hidden pl-1">
-                    <div className="flex justify-between items-center relative">
-                      <p>{`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}</p>
-                      <button onClick={() => navigator.clipboard.writeText(value.resourceId)}>
-                        <FontAwesomeIcon icon="clipboard" size="1x" className="text-gray-400" />{" "}
-                      </button>
-                    </div>
-                  </td>
+
                   <td className="flex items-center sm:hidden">
                     <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                     <div className="flex flex-col overflow-hidden w-1/2">
@@ -96,6 +87,13 @@ const ResourceTable = ({ resources, setResources }) => {
                   <td className="sm:hidden">{value.region}</td>
                   <td className="sm:hidden">{value.createdAt ? value.createdAt : "-"}</td>
                   <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
+                  <td className="sm:hidden pl-1 w-52 lg:w-32">
+                    {/* <p>{`${value.resourceId.substring(0, 10)}${value.resourceId.length > 10 ? "..." : ""}`}</p> */}
+                    <p className="w-52 lg:w-32 break-all mr-0">{`${value.resourceId}`}</p>
+                    {/* <button onClick={() => navigator.clipboard.writeText(value.resourceId)}>
+                      <FontAwesomeIcon icon="clipboard" size="1x" className="text-gray-400" />{" "}
+                    </button> */}
+                  </td>
                 </tr>
               );
             })}
@@ -105,6 +103,5 @@ const ResourceTable = ({ resources, setResources }) => {
     </>
   );
 };
-
 
 export default ResourceTable;
