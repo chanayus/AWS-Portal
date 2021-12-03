@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 
 const Resource = () => {
   const router = useRouter();
-  const { display, cardType } = router.query;
+  const { display, type } = router.query;
   const [resources, setResources] = useState([]);
   const { loading, data } = useFetch("/api/resources", setResources, true);
   const [displayType, setDisplayType] = useState("");
@@ -122,7 +122,7 @@ const Resource = () => {
             <TableSection data={data} resources={resources} setResources={setResources} setDisplayType={setDisplayType} />
           </>
         ) : (
-          <CardSection data={resources} setDisplayType={setDisplayType} type={cardType ? cardType : "service"} />
+          <CardSection data={resources} setDisplayType={setDisplayType} type={type ? type : "service"} />
         )}
       </motion.div>
     );

@@ -1,3 +1,5 @@
+import { HiGlobe, HiUser } from "react-icons/hi";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -26,8 +28,9 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
         {type === "service" ? (
           <img className="" src={`/images/resourceIcon/${title}.png`} alt="" />
         ) : (
-          <div className="absolute w-14 h-14 -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r from-red-500 to-red-400 flex items-center justify-center">
-            <h2 className="text-white text-2xl">{title.charAt(0).toUpperCase()}</h2>
+          <div className={`${type === "iam" ? "from-red-700 to-red-500" : "from-green-700 to-green-500"} absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}>
+            {/* <h2 className="text-white text-2xl">{title.charAt(0).toUpperCase()}</h2> */}
+            {type === "iam" ? <HiUser color="#e1e1e1" size="2.5rem"/> : <HiGlobe color="#e1e1e1" size="2.5rem"/>}
           </div>
         )}
         <div className="flex justify-between items-center w-full">

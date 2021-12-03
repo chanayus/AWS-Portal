@@ -28,8 +28,8 @@ const Index = () => {
   const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length;
 
   const cardlist = [
-    { color: "#7fe490", url: "/resource?cardType=iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
-    { color: "#e07272", url: "/resource?cardType=region", title: "Region ที่กำลังใช้งาน", value: `${getUniqueData(dataFormatted, "region").length}`, icon: "globe-americas" },
+    { color: "#7fe490", url: "/resource?type=iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
+    { color: "#e07272", url: "/resource?type=region", title: "Region ที่กำลังใช้งาน", value: `${getUniqueData(dataFormatted, "region").length}`, icon: "globe-americas" },
     { color: "#e2a54a", url: "/resource", title: "Resource ที่กำลังใช้งาน", value: dataFormatted.length, icon: "server" },
     { color: "#778bf0", url: "/resource?display=table", title: "Resource ใหม่ในวันนี้", value: resourcesToday, icon: "resourceToday" },
   ];
@@ -60,7 +60,7 @@ const Index = () => {
                 <button
                   className="text-white bg-black px-3 py-2 rounded md:text-xs"
                   onClick={() => {
-                    router.push({ pathname: "/resource", query: { display: "card", cardType: "region" } });
+                    router.push({ pathname: "/resource", query: { display: "card", type: "region" } });
                   }}
                 >
                   ดูทั้งหมด

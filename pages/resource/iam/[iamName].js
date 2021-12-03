@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../../components/main/Breadcrumb";
+import { HiUser } from "react-icons/hi";
 import Loading from "../../../components/main/loading";
 import ResourceTable from "../../../components/resource/ResourceTable";
 import { useFetch } from "../../../lib/useFetch";
@@ -27,10 +28,10 @@ const SpecificResource = () => {
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-        <Breadcrumb/>
+        <Breadcrumb />
         <div className="flex items-center mb-16">
-          <div className=" w-12 h-12 rounded-md bg-gray-400 flex items-center justify-center">
-            <h2 className="text-white text-2xl uppercase">{iamName ? iamName[0]  : null}</h2>
+          <div className=" w-12 h-12 font-bold rounded-md bg-gradient-to-r from-red-700 to-red-500 flex items-center justify-center">
+            <HiUser color="#e1e1e1" size="2.2rem" />
           </div>
           <h1 className="ml-3 capitalize">{iamName !== "-" ? iamName : "ไม่มีการระบุ IAM"}</h1>
         </div>
