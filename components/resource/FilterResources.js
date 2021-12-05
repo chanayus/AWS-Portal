@@ -19,7 +19,7 @@ const Filter = ({ filterData, setFilterData, allData }) => {
     owner: getUniqueData(allData, type),
   }
 
-  const dataHandle = (value) => {
+  const handleSelect = (value) => {
     if (!filterData[type].includes(value)) {
       setFilterData({ ...filterData, [type]: [...filterData[type], value] });
     }
@@ -80,18 +80,19 @@ const Filter = ({ filterData, setFilterData, allData }) => {
                
                 if(!filterData[type].includes(value)){
                   const spilted = value.split(" ")
-                  console.log(spilted)
                   if(type === "resource"){
                     return(
-                      <Button onClick={() => dataHandle(spilted[1], type)} key={index} className={`flex items-center w-full`}>
+                      !filterData[type].includes(spilted[1]) ? 
+                      <Button onClick={() => handleSelect(spilted[1])} key={index} className={`flex items-center w-full`} >
                         {type === "resource" ? <img src={`/images/resourceIcon/${spilted[0]}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
                         <p className="dynamic-text">{spilted[1]}</p>
-                      </Button>
+                      </Button> 
+                    : null
                     )
                   }
                   else{
                     return(
-                      <Button onClick={() => dataHandle(value, type)} key={index} className={`flex items-center w-full`}>
+                      <Button onClick={() => handleSelect(value, type)} key={index} className={`flex items-center w-full`}>
                         {type === "resourceType" ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
                         <p className="dynamic-text">{value}</p>
                       </Button>

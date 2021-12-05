@@ -8,7 +8,7 @@ import { useState } from "react";
 const ResourceTable = ({ resources, setResources }) => {
   const router = useRouter();
   const { pathname } = router;
-  const isServicePage = pathname === "/resource/[serviceName]";
+  const isServicePage = pathname === "/resources/[serviceName]";
 
   const [isSelectAll, setIsSelectAll] = useState(false);
   return (
