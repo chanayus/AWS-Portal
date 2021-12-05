@@ -31,7 +31,7 @@ const SpecificResource = () => {
         <Breadcrumb />
         <div className="flex items-center mb-16">
           <div className=" w-12 h-12 font-bold rounded-md bg-gradient-to-r from-red-700 to-red-500 flex items-center justify-center">
-            <HiUser color="#e1e1e1" size="2.2rem" />
+            <HiUser color="#fcfcfc" size="2.2rem" />
           </div>
           <h1 className="ml-3 capitalize">{iamName !== "-" ? iamName : "ไม่มีการระบุ IAM"}</h1>
         </div>

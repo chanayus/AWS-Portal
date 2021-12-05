@@ -42,10 +42,10 @@ const Sidebar = ({ excludePath }) => {
                 <p className="2xl:hidden">ประวัติ</p>
               </a>
             </Link>
-            <Link href="/resource">
-              <a aria-label="resource">
-                {router.asPath.includes("/resource") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
-                {router.asPath.includes("/resource") ? <HiServer /> : <HiOutlineServer />}
+            <Link href="/resources">
+              <a aria-label="resources">
+                {router.asPath.includes("/resources") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
+                {router.asPath.includes("/resources") ? <HiServer /> : <HiOutlineServer />}
                 <p className="2xl:hidden">Resources</p>
               </a>
             </Link>

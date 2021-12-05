@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Breadcrumb from "../../components/main/Breadcrumb";
 import { BsSearch } from "react-icons/bs";
 import CardSection from "../../components/resource/CardSection";
-import Filter from "../../components/resource/Filter";
+import FilterResources from "../../components/resource/FilterResources";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HiOutlineX } from "react-icons/hi";
 import Loading from "../../components/main/loading";
@@ -57,7 +57,7 @@ const Resource = () => {
         <Breadcrumb />
         <h1>Resource ที่กำลังใช้งาน</h1>
         <div className="flex items-start mt-6">
-          <Filter filterData={filterData} setFilterData={setFilterData} allData={data} />
+          <FilterResources filterData={filterData} setFilterData={setFilterData} allData={data} />
           <div className="flex flex-wrap ml-3">
             {filterData["resource"].map((value, index) => (
               <motion.div

@@ -9,32 +9,30 @@ import tw from "twin.macro";
 
 const Filter = ({ filterData, setFilterData, allData }) => {
   const [enable, setEnable] = useState(false);
-  const [type, setType] = useState("serviceName");
-  const wrapperRef = useRef(null);
+  const [type, setType] = useState("resource");
   const [searchText, setSearchText] = useState("")
-  const filterKey = {
-    serviceName: "resource",
-    region: "region",
-    owner: "owner",
-  };
-  const dataHandle = (value, dataKey) => {
-    if (!filterData[filterKey[dataKey]].includes(value)) {
-      setFilterData({ ...filterData, [filterKey[dataKey]]: [...filterData[filterKey[dataKey]], value] });
+  const wrapperRef = useRef(null);
+
+  const dataSelect = {
+    resource: [...new Set(allData.map((value) => `${value.serviceName} ${value.resourceType}`))],
+    region: getUniqueData(allData, type),
+    owner: getUniqueData(allData, type),
+  }
+
+  const dataHandle = (value) => {
+    if (!filterData[type].includes(value)) {
+      setFilterData({ ...filterData, [type]: [...filterData[type], value] });
     }
   };
 
   const filterToggle = () => {
     setEnable(!enable);
-    document.body.addEventListener(
-      "click",
-      (e) => {
+    document.body.addEventListener("click", (e) => {
         if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
           setEnable(false);
         }
       },
-      {
-        once: false,
-      }
+      { once: false, }
     );
   };
 
@@ -56,9 +54,9 @@ const Filter = ({ filterData, setFilterData, allData }) => {
           >
             <AnimateSharedLayout>
               <div className="flex items-center font-light pb-3 relative  border-b border-gray-500 border-opacity-20 p-4">
-                <button onClick={() => setType("serviceName")} className="relative px-2 ">
-                  Service
-                  {type === "serviceName" ? <Highlight className="filter-highlight" layoutId="filter-highlight" transition={{ duration: 0.25 }} /> : null}
+                <button onClick={() => setType("resource")} className="relative px-2 ">
+                  Type
+                  {type === "resource" ? <Highlight className="filter-highlight" layoutId="filter-highlight" transition={{ duration: 0.25 }} /> : null}
                 </button>
 
                 <button onClick={() => setType("region")} className="relative px-2 mx-3">
@@ -76,16 +74,33 @@ const Filter = ({ filterData, setFilterData, allData }) => {
                 <label htmlFor="search" className="absolute left-6"> <BsSearch className="text-gray-500 mr-1" size="1.25rem"/></label>
                 <input type="search" id="search" className="bg-transparent h-fit py-1 pr-2 pl-10 rounded w-full dynamic-text border border-gray-500 border-opacity-20" autoComplete="off" placeholder="ค้นหา" onChange={(e) => setSearchText(e.target.value)} />
               </div>
+
             <div className="overflow-y-scroll max-h-96">
-              {getUniqueData(allData, type).filter((value) => value.includes(searchText)).map((value, index) =>
-                filterData[filterKey[type]].includes(value) ? null : (
-                  <Button onClick={() => dataHandle(value, type)} key={index} className={`flex items-center w-full`}>
-                    {type === "serviceName" ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
-                    <p className="dynamic-text">{value}</p>
-                  </Button>
-                )
-              )}
+              {dataSelect[type].filter((item) => item.includes(searchText)).map((value, index) => {               
+               
+                if(!filterData[type].includes(value)){
+                  const spilted = value.split(" ")
+                  console.log(spilted)
+                  if(type === "resource"){
+                    return(
+                      <Button onClick={() => dataHandle(spilted[1], type)} key={index} className={`flex items-center w-full`}>
+                        {type === "resource" ? <img src={`/images/resourceIcon/${spilted[0]}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
+                        <p className="dynamic-text">{spilted[1]}</p>
+                      </Button>
+                    )
+                  }
+                  else{
+                    return(
+                      <Button onClick={() => dataHandle(value, type)} key={index} className={`flex items-center w-full`}>
+                        {type === "resourceType" ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
+                        <p className="dynamic-text">{value}</p>
+                      </Button>
+                    )
+                  }
+                }
+              })}
             </div>
+
           </motion.div>
         ) : null}
       </AnimatePresence>

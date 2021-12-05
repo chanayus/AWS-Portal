@@ -51,7 +51,7 @@ export const GlobalStyle = createGlobalStyle`
         background: ${(props) => props.theme.subColor};
         td, th{
             ${tw`sm:px-3`}
-            padding: 13px 1.25vw;
+            padding: 15px 1.25vw;
             font-weight: 400;
             font-size: clamp(14px,2vw,16px);
         }

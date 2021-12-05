@@ -13,9 +13,9 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
   };
 
   const linkCondition = {
-    service: { as: `/resource/${title}`, href: "/resource/[serviceName]" },
-    region: { as: `/resource/region/${title}`, href: "/resource/region/[regionName]" },
-    iam: { as: `/resource/iam/${title}`, href: "/resource/iam/[iamName]" },
+    service: { as: `/resources/${title}`, href: "/resources/[serviceName]" },
+    region: { as: `/resources/region/${title}`, href: "/resources/region/[regionName]" },
+    iam: { as: `/resources/iam/${title}`, href: "/resources/iam/[iamName]" },
   };
   const item = {
     hidden: { y: 20, opacity: 0 },
@@ -30,7 +30,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
         ) : (
           <div className={`${type === "iam" ? "from-red-700 to-red-500" : "from-green-700 to-green-500"} absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}>
             {/* <h2 className="text-white text-2xl">{title.charAt(0).toUpperCase()}</h2> */}
-            {type === "iam" ? <HiUser color="#e1e1e1" size="2.5rem"/> : <HiGlobe color="#e1e1e1" size="2.5rem"/>}
+            {type === "iam" ? <HiUser color="#fcfcfc" size="2.5rem"/> : <HiGlobe color="#fcfcfc" size="2.5rem"/>}
           </div>
         )}
         <div className="flex justify-between items-center w-full">

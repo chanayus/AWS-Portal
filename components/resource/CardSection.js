@@ -13,7 +13,7 @@ const CardSection = ({ data, setDisplayType, type }) => {
 
   const changeCardType = (value) => {
     router.replace({
-      pathname: "/resource",
+      pathname: "/resources",
       query: { type: value },
     });
     setCardType(value);

@@ -6,8 +6,8 @@ const Breadcrumb = () => {
     let fullPath = "/"
 
     const pathCondition = {
-        "/resource/region" : "/resource?cardType=region",
-        "/resource/iam" : "/resource?cardType=iam",
+        "/resources/region" : "/resources?type=region",
+        "/resources/iam" : "/resources?type=iam",
     }
     const router = useRouter();
     const { asPath } = router;
