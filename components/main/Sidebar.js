@@ -35,13 +35,13 @@ const Sidebar = ({ excludePath }) => {
                 <p className="2xl:hidden">หน้าหลัก</p>
               </a>
             </Link>
-            <Link href="/history">
+            {/* <Link href="/history">
               <a aria-label="history">
                 {router.asPath === "/history" ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
                 {router.asPath === "/history" ? <HiClock /> : <HiOutlineClock />}
                 <p className="2xl:hidden">ประวัติ</p>
               </a>
-            </Link>
+            </Link> */}
             <Link href="/resources">
               <a aria-label="resources">
                 {router.asPath.includes("/resources") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
@@ -49,13 +49,13 @@ const Sidebar = ({ excludePath }) => {
                 <p className="2xl:hidden">Resources</p>
               </a>
             </Link>
-            <Link href="/iam">
+            {/* <Link href="/iam">
               <a aria-label="iam">
                 {router.asPath === "/iam" ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
                 {router.asPath === "/iam" ? <HiUser /> : <HiOutlineUser />}
                 <p className="2xl:hidden">IAM Users</p>
               </a>
-            </Link>
+            </Link> */}
             <Link href="/login">
               <a aria-label="signout">
                 <HiOutlineLogout />
