@@ -15,12 +15,21 @@ const SpecificResource = () => {
   const [resources, setResources] = useState([]);
   const { serviceName, resource_type } = router.query;
   const { loading, data } = useFetch("/api/resources", setResources, true);
-  const [currentType, setCurrentType] = useState(resource_type ? resource_type : "all");
+  const [currentType, setCurrentType] = useState();
   const [resourceType, setResourceType] = useState([]);
 
   useEffect(() => {
     setResources(data.filter((value) => value.serviceName === serviceName));
     setResourceType(getUniqueResourceType(data, serviceName));
+
+    // check query sting is includes in resourceType List
+    if(getUniqueResourceType(data, serviceName).includes(resource_type)){
+      setCurrentType(resource_type)
+    }
+    else{
+      setCurrentType("all")
+    }
+   
   }, [data]);
 
   const changeType = (typeValue) => {
@@ -51,7 +60,7 @@ const SpecificResource = () => {
           {resourceType.length === 1 ? null : (
             <>
               <button className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow rounded-sm ${currentType === "all" ? "active" : null}`} onClick={() => changeType("all")}>
-                <p>ทั้งหมด</p>
+                <p className="font-semibold">ทั้งหมด</p>
                 <h2 className="text-xl">{data.filter((value) => value.serviceName === serviceName).length}</h2>
               </button>
               {resourceType.map((value, index) => (

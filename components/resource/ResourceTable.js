@@ -46,7 +46,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <div className="flex items-center ">
                         <img className="w-7 mr-1 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                         <div className="flex flex-col justify-center">
-                          <p className="font-medium capitalize">{value.serviceName}</p>
+                          {isServicePage ? null : <p className="font-medium capitalize">{value.serviceName}</p>}                     
                           <p>{value.resourceType}</p>
                         </div>
                       </div>
