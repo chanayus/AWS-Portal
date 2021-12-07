@@ -46,10 +46,6 @@ const LogoWrapper = styled.div`
     ${tw`flex items-center justify-center md:hidden ml-3`}
     svg{
         width: clamp(320px,25vw,450px);
-        fill: #FFF;
-        path{
-            stroke: #FFF;
-        }
     }
 `
 

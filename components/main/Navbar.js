@@ -1,10 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { HiBell, HiMoon, HiOutlineChevronLeft, HiOutlineChevronRight, HiSun, HiUser } from "react-icons/hi";
+import { HiBell, HiMoon, HiSun, HiUser } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
 
-import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
-import LogoNoText from "../LogoNoText";
 import { SetThemeContext } from "../../pages/_app";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -21,13 +19,13 @@ const Navbar = ({ excludePath }) => {
   useEffect(() => {
     const handleScroll = (e) => {
       if (lastScroll > window.pageYOffset || window.pageYOffset <= 0) {
-        navRef.current.style.top = "0px";
+        navRef.current.style.top ??= "0px";
       } else if (lastScroll < window.pageYOffset || window.pageYOffset >= maxScroll) {
-        navRef.current.style.top = "-80px";
+        navRef.current.style.top ??= "-80px";
       }
       setLastScroll(window.pageYOffset);
     };
-    if (window.innerWidth <= 960) {
+    if (window.innerWidth <= 960 && !excludePath) {
       window.addEventListener("scroll", (e) => handleScroll(e));
     }
     return () => {
@@ -40,10 +38,10 @@ const Navbar = ({ excludePath }) => {
   } else {
     return (
       <Container ref={navRef}>
-        <div className="hidden md:flex w-44 logo">
+        <div className="hidden md:block w-44 navbar-logo">    
           <Link href="/">
-            <a>
-              <LogoNoText />
+            <a >
+              <img src="/images/logo-no-text.svg" alt="nav-bar-logo" />
             </a>
           </Link>
         </div>
@@ -81,17 +79,12 @@ const Container = styled.div`
   ${tw`flex sticky top-0 items-center justify-end overflow-hidden py-3 pr-12 pl-14 xl:pl-3 duration-100 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2 lg:pr-4`}
   color: ${(props) => props.theme.textColor};
   background: ${props => props.theme.bodyColor};
-  backdrop-filter: blur(10px) opacity(0);
   @media (max-width: 960px) {
     background: ${(props) => props.theme.subColor};
   }
-  .logo {
-    svg.portal-logo {
+  .navbar-logo {
+    img {
       height: 35px;
-      fill: ${(props) => props.theme.textColor};
-      path {
-        stroke: ${(props) => props.theme.textColor};
-      }
     }
   }
 `;

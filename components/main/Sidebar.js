@@ -17,12 +17,12 @@ const Sidebar = ({ excludePath }) => {
   } else {
     return (
       <Container>
-        <div className="logo md:hidden">
+        <div className="sidebar-logo md:hidden">
           <div className="2xl:hidden">
             <Logo />
           </div>
           <div className="w-10 hidden 2xl:flex">
-            <LogoNoText />
+            <LogoNoText/>
           </div>
         </div>
 
@@ -91,14 +91,11 @@ const Container = styled.div`
     width: 100%;
     background: ${(props) => props.theme.subColor};
   }
-  .logo {
+  .sidebar-logo {
     ${tw`duration-75 self-center`}
     svg {
       width: clamp(100px, 1vw, 135px);
-      fill: #c5c5c5;
-      path {
-        stroke: #ddd;
-      }
+      height: 50px;
     }
   }
   a,

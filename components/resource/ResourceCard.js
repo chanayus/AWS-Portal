@@ -26,7 +26,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
     <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]}>
       <Card variants={item} whileHover={{ scale: 0.965 }} key={type}>
         {type === "service" ? (
-          <img className="" src={`/images/resourceIcon/${title}.png`} alt="" />
+          <img className="" src={`/images/resourceIcon/${title}.png`} alt="service-card-icon" />
         ) : (
           <div className={`${type === "iam" ? "from-red-700 to-red-500" : "from-green-700 to-green-500"} absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}>
             {/* <h2 className="text-white text-2xl">{title.charAt(0).toUpperCase()}</h2> */}

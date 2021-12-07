@@ -76,7 +76,7 @@ const ResourceTable = ({ resources, setResources }) => {
 
                   <td className="sm:hidden">
                     <div className="flex items-center">
-                      <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
+                      <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
                       <div className="flex flex-col overflow-hidden">
                         {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                         {isServicePage && value.resourceType === "" ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
