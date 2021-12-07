@@ -94,7 +94,7 @@ const Container = styled.div`
   .sidebar-logo {
     ${tw`duration-75 self-center`}
     svg {
-      width: clamp(100px, 1vw, 135px);
+      width: clamp(100px, 6vw, 135px);
       height: 50px;
     }
   }
@@ -108,7 +108,7 @@ const Container = styled.div`
       color: ${(props) => props.theme.textColor};
     }
     svg {
-      ${tw`flex-1 mr-2 2xl:mr-0 duration-200`}
+      ${tw`flex-1 mr-1 2xl:mr-0 duration-200`}
       font-size: 1.3rem;
     }
     p {
