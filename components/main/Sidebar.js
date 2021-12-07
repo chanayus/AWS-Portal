@@ -130,9 +130,11 @@ const Menu = styled.div`
 `;
 
 const Hilight = styled(motion.div)`
-  ${tw`absolute w-full bg-white h-full rounded`}
+  ${tw`absolute w-full bg-white h-full rounded md:h-1 md:rounded-none top-0`}
   background: rgba(255, 255, 255, 0.18);
-
+  @media (max-width: 960px){
+    background: ${props => props.theme.textColor};
+  }
 `
 
 export default Sidebar;
