@@ -15,7 +15,7 @@ const SpecificResource = () => {
   const [resources, setResources] = useState([]);
   const { serviceName, resource_type } = router.query;
   const { loading, data } = useFetch("/api/resources", setResources, true);
-  const [currentType, setCurrentType] = useState();
+  const [currentType, setCurrentType] = useState([]);
   const [resourceType, setResourceType] = useState([]);
 
   useEffect(() => {
@@ -23,22 +23,24 @@ const SpecificResource = () => {
     setResourceType(getUniqueResourceType(data, serviceName));
 
     // check query sting is includes in resourceType List
-    if(getUniqueResourceType(data, serviceName).includes(resource_type)){
-      setCurrentType(resource_type)
+    if (getUniqueResourceType(data, serviceName).includes(resource_type)) {
+      setCurrentType(resource_type);
     }
-    else{
-      setCurrentType("all")
-    }
-   
   }, [data]);
 
   const changeType = (typeValue) => {
-    if (typeValue === "all") {
-      setResources(data.filter((value) => value.serviceName === serviceName));
+    if (currentType.includes(typeValue)) {
+      const filtered = currentType.filter((value) => value !== typeValue);
+      setCurrentType(filtered);
+      if (filtered.length === 0) {
+        setResources(data.filter((value) => value.serviceName === serviceName));
+      } else {
+        setResources(data.filter((value) => filtered.includes(value.resourceType)));
+      }
     } else {
-      setResources(data.filter((value) => value.resourceType === typeValue));
+      setCurrentType([...currentType, typeValue]);
+      setResources(data.filter((value) => [...currentType, typeValue].includes(value.resourceType)));
     }
-    setCurrentType(typeValue);
   };
 
   if (loading) {
@@ -59,12 +61,12 @@ const SpecificResource = () => {
         <Grid className="lg:grid-cols-2 md:gap-y-2 gap-3">
           {resourceType.length === 1 ? null : (
             <>
-              <button className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow rounded-sm ${currentType === "all" ? "active" : null}`} onClick={() => changeType("all")}>
-                <p className="font-semibold">ทั้งหมด</p>
-                <h2 className="text-xl">{data.filter((value) => value.serviceName === serviceName).length}</h2>
-              </button>
               {resourceType.map((value, index) => (
-                <button key={index} className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow rounded-sm ${currentType === value ? "active" : null}`} onClick={() => changeType(value)}>
+                <button
+                  key={index}
+                  className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow rounded-sm ${currentType.includes(value) ? "active" : null}`}
+                  onClick={() => changeType(value)}
+                >
                   <p className="capitalize text-left">{value}</p>
                   <h2 className="text-xl">{data.filter((value) => value.serviceName === serviceName).filter((item) => item.resourceType === value).length}</h2>
                 </button>
