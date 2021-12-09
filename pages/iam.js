@@ -4,7 +4,7 @@ import Breadcrumb from "../components/main/Breadcrumb";
 import Loading from "../components/main/loading";
 import { TableWrapper } from "../styles/styleComponents";
 import { motion } from "framer-motion";
-import { useFetch } from "../lib/useFetch";
+import { useFetch } from "../hooks/useFetch";
 
 const IamUser = () => {
   const { loading, data } = useFetch("/api/resources", () => {}, true);
