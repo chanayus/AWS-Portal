@@ -64,7 +64,7 @@ const SpecificResource = () => {
               {resourceType.map((value, index) => (
                 <button
                   key={index}
-                  className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow rounded-sm ${currentType.includes(value) ? "active" : null}`}
+                  className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow-sm rounded ${currentType.includes(value) ? "active" : null}`}
                   onClick={() => changeType(value)}
                 >
                   <p className="capitalize text-left">{value}</p>
