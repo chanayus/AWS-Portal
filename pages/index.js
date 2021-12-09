@@ -6,13 +6,13 @@ import Link from "next/link";
 import Loading from "../components/main/loading";
 import SkeletonTable from "../components/main/SkeletonTable";
 import { TableWrapper } from "../styles/styleComponents";
-import { getUniqueData } from "../lib/getUniqueData";
+import { getUniqueData } from "../hooks/getUniqueData";
 import moment from "moment";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { useFetch } from "../lib/useFetch";
-import { useFormat } from "../lib/useFormat";
+import { useFetch } from "../hooks/useFetch";
+import { useFormat } from "../hooks/useFormat";
 import { useRouter } from "next/router";
 
 const Index = () => {

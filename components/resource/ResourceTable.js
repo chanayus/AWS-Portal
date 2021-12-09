@@ -1,5 +1,5 @@
 import { CheckBox, TableWrapper } from "../../styles/styleComponents";
-import { chooseAllHandle, chooseHandle } from "../../lib/selectHandle";
+import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
-import { BsSearch } from "react-icons/bs";
 import CardSection from "../../components/resource/CardSection";
 import FilterResources from "../../components/resource/FilterResources";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HiOutlineX } from "react-icons/hi";
 import Loading from "../../components/main/loading";
+import SearchInput from "../../components/input/SearchInput";
 import TableSection from "../../components/resource/TableSection";
 import { motion } from "framer-motion";
-import { selectFilterHandle } from "../../lib/useFilter";
-import { useFetch } from "../../lib/useFetch";
+import { useFetch } from "../../hooks/useFetch";
+import { useFilter } from "../../hooks/useFilter";
 import { useRouter } from "next/router";
 
 const Resource = () => {
@@ -28,7 +28,7 @@ const Resource = () => {
 
   // FOR TABLE SECTION
   useEffect(() => {
-    selectFilterHandle(data, setResources, filterData);
+    useFilter(data, setResources, filterData);
   }, [filterData]);
 
   const filterHandle = (textValue) => {
@@ -106,10 +106,7 @@ const Resource = () => {
         {displayType === "table" ? (
           <>
             <div className="flex mt-6 md:mt-8 md:flex-col-reverse justify-between">
-              <div className="flex items-center dynamic-bg rounded-md w-96 md:w-full shadow-sm relative">
-                <label htmlFor="search" className="absolute left-3"> <BsSearch className="text-gray-500 mr-2" size="1.25rem"/></label>
-                <input type="search" id="search" className="bg-transparent h-fit py-2 pr-2 pl-11 rounded w-full dynamic-text" autoComplete="off" placeholder="ค้นหา Resource" onChange={(e) => filterHandle(e.target.value)} />
-              </div>
+              <SearchInput setState={filterHandle} />
               <div className="flex md:mb-3 md:justify-end ">
                 <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
                   <FontAwesomeIcon icon="list" size="lg" color="#468ffd" />

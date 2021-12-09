@@ -3,7 +3,7 @@ import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ResourceCard from "../../components/resource/ResourceCard";
-import { getUniqueData } from "../../lib/getUniqueData";
+import { getUniqueData } from "../../hooks/getUniqueData";
 import { useRouter } from "next/router";
 import { useState } from "react";
 

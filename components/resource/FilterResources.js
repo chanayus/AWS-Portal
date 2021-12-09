@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
-import { getUniqueData } from "../../lib/getUniqueData";
+import { getUniqueData } from "../../hooks/getUniqueData";
 import styled from "styled-components";
 import tw from "twin.macro";
 

@@ -5,18 +5,21 @@ import Breadcrumb from "../../components/main/Breadcrumb";
 import Image from "next/image";
 import Loading from "../../components/main/loading";
 import ResourceTable from "../../components/resource/ResourceTable";
-import { getUniqueResourceType } from "../../lib/getUniqueData";
+import SearchInput from "../../components/input/SearchInput";
+import { getUniqueResourceType } from "../../hooks/getUniqueData";
 import styled from "styled-components";
-import { useFetch } from "../../lib/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { useRouter } from "next/router";
+import { useTextFilter } from "../../hooks/useFilter";
 
 const SpecificResource = () => {
   const router = useRouter();
-  const [resources, setResources] = useState([]);
+  const [resources, setResources] = useState([]); // all resource use for display
   const { serviceName, resource_type } = router.query;
   const { loading, data } = useFetch("/api/resources", setResources, true);
-  const [currentType, setCurrentType] = useState([]);
-  const [resourceType, setResourceType] = useState([]);
+
+  const [currentType, setCurrentType] = useState([]); // for display resourceType 
+  const [resourceType, setResourceType] = useState([]); // all resourceType
 
   useEffect(() => {
     setResources(data.filter((value) => value.serviceName === serviceName));
@@ -33,15 +36,23 @@ const SpecificResource = () => {
       const filtered = currentType.filter((value) => value !== typeValue);
       setCurrentType(filtered);
       if (filtered.length === 0) {
+        // display all Data
         setResources(data.filter((value) => value.serviceName === serviceName));
       } else {
+        // remove selected type
         setResources(data.filter((value) => filtered.includes(value.resourceType)));
       }
     } else {
+      // display only selected type 
       setCurrentType([...currentType, typeValue]);
       setResources(data.filter((value) => [...currentType, typeValue].includes(value.resourceType)));
     }
   };
+  
+  const resourceFilter = (inputValue) => {
+    const allData = currentType.length === 0 ? data.filter((value) => value.serviceName === serviceName) : data.filter((value) => currentType.includes(value.resourceType))
+    setResources(useTextFilter(allData, inputValue))
+  }
 
   if (loading) {
     return (
@@ -74,6 +85,9 @@ const SpecificResource = () => {
             </>
           )}
         </Grid>
+        <div className="mt-10">
+          <SearchInput setState={resourceFilter}/>
+        </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
             <ResourceTable resources={resources} setResources={setResources} />

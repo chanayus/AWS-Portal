@@ -1,7 +1,4 @@
-import { keyframes, styled } from "styled-components";
-
 import { TableWrapper } from "../../styles/styleComponents";
-import tw from "twin.macro";
 
 const SkeletonTable = () => {
   return (
@@ -12,7 +9,7 @@ const SkeletonTable = () => {
       </div>
       <TableWrapper className="mt-6">
         <table>
-          <thead >
+          <thead>
             <tr>
               <th>
                 <div className="my-1 skeleton w-1/3 h-4"></div>

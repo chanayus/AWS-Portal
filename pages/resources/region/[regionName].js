@@ -5,8 +5,10 @@ import Breadcrumb from "../../../components/main/Breadcrumb";
 import { HiGlobe } from "react-icons/hi";
 import Loading from "../../../components/main/loading";
 import ResourceTable from "../../../components/resource/ResourceTable";
-import { useFetch } from "../../../lib/useFetch";
+import SearchInput from "../../../components/input/SearchInput";
+import { useFetch } from "../../../hooks/useFetch";
 import { useRouter } from "next/router";
+import { useTextFilter } from "../../../hooks/useFilter";
 
 const SpecificResource = () => {
   const router = useRouter();
@@ -17,6 +19,11 @@ const SpecificResource = () => {
   useEffect(() => {
     setResources(data.filter((value) => value.region === regionName));
   }, [data]);
+
+  const resourceFilter = (inputValue) => {
+    const allData = data.filter((value) => value.region === regionName)
+    setResources(useTextFilter(allData, inputValue))
+  }
 
   if (loading) {
     return (
@@ -34,6 +41,9 @@ const SpecificResource = () => {
             <HiGlobe color="#fcfcfc" size="2.2rem"/>
           </div>
           <h1 className="ml-3 capitalize">{regionName}</h1>
+        </div>
+        <div className="mt-10">
+          <SearchInput setState={resourceFilter}/>
         </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
