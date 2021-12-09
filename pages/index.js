@@ -1,7 +1,7 @@
+import { IoCube, IoSparkles } from "react-icons/io5";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IoSparkles } from "react-icons/io5";
 import Link from "next/link";
 import Loading from "../components/main/loading";
 import SkeletonTable from "../components/main/SkeletonTable";
@@ -28,10 +28,10 @@ const Index = () => {
   const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length;
 
   const cardlist = [
-    { color: "#7fe490", url: "/resources?type=iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: "user" },
-    { color: "#e07272", url: "/resources?type=region", title: "Region ที่กำลังใช้งาน", value: `${getUniqueData(dataFormatted, "region").length}`, icon: "globe-americas" },
-    { color: "#e2a54a", url: "/resources", title: "Resource ที่กำลังใช้งาน", value: dataFormatted.length, icon: "server" },
-    { color: "#778bf0", url: "/resources?display=table", title: "Resource ใหม่ในวันนี้", value: resourcesToday, icon: "resourceToday" },
+    { color: "#7fe490", url: "/resources?type=iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: <FontAwesomeIcon icon={"user"} size="4x" className="mr-4" /> },
+    { color: "#e07272", url: "/resources?type=region", title: "Region ที่กำลังใช้งาน", value: `${getUniqueData(dataFormatted, "region").length}`, icon: <FontAwesomeIcon icon={"globe-americas"} size="4x" className="mr-4" /> },
+    { color: "#e2a54a", url: "/resources", title: "Resource ที่กำลังใช้งาน", value: dataFormatted.length, icon: <IoCube className="mr-4" /> },
+    { color: "#778bf0", url: "/resources?display=table", title: "Resource ใหม่ในวันนี้", value: resourcesToday, icon: <IoSparkles className="mr-4" /> },
   ];
   return (
     <>
@@ -40,7 +40,7 @@ const Index = () => {
         {cardlist.map((value, index) => (
           <Link href={value.url} key={index}>
             <DataCard color={value.color} whileHover={{ y: 5 }} transition={{ duration: 0.1 }}>
-              {value.icon === "resourceToday" ? <IoSparkles className="mr-4" /> : <FontAwesomeIcon icon={value.icon} size="4x" className="mr-4" />}
+              {value.icon}
               <div>
                 <h2>{value.title}</h2>
                 <h1>{loading ? <Loading /> : value.value}</h1>
