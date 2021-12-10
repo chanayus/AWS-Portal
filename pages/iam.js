@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../components/main/Breadcrumb";
-import Loading from "../components/main/loading";
+import Loader from "../components/main/loader";
 import { TableWrapper } from "../styles/styleComponents";
 import { motion } from "framer-motion";
 import { useFetch } from "../hooks/useFetch";
@@ -15,7 +15,7 @@ const IamUser = () => {
   if (loading) {
     return (
       <div className="flex items-center">
-        <Loading />
+        <Loader />
         <h1 className="ml-3">Loading</h1>
       </div>
     );

@@ -1,7 +1,7 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
+import { FaList, FaTh } from "react-icons/fa";
 import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ResourceCard from "../../components/resource/ResourceCard";
 import { getUniqueData } from "../../hooks/getUniqueData";
 import { useRouter } from "next/router";
@@ -76,10 +76,10 @@ const CardSection = ({ data, setDisplayType, type }) => {
         </AnimateSharedLayout>
         <div className="flex md:mb-3 md:justify-end ">
           <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
-            <FontAwesomeIcon icon="list" size="lg" color="#bdbdbd" />
+            <FaList size="1.4rem" color="#bdbdbd" className="mx-auto"/>
           </button>
           <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("card")}>
-            <FontAwesomeIcon icon="th" size="lg" color="#468ffd" />
+            <FaTh size="1.4rem" color="#468ffd" className="mx-auto"/>
           </button>
         </div>
       </div>

@@ -1,7 +1,5 @@
-import { Button, TableWrapper } from "../styles/styleComponents";
-
 import Breadcrumb from "../components/main/Breadcrumb";
-import fetch from "isomorphic-unfetch";
+import { TableWrapper } from "../styles/styleComponents";
 import { useState } from "react";
 
 export const getServerSideProps = async () => {

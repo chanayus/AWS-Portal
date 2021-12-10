@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useRef, useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { HiOutlineChevronDown } from "react-icons/hi";
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -42,7 +42,7 @@ const SelectInput = ({ title, dataSelect, dataKey, data, setData, resourceImg })
       <MenuToggle onClick={() => menuToggleHandle()} isOpen={showMenu} type="button">
         {(resourceImg && title !== titleText) ? <img src={`/images/resourceIcon/${titleText}.png`} alt="" className="mx-2" /> : null}
         {data[dataKey] === "" ? title : titleText}
-        <FontAwesomeIcon icon={["fas", "chevron-down"]} />
+        <HiOutlineChevronDown />
       </MenuToggle>
       <AnimatePresence>
       {showMenu ? (

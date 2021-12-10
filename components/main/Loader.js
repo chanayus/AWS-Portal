@@ -1,8 +1,8 @@
 import { keyframes } from "styled-components";
 import styled from "styled-components";
 
-const Loading = () => {
-  return <Loader />;
+const Loader = () => {
+  return <Load />;
 };
 
 const rotate = keyframes`
@@ -10,7 +10,7 @@ const rotate = keyframes`
 	to { transform: rotate(359deg); }
 `;
 
-const Loader = styled.div`
+const Load = styled.div`
   width: 38px;
   height: 38px;
   border: 4px ${props => props.theme.textColor} solid;
@@ -18,4 +18,4 @@ const Loader = styled.div`
   border-radius: 50%;
   animation: ${rotate} 0.6s infinite linear;
 `;
-export default Loading;
+export default Loader;

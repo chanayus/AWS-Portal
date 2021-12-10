@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { HiBell, HiMoon, HiSun, HiUser } from "react-icons/hi";
+import { HiOutlineBell, HiOutlineMoon, HiOutlineSun, HiUser } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
 
 import Link from "next/link";
@@ -46,27 +46,27 @@ const Navbar = ({ excludePath }) => {
           </Link>
         </div>
         <Menu>
-          <button className="user-button">
+          {/* <button className="user-button">
             <div className=" bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-9 h-9 flex justify-center items-center">
               <HiUser size="1.7rem" color="#FFF" />
             </div>
             <p className="ml-2 md:hidden">Username</p>
-          </button>
+          </button> */}
           <button className="mx-6 sm:mx-4 darkmode-toggle" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}>
             <AnimatePresence exitBeforeEnter>
               {currentTheme === "light" ? (
                 <motion.div initial={{ scale: 0 }} animate={{ rotate: 360, scale: 1 }} key="dark">
-                  <HiMoon size="1.7rem" />
+                  <HiOutlineMoon size="1.8rem" />
                 </motion.div>
               ) : (
                 <motion.div initial={{ scale: 0 }} animate={{ rotate: 180, scale: 1 }} key="light">
-                  <HiSun size="1.7rem" />
+                  <HiOutlineSun size="1.8rem" />
                 </motion.div>
               )}
             </AnimatePresence>
           </button>
           <button className="notification-button">
-            <HiBell size="1.7rem" />
+            <HiOutlineBell size="1.8rem" />
             <div className="notification-badge"></div>
           </button>
         </Menu>
@@ -90,7 +90,7 @@ const Container = styled.div`
 `;
 
 const Menu = styled.div`
-  ${tw`flex justify-start items-center`}
+  ${tw`flex justify-start items-center py-1`}
   button {
     ${tw`flex items-center`}
   }

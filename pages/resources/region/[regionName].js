@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../../components/main/Breadcrumb";
 import { HiGlobe } from "react-icons/hi";
-import Loading from "../../../components/main/loading";
+import Loader from "../../../components/main/loader";
 import ResourceTable from "../../../components/resource/ResourceTable";
 import SearchInput from "../../../components/input/SearchInput";
 import { useFetch } from "../../../hooks/useFetch";
@@ -28,7 +28,7 @@ const SpecificResource = () => {
   if (loading) {
     return (
       <div className="flex items-center">
-        <Loading />
+        <Loader />
         <h1 className="ml-3">loading</h1>
       </div>
     );

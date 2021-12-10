@@ -1,11 +1,11 @@
+import { FaList, FaTh } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
 import CardSection from "../../components/resource/CardSection";
 import FilterResources from "../../components/resource/FilterResources";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HiOutlineX } from "react-icons/hi";
-import Loading from "../../components/main/loading";
+import Loader from "../../components/main/loader";
 import SearchInput from "../../components/input/SearchInput";
 import TableSection from "../../components/resource/TableSection";
 import { motion } from "framer-motion";
@@ -47,7 +47,7 @@ const Resource = () => {
   if (loading) {
     return (
       <div className="flex items-center">
-        <Loading />
+        <Loader />
         <h1 className="ml-3">Loading</h1>
       </div>
     );
@@ -109,10 +109,10 @@ const Resource = () => {
               <SearchInput setState={filterHandle} />
               <div className="flex md:mb-3 md:justify-end ">
                 <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
-                  <FontAwesomeIcon icon="list" size="lg" color="#468ffd" />
+                  <FaList size="1.4rem" color="#468ffd" className="mx-auto" />
                 </button>
                 <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("card")}>
-                  <FontAwesomeIcon icon="th" size="lg" color="#bdbdbd" />
+                  <FaTh size="1.4rem" color="#bdbdbd" className="mx-auto" />
                 </button>
               </div>
             </div>

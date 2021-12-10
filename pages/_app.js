@@ -8,14 +8,9 @@ import { GlobalStyle } from "../styles/globalStyle";
 import Layout from "../components/main/Layout";
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { motion } from "framer-motion";
 import storage from "local-storage-fallback";
 
-library.add(fas, fab, far);
 const SetThemeContext = React.createContext();
 
 const getLocalTheme = () => { 

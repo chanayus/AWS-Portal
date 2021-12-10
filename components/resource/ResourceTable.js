@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CheckBox, TableWrapper } from "../../styles/styleComponents";
 import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaCheck } from "react-icons/fa";
 import { IoCubeOutline } from "react-icons/io5";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -31,7 +31,7 @@ const ResourceTable = ({ resources, setResources }) => {
                 <tr>
                   <th className="w-2">
                     <CheckBox className={`${isSelectAll ? "checked" : null}`} onClick={() => chooseAllHandle(resources, setResources, isSelectAll, setIsSelectAll)}>
-                      {isSelectAll ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
+                      {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
                     </CheckBox>
                   </th>
                   <th width="20%">Resource</th>
@@ -50,13 +50,13 @@ const ResourceTable = ({ resources, setResources }) => {
                       <tr key={index} className={`${value.isChoose ? "selected" : null}`}>
                         <td className="sm:hidden">
                           <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, resources, setResources)}>
-                            {value.isChoose ? <FontAwesomeIcon icon="check" size="sm" color="white" /> : null}
+                            {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
                           </CheckBox>
                         </td>
                         <td className="hidden sm:block pt-3 px-3">
                           <div className="hidden sm:flex justify-between items-center my-1 pb-1">
                             <div className="flex items-center ">
-                              <img className="w-7 mr-1 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
+                              <img className="w-7 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} loading="lazy" alt="service-icon-mobile" />
                               <div className="flex flex-col justify-center">
                                 {isServicePage ? null : <p className="font-medium capitalize">{value.serviceName}</p>}
                                 <p>{value.resourceType}</p>
@@ -64,7 +64,7 @@ const ResourceTable = ({ resources, setResources }) => {
                             </div>
                             <div>
                               <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, resources, setResources)}>
-                                {value.isChoose ? <FontAwesomeIcon icon="check" size="1x" color="white" /> : null}
+                                {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
                               </CheckBox>
                             </div>
                           </div>
@@ -88,7 +88,7 @@ const ResourceTable = ({ resources, setResources }) => {
 
                         <td className="sm:hidden">
                           <div className="flex items-center">
-                            <img className="w-9 md:w-7 md:mr-1 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
+                            <img className="w-9 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} loading="lazy" alt="service-icon" />
                             <div className="flex flex-col overflow-hidden">
                               {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                               {isServicePage && value.resourceType === "" ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
