@@ -5,7 +5,7 @@ import Breadcrumb from "../../components/main/Breadcrumb";
 import CardSection from "../../components/resource/CardSection";
 import FilterResources from "../../components/resource/FilterResources";
 import { HiOutlineX } from "react-icons/hi";
-import Loader from "../../components/main/loader";
+import Loader from "../../components/main/Loader";
 import SearchInput from "../../components/input/SearchInput";
 import TableSection from "../../components/resource/TableSection";
 import { motion } from "framer-motion";

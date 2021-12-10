@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../components/main/Breadcrumb";
-import Loader from "../components/main/loader";
+import Loader from "../components/main/Loader";
 import { TableWrapper } from "../styles/styleComponents";
 import { motion } from "framer-motion";
 import { useFetch } from "../hooks/useFetch";

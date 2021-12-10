@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
 import Image from "next/image";
-import Loader from "../../components/main/loader";
+import Loader from "../../components/main/Loader";
 import ResourceTable from "../../components/resource/ResourceTable";
 import SearchInput from "../../components/input/SearchInput";
 import { getUniqueResourceType } from "../../hooks/getUniqueData";

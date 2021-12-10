@@ -3,7 +3,7 @@ import { IoCube, IoSparkles } from "react-icons/io5";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-import Loader from "../components/main/loader";
+import Loader from "../components/main/Loader";
 import SkeletonTable from "../components/main/SkeletonTable";
 import { TableWrapper } from "../styles/styleComponents";
 import { getUniqueData } from "../hooks/getUniqueData";
