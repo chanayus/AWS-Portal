@@ -6,8 +6,8 @@ import CardSection from "../../components/resource/CardSection";
 import FilterResources from "../../components/resource/FilterResources";
 import { HiOutlineX } from "react-icons/hi";
 import Loader from "../../components/main/Loader";
+import ResourceTable from "../../components/resource/ResourceTable";
 import SearchInput from "../../components/input/SearchInput";
-import TableSection from "../../components/resource/TableSection";
 import { motion } from "framer-motion";
 import { useFetch } from "../../hooks/useFetch";
 import { useFilter } from "../../hooks/useFilter";
@@ -116,7 +116,7 @@ const Resource = () => {
                 </button>
               </div>
             </div>
-            <TableSection data={data} resources={resources} setResources={setResources} setDisplayType={setDisplayType} />
+            <ResourceTable resources={resources} setResources={setResources} />
           </>
         ) : (
           <CardSection data={resources} setDisplayType={setDisplayType} type={type ? type : "service"} />
