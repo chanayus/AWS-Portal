@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckBox, TableWrapper } from "../../styles/styleComponents";
-import { IoChevronDown, IoChevronUp, IoCubeOutline } from "react-icons/io5";
+import { HiArrowDown, HiArrowUp } from "react-icons/hi";
 import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle";
 
 import { FaCheck } from "react-icons/fa";
+import { IoCubeOutline } from "react-icons/io5";
 import useForceUpdate from "use-force-update";
 import { useRouter } from "next/router";
 import { useSorting } from "../../hooks/useSorting";
@@ -25,7 +26,7 @@ const ResourceTable = ({ resources, setResources }) => {
     owner: "default",
   });
 
-  const sortingHandle = (sortKey, sortValue) => {   
+  const sortingHandle = (sortKey, sortValue) => {
     const nextValue = {
       default: "first",
       first: "last",
@@ -36,13 +37,48 @@ const ResourceTable = ({ resources, setResources }) => {
       region: "default",
       createdAt: "default",
       owner: "default",
-    }  
-
+    };
     setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]));
     setSortData({ ...reset, [sortKey]: nextValue[sortValue] });
     forceUpdate();
   };
 
+  // Animation
+  const arrowUpVariant = {
+    hidden: {
+      y: 10,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
+  const arrowDownVariant = {
+    hidden: {
+      y: -10,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
+  const arrowHandle = (status) => {
+    return status === "first" ? (
+      <motion.div variants={arrowUpVariant} initial={"hidden"} animate={"visible"} exit={"hidden"} key={"up"} transition={{ duration: 0.125 }}>
+        <HiArrowUp />
+      </motion.div>
+    ) : status === "last" ? (
+      <motion.div variants={arrowDownVariant} initial={"hidden"} animate={"visible"} exit={"hidden"} key={"down"} transition={{ duration: 0.125 }}>
+        <HiArrowDown />
+      </motion.div>
+    ) : (
+      <div className="w-4 h-4"></div>
+    );
+  };
   return (
     <>
       <div className="mt-6 mb-3 flex justify-start">
@@ -66,26 +102,42 @@ const ResourceTable = ({ resources, setResources }) => {
                   </th>
                   <th width="20%" className="cursor-pointer">
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("resource", sortData.resource)}>Resource</p>
-                      {sortData.resource === "first" ? <IoChevronUp /> : sortData.resource === "last" ? <IoChevronDown /> : <div className="w-4 h-4"></div> }
+                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("resource", sortData.resource)}>
+                        Resource
+                      </p>
+                      <AnimatePresence exitBeforeEnter>
+                        {arrowHandle(sortData.resource)}
+                      </AnimatePresence>
                     </div>
                   </th>
                   <th className="cursor-pointer">
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("region", sortData.region)}>Region</p>
-                      {sortData.region === "first" ? <IoChevronUp /> : sortData.region === "last" ? <IoChevronDown /> : <div className="w-4 h-4"></div>}
+                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("region", sortData.region)}>
+                        Region
+                      </p>
+                      <AnimatePresence exitBeforeEnter>
+                        {arrowHandle(sortData.region)}
+                      </AnimatePresence>
                     </div>
                   </th>
                   <th className="cursor-pointer">
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("createdAt", sortData.createdAt)}>สร้างเมื่อ</p>
-                      {sortData.createdAt === "first" ? <IoChevronUp /> : sortData.createdAt === "last" ? <IoChevronDown /> :<div className="w-4 h-4"></div>}
+                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("createdAt", sortData.createdAt)}>
+                        สร้างเมื่อ
+                      </p>
+                      <AnimatePresence exitBeforeEnter>
+                        {arrowHandle(sortData.createdAt)}
+                      </AnimatePresence>
                     </div>
                   </th>
                   <th className="cursor-pointer">
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1"  onClick={() => sortingHandle("owner", sortData.owner)}>สร้างโดย</p>
-                      {sortData.owner === "first" ? <IoChevronUp /> : sortData.owner === "last" ? <IoChevronDown /> : <div className="w-4 h-4"></div>}
+                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("owner", sortData.owner)}>
+                        สร้างโดย
+                      </p>
+                      <AnimatePresence exitBeforeEnter>
+                        {arrowHandle(sortData.owner)}
+                      </AnimatePresence>
                     </div>
                   </th>
                   <th className="pl-1">Resource id</th>

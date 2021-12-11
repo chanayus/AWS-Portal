@@ -32,8 +32,9 @@ const nameSortLogic = (a, b) => {
 
 const generalSort = (a, b, key) => {
   if(key === "owner"){
-    a[key] = a[key] === "-" ? "unknow" : a[key]
-    b[key] = b[key] === "-" ? "unknow" : b[key]
+    const validA = a[key] === "-" ? "unknow" : a[key].toLowerCase();
+    const validB = b[key] === "-" ? "unknow" : b[key].toLowerCase();
+    return (validA > validB) ? 1 : ((validB > validA) ? -1 : 0)
   } 
   if(key === "createdAt"){
     return b[key] - a[key]
