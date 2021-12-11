@@ -41,7 +41,7 @@ const Navbar = ({ excludePath }) => {
         <div className="hidden md:block w-44 navbar-logo">    
           <Link href="/">
             <a >
-              <img src="/images/logo-no-text.svg" alt="nav-bar-logo" />
+              <img src="/images/logo-no-text.svg" alt="nav-bar-logo" className="filter drop-shadow"/>
             </a>
           </Link>
         </div>
