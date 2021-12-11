@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
         ) : (
           <Content>
             <Navbar excludePath={excludePath} />
-            <div className="mt-8 px-20 pb-24 2xl:px-3 md:mt-24">{children}</div>
+            <div className="relative min-h-full mt-8 px-20 pb-24 2xl:px-3 md:mt-24">{children}</div>
           </Content>
         )}
       </div>
@@ -35,6 +35,7 @@ const Layout = ({ children }) => {
 
 const Content = styled.div`
   margin-left: clamp(85px, 10vw, 240px);
+  min-height: calc(100vh - 100px);
   ${tw`w-full md:mx-0 2xl:ml-20`}
   /* ${tw`w-full px-20 pb-24 2xl:px-3 2xl:mr-4 md:mx-0 md:mt-24`}; */
   @media(max-width: 960px) {

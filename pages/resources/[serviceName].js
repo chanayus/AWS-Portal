@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
 import Image from "next/image";
-import Loader from "../../components/main/Loader";
+import PageLoader from "../../components/main/PageLoader";
 import ResourceTable from "../../components/resource/ResourceTable";
 import SearchInput from "../../components/input/SearchInput";
 import { getUniqueResourceType } from "../../hooks/getUniqueData";
@@ -56,10 +56,7 @@ const SpecificResource = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center">
-        <Loader />
-        <h1 className="ml-3">Loading</h1>
-      </div>
+      <PageLoader />
     );
   } else {
     return (

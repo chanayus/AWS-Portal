@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { FaList, FaTh } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
@@ -5,10 +6,9 @@ import Breadcrumb from "../../components/main/Breadcrumb";
 import CardSection from "../../components/resource/CardSection";
 import FilterResources from "../../components/resource/FilterResources";
 import { HiOutlineX } from "react-icons/hi";
-import Loader from "../../components/main/Loader";
+import PageLoader from "../../components/main/PageLoader";
 import ResourceTable from "../../components/resource/ResourceTable";
 import SearchInput from "../../components/input/SearchInput";
-import { motion } from "framer-motion";
 import { useFetch } from "../../hooks/useFetch";
 import { useFilter } from "../../hooks/useFilter";
 import { useRouter } from "next/router";
@@ -45,12 +45,7 @@ const Resource = () => {
     hidden: { opacity: 0 },
   };
   if (loading) {
-    return (
-      <div className="flex items-center">
-        <Loader />
-        <h1 className="ml-3">Loading</h1>
-      </div>
-    );
+    return <PageLoader />;
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
