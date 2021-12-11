@@ -100,9 +100,9 @@ const ResourceTable = ({ resources, setResources }) => {
                       {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
                     </CheckBox>
                   </th>
-                  <th width="20%" className="cursor-pointer">
+                  <th width="20%" >
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("resource", sortData.resource)}>
+                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("resource", sortData.resource)}>
                         Resource
                       </p>
                       <AnimatePresence exitBeforeEnter>
@@ -110,9 +110,9 @@ const ResourceTable = ({ resources, setResources }) => {
                       </AnimatePresence>
                     </div>
                   </th>
-                  <th className="cursor-pointer">
+                  <th>
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("region", sortData.region)}>
+                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("region", sortData.region)}>
                         Region
                       </p>
                       <AnimatePresence exitBeforeEnter>
@@ -120,9 +120,9 @@ const ResourceTable = ({ resources, setResources }) => {
                       </AnimatePresence>
                     </div>
                   </th>
-                  <th className="cursor-pointer">
+                  <th>
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("createdAt", sortData.createdAt)}>
+                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("createdAt", sortData.createdAt)}>
                         สร้างเมื่อ
                       </p>
                       <AnimatePresence exitBeforeEnter>
@@ -130,9 +130,9 @@ const ResourceTable = ({ resources, setResources }) => {
                       </AnimatePresence>
                     </div>
                   </th>
-                  <th className="cursor-pointer">
+                  <th>
                     <div className="flex items-center">
-                      <p className="w-min select-none mr-1" onClick={() => sortingHandle("owner", sortData.owner)}>
+                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("owner", sortData.owner)}>
                         สร้างโดย
                       </p>
                       <AnimatePresence exitBeforeEnter>

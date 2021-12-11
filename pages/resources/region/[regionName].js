@@ -37,7 +37,7 @@ const SpecificResource = () => {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
         <div className="flex items-center mb-16">
-          <div className=" w-12 h-12 rounded-md font-bold bg-gradient-to-r from-green-700 to-green-500 flex items-center justify-center">
+          <div className=" w-12 h-12 rounded-md font-bold bg-gradient-to-r from-green-600 to-green-500 flex items-center justify-center">
             <HiGlobe color="#fcfcfc" size="2.2rem"/>
           </div>
           <h1 className="ml-3 capitalize">{regionName}</h1>

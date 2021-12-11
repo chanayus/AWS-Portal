@@ -37,7 +37,7 @@ const SpecificResource = () => {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
         <div className="flex items-center mb-16">
-          <div className=" w-12 h-12 font-bold rounded-md bg-gradient-to-r from-red-700 to-red-500 flex items-center justify-center">
+          <div className=" w-12 h-12 font-bold rounded-md bg-gradient-to-r from-rose-600 to-rose-500 flex items-center justify-center">
             <HiUser color="#fcfcfc" size="2.2rem" />
           </div>
           <h1 className="ml-3 capitalize">{iamName !== "-" ? iamName : "ไม่มีการระบุ IAM"}</h1>

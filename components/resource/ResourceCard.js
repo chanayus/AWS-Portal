@@ -28,8 +28,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
         {type === "service" ? (
           <img className="" src={`/images/resourceIcon/${title}.png`} alt="service-card-icon" />
         ) : (
-          <div className={`${type === "iam" ? "from-red-700 to-red-500" : "from-green-700 to-green-500"} absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}>
-            {/* <h2 className="text-white text-2xl">{title.charAt(0).toUpperCase()}</h2> */}
+          <div className={`${type === "iam" ? "from-rose-600 to-rose-500" : "from-green-600 to-green-500"} absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}>
             {type === "iam" ? <HiUser color="#fcfcfc" size="2.5rem"/> : <HiGlobe color="#fcfcfc" size="2.5rem"/>}
           </div>
         )}

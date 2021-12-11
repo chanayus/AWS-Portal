@@ -73,12 +73,12 @@ export const GlobalStyle = createGlobalStyle`
                 width: 100%;
                 height: 1px;
                 bottom: 0;
-                background: rgba(129, 129, 129, 0.2);
+                background: rgba(129, 129, 129, 0.125);
             }         
         }
         tbody{
             tr{          
-                border-bottom: 1px solid rgba(129, 129, 129, 0.20);
+                border-bottom: 1px solid rgba(129, 129, 129, 0.125);
                 &:last-child{
                     border: none;
                 }     
