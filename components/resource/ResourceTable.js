@@ -2,13 +2,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CheckBox, TableWrapper } from "../../styles/styleComponents";
 import { HiArrowDown, HiArrowUp } from "react-icons/hi";
 import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle";
+import { useEffect, useState } from "react";
 
 import { FaCheck } from "react-icons/fa";
 import { IoCubeOutline } from "react-icons/io5";
 import useForceUpdate from "use-force-update";
 import { useRouter } from "next/router";
 import { useSorting } from "../../hooks/useSorting";
-import { useState } from "react";
 
 const ResourceTable = ({ resources, setResources }) => {
   const forceUpdate = useForceUpdate();
@@ -25,6 +25,18 @@ const ResourceTable = ({ resources, setResources }) => {
     createdAt: "default",
     owner: "default",
   });
+  
+  useEffect(() => {
+    const sort = Object.keys(sortData).find(key => sortData[key] !== "default");
+    if(sort){
+      setDisplayResources(useSorting([...resources], sort, sortData[sort]));
+    }
+    else{
+      setDisplayResources([...resources])
+    }
+  }, [resources]);
+
+
 
   const sortingHandle = (sortKey, sortValue) => {
     const nextValue = {
@@ -100,14 +112,12 @@ const ResourceTable = ({ resources, setResources }) => {
                       {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
                     </CheckBox>
                   </th>
-                  <th width="20%" >
+                  <th width="20%">
                     <div className="flex items-center">
                       <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("resource", sortData.resource)}>
                         Resource
                       </p>
-                      <AnimatePresence exitBeforeEnter>
-                        {arrowHandle(sortData.resource)}
-                      </AnimatePresence>
+                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.resource)}</AnimatePresence>
                     </div>
                   </th>
                   <th>
@@ -115,9 +125,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("region", sortData.region)}>
                         Region
                       </p>
-                      <AnimatePresence exitBeforeEnter>
-                        {arrowHandle(sortData.region)}
-                      </AnimatePresence>
+                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.region)}</AnimatePresence>
                     </div>
                   </th>
                   <th>
@@ -125,9 +133,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("createdAt", sortData.createdAt)}>
                         สร้างเมื่อ
                       </p>
-                      <AnimatePresence exitBeforeEnter>
-                        {arrowHandle(sortData.createdAt)}
-                      </AnimatePresence>
+                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.createdAt)}</AnimatePresence>
                     </div>
                   </th>
                   <th>
@@ -135,9 +141,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("owner", sortData.owner)}>
                         สร้างโดย
                       </p>
-                      <AnimatePresence exitBeforeEnter>
-                        {arrowHandle(sortData.owner)}
-                      </AnimatePresence>
+                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.owner)}</AnimatePresence>
                     </div>
                   </th>
                   <th className="pl-1">Resource id</th>
