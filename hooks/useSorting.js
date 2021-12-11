@@ -1,20 +1,3 @@
-const ec2_layer = [
-  "instance",
-  "image",
-  "launch-template",
-  "snapshot",
-  "key-pair",
-  "elastic-ip",
-  "volume",
-  "network-interface",
-  "nat-gateway",
-  "security-group",
-  "internet-gateway",
-  "subnet",
-  "network-acl",
-  "route-table",
-  "vpc",
-];
 
 const nameSortLogic = (a, b) => {
   if (a.serviceName < b.serviceName) {

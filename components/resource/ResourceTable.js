@@ -152,7 +152,7 @@ const ResourceTable = ({ resources, setResources }) => {
                   return (
                     <tr key={index} className={`${value.isChoose ? "selected" : null}`}>
                       <td className="sm:hidden">
-                        <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResouces, setDisplayResouces)}>
+                        <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResouces, setDisplayResources)}>
                           {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
                         </CheckBox>
                       </td>
@@ -166,7 +166,7 @@ const ResourceTable = ({ resources, setResources }) => {
                             </div>
                           </div>
                           <div>
-                            <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResouces, setDisplayResouces)}>
+                            <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResouces, setDisplayResources)}>
                               {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
                             </CheckBox>
                           </div>
