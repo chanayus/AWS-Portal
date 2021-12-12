@@ -1,20 +1,20 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { HiOutlineBell, HiOutlineMoon, HiOutlineSun, HiUser } from "react-icons/hi";
-import { useEffect, useRef, useState } from "react";
+import { HiOutlineBell, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 
 import Link from "next/link";
 import { SetThemeContext } from "../../pages/_app";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useContext } from "react";
-import { useRouter } from "next/router";
 
 const Navbar = () => {
-  const router = useRouter();
+
   const { currentTheme, themeHandle } = useContext(SetThemeContext);
-  const [lastScroll, setLastScroll] = useState(window.pageYOffset);
-  const navRef = useRef();
-  const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  // const navRef = useRef();
+
+  // const router = useRouter();
+  // const [lastScroll, setLastScroll] = useState(window.pageYOffset);
+  // const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   // useEffect(() => {
   //   const handleScroll = (e) => {
   //     if (lastScroll > window.pageYOffset || window.pageYOffset <= 0) {
@@ -33,7 +33,7 @@ const Navbar = () => {
   // }, [lastScroll]);
 
   return (
-    <Container ref={navRef} exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="navbar" >
+    <Container exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="navbar" >
       <div className="hidden md:block w-44 navbar-logo">
         <Link href="/">
           <a>

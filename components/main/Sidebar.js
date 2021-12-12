@@ -1,5 +1,5 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
-import { HiClock, HiHome, HiOutlineClock, HiOutlineHome, HiOutlineLogout, HiOutlineServer, HiOutlineUser, HiServer, HiUser } from "react-icons/hi";
+import { HiHome, HiOutlineHome, HiOutlineLogout } from "react-icons/hi";
 import { IoCube, IoCubeOutline } from "react-icons/io5";
 
 import Link from "next/link";

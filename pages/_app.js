@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { dark, light } from "../styles/theme";
 import { useEffect, useState } from "react";
 

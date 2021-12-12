@@ -18,15 +18,21 @@ const Layout = ({ children }) => {
         <title>AWS Portal</title>
       </Head>
       <div className="flex">
-        <AnimatePresence exitBeforeEnter>{isHidden ? <></> : <Sidebar  key="sidebar" />}</AnimatePresence>
-        <AnimatePresence exitBeforeEnter>{isHidden ? <></> : <Navbar key="navbar" />}</AnimatePresence>
+        <AnimatePresence exitBeforeEnter>
+          {isHidden ? null : (
+            <>
+              <Sidebar key="sidebar" />
+              <Navbar key="navbar" />
+            </>
+          )}
+        </AnimatePresence>
         <AnimatePresence exitBeforeEnter>
           {isHidden ? (
             <motion.div className="w-full" exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key="exclude-path">
               <>{children}</>
             </motion.div>
           ) : (
-            <Content exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={router.pathname}>            
+            <Content exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={router.pathname}>
               <div className="relative min-h-full mt-24 px-20 pb-24 2xl:px-3">{children}</div>
             </Content>
           )}
