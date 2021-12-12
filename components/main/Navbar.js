@@ -15,25 +15,25 @@ const Navbar = () => {
   const [lastScroll, setLastScroll] = useState(window.pageYOffset);
   const navRef = useRef();
   const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  useEffect(() => {
-    const handleScroll = (e) => {
-      if (lastScroll > window.pageYOffset || window.pageYOffset <= 0) {
-        navRef.current.style.top ??= "0px";
-      } else if (lastScroll < window.pageYOffset || window.pageYOffset >= maxScroll) {
-        navRef.current.style.top ??= "-80px";
-      }
-      setLastScroll(window.pageYOffset);
-    };
-    if (window.innerWidth <= 960 && !excludePath) {
-      window.addEventListener("scroll", (e) => handleScroll(e));
-    }
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScroll]);
+  // useEffect(() => {
+  //   const handleScroll = (e) => {
+  //     if (lastScroll > window.pageYOffset || window.pageYOffset <= 0) {
+  //       navRef.current.style.top ??= "0px";
+  //     } else if (lastScroll < window.pageYOffset || window.pageYOffset >= maxScroll) {
+  //       navRef.current.style.top ??= "-80px";
+  //     }
+  //     setLastScroll(window.pageYOffset);
+  //   };
+  //   if (window.innerWidth <= 960 && !excludePath) {
+  //     window.addEventListener("scroll", (e) => handleScroll(e));
+  //   }
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [lastScroll]);
 
   return (
-    <Container ref={navRef} exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="navbar">
+    <Container ref={navRef} exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="navbar" >
       <div className="hidden md:block w-44 navbar-logo">
         <Link href="/">
           <a>
