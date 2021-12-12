@@ -33,11 +33,7 @@ function MyApp({ Component, pageProps, router }) {
         <ThemeProvider theme={currentTheme === "light" ? light : dark}>
           <GlobalStyle />
           <Layout>
-            <AnimatePresence exitBeforeEnter >
-              <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={router.route}>
-                <Component {...pageProps} />
-              </motion.div>
-            </AnimatePresence>
+            <Component {...pageProps} />
           </Layout>
         </ThemeProvider>
       </SetThemeContext.Provider>

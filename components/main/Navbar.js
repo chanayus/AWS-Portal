@@ -9,9 +9,8 @@ import tw from "twin.macro";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 
-const Navbar = ({ excludePath }) => {
+const Navbar = () => {
   const router = useRouter();
-  const isHidden = excludePath?.find((value) => value === router.pathname);
   const { currentTheme, themeHandle } = useContext(SetThemeContext);
   const [lastScroll, setLastScroll] = useState(window.pageYOffset);
   const navRef = useRef();
@@ -33,52 +32,48 @@ const Navbar = ({ excludePath }) => {
     };
   }, [lastScroll]);
 
-  if (isHidden) {
-    return <></>;
-  } else {
-    return (
-      <Container ref={navRef}>
-        <div className="hidden md:block w-44 navbar-logo">    
-          <Link href="/">
-            <a >
-              <img src="/images/logo-no-text.svg" alt="nav-bar-logo" className="filter drop-shadow"/>
-            </a>
-          </Link>
-        </div>
-        <Menu>
-          {/* <button className="user-button">
+  return (
+    <Container ref={navRef} exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="navbar">
+      <div className="hidden md:block w-44 navbar-logo">
+        <Link href="/">
+          <a>
+            <img src="/images/logo-no-text.svg" alt="nav-bar-logo" className="filter drop-shadow" />
+          </a>
+        </Link>
+      </div>
+      <Menu>
+        {/* <button className="user-button">
             <div className=" bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-9 h-9 flex justify-center items-center">
               <HiUser size="1.7rem" color="#FFF" />
             </div>
             <p className="ml-2 md:hidden">Username</p>
           </button> */}
-          <button className="mx-6 sm:mx-4 darkmode-toggle" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}>
-            <AnimatePresence exitBeforeEnter>
-              {currentTheme === "light" ? (
-                <motion.div initial={{ scale: 0 }} animate={{ rotate: 360, scale: 1 }} key="dark">
-                  <HiOutlineMoon size="1.8rem" />
-                </motion.div>
-              ) : (
-                <motion.div initial={{ scale: 0 }} animate={{ rotate: 180, scale: 1 }} key="light">
-                  <HiOutlineSun size="1.8rem" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
-          <button className="notification-button">
-            <HiOutlineBell size="1.8rem" />
-            <div className="notification-badge"></div>
-          </button>
-        </Menu>
-      </Container>
-    );
-  }
+        <button className="mx-6 sm:mx-4 darkmode-toggle" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}>
+          <AnimatePresence exitBeforeEnter>
+            {currentTheme === "light" ? (
+              <motion.div initial={{ scale: 0 }} animate={{ rotate: 360, scale: 1 }} key="dark">
+                <HiOutlineMoon size="1.8rem" />
+              </motion.div>
+            ) : (
+              <motion.div initial={{ scale: 0 }} animate={{ rotate: 180, scale: 1 }} key="light">
+                <HiOutlineSun size="1.8rem" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
+        <button className="notification-button">
+          <HiOutlineBell size="1.8rem" />
+          <div className="notification-badge"></div>
+        </button>
+      </Menu>
+    </Container>
+  );
 };
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   ${tw`flex sticky top-0 items-center justify-end overflow-hidden py-3 pr-12 pl-14 xl:pl-3 duration-100 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2 lg:pr-4`}
   color: ${(props) => props.theme.textColor};
-  background: ${props => props.theme.bodyColor};
+  background: ${(props) => props.theme.bodyColor};
   @media (max-width: 960px) {
     background: ${(props) => props.theme.subColor};
   }

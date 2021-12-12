@@ -23,7 +23,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
     transition: { duration: 0.35 },
   };
   return (
-    <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]}>
+    <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]} scroll={false}>
       <Card variants={item} whileHover={{ scale: 0.965 }} key={type}>
         {type === "service" ? (
           <img className="" src={`/images/resourceIcon/${title}.png`} alt="service-card-icon" />
