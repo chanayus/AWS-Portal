@@ -3,15 +3,17 @@ import { FaList, FaTh } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
-import CardSection from "../../components/resource/CardSection";
 import FilterResources from "../../components/resource/FilterResources";
 import { HiOutlineX } from "react-icons/hi";
 import PageLoader from "../../components/main/PageLoader";
-import ResourceTable from "../../components/resource/ResourceTable";
-import SearchInput from "../../components/input/SearchInput";
+import dynamic from "next/dynamic";
 import { useFetch } from "../../hooks/useFetch";
 import { useFilter } from "../../hooks/useFilter";
 import { useRouter } from "next/router";
+
+const SearchInput = dynamic(import("../../components/input/SearchInput"));
+const ResourceTable = dynamic(import("../../components/resource/ResourceTable"));
+const CardSection = dynamic(import("../../components/resource/CardSection"));
 
 const Resource = () => {
   const router = useRouter();
