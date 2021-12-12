@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps, router }) {
           <GlobalStyle />
           <Layout>
             <AnimatePresence exitBeforeEnter >
-              <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} key={router.route}>
+              <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={router.route}>
                 <Component {...pageProps} />
               </motion.div>
             </AnimatePresence>
