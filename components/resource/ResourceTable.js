@@ -25,18 +25,15 @@ const ResourceTable = ({ resources, setResources }) => {
     createdAt: "default",
     owner: "default",
   });
-  
+
   useEffect(() => {
-    const sort = Object.keys(sortData).find(key => sortData[key] !== "default");
-    if(sort){
+    const sort = Object.keys(sortData).find((key) => sortData[key] !== "default");
+    if (sort) {
       setDisplayResources(useSorting([...resources], sort, sortData[sort]));
-    }
-    else{
-      setDisplayResources([...resources])
+    } else {
+      setDisplayResources([...resources]);
     }
   }, [resources]);
-
-
 
   const sortingHandle = (sortKey, sortValue) => {
     const nextValue = {
@@ -98,12 +95,19 @@ const ResourceTable = ({ resources, setResources }) => {
       </div>
       <AnimatePresence exitBeforeEnter>
         {displayResouces.length === 0 ? (
-          <motion.div className="w-full flex flex-col items-center opacity-50" exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} transition={{ duration: 0.4 }}>
+          <motion.div
+            className="w-full flex flex-col items-center opacity-50"
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ duration: 0.1 }}
+            key={"not-found"}
+          >
             <IoCubeOutline size="7rem" className="dynamic-text mt-10 mb-2" />
             <h2 className="text-2xl font-light">ไม่พบข้อมูล Resource</h2>
           </motion.div>
         ) : (
-          <TableWrapper exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+          <TableWrapper exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={"resorce-table"}>
             <table>
               <thead className="sm:hidden">
                 <tr>
@@ -162,7 +166,7 @@ const ResourceTable = ({ resources, setResources }) => {
                             <img className="w-7 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} loading="lazy" alt="service-icon-mobile" />
                             <div className="flex flex-col justify-center">
                               {isServicePage ? null : <p className="font-medium capitalize">{value.serviceName}</p>}
-                              <p>{value.resourceType}</p>
+                              {value.serviceName === value.resourceType ? null : <p>{value.resourceType}</p>}
                             </div>
                           </div>
                           <div>
@@ -195,9 +199,11 @@ const ResourceTable = ({ resources, setResources }) => {
                           <div className="flex flex-col overflow-hidden">
                             {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                             {isServicePage && value.resourceType === "" ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
-                            <p className={`text-left ${isServicePage ? "dynamic-text" : " text-gray-500"} truncate`}>{`${value.resourceType.substring(0, 30)}${
-                              value.resourceType.length > 30 ? "..." : ""
-                            }`}</p>
+                            {value.serviceName === value.resourceType ? null : (
+                              <p className={`text-left ${isServicePage ? "dynamic-text" : " text-gray-500"} truncate`}>{`${value.resourceType.substring(0, 30)}${
+                                value.resourceType.length > 30 ? "..." : ""
+                              }`}</p>
+                            )}
                           </div>
                         </div>
                       </td>

@@ -83,9 +83,9 @@ const Filter = ({ filterData, setFilterData, allData }) => {
                   if(type === "resource"){
                     return(
                       !filterData[type].includes(spilted[1]) ? 
-                      <Button onClick={() => handleSelect(spilted[1])} key={index} className={`flex items-center w-full`} >
+                      <Button onClick={() => handleSelect(spilted[1] ? spilted[1] : spilted[0])} key={index} className={`flex items-center w-full`} >
                         {type === "resource" ? <img src={`/images/resourceIcon/${spilted[0]}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
-                        <p className="dynamic-text">{spilted[1]}</p>
+                        <p className="dynamic-text">{spilted[1] ? spilted[1] : spilted[0] }</p>
                       </Button> 
                     : null
                     )

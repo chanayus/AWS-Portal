@@ -14,7 +14,7 @@ const PageLoader = () => {
   return (
     <div className="flex items-center justify-center absolute w-full left-0 top-1/3 ">
       <div className="flex flex-col justify-center items-center rounded-md">
-        <motion.svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="dynamic-text opacity-100" height="5.5rem" width="5.5rem" xmlns="http://www.w3.org/2000/svg">
+        <motion.svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className="dynamic-text opacity-100" height="5.5rem" width="5.5rem" xmlns="http://www.w3.org/2000/svg">
           <motion.path
             variants={icon}
             initial="hidden"

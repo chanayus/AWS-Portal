@@ -98,24 +98,28 @@ const Resource = () => {
             ))}
           </div>
         </div>
-        {displayType === "table" ? (
-          <>
-            <div className="flex mt-6 md:mt-8 md:flex-col-reverse justify-between">
-              <SearchInput setState={filterHandle} />
-              <div className="flex md:mb-3 md:justify-end ">
-                <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
-                  <FaList size="1.4rem" color="#468ffd" className="mx-auto" />
-                </button>
-                <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("card")}>
-                  <FaTh size="1.4rem" color="#bdbdbd" className="mx-auto" />
-                </button>
+        <AnimatePresence exitBeforeEnter>
+          {displayType === "table" ? (
+            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key={"table-section"}>
+              <div className="flex mt-6 md:mt-8 md:flex-col-reverse justify-between">
+                <SearchInput setState={filterHandle} />
+                <div className="flex md:mb-3 md:justify-end ">
+                  <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
+                    <FaList size="1.4rem" color="#468ffd" className="mx-auto" />
+                  </button>
+                  <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("card")}>
+                    <FaTh size="1.4rem" color="#bdbdbd" className="mx-auto" />
+                  </button>
+                </div>
               </div>
-            </div>
-            <ResourceTable resources={resources} setResources={setResources} />
-          </>
-        ) : (
-          <CardSection data={resources} setDisplayType={setDisplayType} type={type ? type : "service"} />
-        )}
+              <ResourceTable resources={resources} setResources={setResources} />
+            </motion.div>
+          ) : (
+            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key={"card-section"}>
+              <CardSection data={resources} setDisplayType={setDisplayType} type={type ? type : "service"} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     );
   }
