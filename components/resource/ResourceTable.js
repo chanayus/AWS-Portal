@@ -198,7 +198,7 @@ const ResourceTable = ({ resources, setResources }) => {
                           <img className="w-9 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} loading="lazy" alt="service-icon" />
                           <div className="flex flex-col overflow-hidden">
                             {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
-                            {isServicePage && value.resourceType === "" ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
+                            {isServicePage && value.serviceName === value.resourceType ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
                             {value.serviceName === value.resourceType ? null : (
                               <p className={`text-left ${isServicePage ? "dynamic-text" : " text-gray-500"} truncate`}>{`${value.resourceType.substring(0, 30)}${
                                 value.resourceType.length > 30 ? "..." : ""
