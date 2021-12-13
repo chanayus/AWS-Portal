@@ -109,7 +109,7 @@ const Index = () => {
               </div>
               <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
                 <table>
-                  <thead>
+                  <thead className="sm:hidden">
                     <tr>
                       <th>Resource</th>
                       <th>สร้างเมื่อ</th>
@@ -119,17 +119,41 @@ const Index = () => {
                   <tbody>
                     {dataFormatted.slice(0, 3).map((value, index) => (
                       <tr key={index}>
-                        <td className="flex items-center capitalize">
+                        <td className="flex items-center capitalize sm:hidden">
                           <Image classProps="w-8 mr-2 rounded" width="32px" height="32px" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
                           <div className="flex flex-col overflow-hidden w-1/2">
                             <p className="text-left font-medium truncate">{value.serviceName}</p>
                             {value.serviceName === value.resourceType ? null : (
-                              <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 25)}${value.resourceType.length > 30 ? "..." : ""}`}</p>
+                              <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 15)}${value.resourceType.length > 15 ? "..." : ""}`}</p>
                             )}
                           </div>
                         </td>
-                        <td>{dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
-                        <td>{value.owner}</td>
+                        <td className="sm:hidden">{dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
+                        <td className="sm:hidden">{value.owner}</td>
+
+                        <td className="hidden sm:block pt-3 px-3 w-full">
+                          <div className="flex items-center">
+                            <Image classProps="w-8 mr-2 rounded" width="32px" height="32px" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
+                            <div className="flex flex-col overflow-hidden w-1/2">
+                              <p className="text-left font-medium truncate">{value.serviceName}</p>
+                              {value.serviceName === value.resourceType ? null : (
+                                <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 15)}${value.resourceType.length > 15 ? "..." : ""}`}</p>
+                              )}
+                            </div>
+                          </div>
+                          <div className="hidden sm:flex w-full justify-between my-2 pt-1">
+                            <b>Region</b>
+                            <p className="text-right">{value.region ? value.region : "-"}</p>
+                          </div>
+                          <div className="hidden sm:flex w-full justify-between my-2 pt-1">
+                            <b>สร้างเมื่อ</b>
+                            <p className="text-right">{value.createdAt ? value.createdAt : "-"}</p>
+                          </div>
+                          <div className="hidden sm:flex w-full justify-between my-2 pt-1">
+                            <b>สร้างโดย</b>
+                            <p className="text-right">{value.owner ? value.owner : "-"}</p>
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
