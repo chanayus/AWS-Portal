@@ -21,7 +21,8 @@ const PageLoader = () => {
             animate="visible"
             transition={{
               duration: 1,
-              yoyo: Infinity,
+              repeat: Infinity,
+              repeatType: 'reverse'
             }}
             fill="none"
             strokeLinecap="round"
@@ -39,7 +40,8 @@ const PageLoader = () => {
             animate="visible"
             transition={{
               duration: 1,
-              yoyo: Infinity,
+              repeat: Infinity,
+              repeatType: 'reverse'
             }}
             d="M69 153.99l187 110 187-110m-187 310v-200"
           ></motion.path>

@@ -127,7 +127,7 @@ const Index = () => {
                             )}
                           </div>
                         </td>
-                        <td>{dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
+                        <td>{dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
                         <td>{value.owner}</td>
                       </tr>
                     ))}

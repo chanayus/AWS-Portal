@@ -210,7 +210,7 @@ const ResourceTable = ({ resources, setResources }) => {
                         </div>
                       </td>
                       <td className="sm:hidden">{value.region}</td>
-                      <td className="sm:hidden">{dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
+                      <td className="sm:hidden">{dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
                       <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
                       <td className="sm:hidden pl-1 w-52 lg:w-32">
                         <p className="w-52 lg:w-32 break-all mr-0">{`${value.resourceId}`}</p>
