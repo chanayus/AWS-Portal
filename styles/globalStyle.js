@@ -21,7 +21,6 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         font-family: 'Prompt', sans-serif;
         scroll-behavior: smooth;
-        -webkit-text-stroke: .01em rgba(51,51,51,0.50);
         -webkit-font-smoothing:antialiased !important;
     }
     body {
