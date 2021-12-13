@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import Image from 'next/image'
 import { IoCubeOutline } from "react-icons/io5";
+import dayjs from "dayjs";
 import useForceUpdate from "use-force-update";
 import { useRouter } from "next/router";
 import { useSorting } from "../../hooks/useSorting";
@@ -182,7 +183,7 @@ const ResourceTable = ({ resources, setResources }) => {
                         </div>
                         <div className="hidden sm:flex justify-between my-2">
                           <b>สร้างเมื่อ</b>
-                          <p className="text-right">{value.createdAt ? value.createdAt : "-"}</p>
+                          <p className="text-right">{dayjs(value.createdAt).format("DD/MM/YYYY HH:mm")}</p>
                         </div>
                         <div className="hidden sm:flex justify-between my-2">
                           <b>สร้างโดย</b>
@@ -209,7 +210,7 @@ const ResourceTable = ({ resources, setResources }) => {
                         </div>
                       </td>
                       <td className="sm:hidden">{value.region}</td>
-                      <td className="sm:hidden">{value.createdAt ? value.createdAt : "-"}</td>
+                      <td className="sm:hidden">{dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
                       <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
                       <td className="sm:hidden pl-1 w-52 lg:w-32">
                         <p className="w-52 lg:w-32 break-all mr-0">{`${value.resourceId}`}</p>

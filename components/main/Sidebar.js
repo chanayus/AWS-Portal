@@ -3,11 +3,13 @@ import { HiHome, HiOutlineHome, HiOutlineLogout } from "react-icons/hi";
 import { IoCube, IoCubeOutline } from "react-icons/io5";
 
 import Link from "next/link";
-import Logo from "../Logo";
-import LogoNoText from "../LogoNoText";
+import dynamic from "next/dynamic";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { useRouter } from "next/router";
+
+const Logo = dynamic(import("../Logo"));
+const LogoNoText = dynamic(import("../LogoNoText"));
 
 const Sidebar = () => {
   const router = useRouter();

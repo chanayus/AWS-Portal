@@ -6,8 +6,8 @@ import Link from "next/link";
 import Loader from "../components/main/Loader";
 import SkeletonTable from "../components/main/SkeletonTable";
 import { TableWrapper } from "../styles/styleComponents";
+import dayjs from "dayjs";
 import { getUniqueData } from "../hooks/getUniqueData";
-import moment from "moment";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -24,7 +24,8 @@ const Index = () => {
     loading ? null : setDataFormatted(useFormat(resources));
   }, [loading]);
 
-  const resourcesToday = dataFormatted.filter((value) => moment(value.createdAt, "DD/MM/YYYY HH:mm").format("DD/MM/YYYY") === moment().format("DD/MM/YYYY")).length;
+  const resourcesToday = dataFormatted.filter((value) => dayjs(value.createdAt).format("DD/MM/YYYY") === dayjs().format("DD/MM/YYYY")).length;
+
   const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length;
 
   const cardlist = [
@@ -121,11 +122,12 @@ const Index = () => {
                           <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
                           <div className="flex flex-col overflow-hidden w-1/2">
                             <p className="text-left font-medium truncate">{value.serviceName}</p>
-                            {value.serviceName === value.resourceType ? null :  <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 25)}${value.resourceType.length > 30 ? "..." : ""}`}</p>}
-                           
+                            {value.serviceName === value.resourceType ? null : (
+                              <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 25)}${value.resourceType.length > 30 ? "..." : ""}`}</p>
+                            )}
                           </div>
                         </td>
-                        <td>{value.createdAt}</td>
+                        <td>{dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
                         <td>{value.owner}</td>
                       </tr>
                     ))}

@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "apollo-server-micro": "2.25.0",
     "bcrypt": "^5.0.1",
+    "dayjs": "^1.10.7",
     "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
     "graphql": "^15.6.1",
@@ -18,7 +20,6 @@
     "graphql-compose-mongoose": "^9.7.0",
     "isomorphic-unfetch": "^3.1.0",
     "local-storage-fallback": "^4.1.2",
-    "moment": "^2.29.1",
     "mongoose": "^6.0.11",
     "mongoose-bcrypt": "^1.9.0",
     "next": "11.1.2",
@@ -30,9 +31,11 @@
     "use-state-if-mounted": "^1.0.4"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.0.7",
     "autoprefixer": "^10.3.6",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-styled-components": "^1.13.2",
+    "cross-env": "^7.0.3",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "postcss": "^8.3.8",

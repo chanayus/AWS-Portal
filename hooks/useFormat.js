@@ -1,5 +1,3 @@
-import moment from "moment";
-
 const ec2_layer = [
   "instance",
   "image",
@@ -81,10 +79,7 @@ export const useFormat = (data) => {
   // Sorting Data
   finalData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   finalData.map((value) => {
-    value.createdAt = value.createdAt != "2000-01-01T00:00:00Z" ? moment(value.createdAt).format("DD/MM/YYYY HH:mm") : "-";
-    if (value.createdAt === "Invalid date") {
-      value.createdAt = "-";
-    }
+    value.createdAt = value.createdAt != "2000-01-01T00:00:00Z" ? value.createdAt : "-";
   });
 
   return finalData;
