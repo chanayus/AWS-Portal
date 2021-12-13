@@ -5,7 +5,7 @@ import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle";
 import { useEffect, useState } from "react";
 
 import { FaCheck } from "react-icons/fa";
-import Image from 'next/image'
+import Image from "../main/Image";
 import { IoCubeOutline } from "react-icons/io5";
 import dayjs from "dayjs";
 import useForceUpdate from "use-force-update";
@@ -165,7 +165,7 @@ const ResourceTable = ({ resources, setResources }) => {
                       <td className="hidden sm:block pt-3 px-3">
                         <div className="hidden sm:flex justify-between items-center my-1 pb-1">
                           <div className="flex items-center ">
-                            <Image className="w-9 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} width={"28px"} height={"28px"} loading="lazy" quality={50} alt="service-icon-mobile" />
+                            <Image classProps="w-8 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} width={"24px"} height={"24px"} alt="service-icon-mobile" />
                             <div className="flex flex-col justify-center ml-2">
                               {isServicePage ? null : <p className="font-medium capitalize">{value.serviceName}</p>}
                               {value.serviceName === value.resourceType ? null : <p>{value.resourceType}</p>}
@@ -197,14 +197,12 @@ const ResourceTable = ({ resources, setResources }) => {
 
                       <td className="sm:hidden">
                         <div className="flex items-center">
-                          <Image className="w-9 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} width={"36px"} height={"36px"} loading="lazy" quality={55} alt="service-icon" />
+                          <Image classProps="w-9 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} width="36px" height="36px" alt="service-icon" />
                           <div className="flex flex-col overflow-hidden  ml-2">
                             {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                             {isServicePage && value.serviceName === value.resourceType ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
                             {value.serviceName === value.resourceType ? null : (
-                              <p className={`text-left ${isServicePage ? "dynamic-text" : " text-gray-500"} truncate`}>{`${value.resourceType.substring(0, 30)}${
-                                value.resourceType.length > 30 ? "..." : ""
-                              }`}</p>
+                              <p className={`max-w-18 text-left break-all ${isServicePage ? "dynamic-text" : " text-gray-500"}`}>{`${value.resourceType}`}</p>
                             )}
                           </div>
                         </div>

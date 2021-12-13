@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
-import Image from "next/image";
+import Image from "../../components/main/Image";
 import PageLoader from "../../components/main/PageLoader";
 import ResourceTable from "../../components/resource/ResourceTable";
 import SearchInput from "../../components/input/SearchInput";
@@ -63,7 +63,7 @@ const SpecificResource = () => {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
         <div className="flex items-center mb-8">
-          <Image className="rounded" src={`/images/resourceIcon/${serviceName}.png`} alt="service-Img" width={48} height={48} />
+          <Image classProps="rounded" src={`/images/resourceIcon/${serviceName}.png`} alt="service-Img" width={48} height={48} />
           <h1 className="ml-3 capitalize">{serviceName}</h1>
         </div>
         <Grid className="lg:grid-cols-2 md:gap-y-2 gap-3">

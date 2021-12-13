@@ -2,6 +2,7 @@ import { FaGlobeAmericas, FaUserAlt } from "react-icons/fa";
 import { IoCube, IoSparkles } from "react-icons/io5";
 import { useEffect, useState } from "react";
 
+import Image from "../components/main/Image";
 import Link from "next/link";
 import Loader from "../components/main/Loader";
 import SkeletonTable from "../components/main/SkeletonTable";
@@ -119,7 +120,7 @@ const Index = () => {
                     {dataFormatted.slice(0, 3).map((value, index) => (
                       <tr key={index}>
                         <td className="flex items-center capitalize">
-                          <img className="w-8 mr-2 rounded" width="32px" height="32px" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
+                          <Image classProps="w-8 mr-2 rounded" width="32px" height="32px" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
                           <div className="flex flex-col overflow-hidden w-1/2">
                             <p className="text-left font-medium truncate">{value.serviceName}</p>
                             {value.serviceName === value.resourceType ? null : (

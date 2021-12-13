@@ -1,5 +1,6 @@
 import { HiGlobe, HiUser } from "react-icons/hi";
 
+import Image from "../main/Image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -26,7 +27,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
     <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]} scroll={false}>
       <Card variants={item} whileHover={{ scale: 0.965 }} key={type}>
         {type === "service" ? (
-          <img className="" src={`/images/resourceIcon/${title}.png`} alt="service-card-icon" />
+          <Image src={`/images/resourceIcon/${title}.png`} width="56px" height="56px" alt="service-card-icon" />
         ) : (
           <div className={`${type === "iam" ? "from-rose-600 to-rose-500" : "from-green-600 to-green-500"} absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}>
             {type === "iam" ? <HiUser color="#fcfcfc" size="2.5rem"/> : <HiGlobe color="#fcfcfc" size="2.5rem"/>}
