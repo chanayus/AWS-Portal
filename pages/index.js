@@ -119,7 +119,7 @@ const Index = () => {
                     {dataFormatted.slice(0, 3).map((value, index) => (
                       <tr key={index}>
                         <td className="flex items-center capitalize">
-                          <img className="w-8 mr-2 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} alt="" />
+                          <img className="w-8 mr-2 rounded" width="32px" height="32px" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
                           <div className="flex flex-col overflow-hidden w-1/2">
                             <p className="text-left font-medium truncate">{value.serviceName}</p>
                             {value.serviceName === value.resourceType ? null : (
