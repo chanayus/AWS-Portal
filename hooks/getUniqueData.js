@@ -10,10 +10,36 @@ export const getUniqueData = (data, key) =>{
     }
 }
 
+const ec2_layer = [
+    "instance",
+    "image",
+    "launch-template",
+    "snapshot",
+    "key-pair",
+    "elastic-ip",
+    "volume",
+    "network-interface",
+    "nat-gateway",
+    "security-group",
+    "internet-gateway",
+    "subnet",
+    "network-acl",
+    "route-table",
+    "vpc",
+  ];
 
 export const getUniqueResourceType = (data, service) =>{
     const resources = data.filter((value => value.serviceName === service))
     const uniqueData = [...new Set(resources.map(value => value.resourceType))];
 
-    return uniqueData.sort();
+    if(service === "ec2"){
+        const sorted = []
+        ec2_layer.map(value => {
+            if(uniqueData.includes(value)){
+                sorted.push(value)
+            }
+        })
+        return sorted
+    }
+    return uniqueData;
 }

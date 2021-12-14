@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
               <>{children}</>
             </motion.div>
           ) : (
-            <Content exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={router.pathname}>
+            <Content exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.175 }} key={router.pathname}>
               <div className="relative min-h-full mt-24 px-20 pb-24 2xl:px-3">{children}</div>
             </Content>
           )}
