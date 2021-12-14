@@ -118,7 +118,7 @@ const Button = styled.button`
 
 const Highlight = styled(motion.div)`
   &.filter-highlight {
-    ${tw`w-full h-1 absolute -bottom-3 rounded-lg left-0`}
+    ${tw`w-full h-1 absolute -bottom-3 left-0`}
     z-index: -1;
     background: ${(props) => props.theme.blue};
   }

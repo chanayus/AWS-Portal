@@ -30,7 +30,7 @@ export const useFormat = (data) => {
     // loop in value
     data[value].map((value) => {
       value.serviceName = serviceCondition[value.ResourceARN.split(":")[2]] ?? value.ResourceARN.split(":")[2];
-      value.region = allRegionCondition.includes(value.serviceName) ? "CoverageAll" : value.ResourceARN.split(":")[3] === "" ? "-" : value.ResourceARN.split(":")[3];
+      value.region = allRegionCondition.includes(value.serviceName) ? "Global" : value.ResourceARN.split(":")[3] === "" ? "-" : value.ResourceARN.split(":")[3];
       value.resourceType = value.ResourceARN.split(":")[5].split("/")[0] === "" ? value.serviceName : value.ResourceARN.split(":")[5].split("/")[0]  ;
 
       // Loop in Tag Array
