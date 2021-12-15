@@ -1,27 +1,26 @@
 
 
-const formatOwner = (tagName, owner) =>{
+
+
+const autoTagFormatter = (tagName, owner) =>{
   const valueCondition = ["cie21", "ict21"]
-
-  if(tagName === "cie2021" && (valueCondition.includes(owner.slice(0,5)) || owner.slice(0,5) === "group")){
-
-    if(valueCondition.includes(owner.slice(0,5))){
-      return `${owner.slice(0,5)}g${owner.slice(0,7).substr(-1)}`
-    }
-    else{
-      return `cie21g${owner.slice(-1)}`;
-    }
-   
+  if(valueCondition.includes(owner.slice(0,5))){
+    return `${owner.slice(0,5)}g${owner.slice(0,7).substr(-1)}`
   }
   else{
-    const formatCondition = {
-      cie21: `cie21g${owner.slice(-1)}`,
-      ict21: `ict21g${owner.slice(-1)}`
-    }
-    return formatCondition[tagName];
-  }
- 
+    return `cie21g${owner.slice(-1)}`;
+  } 
 }
+
+const manualTagFormatter = (tagName, owner) =>{
+  const formatCondition = {
+    cie21: `cie21g${owner.slice(-1)}`,
+    ict21: `ict21g${owner.slice(-1)}`
+  }
+  return formatCondition[tagName];
+}
+
+
 
 export const useFormat = (data) => {
   const finalData = [];
@@ -46,7 +45,7 @@ export const useFormat = (data) => {
           value[tagValue.Key] = tagValue.Value;
         }
         if(tagValue.Key === "cie2021"){
-          value.owner = formatOwner(tagValue.Key, tagValue.Value) 
+          value.owner = autoTagFormatter(tagValue.Key, tagValue.Value) 
         }
       });
 
@@ -54,7 +53,7 @@ export const useFormat = (data) => {
       if(!value.owner){
         value.Tags.map((tagValue) => {
           if (manualTagCndition.includes(tagValue.Key)) {
-            value.owner = formatOwner(tagValue.Key, tagValue.Value)
+            value.owner = manualTagFormatter(tagValue.Key, tagValue.Value)
           }
         });
       }
