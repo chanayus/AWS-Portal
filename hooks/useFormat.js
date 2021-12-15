@@ -4,7 +4,14 @@ const formatOwner = (tagName, owner) =>{
   const valueCondition = ["cie21", "ict21"]
 
   if(tagName === "cie2021" && (valueCondition.includes(owner.slice(0,5)) || owner.slice(0,5) === "group")){
-    return `${valueCondition.includes(owner.slice(0,5)) ? owner.slice(0,5) : "cie21"}g${owner.slice(-1)}`;
+
+    if(valueCondition.includes(owner.slice(0,5))){
+      return `${owner.slice(0,5)}g${owner.slice(0,7).substr(-1)}`
+    }
+    else{
+      return `cie21g${owner.slice(-1)}`;
+    }
+   
   }
   else{
     const formatCondition = {
