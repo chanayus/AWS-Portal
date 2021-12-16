@@ -14,7 +14,7 @@ import { useTextFilter } from "../../hooks/useFilter";
 
 const SpecificResource = () => {
   const router = useRouter();
-  const { serviceName: serviceQuery, resource_type: typeQuery} = router.query;
+  const { serviceName: serviceQuery, resource_type: typeQuery } = router.query;
   const [resources, setResources] = useState([]); // all resource use for display
   const { loading, data } = useFetch("/api/resources", setResources, true);
 
@@ -25,13 +25,16 @@ const SpecificResource = () => {
   useEffect(() => {
     setResources(data.filter((value) => value.serviceName === serviceName));
     setResourceType(getUniqueResourceType(data, serviceName));
-    setServiceName(serviceQuery);
 
-    // check query sting is includes in resourceType List
-    if (getUniqueResourceType(data, serviceName).includes(typeQuery)) {
-      setCurrentType(typeQuery);
+    console.log("ASD")
+    if (router.isReady) {
+      setServiceName(serviceQuery);
+      // check query sting is includes in resourceType List
+      if (getUniqueResourceType(data, serviceName).includes(typeQuery)) {
+        setCurrentType(typeQuery);
+      }
     }
-  }, [data]);
+  }, [data, router.isReady]);
 
   const changeType = (typeValue) => {
     if (currentType.includes(typeValue)) {
@@ -101,9 +104,11 @@ const Grid = styled.div`
   @media (max-width: 480px) {
     grid-template-columns: 1fr 1fr;
   }
-  .active {
-    transition: 0.25s;
-    box-shadow: 0 0 3px 2px ${(props) => props.theme.blue};
+  button {
+    transition: 0.35s;
+    &.active {
+      box-shadow: 0 0 3px 2px ${(props) => props.theme.blue};
+    }
   }
 `;
 
