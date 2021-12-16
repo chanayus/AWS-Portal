@@ -5,6 +5,9 @@ const autoTagFormatter = (tagName, owner) => {
   } if (owner.slice(0,5) === "group") {
     return `cie21g${owner.slice(-1)}`;
   }
+  else{
+    return owner
+  }
 };
 
 const manualTagFormatter = (tagName, owner) => {
