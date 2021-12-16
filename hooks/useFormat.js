@@ -24,7 +24,6 @@ export const useFormat = (data) => {
   const tagCondition = ["owner", "createdAt"];
   const manualTagCndition = ["cie21", "ict21"];
 
-  console.log(data);
   /// loop in key
   Object.keys(data).map((keyValue) => {
     if (keyValue !== "PaginationToken") {
