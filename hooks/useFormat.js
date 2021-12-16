@@ -2,7 +2,7 @@ const autoTagFormatter = (tagName, owner) => {
   const valueCondition = ["cie21", "ict21"];
   if (valueCondition.includes(owner.slice(0, 5))) {
     return `${owner.slice(0, 5)}g${owner.slice(0, 7).substr(-1)}`;
-  } else {
+  } if (owner.slice(0,5) === "group") {
     return `cie21g${owner.slice(-1)}`;
   }
 };
