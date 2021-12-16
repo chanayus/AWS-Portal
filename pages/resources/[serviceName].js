@@ -23,10 +23,10 @@ const SpecificResource = () => {
   const [resourceType, setResourceType] = useState(getUniqueResourceType(data, serviceName)); // all resourceType
 
   useEffect(() => {
-    setResources(data.filter((value) => value.serviceName === serviceName));
-    setResourceType(getUniqueResourceType(data, serviceName));
-
-    console.log("ASD")
+    if(data.length){
+      setResources(data.filter((value) => value.serviceName === serviceName));
+      setResourceType(getUniqueResourceType(data, serviceName));
+    }
     if (router.isReady) {
       setServiceName(serviceQuery);
       // check query sting is includes in resourceType List
