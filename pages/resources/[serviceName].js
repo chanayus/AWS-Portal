@@ -14,20 +14,22 @@ import { useTextFilter } from "../../hooks/useFilter";
 
 const SpecificResource = () => {
   const router = useRouter();
+  const { serviceName: serviceQuery, resource_type: typeQuery} = router.query;
   const [resources, setResources] = useState([]); // all resource use for display
-  const { serviceName, resource_type } = router.query;
   const { loading, data } = useFetch("/api/resources", setResources, true);
 
-  const [currentType, setCurrentType] = useState([]); // for display resourceType 
-  const [resourceType, setResourceType] = useState([]); // all resourceType
+  const [serviceName, setServiceName] = useState("");
+  const [currentType, setCurrentType] = useState([]); // for display resourceType
+  const [resourceType, setResourceType] = useState(getUniqueResourceType(data, serviceName)); // all resourceType
 
   useEffect(() => {
     setResources(data.filter((value) => value.serviceName === serviceName));
     setResourceType(getUniqueResourceType(data, serviceName));
+    setServiceName(serviceQuery);
 
     // check query sting is includes in resourceType List
-    if (getUniqueResourceType(data, serviceName).includes(resource_type)) {
-      setCurrentType(resource_type);
+    if (getUniqueResourceType(data, serviceName).includes(typeQuery)) {
+      setCurrentType(typeQuery);
     }
   }, [data]);
 
@@ -43,21 +45,19 @@ const SpecificResource = () => {
         setResources(data.filter((value) => filtered.includes(value.resourceType)));
       }
     } else {
-      // display only selected type 
+      // display only selected type
       setCurrentType([...currentType, typeValue]);
       setResources(data.filter((value) => [...currentType, typeValue].includes(value.resourceType)));
     }
   };
-  
+
   const resourceFilter = (inputValue) => {
-    const allData = currentType.length === 0 ? data.filter((value) => value.serviceName === serviceName) : data.filter((value) => currentType.includes(value.resourceType))
-    setResources(useTextFilter(allData, inputValue))
-  }
+    const allData = currentType.length === 0 ? data.filter((value) => value.serviceName === serviceName) : data.filter((value) => currentType.includes(value.resourceType));
+    setResources(useTextFilter(allData, inputValue));
+  };
 
   if (loading) {
-    return (
-      <PageLoader />
-    );
+    return <PageLoader />;
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
@@ -83,7 +83,7 @@ const SpecificResource = () => {
           )}
         </Grid>
         <div className="mt-10">
-          <SearchInput setState={resourceFilter}/>
+          <SearchInput setState={resourceFilter} />
         </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
