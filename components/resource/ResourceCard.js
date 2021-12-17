@@ -34,7 +34,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
           </div>
         )}
         <div className="flex justify-between items-center w-full">
-          <h1 className="service-name">{title === "-" ? "ไม่มีการระบุ" : title}</h1>
+          <h1 className={`service-name truncate`}>{title === "-" ? "ไม่มีการระบุ" : title}</h1>
           <h1 className="font-light">{totalResource}</h1>
         </div>
         <h2 className={`text-gray-500 mt-2 font-light`}>
