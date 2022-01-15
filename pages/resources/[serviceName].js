@@ -7,20 +7,13 @@ import Image from "../../components/main/Image";
 import { MdAccountTree } from "react-icons/md";
 import PageLoader from "../../components/main/PageLoader";
 import ResourceTable from "../../components/resource/ResourceTable";
+import ResourceTree from "../../components/resource/ResourceTree";
 import SearchInput from "../../components/input/SearchInput";
 import { getUniqueResourceType } from "../../hooks/getUniqueData";
 import styled from "styled-components";
 import { useFetch } from "../../hooks/useFetch";
 import { useRouter } from "next/router";
 import { useTextFilter } from "../../hooks/useFilter";
-
-// import ResourceTree from "../../components/resource/ResourceTree";
-
-
-
-
-
-
 
 const SpecificResource = () => {
   const router = useRouter();
@@ -113,8 +106,7 @@ const SpecificResource = () => {
         </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
-            {displayType === "tree" ? null : <ResourceTable resources={resources} setResources={setResources} />}
-            {/* {displayType === "tree" ? <ResourceTree/> : <ResourceTable resources={resources} setResources={setResources} />} */}
+            {displayType === "tree" ? <ResourceTree/> : <ResourceTable resources={resources} setResources={setResources} />}
           </motion.div>
         </AnimatePresence>
       </motion.div>
