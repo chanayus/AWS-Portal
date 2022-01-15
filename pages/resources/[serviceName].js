@@ -7,20 +7,13 @@ import Image from "../../components/main/Image";
 import { MdAccountTree } from "react-icons/md";
 import PageLoader from "../../components/main/PageLoader";
 import ResourceTable from "../../components/resource/ResourceTable";
+import ResourceTree from "../../components/resource/ResourceTree";
 import SearchInput from "../../components/input/SearchInput";
 import { getUniqueResourceType } from "../../hooks/getUniqueData";
 import styled from "styled-components";
 import { useFetch } from "../../hooks/useFetch";
 import { useRouter } from "next/router";
 import { useTextFilter } from "../../hooks/useFilter";
-
-// import ResourceTree from "../../components/resource/ResourceTree";
-
-
-
-
-
-
 
 const SpecificResource = () => {
   const router = useRouter();
@@ -98,22 +91,22 @@ const SpecificResource = () => {
         </Grid>
         <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>
           {displayType === "table" ? <SearchInput setState={resourceFilter} /> : null}
-          {router.asPath === "/resources/ec2" ? 
+          {router.asPath === "/resources/ec2" ? (
             <div className="flex items-center">
               <div className="flex md:mb-3 md:justify-end ">
-                  <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
-                    <FaList size="1.4rem" color={displayType === "table" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
-                  </button>
-                  <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("tree")}>
-                    <MdAccountTree size="1.4rem" color={displayType === "tree" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
-                  </button>
-                </div>
+                <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
+                  <FaList size="1.4rem" color={displayType === "table" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
+                </button>
+                <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("tree")}>
+                  <MdAccountTree size="1.4rem" color={displayType === "tree" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
+                </button>
+              </div>
             </div>
-          : null}
+          ) : null}
         </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
-            {displayType === "tree" ? null : <ResourceTable resources={resources} setResources={setResources} />}
+            {displayType === "tree" ? <ResourceTree/> : <ResourceTable resources={resources} setResources={setResources} />}
           </motion.div>
         </AnimatePresence>
       </motion.div>
