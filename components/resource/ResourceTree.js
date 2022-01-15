@@ -10,10 +10,10 @@ const ResourceTree = () => {
     return (
       <div>
          
-        {(data.usedResources ?? []).map((item, index) => (
+        {/* {(data.usedResources ?? []).map((item, index) => (
         
          <div className="mb-12" key={index}> <ResourceTreeItems item={item} /></div>
-        ))}
+        ))} */}
       </div>
     );
   }
