@@ -92,8 +92,8 @@ const SpecificResource = () => {
         <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>
           {displayType === "table" ? <SearchInput setState={resourceFilter} /> : null}
           {router.asPath === "/resources/ec2" ? (
-            <div className="flex items-center">
-              <div className="flex md:mb-3 md:justify-end ">
+            <div className="flex items-center ml-6">
+              <div className="flex md:justify-end ">
                 <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
                   <FaList size="1.4rem" color={displayType === "table" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
                 </button>
