@@ -1,12 +1,12 @@
 export const light =  {
     tableHeader: "#f7f7f7",
     textColor : "#2a2a2a",
-    mainColor: "#E6E9EE",
+    mainColor: "#dce1e9",
     subColor: "#FFF",
     blue: "#2E75DF",
     red: "#E82424",
     tabletScreen: "(max-width: 960px)",
-    bodyColor:"#E6E9EE",
+    bodyColor:"#dce1e9",
     themeName: "light"
 }
 
