@@ -63,6 +63,21 @@ const SpecificResource = () => {
     setResources(useTextFilter(allData, inputValue));
   };
 
+  const changeDisplayRender = () => {
+    return (
+      <div className="flex items-center ml-6">
+        <div className="flex md:justify-end ">
+          <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
+            <FaList size="1.4rem" color={displayType === "table" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
+          </button>
+          <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("tree")}>
+            <MdAccountTree size="1.4rem" color={displayType === "tree" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   if (loading) {
     return <PageLoader />;
   } else {
@@ -73,41 +88,44 @@ const SpecificResource = () => {
           <Image classProps="rounded" src={`/images/resourceIcon/${serviceName}.png`} alt="service-Img" width={48} height={48} />
           <h1 className="ml-3 capitalize">{serviceName}</h1>
         </div>
-        <Grid className="lg:grid-cols-2 md:gap-y-2 gap-3">
-          {resourceType.length === 1 || displayType === "tree" ? null : (
-            <>
-              {resourceType.map((value, index) => (
-                <button
-                  key={index}
-                  className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow-sm rounded ${currentType.includes(value) ? "active" : null}`}
-                  onClick={() => changeType(value)}
-                >
-                  <p className="capitalize text-left">{value}</p>
-                  <h2 className="text-xl">{data.filter((value) => value.serviceName === serviceName).filter((item) => item.resourceType === value).length}</h2>
-                </button>
-              ))}
-            </>
-          )}
-        </Grid>
-        <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>
-          {displayType === "table" ? <SearchInput setState={resourceFilter} /> : null}
-          {router.asPath === "/resources/ec2" ? (
-            <div className="flex items-center ml-6">
-              <div className="flex md:justify-end ">
-                <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
-                  <FaList size="1.4rem" color={displayType === "table" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
-                </button>
-                <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("tree")}>
-                  <MdAccountTree size="1.4rem" color={displayType === "tree" ? "#468ffd" : "#bdbdbd"} className="mx-auto" />
-                </button>
-              </div>
-            </div>
-          ) : null}
-        </div>
+
         <AnimatePresence exitBeforeEnter>
-          <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
-            {displayType === "tree" ? <ResourceTree /> : <ResourceTable resources={resources} setResources={setResources} />}
-          </motion.div>
+          {displayType === "tree" ? (
+            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"tree"}>
+              <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>
+                {router.asPath === "/resources/ec2" ? (
+                  changeDisplayRender()
+                ) : null}
+              </div>
+              <ResourceTree />
+            </motion.div>
+          ) : (
+            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
+              <Grid className="lg:grid-cols-2 md:gap-y-2 gap-3">
+                {resourceType.length === 1 || displayType === "tree" ? null : (
+                  <>
+                    {resourceType.map((value, index) => (
+                      <button
+                        key={index}
+                        className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow-sm rounded ${currentType.includes(value) ? "active" : null}`}
+                        onClick={() => changeType(value)}
+                      >
+                        <p className="capitalize text-left">{value}</p>
+                        <h2 className="text-xl">{data.filter((value) => value.serviceName === serviceName).filter((item) => item.resourceType === value).length}</h2>
+                      </button>
+                    ))}
+                  </>
+                )}
+              </Grid>
+              <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>
+                <SearchInput setState={resourceFilter} />
+                {router.asPath === "/resources/ec2" ? (
+                  changeDisplayRender()
+                ) : null}
+              </div>
+              <ResourceTable resources={resources} setResources={setResources} />
+            </motion.div>
+          )}
         </AnimatePresence>
       </motion.div>
     );
