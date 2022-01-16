@@ -74,7 +74,7 @@ const SpecificResource = () => {
           <h1 className="ml-3 capitalize">{serviceName}</h1>
         </div>
         <Grid className="lg:grid-cols-2 md:gap-y-2 gap-3">
-          {resourceType.length === 1 ? null : (
+          {resourceType.length === 1 || displayType === "tree" ? null : (
             <>
               {resourceType.map((value, index) => (
                 <button
@@ -106,7 +106,7 @@ const SpecificResource = () => {
         </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
-            {displayType === "tree" ? <ResourceTree/> : <ResourceTable resources={resources} setResources={setResources} />}
+            {displayType === "tree" ? <ResourceTree /> : <ResourceTable resources={resources} setResources={setResources} />}
           </motion.div>
         </AnimatePresence>
       </motion.div>
