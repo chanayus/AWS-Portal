@@ -6,7 +6,7 @@ const { Schema } = mongoose
 const gqlSchemaComposer = new SchemaComposer()
 
 const ResourceSchema = new Schema({
-    resourceARN: { type: String, required: true },
+    resourceARN: { type: String, required: true, index: true },
     createdAt: { type: Date, required: true, index: true },
     userId: { type: String, require: true, ref: 'User' }
 })
