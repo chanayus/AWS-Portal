@@ -10,6 +10,7 @@
     "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.8",
     "apollo-server-micro": "2.25.0",
     "bcrypt": "^5.0.1",
     "dayjs": "^1.10.7",
