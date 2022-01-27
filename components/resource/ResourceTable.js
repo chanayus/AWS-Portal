@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import Image from "../main/Image";
 import { IoCubeOutline } from "react-icons/io5";
+import ResourcesSelected from "./ResourcesSelected";
 import dayjs from "dayjs";
 import useForceUpdate from "use-force-update";
 import { useRouter } from "next/router";
@@ -92,6 +93,8 @@ const ResourceTable = ({ resources, setResources }) => {
   };
   return (
     <>
+      {displayResouces.filter((value) => value.isChoose).length === 0 ? null : <ResourcesSelected selectedData={displayResouces.filter((value) => value.isChoose)} />}
+
       <div className="mt-6 mb-3 flex justify-start">
         <p className="opacity-80">ผลการค้นหา {displayResouces.length} รายการ</p>
       </div>
