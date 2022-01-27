@@ -57,7 +57,7 @@ export const GlobalStyle = createGlobalStyle`
         tr{
             transition: 0.25s;
             &.selected{
-                background: rgba(129, 129, 129, 0.25);
+                background: rgba(71, 171, 253, 0.2);
             }
         }
         thead{  
