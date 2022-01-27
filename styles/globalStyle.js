@@ -60,7 +60,11 @@ export const GlobalStyle = createGlobalStyle`
                 background: rgba(129, 129, 129, 0.25);
             }
         }
-        thead{       
+        thead{  
+            &.non-sticky{
+                position: relative;
+                top: 0;  
+            }     
             position: sticky;
             top: 60px;     
             z-index: 1;

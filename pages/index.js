@@ -70,7 +70,7 @@ const Index = () => {
               </div>
               <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
                 <table>
-                  <thead>
+                  <thead className="non-sticky">
                     <tr>
                       <th>Region</th>
                       <th>จำนวน Resource</th>
