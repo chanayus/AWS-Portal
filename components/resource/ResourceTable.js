@@ -27,6 +27,7 @@ const ResourceTable = ({ resources, setResources }) => {
     region: "default",
     createdAt: "default",
     owner: "default",
+    resourceId: "default",
   });
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const ResourceTable = ({ resources, setResources }) => {
       region: "default",
       createdAt: "default",
       owner: "default",
+      resourceId: "default",
     };
     setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]));
     setSortData({ ...reset, [sortKey]: nextValue[sortValue] });
@@ -153,7 +155,15 @@ const ResourceTable = ({ resources, setResources }) => {
                       <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.owner)}</AnimatePresence>
                     </div>
                   </th>
-                  <th className="pl-1">Resource id</th>
+                  <th className="pl-1">
+                    <div className="flex items-center">
+                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("resourceId", sortData.resourceId)}>
+                        Resource id
+                      </p>
+                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.resourceId)}</AnimatePresence>
+                    </div>
+                 
+                  </th>
                 </tr>
               </thead>
               <tbody>

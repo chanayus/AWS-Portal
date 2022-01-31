@@ -78,6 +78,7 @@ const SpecificResource = () => {
     );
   };
 
+
   if (loading) {
     return <PageLoader />;
   } else {
@@ -92,22 +93,18 @@ const SpecificResource = () => {
         <AnimatePresence exitBeforeEnter>
           {displayType === "tree" ? (
             <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"tree"}>
-              <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>
-                {router.asPath === "/resources/ec2" ? (
-                  changeDisplayRender()
-                ) : null}
-              </div>
+              <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>{router.asPath === "/resources/ec2" && changeDisplayRender() }</div>
               <ResourceTree />
             </motion.div>
           ) : (
             <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
               <Grid className="lg:grid-cols-2 md:gap-y-2 gap-3">
-                {resourceType.length === 1 || displayType === "tree" ? null : (
+                {resourceType.length !== 1 && displayType !== "tree" && (
                   <>
                     {resourceType.map((value, index) => (
                       <button
                         key={index}
-                        className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow-sm rounded ${currentType.includes(value) ? "active" : null}`}
+                        className={`flex justify-between items-center p-4 py-3 dynamic-bg shadow-sm rounded ${currentType.includes(value) && "active"}`}
                         onClick={() => changeType(value)}
                       >
                         <p className="capitalize text-left">{value}</p>
@@ -119,9 +116,7 @@ const SpecificResource = () => {
               </Grid>
               <div className={`mt-10 flex ${displayType === "table" ? "justify-between" : "justify-end"}`}>
                 <SearchInput setState={resourceFilter} />
-                {router.asPath === "/resources/ec2" ? (
-                  changeDisplayRender()
-                ) : null}
+                {router.asPath === "/resources/ec2" && changeDisplayRender()}
               </div>
               <ResourceTable resources={resources} setResources={setResources} />
             </motion.div>
