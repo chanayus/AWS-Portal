@@ -47,7 +47,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
 };
 
 const Card = styled(motion.a)`
-  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end shadow-lg rounded-xl md:px-3 sm:pb-6`}
+  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end shadow-md rounded-xl md:px-3 sm:pb-6`}
   width: 400px;
   max-width: 100%;
   height: 140px;
