@@ -4,6 +4,7 @@ dotenv.config()
 
 export default async function handler(req, res) {
   const fetch = require('node-fetch');
+  console.log(process.env.GET_RESOURCES_END_POINT)
   const request = await fetch(`${process.env.GET_RESOURCES_END_POINT}/get-resources/`)
   const dataJson = await request.json()
   res.json(dataJson)
