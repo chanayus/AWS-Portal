@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
-import schema from '../../apollo-server/graphql'
+import schema from '../apollo-server/graphql'
 
-import '../../apollo-server/mongoose-connect'
+import '../apollo-server/mongoose-connect'
 
 export const config = {
   api: {
