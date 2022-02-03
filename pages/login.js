@@ -1,10 +1,40 @@
 import tw, {styled} from 'twin.macro';
 
 import Link from "next/link";
+import { useState } from 'react'
+import { useRouter } from 'next/router';
 import Logo from '../components/Logo';
 import TextInput from "../components/input/TextInput";
 
 const Login = () =>{
+    const [record, setRecord] = useState({})
+
+    const changeRecord = (e) =>{
+        const { name, value } = e?.target;
+        setRecord({ ...record, [name]: value });
+    }
+    const loginHandler = async () =>{
+        if (!(record?.username && record?.password)){
+            return false
+        }
+        let abortController = new AbortController();
+        try{
+            const response = await fetch("/api/login", {
+              signal: abortController.signal,
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(record)
+            })
+            const data = await response.json()
+            console.log(data)
+      
+          }catch (err){
+            console.log(err)
+          }
+    }
+
     return(
         <Container>
             <FlexBox>
@@ -14,11 +44,27 @@ const Login = () =>{
                 <LoginForm className="backdrop-filter backdrop-blur">
                     <h1 className="text-black md:text-white text-5xl xs:text-4xl font-bold">Sign In</h1>
                     <div className="form-group">
-                        <TextInput type="text" name="" id="" required={true} title="Username"/>
-                        <TextInput type="password" name="" id="" required={true} title="Password" />
+                        <TextInput 
+                            type="text" 
+                            name="username" 
+                            id="" 
+                            required={true} 
+                            title="Username"
+                            value={record?.username ?? ''}
+                            setValueHandler={changeRecord}
+                        />
+                        <TextInput 
+                            type="password" 
+                            name="password" 
+                            id="" 
+                            required={true} 
+                            title="Password"
+                            value={record?.password ?? ''}
+                            setValueHandler={changeRecord}
+                        />
                     </div>
                     <div className="button-group">
-                        <Link href="/"><a>Log in</a></Link>
+                        <a onClick={loginHandler}>Log in</a>
                         <a href="">Forgot Password ?</a>
                     </div>
                 </LoginForm>

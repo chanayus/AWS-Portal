@@ -1,9 +1,18 @@
 import styled from "styled-components"
 
 const TextInput = (props) => {
+    const {value, setValueHandler, name} = props
+
     return (
         <Container>                     
-            <input type={props.type} required={props.required} className="text-input rounded-none"/>
+            <input 
+                type={props.type} 
+                required={props.required} 
+                className="text-input rounded-none"
+                value={value}
+                onChange={(e) => setValueHandler(e)}
+                name={name}
+            />
             <label>{props.title}</label>
             <div className="bar"></div>
         </Container>

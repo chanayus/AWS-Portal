@@ -4,7 +4,6 @@ import fetch from "isomorphic-unfetch"
 
 const ConfrimModal = ({ setModalVisible, selectedData }) => {
   const deleteResoures = async (selectedData) => {
-    console.log(selectedData)
     let abortController = new AbortController();
     try{
       const response = await fetch("/api/delete-resoures", {
