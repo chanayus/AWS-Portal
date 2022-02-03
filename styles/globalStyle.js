@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         background: ${(props) => props.theme.bodyColor};
-        transition: 0.1s;
+        transition: 0.2s;
         min-height: 100vh;
     }
     img{
