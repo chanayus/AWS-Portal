@@ -1,5 +1,4 @@
 import tw, {styled} from 'twin.macro';
-
 import Link from "next/link";
 import { useState } from 'react'
 import { useRouter } from 'next/router';
@@ -8,6 +7,7 @@ import TextInput from "../components/input/TextInput";
 
 const Login = () =>{
     const [record, setRecord] = useState({})
+    const router = useRouter();
 
     const changeRecord = (e) =>{
         const { name, value } = e?.target;
@@ -28,7 +28,7 @@ const Login = () =>{
               body: JSON.stringify(record)
             })
             const data = await response.json()
-            console.log(data)
+            router.replace('/');
       
           }catch (err){
             console.log(err)
