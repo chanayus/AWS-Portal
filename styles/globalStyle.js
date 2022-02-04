@@ -98,7 +98,13 @@ export const GlobalStyle = createGlobalStyle`
     button{
         cursor: pointer;
         color: ${(props) => props.theme.textColor};
+        
     }
+    button[disabled]{
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
     input[type="text"], input[type="search"]{
         /* ${tw`shadow`} */
         outline: none;
