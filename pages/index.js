@@ -1,6 +1,6 @@
 import { FaGlobeAmericas, FaUserAlt } from "react-icons/fa";
 import { IoCube, IoSparkles } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import Image from "../components/main/Image";
 import Link from "next/link";
