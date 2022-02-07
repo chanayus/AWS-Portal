@@ -38,7 +38,6 @@ export const GlobalStyle = createGlobalStyle`
     p,h1,h2,h3,h4,h5,h6,td,th,label{
         color: ${(props) => props.theme.textColor};
 
-
     }
     button{
         font-size: clamp(13px,1vw,16px);
@@ -52,7 +51,7 @@ export const GlobalStyle = createGlobalStyle`
             ${tw`sm:px-3`}
             padding: 15px 1.25vw;
             font-weight: 400;
-            font-size: clamp(14px,2vw,16px);
+            font-size: clamp(14px,1.1vw,16px);
         }
         tr{
             transition: 0.25s;
