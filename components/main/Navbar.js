@@ -71,7 +71,7 @@ const Navbar = () => {
 };
 
 const Container = styled(motion.div)`
-  ${tw`flex fixed w-full top-0 items-center justify-end overflow-hidden py-3 pr-12 pl-14 xl:pl-3 2xl:pr-5 duration-100 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2`}
+  ${tw`flex fixed w-full top-0 items-center justify-end overflow-hidden py-3 pr-12 pl-14 xl:pl-3 2xl:pr-5 duration-200 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2`}
   color: ${(props) => props.theme.textColor};
   background: ${(props) => props.theme.bodyColor};
   @media (max-width: 960px) {

@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         background: ${(props) => props.theme.bodyColor};
-        transition: 0.1s;
+        transition: 0.2s;
         min-height: 100vh;
     }
     img{
@@ -37,7 +37,6 @@ export const GlobalStyle = createGlobalStyle`
     }
     p,h1,h2,h3,h4,h5,h6,td,th,label{
         color: ${(props) => props.theme.textColor};
-
 
     }
     button{
@@ -52,7 +51,7 @@ export const GlobalStyle = createGlobalStyle`
             ${tw`sm:px-3`}
             padding: 15px 1.25vw;
             font-weight: 400;
-            font-size: clamp(14px,2vw,16px);
+            font-size: clamp(14px,1.1vw,16px);
         }
         tr{
             transition: 0.25s;
@@ -98,7 +97,13 @@ export const GlobalStyle = createGlobalStyle`
     button{
         cursor: pointer;
         color: ${(props) => props.theme.textColor};
+        
     }
+    button[disabled]{
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
     input[type="text"], input[type="search"]{
         /* ${tw`shadow`} */
         outline: none;

@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
             </motion.div>
           ) : (
             <Content exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.175 }} key={router.pathname}>
-              <div className="relative min-h-full mt-24 px-20 pb-24 2xl:px-3">{children}</div>
+              <div className="relative min-h-full mt-24 pb-24 ">{children}</div>
             </Content>
           )}
         </AnimatePresence>
@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
 const Content = styled(motion.div)`
   margin-left: clamp(85px, 10vw, 240px);
   min-height: calc(100vh - 100px);
-  ${tw`w-full md:mx-0 2xl:ml-20`}
+  ${tw`w-full md:mx-0 2xl:ml-20 px-20 2xl:pl-6 2xl:pr-3`}
   @media(max-width: 960px) {
     ${tw`mx-0`}
   }
