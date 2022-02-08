@@ -1,32 +1,15 @@
 import Image from "../main/Image";
-import fetch from "isomorphic-unfetch";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useState } from "react";
 
-const ConfrimModal = ({ setModalVisible, type, selectedData, title, buttonTitle, headerTitle }) => {
+const ConfrimModal = ({ setModalVisible, type, selectedData, title, buttonTitle, headerTitle, operation }) => {
   const [comfirmText, setConfirmText] = useState("");
-
-  const deleteResoures = async (selectedData) => {
-    console.log(selectedData);
-    let abortController = new AbortController();
-    try {
-      const response = await fetch("/api/delete-resoures", {
-        signal: abortController.signal,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(selectedData),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-    // console.log(data)
+  
+  const operationHandle = () => {
+    operation();
+    setModalVisible(false);
   };
-
   return (
     <motion.div
       exit={{ opacity: 0 }}
@@ -72,7 +55,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, title, buttonTitle,
           <button className="bg-gray-500 px-5 py-2 rounded duration-200 hover:bg-gray-600 text-white" onClick={() => setModalVisible(false)}>
             ยกเลิก
           </button>
-          <button disabled={comfirmText === type ? false : true} className="bg-red-500 px-5 py-2 ml-6 rounded duration-200 hover:bg-red-600 text-white" onClick={() => deleteResoures(selectedData)}>
+          <button disabled={comfirmText === type ? false : true} className="bg-red-500 px-5 py-2 ml-6 rounded duration-200 hover:bg-red-600 text-white" onClick={() => operationHandle()}>
             {buttonTitle}
           </button>
         </div>

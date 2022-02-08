@@ -95,7 +95,7 @@ const ResourceTable = ({ resources, setResources }) => {
   };
   return (
     <>
-      {displayResouces.filter((value) => value.isChoose).length === 0 ? null : <ResourcesSelected selectedData={displayResouces.filter((value) => value.isChoose)} />}
+      {displayResouces.filter((value) => value.isChoose).length === 0 ? null : <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} />}
 
       <div className="mt-6 mb-3 flex justify-start">
         <p className="opacity-80">ผลการค้นหา {displayResouces.length} รายการ</p>
