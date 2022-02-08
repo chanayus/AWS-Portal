@@ -3,12 +3,19 @@ import { gql } from "@apollo/client";
 
 const handler = async (req, res) => {
     const input = req.body.map((item) => ({ resourceARN: item.ResourceARN }))
+    console.log({input})
     try {
         const { data } = await client.mutate({
             mutation: gql`
                 mutation DeleteEC2Resources($input: [resourceARNInput]){
                     deleteEC2Resources(records: $input){
-                        resourceARN
+                        success{
+                            resourceARN
+                        }
+                        failure{
+                            resourceARN
+                            error
+                        }
                     }
                 }
             `,
