@@ -65,7 +65,7 @@ const Sidebar = () => {
       </Menu>
 
       <div className="md:hidden">
-        <Link href="/login">
+        <Link href="/api/logout">
           <a aria-label="signout">
             <HiOutlineLogout />
             <p className="2xl:hidden">ออกจากระบบ</p>
