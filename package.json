@@ -13,6 +13,7 @@
     "@apollo/client": "^3.5.8",
     "apollo-server-micro": "2.25.0",
     "bcrypt": "^5.0.1",
+    "cookie": "^0.4.2",
     "dayjs": "^1.10.7",
     "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
