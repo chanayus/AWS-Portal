@@ -1,11 +1,13 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
-import { HiHome, HiOutlineHome, HiOutlineLogout } from "react-icons/hi";
+import { HiHome, HiOutlineHome, HiOutlineLogout, HiUser } from "react-icons/hi";
 import { IoCube, IoCubeOutline } from "react-icons/io5";
 
 import Link from "next/link";
+import { SetUserContext } from "../../pages/_app";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 
 const Logo = dynamic(import("../Logo"));
@@ -13,7 +15,8 @@ const LogoNoText = dynamic(import("../LogoNoText"));
 
 const Sidebar = () => {
   const router = useRouter();
-
+  const { user } = useContext(SetUserContext);
+  console.log(user);
   return (
     <Container exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="sidebar">
       <div className="sidebar-logo md:hidden">
@@ -65,6 +68,12 @@ const Sidebar = () => {
       </Menu>
 
       <div className="md:hidden">
+        <div className="flex items-center">
+          <div className="ml-3 bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
+            <HiUser size="1.5rem" color="#FFF" />
+          </div>
+          <p className="text-red-500 ml-3">{user.user.username}</p>
+        </div>
         <Link href="/login">
           <a aria-label="signout">
             <HiOutlineLogout />

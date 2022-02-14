@@ -42,12 +42,6 @@ const Navbar = () => {
         </Link>
       </div>
       <Menu>
-        {/* <button className="user-button">
-            <div className=" bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-9 h-9 flex justify-center items-center">
-              <HiUser size="1.7rem" color="#FFF" />
-            </div>
-            <p className="ml-2 md:hidden">Username</p>
-          </button> */}
         <button className="mx-6 sm:mx-4 darkmode-toggle" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")} aria-label="darkmode-toggle">
           <AnimatePresence exitBeforeEnter>
             {currentTheme === "light" ? (
