@@ -1,5 +1,5 @@
 import { AnimateSharedLayout, motion } from "framer-motion";
-import { HiHome, HiOutlineHome, HiOutlineLogout, HiUser } from "react-icons/hi";
+import { HiHome, HiOutlineHome, HiOutlineLogin, HiOutlineLogout, HiUser } from "react-icons/hi";
 import { IoCube, IoCubeOutline } from "react-icons/io5";
 
 import Link from "next/link";
@@ -70,7 +70,10 @@ const Sidebar = () => {
           </>
         ) : (
           <Link href="/login">
-            <a aria-label="Login">Login</a>
+            <a aria-label="signout">
+              <HiOutlineLogin />
+              <p className="2xl:hidden">ลงชื่อเข้าสู่ระบบ</p>
+            </a>
           </Link>
         )}
       </div>

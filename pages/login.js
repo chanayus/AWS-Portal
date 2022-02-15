@@ -68,7 +68,7 @@ const Login = () =>{
                         />
                     </div>
                     <div className="button-group">
-                        <button onClick={loginHandler}>Log in</button>
+                        <a onClick={loginHandler}>Log in</a>
                         <a href="">Forgot Password ?</a>
                     </div>
                 </LoginForm>
@@ -123,7 +123,7 @@ const LoginForm = styled.form`
     }
     .button-group{
         ${tw`flex justify-around items-center flex-wrap gap-y-7`}
-        button{
+        a:first-child{
             flex: 1;
             max-width: 250px;
             min-width: 250px;
@@ -131,6 +131,7 @@ const LoginForm = styled.form`
             background: ${(props) => props.theme.blue};
             color: #FFF;
             text-align: center;
+            cursor: pointer;
         }
         a:last-child{
             ${tw`min-w-max xs:mt-7`}
