@@ -56,10 +56,10 @@ const Sidebar = () => {
         {user ? (
           <>
             <div className="flex items-center">
-              <div className="ml-3 bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
+              <div className="ml-3 2xl:mx-auto  bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
                 <HiUser size="1.5rem" color="#FFF" />
               </div>
-              <p className="ml-3 text-white">{user.user.username}</p>
+              <p className="ml-3 text-white 2xl:hidden ">{user.user.username}</p>
             </div>
             <Link href="/login">
               <a aria-label="signout">
