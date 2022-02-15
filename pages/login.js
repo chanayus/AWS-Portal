@@ -1,10 +1,11 @@
 import tw, {styled} from 'twin.macro';
+import { useContext, useState } from 'react'
+
 import Link from "next/link";
-import { useState, useContext } from 'react'
-import { useRouter } from 'next/router';
 import Logo from '../components/Logo';
-import TextInput from "../components/input/TextInput";
 import { SetUserContext } from "./_app"
+import TextInput from "../components/input/TextInput";
+import { useRouter } from 'next/router';
 
 const Login = () =>{
     const [record, setRecord] = useState({})
@@ -67,7 +68,7 @@ const Login = () =>{
                         />
                     </div>
                     <div className="button-group">
-                        <a onClick={loginHandler}>Log in</a>
+                        <button onClick={loginHandler}>Log in</button>
                         <a href="">Forgot Password ?</a>
                     </div>
                 </LoginForm>
@@ -122,7 +123,7 @@ const LoginForm = styled.form`
     }
     .button-group{
         ${tw`flex justify-around items-center flex-wrap gap-y-7`}
-        a:first-child{
+        button{
             flex: 1;
             max-width: 250px;
             min-width: 250px;

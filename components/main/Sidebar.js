@@ -15,8 +15,7 @@ const LogoNoText = dynamic(import("../LogoNoText"));
 
 const Sidebar = () => {
   const router = useRouter();
-  const { user } = useContext(SetUserContext);
-  console.log(user);
+  const { user, getLocalUser } = useContext(SetUserContext);
   return (
     <Container exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="sidebar">
       <div className="sidebar-logo md:hidden">
@@ -37,13 +36,6 @@ const Sidebar = () => {
               <p className="2xl:hidden">หน้าหลัก</p>
             </a>
           </Link>
-          {/* <Link href="/history">
-              <a aria-label="history">
-                {router.asPath === "/history" ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
-                {router.asPath === "/history" ? <HiClock /> : <HiOutlineClock />}
-                <p className="2xl:hidden">ประวัติ</p>
-              </a>
-            </Link> */}
           <Link href="/resources" scroll={false}>
             <a aria-label="resources">
               {router.asPath.includes("/resources") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
@@ -51,13 +43,6 @@ const Sidebar = () => {
               <p className="2xl:hidden">Resources</p>
             </a>
           </Link>
-          {/* <Link href="/iam">
-              <a aria-label="iam">
-                {router.asPath === "/iam" ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
-                {router.asPath === "/iam" ? <HiUser /> : <HiOutlineUser />}
-                <p className="2xl:hidden">IAM Users</p>
-              </a>
-            </Link> */}
           <Link href="/login" scroll={false}>
             <a aria-label="signout">
               <HiOutlineLogout />
@@ -68,18 +53,26 @@ const Sidebar = () => {
       </Menu>
 
       <div className="md:hidden">
-        <div className="flex items-center">
-          <div className="ml-3 bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
-            <HiUser size="1.5rem" color="#FFF" />
-          </div>
-          <p className="ml-3">{user.user.username}</p>
-        </div>
-        <Link href="/login">
-          <a aria-label="signout">
-            <HiOutlineLogout />
-            <p className="2xl:hidden">ออกจากระบบ</p>
-          </a>
-        </Link>
+        {user ? (
+          <>
+            <div className="flex items-center">
+              <div className="ml-3 bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
+                <HiUser size="1.5rem" color="#FFF" />
+              </div>
+              <p className="ml-3">{user.user.username}</p>
+            </div>
+            <Link href="/login">
+              <a aria-label="signout">
+                <HiOutlineLogout />
+                <p className="2xl:hidden">ออกจากระบบ</p>
+              </a>
+            </Link>
+          </>
+        ) : (
+          <Link href="/login">
+            <a aria-label="Login">Login</a>
+          </Link>
+        )}
       </div>
     </Container>
   );

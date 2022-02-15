@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps, router }) {
   if (mounted) {
     return (
       <SetThemeContext.Provider value={{ currentTheme, themeHandle }}>
-        <SetUserContext.Provider value={{ user, userHandle }}>
+        <SetUserContext.Provider value={{ user, userHandle, getLocalUser }}>
           <ThemeProvider theme={currentTheme === "light" ? light : dark}>
             <GlobalStyle />
             <Layout>
