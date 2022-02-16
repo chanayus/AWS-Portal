@@ -53,28 +53,28 @@ const Sidebar = () => {
       </Menu>
 
       <div className="md:hidden">
-        {user ? (
-          <>
-            <div className="flex items-center">
-              <div className="ml-3 2xl:mx-auto  bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
-                <HiUser size="1.5rem" color="#FFF" />
-              </div>
-              <p className="ml-3 text-white 2xl:hidden ">{user.user.username}</p>
-            </div>
-            <Link href="/login">
-              <a aria-label="signout">
-                <HiOutlineLogout />
-                <p className="2xl:hidden">ออกจากระบบ</p>
-              </a>
-            </Link>
-          </>
-        ) : (
+        {["1", "2"].includes(user.user._id) ? (
           <Link href="/login">
             <a aria-label="signout">
               <HiOutlineLogin />
               <p className="2xl:hidden">ลงชื่อเข้าสู่ระบบ</p>
             </a>
           </Link>
+        ) : (
+          <>
+          <div className="flex items-center">
+            <div className="ml-3 2xl:mx-auto  bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
+              <HiUser size="1.5rem" color="#FFF" />
+            </div>
+            <p className="ml-3 text-white 2xl:hidden ">{user.user.username}</p>
+          </div>
+          <Link href="/api/logout">
+            <a aria-label="signout">
+              <HiOutlineLogout />
+              <p className="2xl:hidden">ออกจากระบบ</p>
+            </a>
+          </Link>
+        </>
         )}
       </div>
     </Container>

@@ -20,12 +20,12 @@ const getLocalTheme = () => {
 };
 
 const getLocalUser = () => {
-  return storage.getItem("user") ? storage.getItem("user") : {user: {id: "1", username: "test"}};
+  return storage.getItem("user") ? storage.getItem("user") : {user: {_id: "1", username: "test"}};
 }
 
 function MyApp({ Component, pageProps, router }) {
   const [currentTheme, setCurrentTheme] = useState(getLocalTheme);
-  const [user, setUser] = useState({user: {id: "1", username: ""}})
+  const [user, setUser] = useState({user: {_id: "1", username: ""}})
   const [mounted, setMounted] = useState(false);
   const themeHandle = (value) => {
     storage.setItem("theme", value);
@@ -40,24 +40,22 @@ function MyApp({ Component, pageProps, router }) {
   }
 
   useEffect(() => {
-    if (user.user.id === "1"){
+    setMounted(true);
+    if (user.user._id === "1"){
       let abortController = new AbortController();
       const url = "/api/get-profile"
       const fetchData = async () => {
         const response = await fetch(url, {signal: abortController.signal});
         if (response.status !== 200){
-          console.log(response.status)
-          setUser({user: {id: "1", username: ""}})
+          setUser({user: {_id: "2", username: ""}})
         }
         else{
           const json = await response.json()
-          console.log({user: json.me})
           setUser({user: json.me})
         }
       }
-      fetchData();
+      fetchData()
     }
-    setMounted(true);
   }, []);
 
   // useEffect(() => {
