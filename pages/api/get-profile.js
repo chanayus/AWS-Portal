@@ -8,6 +8,8 @@ const getToken = (req) => {
 }
 
 const handler = async (req, res) => {
+    if (getToken(req) === "")
+        res.status(401).json("Unauthorized")
     try {
         const { data } = await client.query({
             query: gql`

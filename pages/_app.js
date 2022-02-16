@@ -3,6 +3,8 @@ import "tailwindcss/tailwind.css";
 
 import { dark, light } from "../styles/theme";
 import { useEffect, useState } from "react";
+import fetch from "isomorphic-unfetch"
+import { useFetch } from "../hooks/useFetch"
 
 import { GlobalStyle } from "../styles/globalStyle";
 import Layout from "../components/main/Layout";
@@ -23,7 +25,7 @@ const getLocalUser = () => {
 
 function MyApp({ Component, pageProps, router }) {
   const [currentTheme, setCurrentTheme] = useState(getLocalTheme);
-  const [user, setUser] = useState(getLocalUser)
+  const [user, setUser] = useState({user: {id: "1", username: ""}})
   const [mounted, setMounted] = useState(false);
   const themeHandle = (value) => {
     storage.setItem("theme", value);
@@ -33,9 +35,37 @@ function MyApp({ Component, pageProps, router }) {
     storage.setItem("user", value);
     setUser(value);
   }
+  const logCb = (value) => {
+    console.log(value)
+  }
+
   useEffect(() => {
+    if (user.user.id === "1"){
+      let abortController = new AbortController();
+      const url = "/api/get-profile"
+      const fetchData = async () => {
+        const response = await fetch(url, {signal: abortController.signal});
+        if (response.status !== 200){
+          console.log(response.status)
+          setUser({user: {id: "1", username: ""}})
+        }
+        else{
+          const json = await response.json()
+          console.log({user: json.me})
+          setUser({user: json.me})
+        }
+      }
+      fetchData();
+    }
     setMounted(true);
   }, []);
+
+  // useEffect(() => {
+  //   if (user.user.id !== "1" && mounted === false){
+  //     setMounted(true);
+  //   }
+  // }, [user])
+
   if (mounted) {
     return (
       <SetThemeContext.Provider value={{ currentTheme, themeHandle }}>
