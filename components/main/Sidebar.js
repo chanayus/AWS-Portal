@@ -84,7 +84,7 @@ const Sidebar = () => {
 const Container = styled(motion.div)`
   ${tw`fixed left-0 h-screen flex flex-col overflow-hidden justify-between py-7 pb-2 min-h-full z-50 px-2.5 xl:px-0 md:w-full md:p-0 md:flex-row md:h-16 md:min-h-0 md:bottom-0`}
   width: clamp(150px,10.25vw,200px);
-  background: #111;
+  background: #191919;
   @media (max-width: 1366px) {
     width: fit-content;
     ${tw`pr-5 pl-5`}

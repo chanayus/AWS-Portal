@@ -14,7 +14,7 @@ export const dark = {
     tableHeader: "#1f1f1f",
     textColor : "#e1e1e1",
     mainColor: "#2a2c30",
-    subColor: "#181818",
+    subColor: "#1a1a1a",
     blue: "#2E75DF",
     red: "#E82424",
     tabletScreen: "(max-width: 960px)",

@@ -1,7 +1,9 @@
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import { useRef, useState } from "react";
 
+import { AiOutlineClear } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
+import { HiOutlineX } from "react-icons/hi";
 import { HiPlus } from "react-icons/hi";
 import { getUniqueData } from "../../hooks/getUniqueData";
 import styled from "styled-components";
@@ -10,14 +12,14 @@ import tw from "twin.macro";
 const Filter = ({ filterData, setFilterData, allData }) => {
   const [enable, setEnable] = useState(false);
   const [type, setType] = useState("resource");
-  const [searchText, setSearchText] = useState("")
+  const [searchText, setSearchText] = useState("");
   const wrapperRef = useRef(null);
 
   const dataSelect = {
     resource: [...new Set(allData.map((value) => `${value.serviceName} ${value.resourceType}`))],
     region: getUniqueData(allData, type),
     owner: getUniqueData(allData, type),
-  }
+  };
 
   const handleSelect = (value) => {
     if (!filterData[type].includes(value)) {
@@ -27,18 +29,36 @@ const Filter = ({ filterData, setFilterData, allData }) => {
 
   const filterToggle = () => {
     setEnable(!enable);
-    document.body.addEventListener("click", (e) => {
+    document.body.addEventListener(
+      "click",
+      (e) => {
         if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
           setEnable(false);
         }
       },
-      { once: false, }
+      { once: false }
     );
   };
 
+  const removeFilter = (key, value) => {
+    const removed = filterData[key].filter((item) => item !== value);
+    setFilterData({ ...filterData, [key]: removed });
+  };
+
+  const variants = {
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 },
+  };
+
+  const FilterTheme = {
+    resource: { bgColor: "bg-yellow-200", textColor: "text-yellow-600", borderColor: "border-yellow-400", buttonColor: "bg-yellow-600", butonText: "text-yellow-200" },
+    region: { bgColor: "bg-green-200", textColor: "text-green-600", borderColor: "border-green-400", buttonColor: "bg-green-600", butonText: "text-green-200" },
+    owner: { bgColor: "bg-red-200", textColor: "text-red-600", borderColor: "border-red-400", buttonColor: "bg-red-600", butonText: "text-red-200" },
+  };
+
   return (
-    <div className="relative" ref={wrapperRef}>
-      <button className="dynamic-bg dynamic-text shadow-sm w-24 h-9 rounded flex justify-evenly items-center" onClick={() => filterToggle()}>
+    <div className="relative flex flex-wrap items-center" ref={wrapperRef}>
+      <button className="dynamic-bg dynamic-text shadow-sm w-24 h-9 rounded flex justify-evenly items-center mr-4 mb-2" onClick={() => filterToggle()}>
         <HiPlus size="1.25rem" />
         Filter
       </button>
@@ -71,40 +91,82 @@ const Filter = ({ filterData, setFilterData, allData }) => {
               </div>
             </AnimateSharedLayout>
             <div className="flex items-center dynamic-bg :w-full relative py-3 px-4 ">
-                <label htmlFor="search" className="absolute left-6"> <BsSearch className="text-gray-500 mr-1" size="1.25rem"/></label>
-                <input type="search" id="search" className="bg-transparent h-fit py-1 pr-2 pl-10 rounded w-full dynamic-text border border-gray-500 border-opacity-20" autoComplete="off" placeholder="ค้นหา" onChange={(e) => setSearchText(e.target.value)} />
-              </div>
-
-            <div className="overflow-y-scroll max-h-96">
-              {dataSelect[type].filter((item) => item.includes(searchText)).map((value, index) => {               
-               
-                if(!filterData[type].includes(value)){
-                  const spilted = value.split(" ")
-                  if(type === "resource"){
-                    return(
-                      !filterData[type].includes(spilted[1]) ? 
-                      <Button onClick={() => handleSelect(spilted[1] ? spilted[1] : spilted[0])} key={index} className={`flex items-center w-full`} >
-                        {type === "resource" ? <img src={`/images/resourceIcon/${spilted[0]}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
-                        <p className="dynamic-text text-left break-all">{spilted[1] ? spilted[1] : spilted[0] }</p>
-                      </Button> 
-                    : null
-                    )
-                  }
-                  else{
-                    return(
-                      <Button onClick={() => handleSelect(value, type)} key={index} className={`flex items-center w-full`}>
-                        {type === "resourceType" ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
-                        <p className="dynamic-text text-left break-all">{value}</p>
-                      </Button>
-                    )
-                  }
-                }
-              })}
+              <label htmlFor="search" className="absolute left-6">
+                {" "}
+                <BsSearch className="text-gray-500 mr-1" size="1.25rem" />
+              </label>
+              <input
+                type="search"
+                id="search"
+                className="bg-transparent h-fit py-1 pr-2 pl-10 rounded w-full dynamic-text border border-gray-500 border-opacity-20"
+                autoComplete="off"
+                placeholder="ค้นหา"
+                onChange={(e) => setSearchText(e.target.value)}
+              />
             </div>
 
+            <div className="overflow-y-scroll max-h-96">
+              {dataSelect[type]
+                .filter((item) => item.includes(searchText))
+                .map((value, index) => {
+                  if (!filterData[type].includes(value)) {
+                    const spilted = value.split(" ");
+                    if (type === "resource") {
+                      return !filterData[type].includes(spilted[1]) ? (
+                        <Button onClick={() => handleSelect(spilted[1] ? spilted[1] : spilted[0])} key={index} className={`flex items-center w-full`}>
+                          {type === "resource" ? <img src={`/images/resourceIcon/${spilted[0]}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
+                          <p className="dynamic-text text-left break-all">{spilted[1] ? spilted[1] : spilted[0]}</p>
+                        </Button>
+                      ) : null;
+                    } else {
+                      return (
+                        <Button onClick={() => handleSelect(value, type)} key={index} className={`flex items-center w-full`}>
+                          {type === "resourceType" ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
+                          <p className="dynamic-text text-left break-all">{value}</p>
+                        </Button>
+                      );
+                    }
+                  }
+                })}
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>
+
+      {Object.keys(filterData).map((keyItem) => {
+        return (
+          keyItem !== "searchText" &&
+          filterData[keyItem].map((filterItem, index) => (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={variants}
+              key={index}
+              className={`rounded-md ${FilterTheme[keyItem].bgColor} ${FilterTheme[keyItem].borderColor} border w-max py-1 px-2 mr-2 mb-2 flex justify-between items-center`}
+            >
+              <p className={`${FilterTheme[keyItem].textColor} mr-2`}>{filterItem}</p>
+              <button
+                onClick={() => removeFilter(keyItem, filterItem)}
+                className={`${FilterTheme[keyItem].butonText} ${FilterTheme[keyItem].buttonColor} rounded-full w-4 h-4 flex items-center justify-center`}
+              >
+                <HiOutlineX size="1rem" />
+              </button>
+            </motion.div>
+          ))
+        );
+      })}
+      {(filterData["resource"].length > 0 || filterData["region"].length > 0 || filterData["owner"].length > 0) && (
+        <motion.button
+          initial="hidden"
+          animate="visible"
+          variants={variants}
+          className={`rounded-md w-max py-1 bg-red-600 px-2 mr-2 mb-2 flex justify-between items-center`}
+          onClick={() => setFilterData({ ...filterData, resource: [], region: [], owner: [] })}
+        >
+          <AiOutlineClear size="1.25rem" className="mr-1" />
+          ล้าง
+        </motion.button>
+      )}
     </div>
   );
 };
