@@ -61,7 +61,7 @@ const Login = () => {
       <AnimatePresence>
         {loading && (
           <motion.div className="fixed w-full h-full flex justify-center items-center z-50" exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.175 }}>
-            <div className="w-50 h-50 rounded-md p-3 rounded-full bg-white">
+            <div className="w-50 h-50 p-3 rounded-full bg-white">
               <BoxLoader classProps={"text-black"} />
             </div>
           </motion.div>

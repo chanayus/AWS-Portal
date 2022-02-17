@@ -207,7 +207,7 @@ const ResourceTable = ({ resources, setResources }) => {
                         </div>
                         <div className="hidden sm:flex justify-between my-2">
                           <b>สร้างเมื่อ</b>
-                          <p className="text-right">{dayjs(value.createdAt).format("DD/MM/YYYY HH:mm")}</p>
+                          <p className="text-right">{dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</p>
                         </div>
                         <div className="hidden sm:flex justify-between my-2">
                           <b>สร้างโดย</b>
