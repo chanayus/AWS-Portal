@@ -160,7 +160,7 @@ const Filter = ({ filterData, setFilterData, allData }) => {
           initial="hidden"
           animate="visible"
           variants={variants}
-          className={`rounded-md w-max py-1 bg-red-600 px-2 mr-2 mb-2 flex justify-between items-center`}
+          className={`rounded-md w-max py-1 bg-blue-600 border border-blue-400 px-2 mr-2 mb-2 flex justify-between items-center`}
           onClick={() => setFilterData({ ...filterData, resource: [], region: [], owner: [] })}
         >
           <AiOutlineClear size="1.25rem" className="mr-1" />
