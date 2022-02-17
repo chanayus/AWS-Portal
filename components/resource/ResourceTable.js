@@ -95,7 +95,9 @@ const ResourceTable = ({ resources, setResources }) => {
   };
   return (
     <>
-      {displayResouces.filter((value) => value.isChoose).length === 0 ? null : <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} />}
+      {displayResouces.filter((value) => value.isChoose).length === 0 ? null : (
+        <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} />
+      )}
 
       <div className="mt-6 mb-3 flex justify-start">
         <p className="opacity-80">ผลการค้นหา {displayResouces.length} รายการ</p>
@@ -162,11 +164,20 @@ const ResourceTable = ({ resources, setResources }) => {
                       </p>
                       <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.resourceId)}</AnimatePresence>
                     </div>
-                 
                   </th>
                 </tr>
               </thead>
               <tbody>
+                <tr className="hidden sm:block">
+                  <td>
+                    <div  className="flex justify-start mx-0">
+                      <CheckBox className={`${isSelectAll ? "checked" : null} m-0`} onClick={() => chooseAllHandle(displayResouces, setDisplayResources, isSelectAll, setIsSelectAll)}>
+                        {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
+                      </CheckBox>
+                      <p className="ml-2">เลือกทั้งหมด</p>
+                    </div>
+                  </td>
+                </tr>
                 {displayResouces.map((value, index) => {
                   return (
                     <tr key={index} className={`${value.isChoose ? "selected" : null}`}>

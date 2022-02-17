@@ -45,9 +45,9 @@ const Layout = ({ children }) => {
 const Content = styled(motion.div)`
   margin-left: clamp(85px, 10vw, 240px);
   min-height: calc(100vh - 100px);
-  ${tw`w-full md:mx-0 2xl:ml-20 px-20 2xl:pl-6 2xl:px-3`}
+  ${tw`w-full md:mx-0 2xl:ml-20 px-20 2xl:pl-6 2xl:pr-3`}
   @media(max-width: 960px) {
-    ${tw`mx-0`}
+    ${tw`mx-0 px-3`}
   }
 `;
 export default Layout;

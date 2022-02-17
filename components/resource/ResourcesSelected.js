@@ -26,7 +26,7 @@ const ResourcesSelected = ({ selectedData, setResources, resources }) => {
 
   return (
     <>
-      <div className="bg-blue-600 w-1/3 p-4 h-fit fixed right-5 md:w-full md:bottom-16 lg:right-0 bottom-5 flex items-center justify-between text-white rounded shadow-sm">
+      <div className="bg-blue-600 w-1/3 p-4 h-fit fixed right-5 md:w-full md:bottom-16 lg:right-0 bottom-5 flex items-center justify-between text-white rounded shadow-sm sm:rounded-none">
         <div>เลือกแล้ว {selectedData.length} รายการ</div>
         <div className="flex">
           <button onClick={() => setPauseModalVisible(true)} className="bg-white text-black px-3 py-2 rounded mr-4 flex items-center">
