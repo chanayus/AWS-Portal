@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../../components/main/Breadcrumb";
 import { HiUser } from "react-icons/hi";
-import PageLoader from "../../../components/main/PageLoader";
+import PageLoader from "../../../components/loader/PageLoader";
 import ResourceTable from "../../../components/resource/ResourceTable";
 import SearchInput from "../../../components/input/SearchInput";
 import { useFetch } from "../../../hooks/useFetch";

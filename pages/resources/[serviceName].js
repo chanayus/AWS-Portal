@@ -5,7 +5,7 @@ import Breadcrumb from "../../components/main/Breadcrumb";
 import { FaList } from "react-icons/fa";
 import Image from "../../components/main/Image";
 import { MdAccountTree } from "react-icons/md";
-import PageLoader from "../../components/main/PageLoader";
+import PageLoader from "../../components/loader/PageLoader";
 import ResourceTable from "../../components/resource/ResourceTable";
 import ResourceTree from "../../components/resource/ResourceTree";
 import SearchInput from "../../components/input/SearchInput";

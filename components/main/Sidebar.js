@@ -10,8 +10,8 @@ import tw from "twin.macro";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 
-const Logo = dynamic(import("../Logo"));
-const LogoNoText = dynamic(import("../LogoNoText"));
+const Logo = dynamic(import("../icon/Logo"));
+const LogoNoText = dynamic(import("../icon/LogoNoText"));
 
 const Sidebar = () => {
   const router = useRouter();

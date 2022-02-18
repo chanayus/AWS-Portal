@@ -2,9 +2,9 @@ import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import { useRef, useState } from "react";
 
 import { AiOutlineClear } from "react-icons/ai";
-import { BsSearch } from "react-icons/bs";
 import { HiOutlineX } from "react-icons/hi";
 import { HiPlus } from "react-icons/hi";
+import SearchInput from "../input/SearchInput"
 import { getUniqueData } from "../../hooks/getUniqueData";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -27,6 +27,7 @@ const Filter = ({ filterData, setFilterData, allData }) => {
     }
   };
 
+  //  ปิด popup เมื่อกดคลิกนอกพื้นที่ของ popup element
   const filterToggle = () => {
     setEnable(!enable);
     document.body.addEventListener(
@@ -45,11 +46,13 @@ const Filter = ({ filterData, setFilterData, allData }) => {
     setFilterData({ ...filterData, [key]: removed });
   };
 
+  // Animation varinats
   const variants = {
     visible: { opacity: 1 },
     hidden: { opacity: 0 },
   };
 
+  // Filter Tag Styles
   const FilterTheme = {
     resource: { bgColor: "bg-yellow-200", textColor: "text-yellow-600", borderColor: "border-yellow-400", buttonColor: "bg-yellow-600", butonText: "text-yellow-200" },
     region: { bgColor: "bg-green-200", textColor: "text-green-600", borderColor: "border-green-400", buttonColor: "bg-green-600", butonText: "text-green-200" },
@@ -90,21 +93,9 @@ const Filter = ({ filterData, setFilterData, allData }) => {
                 </button>
               </div>
             </AnimateSharedLayout>
-            <div className="flex items-center dynamic-bg :w-full relative py-3 px-4 ">
-              <label htmlFor="search" className="absolute left-6">
-                {" "}
-                <BsSearch className="text-gray-500 mr-1" size="1.25rem" />
-              </label>
-              <input
-                type="search"
-                id="search"
-                className="bg-transparent h-fit py-1 pr-2 pl-10 rounded w-full dynamic-text border border-gray-500 border-opacity-20"
-                autoComplete="off"
-                placeholder="ค้นหา"
-                onChange={(e) => setSearchText(e.target.value)}
-              />
+            <div className="px-4 py-2 w-full">
+              <SearchInput setState={setSearchText} initialWdith="" externalStyle="border border-gray-600"/>
             </div>
-
             <div className="overflow-y-scroll max-h-96">
               {dataSelect[type]
                 .filter((item) => item.includes(searchText))

@@ -9,7 +9,6 @@ const ResourceTreeItems = ({ item }) => {
   const handleClick = () => {
     setShowChilden(!showChildren);
   };
-  console.log(item);
 
   return (
     <>

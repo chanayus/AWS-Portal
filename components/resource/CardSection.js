@@ -2,7 +2,7 @@ import { AnimateSharedLayout, motion } from "framer-motion";
 import { FaList, FaTh } from "react-icons/fa";
 import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi";
 
-import ResourceCard from "../../components/resource/ResourceCard";
+import ResourceCard from "./ResourceCard";
 import { getUniqueData } from "../../hooks/getUniqueData";
 import { useRouter } from "next/router";
 import { useState } from "react";

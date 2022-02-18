@@ -1,11 +1,11 @@
 import { FaGlobeAmericas, FaUserAlt } from "react-icons/fa";
 import { IoCube, IoSparkles } from "react-icons/io5";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Image from "../components/main/Image";
 import Link from "next/link";
-import Loader from "../components/main/Loader";
-import SkeletonTable from "../components/main/SkeletonTable";
+import Loader from "../components/loader/Loader";
+import SkeletonTable from "../components/loader/SkeletonTable";
 import { TableWrapper } from "../styles/styleComponents";
 import dayjs from "dayjs";
 import { getUniqueData } from "../hooks/getUniqueData";

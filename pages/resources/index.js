@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Breadcrumb from "../../components/main/Breadcrumb";
 import FilterResources from "../../components/resource/FilterResources";
-import PageLoader from "../../components/main/PageLoader";
+import PageLoader from "../../components/loader/PageLoader";
 import dynamic from "next/dynamic";
 import { useFetch } from "../../hooks/useFetch";
 import { useFilter } from "../../hooks/useFilter";

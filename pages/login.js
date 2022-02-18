@@ -2,10 +2,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import tw, { styled } from "twin.macro";
 import { useContext, useState } from "react";
 
-import BoxLoader from "../components/main/BoxLoader";
+import BoxLoader from "../components/loader/BoxLoader";
 import Link from "next/link";
-import Logo from "../components/Logo";
-import LogoNoText from "../components/LogoNoText";
+import Logo from "../components/icon/Logo";
+import LogoNoText from "../components/icon/LogoNoText";
 import { SetUserContext } from "./_app";
 import TextInput from "../components/input/TextInput";
 import { useRouter } from "next/router";
