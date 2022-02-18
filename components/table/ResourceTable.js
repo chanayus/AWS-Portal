@@ -7,15 +7,15 @@ import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import Image from "../main/Image";
 import { IoCubeOutline } from "react-icons/io5";
-import ResourcesSelected from "../resource/ResourcesSelected";
 import dayjs from "dayjs";
+import dynamic from "next/dynamic";
 import useForceUpdate from "use-force-update";
+import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
 import { useSorting } from "../../hooks/useSorting";
-import { useMediaQuery } from "react-responsive";
-import dynamic from "next/dynamic";
 
 const ResouceTableMobile = dynamic(import("./ResourceTableMobile"));
+const ResourcesSelected = dynamic(import("../resource/ResourcesSelected"));
 
 const ResourceTable = ({ resources, setResources }) => {
   const forceUpdate = useForceUpdate();
@@ -101,9 +101,11 @@ const ResourceTable = ({ resources, setResources }) => {
   };
   return (
     <>
-      {displayResouces.filter((value) => value.isChoose).length === 0 ? null : (
-        <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} />
-      )}
+      <AnimatePresence>
+        {displayResouces.filter((value) => value.isChoose).length === 0 ? null : (
+          <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} />
+        )}
+      </AnimatePresence>
 
       <div className="mt-6 mb-3 flex justify-start">
         <p className="opacity-80">ผลการค้นหา {displayResouces.length} รายการ</p>

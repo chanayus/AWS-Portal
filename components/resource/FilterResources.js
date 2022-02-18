@@ -4,11 +4,11 @@ import { useRef, useState } from "react";
 import { AiOutlineClear } from "react-icons/ai";
 import { HiOutlineX } from "react-icons/hi";
 import { HiPlus } from "react-icons/hi";
+import Image from "../main/Image";
 import SearchInput from "../input/SearchInput"
 import { getUniqueData } from "../../hooks/getUniqueData";
 import styled from "styled-components";
 import tw from "twin.macro";
-import Image from "../main/Image";
 
 const Filter = ({ filterData, setFilterData, allData }) => {
   const [enable, setEnable] = useState(false);
@@ -95,7 +95,7 @@ const Filter = ({ filterData, setFilterData, allData }) => {
               </div>
             </AnimateSharedLayout>
             <div className="px-4 py-2 w-full">
-              <SearchInput setState={setSearchText} initialWdith="" externalStyle="border border-gray-600"/>
+              <SearchInput setState={setSearchText} initialWdith="" externalStyle="border border-gray-600" py="py-1"/>
             </div>
             <div className="overflow-y-scroll max-h-96">
               {dataSelect[type]
