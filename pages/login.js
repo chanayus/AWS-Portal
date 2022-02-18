@@ -38,21 +38,23 @@ const Login = () => {
 
     setLoading(true);
     let abortController = new AbortController();
-    try {
-      const response = await fetch("/api/login", {
-        signal: abortController.signal,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(record),
-      });
-      const data = await response.json();
+    const response = await fetch("/api/login", {
+      signal: abortController.signal,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(record),
+    });
+    const data = await response.json();
+    console.log(response.status)
+    if(response.status === 200){
       userHandle({ user: data?.login?.user });
-      router.replace("/");
-    } catch (err) {
+      router.replace("/");  
+    }
+    else{
       setLoading(false);
-      console.log(err);
+      console.log("Adsasd")
     }
   };
 
