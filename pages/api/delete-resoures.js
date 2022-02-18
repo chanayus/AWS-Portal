@@ -1,9 +1,9 @@
 import client from '../../context/apollo-client'
 import { gql } from "@apollo/client";
+import { getToken } from "../../hooks/getToken"
 
 const handler = async (req, res) => {
     const input = req.body.map((item) => ({ resourceARN: item.ResourceARN }))
-    console.log({input})
     try {
         const { data } = await client.mutate({
             mutation: gql`
@@ -19,7 +19,13 @@ const handler = async (req, res) => {
                     }
                 }
             `,
-            variables: { input }
+            variables: { input },
+            context: {
+                headers: {
+                    authorization: `Bearer ${getToken(req)}`
+                }
+            },
+            fetchPolicy: "network-only"
         })
 
         res.status(200).json(data);

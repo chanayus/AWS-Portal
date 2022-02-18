@@ -18,5 +18,4 @@ export const deleteResources = async (setResources, resources, selectedData) => 
   } catch (err) {
     console.log(err);
   }
-  console.log(data)
 };
