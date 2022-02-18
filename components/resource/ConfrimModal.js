@@ -103,10 +103,7 @@ const Modal = styled.div`
   h2 {
     ${tw`sm:text-base`}
   }
-  /* .resource-list {
-    max-height: 10vh;
-    background: red;
-  } */
+
 `;
 
 export default ConfrimModal;
