@@ -1,24 +1,31 @@
-import { AiOutlineDelete, AiOutlinePause } from "react-icons/ai";
+import { useEffect, useState } from "react";
 
 import Image from "../main/Image";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { useState } from "react";
 
 const ConfrimModal = ({ setModalVisible, type, selectedData, title, buttonTitle, headerTitle, operation }) => {
   const [comfirmText, setConfirmText] = useState("");
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "initial";
+    };
+  }, []);
 
   const operationHandle = () => {
     operation();
     setModalVisible(false);
   };
+
   return (
     <motion.div
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2 }}
       className="fixed w-full bg-black bg-opacity-25 h-full top-0 left-0 z-40 flex justify-center items-center"
     >
       <Modal className="flex flex-col items-between rounded-2xl p-10 shadow lg:mx-4 lg:px-4 lg:py-4">
