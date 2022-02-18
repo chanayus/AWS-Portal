@@ -8,6 +8,7 @@ import SearchInput from "../input/SearchInput"
 import { getUniqueData } from "../../hooks/getUniqueData";
 import styled from "styled-components";
 import tw from "twin.macro";
+import Image from "../main/Image";
 
 const Filter = ({ filterData, setFilterData, allData }) => {
   const [enable, setEnable] = useState(false);
@@ -98,21 +99,20 @@ const Filter = ({ filterData, setFilterData, allData }) => {
             </div>
             <div className="overflow-y-scroll max-h-96">
               {dataSelect[type]
-                .filter((item) => item.includes(searchText))
+                .filter((item) => item.toLowerCase().includes(searchText.toLowerCase()))
                 .map((value, index) => {
                   if (!filterData[type].includes(value)) {
                     const spilted = value.split(" ");
                     if (type === "resource") {
                       return !filterData[type].includes(spilted[1]) ? (
                         <Button onClick={() => handleSelect(spilted[1] ? spilted[1] : spilted[0])} key={index} className={`flex items-center w-full`}>
-                          {type === "resource" ? <img src={`/images/resourceIcon/${spilted[0]}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
+                          {type === "resource" ? <Image src={`/images/resourceIcon/${spilted[0]}.png`} alt=""  classProps="mr-2 w-8 rounded" /> : null}
                           <p className="dynamic-text text-left break-all">{spilted[1] ? spilted[1] : spilted[0]}</p>
                         </Button>
                       ) : null;
                     } else {
                       return (
-                        <Button onClick={() => handleSelect(value, type)} key={index} className={`flex items-center w-full`}>
-                          {type === "resourceType" ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2 w-8 rounded" /> : null}
+                        <Button onClick={() => handleSelect(value, type)} key={index} className={`flex items-center w-full`}>         
                           <p className="dynamic-text text-left break-all">{value}</p>
                         </Button>
                       );

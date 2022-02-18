@@ -5,6 +5,7 @@ const dataFilter = (resource, value) =>{
 
 export const useTextFilter = (data, condition) => {
   condition = condition.toLowerCase()
+  console.log(condition, data)
   if(condition === ""){
     return data
   }
@@ -22,7 +23,7 @@ export const useTextFilter = (data, condition) => {
 
 
 export const useFilter = (data, setState, filterData) =>{
-    const {resource, region, owner,searchText} = filterData
+    const {resource, region, owner, searchText} = filterData
     const filtered = data.filter((value) => dataFilter(resource,value.resourceType))
     .filter((value) => dataFilter(region, value.region))
     .filter((value) => dataFilter(owner, value.owner))
