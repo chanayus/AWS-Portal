@@ -1,14 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-
-import Breadcrumb from "../../../components/main/Breadcrumb";
 import { HiGlobe } from "react-icons/hi";
 import PageLoader from "../../../components/loader/PageLoader";
-import ResourceTable from "../../../components/resource/ResourceTable";
-import SearchInput from "../../../components/input/SearchInput";
 import { useFetch } from "../../../hooks/useFetch";
 import { useRouter } from "next/router";
 import { useTextFilter } from "../../../hooks/useFilter";
+import dynamic from "next/dynamic";
+
+const SearchInput = dynamic(import("../../../components/input/SearchInput"));
+const ResourceTable = dynamic(import("../../../components/table/ResourceTable"));
+const Breadcrumb = dynamic(import("../../../components/main/Breadcrumb"));
 
 const SpecificResource = () => {
   const router = useRouter();

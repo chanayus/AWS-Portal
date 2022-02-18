@@ -4,7 +4,6 @@ import "tailwindcss/tailwind.css";
 import { dark, light } from "../styles/theme";
 import { useEffect, useState } from "react";
 import fetch from "isomorphic-unfetch"
-import { useFetch } from "../hooks/useFetch"
 
 import { GlobalStyle } from "../styles/globalStyle";
 import Layout from "../components/main/Layout";

@@ -11,7 +11,7 @@ import { useFilter } from "../../hooks/useFilter";
 import { useRouter } from "next/router";
 
 const SearchInput = dynamic(import("../../components/input/SearchInput"));
-const ResourceTable = dynamic(import("../../components/resource/ResourceTable"));
+const ResourceTable = dynamic(import("../../components/table/ResourceTable"));
 const CardSection = dynamic(import("../../components/resource/CardSection"));
 
 const Resource = () => {

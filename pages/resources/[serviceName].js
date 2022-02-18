@@ -1,19 +1,21 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import Breadcrumb from "../../components/main/Breadcrumb";
 import { FaList } from "react-icons/fa";
 import Image from "../../components/main/Image";
 import { MdAccountTree } from "react-icons/md";
 import PageLoader from "../../components/loader/PageLoader";
-import ResourceTable from "../../components/resource/ResourceTable";
-import ResourceTree from "../../components/resource/ResourceTree";
-import SearchInput from "../../components/input/SearchInput";
 import { getUniqueResourceType } from "../../hooks/getUniqueData";
 import styled from "styled-components";
 import { useFetch } from "../../hooks/useFetch";
 import { useRouter } from "next/router";
 import { useTextFilter } from "../../hooks/useFilter";
+import dynamic from "next/dynamic";
+
+const SearchInput = dynamic(import("../../components/input/SearchInput"));
+const ResourceTable = dynamic(import("../../components/table/ResourceTable"));
+const ResourceTree = dynamic(import("../../components/resource/ResourceTree"));
+const Breadcrumb = dynamic(import("../../components/main/Breadcrumb"));
 
 const SpecificResource = () => {
   const router = useRouter();
