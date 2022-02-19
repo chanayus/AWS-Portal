@@ -12,7 +12,7 @@ const ResourcesSelected = ({ selectedData, setResources, resources }) => {
     setResources,
     selectedData,
     resources,
-  }
+  };
 
   return (
     <>
@@ -37,7 +37,7 @@ const ResourcesSelected = ({ selectedData, setResources, resources }) => {
       </motion.div>
       <AnimatePresence>
         {isDeleteModalVisible && <ConfrimModal type="delete" {...props} setModalVisible={setDeleteModalVisible} />}
-        {isStopModalVisible && <ConfrimModal type="stop" {...props}  setModalVisible={setStopModalVisible} />}
+        {isStopModalVisible && <ConfrimModal type="stop" {...props} setModalVisible={setStopModalVisible} />}
       </AnimatePresence>
     </>
   );

@@ -37,7 +37,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
     title:
       type === "stop" ? `คุณแน่ใจหรือไม่ที่จะทำการหยุดการทำงานของ Resource ทั้ง ${selectedData.length} รายการดังนี้` : `คุณแน่ใจหรือไม่ที่จะทำการลบ Resource ทั้ง ${selectedData.length} รายการดังนี้`,
     buttonTitle: type === "stop" ? `หยุดทั้ง ${selectedData.length} รายการ` : `ลบทั้ง ${selectedData.length} รายการ`,
-    loadingText: type === "stop" ? "กำลังหยุด resource" : "กำลังลบ resource"
+    loadingText: type === "stop" ? "กำลังหยุด resource" : "กำลังลบ resource",
   };
 
   return (
@@ -48,7 +48,13 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
       transition={{ duration: 0.2 }}
       className="fixed w-full bg-black bg-opacity-25 h-full top-0 left-0 z-40 flex justify-center items-center"
     >
-      <Modal className="flex flex-col items-between rounded-2xl p-10 shadow lg:mx-4 lg:px-4 lg:py-4">
+      <Modal
+        exit={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex flex-col items-between rounded-2xl p-10 shadow lg:mx-4 lg:px-4 lg:py-4"
+      >
         <div className="h-fit mb-2">
           <h2 className="text-xl font-bold mb-2 md:text-lg md:mb-1">{modalContent.headerTitle}</h2>
           <p>{modalContent.title}</p>
@@ -74,9 +80,9 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
             ))}
           </div>
           {!loading && (
-            <div className="flex-grow">
+            <div className="flex-grow p-1">
               <p className="my-2">{`พิมพ์ ${type} เพื่อดำเนินการต่อ`}</p>
-              <div className="flex items-center dynamic-bg rounded-md w-full md:w-full border border-gray-600 border-opacity-40 relative">
+              <div className="flex items-center dynamic-bg rounded-md w-full md:w-full  border border-gray-600 border-opacity-40 relative">
                 <input
                   type="search"
                   id="search"
@@ -109,7 +115,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
   );
 };
 
-const Modal = styled.div`
+const Modal = styled(motion.div)`
   max-width: 650px;
   max-height: 520px;
   width: 100%;
