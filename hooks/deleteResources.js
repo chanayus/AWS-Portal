@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 
-export const deleteResources = async (setResources, resources, selectedData) => {
+export const deleteResources = async (selectedData, callback) => {
   console.log(selectedData);
   let abortController = new AbortController();
   try {
@@ -13,8 +13,8 @@ export const deleteResources = async (setResources, resources, selectedData) => 
       body: JSON.stringify(selectedData),
     });
     const data = await response.json();
-    setResources(resources.filter((item) => item.resourceId !== selectedData[0].resourceId));
     console.log(data);
+    callback();
   } catch (err) {
     console.log(err);
   }

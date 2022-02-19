@@ -3,7 +3,6 @@ import tw, { styled } from "twin.macro";
 import { useContext, useState } from "react";
 
 import BoxLoader from "../components/loader/BoxLoader";
-import Link from "next/link";
 import Logo from "../components/icon/Logo";
 import LogoNoText from "../components/icon/LogoNoText";
 import { SetUserContext } from "./_app";

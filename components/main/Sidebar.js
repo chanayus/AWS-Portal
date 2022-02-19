@@ -62,18 +62,22 @@ const Sidebar = () => {
           </Link>
         ) : (
           <>
-          <div className="flex items-center">
-            <div className="ml-3 2xl:mx-auto  bg-gradient-to-r from-red-500 to-red-400 rounded-full text-gray-500rounded-full w-8 h-8 flex justify-center items-center">
-              <HiUser size="1.5rem" color="#FFF" />
-            </div>
-            <p className="ml-3 text-white 2xl:hidden ">{user.user.username}</p>
-          </div>
+
           <Link href="/api/logout">
             <a aria-label="signout">
               <HiOutlineLogout />
               <p className="2xl:hidden">ออกจากระบบ</p>
             </a>
           </Link>
+          <div className="flex items-center mt-5 mb-4 border-t border-gray-700 pt-7">
+            <div className="ml-2 2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-500 to-blue-400 rounded-full text-gray-500 w-8 h-8 flex justify-center items-center">
+              <HiUser size="1.5rem" color="#FFF" />
+            </div>
+           <div className="truncate">
+            <p className="ml-2 w-fit text-white 2xl:hidden leading-5 text-sm truncate">{user.user.username}</p>
+            <p className="ml-2 w-fit text-gray-400 2xl:hidden">Admin</p>
+           </div>
+          </div>
         </>
         )}
       </div>

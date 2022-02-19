@@ -2,40 +2,30 @@ import { AiOutlineDelete, AiOutlinePause } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 
 import ConfrimModal from "./ConfrimModal";
-import { deleteResources } from "../../hooks/deleteResources";
 import { useState } from "react";
 
 const ResourcesSelected = ({ selectedData, setResources, resources }) => {
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [isStopModalVisible, setPauseModalVisible] = useState(false);
+  const [isStopModalVisible, setStopModalVisible] = useState(false);
 
-  const stopProps = {
+  const props = {
+    setResources,
     selectedData,
-    type: "stop",
-    headerTitle: "ยืนยันการหยุด Resources",
-    title: `คุณแน่ใจหรือไม่ที่จะทำการหยุดการทำงานของ Resource ทั้ง ${selectedData.length} รายการดังนี้`,
-    buttonTitle: `หยุดทั้ง ${selectedData.length} รายการ`,
-  };
-  const deleteProps = {
-    selectedData,
-    type: "delete",
-    headerTitle: "ยืนยันการลบ Resources",
-    title: `คุณแน่ใจหรือไม่ที่จะทำการลบ Resource ทั้ง ${selectedData.length} รายการดังนี้`,
-    buttonTitle: `ลบทั้ง ${selectedData.length} รายการ`,
-  };
+    resources,
+  }
 
   return (
     <>
       <motion.div
-        exit={{ opacity: 0 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        exit={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.15 }}
         className="bg-blue-600 w-1/3 p-4 h-fit fixed right-5 md:w-full md:bottom-16 lg:right-0 bottom-5 flex items-center justify-between text-white rounded shadow-sm sm:rounded-none"
       >
         <div>เลือกแล้ว {selectedData.length} รายการ</div>
         <div className="flex">
-          <button onClick={() => setPauseModalVisible(true)} className="bg-white text-black px-3 py-2 rounded mr-4 flex items-center">
+          <button onClick={() => setStopModalVisible(true)} className="bg-white text-black px-3 py-2 rounded mr-4 flex items-center">
             <AiOutlinePause />
             หยุด
           </button>
@@ -46,8 +36,8 @@ const ResourcesSelected = ({ selectedData, setResources, resources }) => {
         </div>
       </motion.div>
       <AnimatePresence>
-        {isDeleteModalVisible && <ConfrimModal {...deleteProps} setModalVisible={setDeleteModalVisible} operation={() => deleteResources(setResources, resources, selectedData)} />}
-        {isStopModalVisible && <ConfrimModal {...stopProps} setModalVisible={setPauseModalVisible} operation={() => {}} />}
+        {isDeleteModalVisible && <ConfrimModal type="delete" {...props} setModalVisible={setDeleteModalVisible} />}
+        {isStopModalVisible && <ConfrimModal type="stop" {...props}  setModalVisible={setStopModalVisible} />}
       </AnimatePresence>
     </>
   );
