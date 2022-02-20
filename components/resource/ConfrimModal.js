@@ -9,6 +9,7 @@ import Loader from "../loader/Loader";
 const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resources }) => {
   const [comfirmText, setConfirmText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [confrimData, setConfrimData] = useState([])
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -17,11 +18,22 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
     };
   }, []);
 
-  const operationCallback = () => {
-    setResources(resources.filter((item) => item.resourceId !== selectedData[0].resourceId));
+  useEffect(() => {
+    console.log(confrimData)
+  }, [confrimData])
+
+  const operationCallback = ({ data, status}) => {
     setLoading(false);
-    setModalVisible(false);
+    if (status === 200){
+      const confrimResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
+      setConfrimData(confrimResourcesARN)
+    }
   };
+
+  const removeDisplayResourcesHandle = () => {
+    setModalVisible(false)
+    setResources(resources.filter((item) => !confrimData.includes(item.ResourceARN)));
+  }
 
   const operationHandle = () => {
     if (type === "delete") {
@@ -102,7 +114,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
           </div>
         ) : (
           <div className="flex justify-end md:mt-3 mt-4">
-            <button className="px-5 py-2 rounded duration-200 dynamic-text" onClick={() => setModalVisible(false)}>
+            <button className="px-5 py-2 rounded duration-200 dynamic-text" onClick={() => removeDisplayResourcesHandle()}>
               ยกเลิก
             </button>
             <button disabled={comfirmText === type ? false : true} className="bg-red-500 sm:px-4 px-5 py-2 ml-4 rounded duration-200 hover:bg-red-600 text-white" onClick={() => operationHandle()}>

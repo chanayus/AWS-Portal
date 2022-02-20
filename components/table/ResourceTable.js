@@ -103,7 +103,7 @@ const ResourceTable = ({ resources, setResources }) => {
     <>
       <AnimatePresence>
         {displayResouces.filter((value) => value.isChoose).length === 0 ? null : (
-          <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} />
+          <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} setDisplayResources={setDisplayResources}/>
         )}
       </AnimatePresence>
 

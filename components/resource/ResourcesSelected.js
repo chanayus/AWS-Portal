@@ -4,15 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import ConfrimModal from "./ConfrimModal";
 import { useState } from "react";
 
-const ResourcesSelected = ({ selectedData, setResources, resources }) => {
+const ResourcesSelected = (props) => {
+  const { setResources, selectedData, resources } = props
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
   const [isStopModalVisible, setStopModalVisible] = useState(false);
-
-  const props = {
-    setResources,
-    selectedData,
-    resources,
-  };
 
   return (
     <>
