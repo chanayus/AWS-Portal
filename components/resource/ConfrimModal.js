@@ -22,7 +22,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
     console.log(confrimData)
   }, [confrimData])
 
-  const operationCallback = ({ data, status}) => {
+  const operationCallback = ({data, status}) => {
     setLoading(false);
     if (status === 200){
       const confrimResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
