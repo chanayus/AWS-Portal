@@ -14,24 +14,18 @@ const Login = () => {
   const router = useRouter()
   const { user, userHandle } = useContext(SetUserContext)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("");
 
   const changeRecord = (e) => {
     const { name, value } = e?.target
     setRecord({ ...record, [name]: value })
   }
 
-  const icon = {
-    hidden: {
-      pathLength: 0,
-      opacity: 0.1,
-    },
-    visible: {
-      pathLength: 1,
-      opacity: 1,
-    },
-  }
   const loginHandler = async () => {
     if (!(record?.username && record?.password)) {
+      console.log(record)
+      console.log(record)
+      setError("โปรดกรอก username และ password ให้ครบ")
       return false
     }
 
@@ -52,7 +46,7 @@ const Login = () => {
       router.replace("/")
     } else {
       setLoading(false)
-      console.log("Adsasd")
+      setError("username หรือ password ไม่ถูกต้อง")
     }
   }
 
@@ -85,7 +79,7 @@ const Login = () => {
               </div>
               <h1 className="text-black md:text-white text-5xl sm:text-3xl font-bold md:ml-3">เข้าสู่ระบบ</h1>
             </div>
-
+            {error && <div className="border border-red-600 bg-red-300 p-2 pl-4 rounded-md text-red-600">{error}</div>}
             <div className="form-group">
               <TextInput
                 type="text"

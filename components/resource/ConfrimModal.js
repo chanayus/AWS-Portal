@@ -1,26 +1,17 @@
 import { useEffect, useState } from "react"
-import { deleteResources } from "../../hooks/deleteResources"
+
+import { HiCheck } from "react-icons/hi"
 import Image from "../main/Image"
+import Loader from "../loader/Loader"
+import { deleteResources } from "../../hooks/deleteResources"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import tw from "twin.macro"
-import Loader from "../loader/Loader"
 
 const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resources }) => {
   const [comfirmText, setConfirmText] = useState("")
   const [loading, setLoading] = useState(false)
   const [confrimData, setConfrimData] = useState([])
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden"
-    return () => {
-      document.body.style.overflow = "initial"
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log(confrimData)
-  }, [confrimData])
 
   const operationCallback = ({ data, status }) => {
     setLoading(false)
@@ -43,6 +34,24 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
       console.log("stop resources")
     }
   }
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.body.style.overflow = "initial"
+    }
+  }, [])
+
+  useEffect(() => {
+    if (confrimData.length) {
+      const closeModal = setTimeout(() => {
+        removeDisplayResourcesHandle()
+      }, 2000)
+      return () => {
+        clearTimeout(closeModal)
+      }
+    }
+  }, [confrimData])
 
   const modalContent = {
     headerTitle: type === "stop" ? "ยืนยันการหยุด Resources" : "ยืนยันการลบ Resources",
@@ -73,7 +82,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
           <h2 className="text-xl font-bold mb-2 md:text-lg md:mb-1">{modalContent.headerTitle}</h2>
           <p>{modalContent.title}</p>
         </div>
-        <div className="h-3/4 overflow-hidden flex flex-col items-between">
+        <div className="h-full overflow-hidden flex flex-col items-between">
           <div className="resource-list flex-grow-2 overflow-y-scroll px-3 my-2 sm:px-1 overflow-x-hidden">
             {selectedData.map((value, index) => (
               <div className="dynamic-text flex justify-between py-2 md:py-1 items-center border-b border-gray-600 border-opacity-40" key={index}>
@@ -99,8 +108,8 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
               </div>
             ))}
           </div>
-          {!loading && (
-            <div className="flex-grow p-1">
+          {!loading && confrimData <= 0 && (
+            <div className="p-1">
               <p className="my-2">{`พิมพ์ ${type} เพื่อดำเนินการต่อ`}</p>
               <div className="flex items-center dynamic-bg rounded-md w-full md:w-full  border border-gray-600 border-opacity-40 relative">
                 <input
@@ -112,26 +121,33 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
                   onChange={(e) => setConfirmText(e.target.value)}
                 />
               </div>
+              <div className="flex justify-end md:mt-3 mt-4">
+                <button className="px-5 py-2 rounded duration-200 dynamic-text" onClick={() => removeDisplayResourcesHandle()}>
+                  ยกเลิก
+                </button>
+                <button
+                  disabled={comfirmText === type ? false : true}
+                  className="bg-red-500 sm:px-4 px-5 py-2 ml-4 rounded duration-200 hover:bg-red-600 text-white"
+                  onClick={() => operationHandle()}
+                >
+                  {modalContent.buttonTitle}
+                </button>
+              </div>
             </div>
           )}
         </div>
-        {loading ? (
+        {loading && (
           <div className="h-1/4 flex flex-col justify-center items-center">
             <Loader />
             <p className="mt-2">{modalContent.loadingText}</p>
           </div>
-        ) : (
-          <div className="flex justify-end md:mt-3 mt-4">
-            <button className="px-5 py-2 rounded duration-200 dynamic-text" onClick={() => removeDisplayResourcesHandle()}>
-              ยกเลิก
-            </button>
-            <button
-              disabled={comfirmText === type ? false : true}
-              className="bg-red-500 sm:px-4 px-5 py-2 ml-4 rounded duration-200 hover:bg-red-600 text-white"
-              onClick={() => operationHandle()}
-            >
-              {modalContent.buttonTitle}
-            </button>
+        )}
+        {confrimData.length > 0 && (
+          <div className=" flex flex-col justify-center items-center">
+            <div className="w-11 h-11 p-0 m-0 bg-green-600 flex rounded-full justify-center items-center">
+              <HiCheck color="#FFF" size="2rem" />
+            </div>
+            <p className="mt-2">ลบ resources สำเร็จ</p>
           </div>
         )}
       </Modal>
