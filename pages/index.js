@@ -1,40 +1,64 @@
-import { FaGlobeAmericas, FaUserAlt } from "react-icons/fa";
-import { IoCube, IoSparkles } from "react-icons/io5";
-import { useContext, useEffect, useState } from "react";
+import { FaGlobeAmericas, FaUserAlt } from "react-icons/fa"
+import { IoCube, IoSparkles } from "react-icons/io5"
+import { useContext, useEffect, useState } from "react"
 
-import Image from "../components/main/Image";
-import Link from "next/link";
-import Loader from "../components/loader/Loader";
-import SkeletonTable from "../components/loader/SkeletonTable";
-import { TableWrapper } from "../styles/styleComponents";
-import dayjs from "dayjs";
-import { getUniqueData } from "../hooks/getUniqueData";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { useFetch } from "../hooks/useFetch";
-import { useFormat } from "../hooks/useFormat";
-import { useRouter } from "next/router";
+import Image from "../components/main/Image"
+import Link from "next/link"
+import Loader from "../components/loader/Loader"
+import SkeletonTable from "../components/loader/SkeletonTable"
+import { TableWrapper } from "../styles/styleComponents"
+import dayjs from "dayjs"
+import { getUniqueData } from "../hooks/getUniqueData"
+import { motion } from "framer-motion"
+import styled from "styled-components"
+import tw from "twin.macro"
+import { useFetch } from "../hooks/useFetch"
+import { useFormat } from "../hooks/useFormat"
+import { useRouter } from "next/router"
 
 const Index = () => {
-  const { loading, data: resources } = useFetch("/api/resources", () => {}, false);
-  const [dataFormatted, setDataFormatted] = useState([]);
-  const router = useRouter();
+  const { loading, data: resources } = useFetch("/api/resources", () => {}, false)
+  const [dataFormatted, setDataFormatted] = useState([])
+  const router = useRouter()
 
   useEffect(() => {
-    loading ? null : setDataFormatted(useFormat(resources));
-  }, [loading]);
+    loading ? null : setDataFormatted(useFormat(resources))
+  }, [loading])
 
-  const resourcesToday = dataFormatted.filter((value) => dayjs(value.createdAt).format("DD/MM/YYYY") === dayjs().format("DD/MM/YYYY")).length;
+  const resourcesToday = dataFormatted.filter((value) => dayjs(value.createdAt).format("DD/MM/YYYY") === dayjs().format("DD/MM/YYYY")).length
 
-  const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length;
+  const totalIAM = [...new Set(dataFormatted.map((value) => value.owner))].filter((value) => value).length
 
   const cardlist = [
-    { color: "#7fe490", url: "/resources?type=iam", title: "IAM ที่กำลังใช้ Resource", value: totalIAM, icon: <FaUserAlt className="mr-4" /> },
-    { color: "#e07272", url: "/resources?type=region", title: "Region ที่กำลังใช้งาน", value: `${getUniqueData(dataFormatted, "region").length}`, icon: <FaGlobeAmericas className="mr-4" /> },
-    { color: "#e2a54a", url: "/resources", title: "Resource ที่กำลังใช้งาน", value: dataFormatted.length, icon: <IoCube className="mr-4" /> },
-    { color: "#778bf0", url: "/resources?display=table", title: "Resource ใหม่ในวันนี้", value: resourcesToday, icon: <IoSparkles className="mr-4" /> },
-  ];
+    {
+      color: "#7fe490",
+      url: "/resources?type=iam",
+      title: "IAM ที่กำลังใช้ Resource",
+      value: totalIAM,
+      icon: <FaUserAlt className="mr-4" />,
+    },
+    {
+      color: "#e07272",
+      url: "/resources?type=region",
+      title: "Region ที่กำลังใช้งาน",
+      value: `${getUniqueData(dataFormatted, "region").length}`,
+      icon: <FaGlobeAmericas className="mr-4" />,
+    },
+    {
+      color: "#e2a54a",
+      url: "/resources",
+      title: "Resource ที่กำลังใช้งาน",
+      value: dataFormatted.length,
+      icon: <IoCube className="mr-4" />,
+    },
+    {
+      color: "#778bf0",
+      url: "/resources?display=table",
+      title: "Resource ใหม่ในวันนี้",
+      value: resourcesToday,
+      icon: <IoSparkles className="mr-4" />,
+    },
+  ]
   return (
     <>
       <h1>Dashboard</h1>
@@ -62,7 +86,10 @@ const Index = () => {
                 <button
                   className="text-white bg-black px-3 py-2 rounded md:text-xs"
                   onClick={() => {
-                    router.push({ pathname: "/resources", query: { display: "card", type: "region" } });
+                    router.push({
+                      pathname: "/resources",
+                      query: { display: "card", type: "region" },
+                    })
                   }}
                 >
                   ดูทั้งหมด
@@ -101,7 +128,10 @@ const Index = () => {
                 <button
                   className="text-white bg-black px-3 py-2 rounded md:text-xs"
                   onClick={() => {
-                    router.push({ pathname: "/resources", query: { display: "table" } });
+                    router.push({
+                      pathname: "/resources",
+                      query: { display: "table" },
+                    })
                   }}
                 >
                   ดูทั้งหมด
@@ -120,24 +150,42 @@ const Index = () => {
                     {dataFormatted.slice(0, 3).map((value, index) => (
                       <tr key={index}>
                         <td className="flex items-center capitalize sm:hidden">
-                          <Image classProps="w-8 mr-2 rounded" width="32px" height="32px" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
+                          <Image
+                            classProps="w-8 mr-2 rounded"
+                            width="32px"
+                            height="32px"
+                            src={`/images/resourceIcon/${value.serviceName}.png`}
+                            alt="service-icon"
+                          />
                           <div className="flex flex-col overflow-hidden w-1/2">
                             <p className="text-left font-medium truncate">{value.serviceName}</p>
                             {value.serviceName === value.resourceType ? null : (
-                              <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 15)}${value.resourceType.length > 15 ? "..." : ""}`}</p>
+                              <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 15)}${
+                                value.resourceType.length > 15 ? "..." : ""
+                              }`}</p>
                             )}
                           </div>
                         </td>
-                        <td className="sm:hidden">{dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
+                        <td className="sm:hidden">
+                          {dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}
+                        </td>
                         <td className="sm:hidden">{value.owner}</td>
 
                         <td className="hidden sm:block pt-3 px-3 w-full">
                           <div className="flex items-center">
-                            <Image classProps="w-8 mr-2 rounded" width="32px" height="32px" src={`/images/resourceIcon/${value.serviceName}.png`} alt="service-icon" />
+                            <Image
+                              classProps="w-8 mr-2 rounded"
+                              width="32px"
+                              height="32px"
+                              src={`/images/resourceIcon/${value.serviceName}.png`}
+                              alt="service-icon"
+                            />
                             <div className="flex flex-col overflow-hidden w-1/2">
                               <p className="text-left font-medium truncate">{value.serviceName}</p>
                               {value.serviceName === value.resourceType ? null : (
-                                <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 15)}${value.resourceType.length > 15 ? "..." : ""}`}</p>
+                                <p className={`text-left text-gray-500 truncate`}>{`${value.resourceType.substring(0, 15)}${
+                                  value.resourceType.length > 15 ? "..." : ""
+                                }`}</p>
                               )}
                             </div>
                           </div>
@@ -164,8 +212,8 @@ const Index = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 const DataCard = styled(motion.a)`
   ${tw`flex justify-center flex-col rounded-2xl pl-5 cursor-pointer md:px-4 md:mr-0 relative overflow-hidden duration-300 shadow-lg hover:shadow-xl`}
@@ -197,5 +245,5 @@ const DataCard = styled(motion.a)`
     ${tw`mt-2`}
     color: ${(props) => props.theme.textColor};
   }
-`;
-export default Index;
+`
+export default Index

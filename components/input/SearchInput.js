@@ -1,6 +1,6 @@
-import { BsSearch } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs"
 
-const SearchInput = ({setState, initialWdith = "w-96", externalStyle = "", py = "py-2"}) => {
+const SearchInput = ({ setState, initialWdith = "w-96", externalStyle = "", py = "py-2" }) => {
   return (
     <div className={`flex items-center dynamic-bg rounded-md ${initialWdith} md:w-full shadow-sm relative`}>
       <label htmlFor="search" className="absolute left-3">
@@ -15,7 +15,7 @@ const SearchInput = ({setState, initialWdith = "w-96", externalStyle = "", py = 
         onChange={(e) => setState(e.target.value)}
       />
     </div>
-  );
-};
+  )
+}
 
-export default SearchInput;
+export default SearchInput

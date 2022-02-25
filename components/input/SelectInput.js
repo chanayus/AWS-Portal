@@ -1,26 +1,26 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React, { useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"
+import React, { useRef, useState } from "react"
 
-import { HiOutlineChevronDown } from "react-icons/hi";
-import styled from "styled-components";
-import tw from "twin.macro";
+import { HiOutlineChevronDown } from "react-icons/hi"
+import styled from "styled-components"
+import tw from "twin.macro"
 
 const SelectInput = ({ title, dataSelect, dataKey, data, setData, resourceImg }) => {
-  const [titleText, setTitleText] = useState(title);
-  const [showMenu, setShowMenu] = useState(false);
-  const wrapperRef = useRef(null); // dom ตัว wrapper
-  const menuRef = useRef(); // dom ตัว menu option
-  
+  const [titleText, setTitleText] = useState(title)
+  const [showMenu, setShowMenu] = useState(false)
+  const wrapperRef = useRef(null) // dom ตัว wrapper
+  const menuRef = useRef() // dom ตัว menu option
+
   const dataHandle = (value) => {
     if (value === data[dataKey]) {
-      setTitleText(title);
-      setData({ ...data, [dataKey]: "" });
+      setTitleText(title)
+      setData({ ...data, [dataKey]: "" })
     } else {
-      setTitleText(value);
-      data[dataKey] = value;
-      setData({ ...data, [dataKey]: value });
+      setTitleText(value)
+      data[dataKey] = value
+      setData({ ...data, [dataKey]: value })
     }
-  };
+  }
 
   // เปิด-ปิด selection
   const menuToggleHandle = () => {
@@ -35,40 +35,47 @@ const SelectInput = ({ title, dataSelect, dataKey, data, setData, resourceImg })
       {
         once: false,
       }
-    );
-  };
+    )
+  }
   return (
     <Container ref={wrapperRef}>
       <MenuToggle onClick={() => menuToggleHandle()} isOpen={showMenu} type="button">
-        {(resourceImg && title !== titleText) ? <img src={`/images/resourceIcon/${titleText}.png`} alt="" className="mx-2" /> : null}
+        {resourceImg && title !== titleText ? <img src={`/images/resourceIcon/${titleText}.png`} alt="" className="mx-2" /> : null}
         {data[dataKey] === "" ? title : titleText}
         <HiOutlineChevronDown />
       </MenuToggle>
       <AnimatePresence>
-      {showMenu ? (
-        <MenuList ref={menuRef} isVisible="false" initial={{ opacity: 0 }} exit={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }}>
-          <h2 className="py-2 px-3 pb-1 border-b-2 border-gray-300">{title}</h2>
-          {dataSelect.map((value, index) => {
-            return (
-              <Button onClick={() => dataHandle(value)} selected={value === titleText} key={index}>
-                {resourceImg ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2"  /> : null}
-                <p>{value}</p>
-              </Button>
-            );
-          })}
-        </MenuList>
-      ) : null}
+        {showMenu ? (
+          <MenuList
+            ref={menuRef}
+            isVisible="false"
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.25 }}
+          >
+            <h2 className="py-2 px-3 pb-1 border-b-2 border-gray-300">{title}</h2>
+            {dataSelect.map((value, index) => {
+              return (
+                <Button onClick={() => dataHandle(value)} selected={value === titleText} key={index}>
+                  {resourceImg ? <img src={`/images/resourceIcon/${value}.png`} alt="" className="mr-2" /> : null}
+                  <p>{value}</p>
+                </Button>
+              )
+            })}
+          </MenuList>
+        ) : null}
       </AnimatePresence>
     </Container>
-  );
-};
+  )
+}
 
 const Container = styled.div`
   ${tw`relative mr-1.5`}
   min-width: 190px;
-`;
+`
 const MenuToggle = styled.div`
- ${tw`overflow-hidden flex justify-center items-center duration-100 cursor-pointer font-light w-full rounded hover:bg-blue-600 hover:text-white`}
+  ${tw`overflow-hidden flex justify-center items-center duration-100 cursor-pointer font-light w-full rounded hover:bg-blue-600 hover:text-white`}
   border: 1px solid #d0d0d0;
   background: ${(props) => props.theme.subColor};
   color: ${(props) => props.theme.textColor};
@@ -78,13 +85,13 @@ const MenuToggle = styled.div`
   svg {
     margin: 0 7px;
     transition: 0.2s;
-    transform: rotate(${props => props.isOpen ? "180deg" : "0deg"});
+    transform: rotate(${(props) => (props.isOpen ? "180deg" : "0deg")});
   }
   img {
     width: 30px;
     border-radius: 5px;
   }
-`;
+`
 
 const MenuList = styled(motion.div)`
   position: absolute;
@@ -107,32 +114,32 @@ const MenuList = styled(motion.div)`
     background: #909090;
     border-radius: 5px 30px 30px 5px;
   }
-  h2{
+  h2 {
     font-size: 1.4rem;
     color: #000;
     font-weight: 600;
   }
-`;
-
-const Button = styled.button`
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #d4d4d4;
-    padding: 7px 5px;
-    margin: 0 10px;
-    overflow: hidden;
-    min-width: 200px;
-    font-weight: 300;
-    background: ${props => props.selected ? props.theme.blue : "white"};
-    img {
-      width: 30px;
-      border-radius: 5px;
-    }
-    p {
-      text-align: center;
-      width: 100%;
-      color: ${props => props.selected ? "white" : "black"};
-    }
 `
 
-export default SelectInput;
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #d4d4d4;
+  padding: 7px 5px;
+  margin: 0 10px;
+  overflow: hidden;
+  min-width: 200px;
+  font-weight: 300;
+  background: ${(props) => (props.selected ? props.theme.blue : "white")};
+  img {
+    width: 30px;
+    border-radius: 5px;
+  }
+  p {
+    text-align: center;
+    width: 100%;
+    color: ${(props) => (props.selected ? "white" : "black")};
+  }
+`
+
+export default SelectInput

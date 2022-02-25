@@ -1,21 +1,21 @@
-import { AnimateSharedLayout, motion } from "framer-motion";
-import { HiHome, HiOutlineHome, HiOutlineLogin, HiOutlineLogout, HiUser } from "react-icons/hi";
-import { IoCube, IoCubeOutline } from "react-icons/io5";
+import { AnimateSharedLayout, motion } from "framer-motion"
+import { HiHome, HiOutlineHome, HiOutlineLogin, HiOutlineLogout, HiUser } from "react-icons/hi"
+import { IoCube, IoCubeOutline } from "react-icons/io5"
 
-import Link from "next/link";
-import { SetUserContext } from "../../pages/_app";
-import dynamic from "next/dynamic";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { useContext } from "react";
-import { useRouter } from "next/router";
+import Link from "next/link"
+import { SetUserContext } from "../../pages/_app"
+import dynamic from "next/dynamic"
+import styled from "styled-components"
+import tw from "twin.macro"
+import { useContext } from "react"
+import { useRouter } from "next/router"
 
-const Logo = dynamic(import("../icon/Logo"));
-const LogoNoText = dynamic(import("../icon/LogoNoText"));
+const Logo = dynamic(import("../icon/Logo"))
+const LogoNoText = dynamic(import("../icon/LogoNoText"))
 
 const Sidebar = () => {
-  const router = useRouter();
-  const { user, getLocalUser } = useContext(SetUserContext);
+  const router = useRouter()
+  const { user, getLocalUser } = useContext(SetUserContext)
   return (
     <Container exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="sidebar">
       <div className="sidebar-logo md:hidden">
@@ -62,28 +62,27 @@ const Sidebar = () => {
           </Link>
         ) : (
           <>
-
-          <Link href="/api/logout">
-            <a aria-label="signout">
-              <HiOutlineLogout />
-              <p className="2xl:hidden">ออกจากระบบ</p>
-            </a>
-          </Link>
-          <div className="flex items-center mt-5 mb-4 border-t border-gray-700 pt-7">
-            <div className="ml-2 2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-500 to-blue-400 rounded-full text-gray-500 w-8 h-8 flex justify-center items-center">
-              <HiUser size="1.5rem" color="#FFF" />
+            <Link href="/api/logout">
+              <a aria-label="signout">
+                <HiOutlineLogout />
+                <p className="2xl:hidden">ออกจากระบบ</p>
+              </a>
+            </Link>
+            <div className="flex items-center mt-5 mb-4 border-t border-gray-700 pt-7">
+              <div className="ml-2 2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-500 to-blue-400 rounded-full text-gray-500 w-8 h-8 flex justify-center items-center">
+                <HiUser size="1.5rem" color="#FFF" />
+              </div>
+              <div className="truncate">
+                <p className="ml-2 w-fit text-white 2xl:hidden leading-5 text-sm truncate">{user.user.username}</p>
+                <p className="ml-2 w-fit text-gray-400 2xl:hidden">Admin</p>
+              </div>
             </div>
-           <div className="truncate">
-            <p className="ml-2 w-fit text-white 2xl:hidden leading-5 text-sm truncate">{user.user.username}</p>
-            <p className="ml-2 w-fit text-gray-400 2xl:hidden">Admin</p>
-           </div>
-          </div>
-        </>
+          </>
         )}
       </div>
     </Container>
-  );
-};
+  )
+}
 
 const Container = styled(motion.div)`
   ${tw`fixed left-0 h-screen flex flex-col overflow-hidden justify-between py-7 pb-2 min-h-full z-50 px-2.5 xl:px-0 md:w-full md:p-0 md:flex-row md:h-16 md:min-h-0 md:bottom-0`}
@@ -127,14 +126,14 @@ const Container = styled(motion.div)`
       font-weight: 300;
     }
   }
-`;
+`
 
 const Menu = styled.div`
   ${tw`flex flex-col flex-1 pt-14 md:flex-row md:pt-0`}
   a:last-child {
     ${tw`hidden md:flex`}
   }
-`;
+`
 
 const Hilight = styled(motion.div)`
   ${tw`absolute w-full bg-white h-full rounded md:h-1 md:rounded-none top-0`}
@@ -142,6 +141,6 @@ const Hilight = styled(motion.div)`
   @media (max-width: 960px) {
     background: ${(props) => props.theme.textColor};
   }
-`;
+`
 
-export default Sidebar;
+export default Sidebar

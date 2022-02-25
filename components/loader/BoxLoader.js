@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 
-const BoxLoader = ({classProps = "dynamic-text"}) => {
+const BoxLoader = ({ classProps = "dynamic-text" }) => {
   const icon = {
     hidden: {
       pathLength: 0,
@@ -10,9 +10,18 @@ const BoxLoader = ({classProps = "dynamic-text"}) => {
       pathLength: 1,
       opacity: 1,
     },
-  };
+  }
   return (
-    <motion.svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className={`${classProps} opacity-100`} height="5.5rem" width="5.5rem" xmlns="http://www.w3.org/2000/svg">
+    <motion.svg
+      stroke="currentColor"
+      fill="currentColor"
+      stroke-width="0"
+      viewBox="0 0 512 512"
+      className={`${classProps} opacity-100`}
+      height="5.5rem"
+      width="5.5rem"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <motion.path
         variants={icon}
         initial="hidden"
@@ -44,7 +53,7 @@ const BoxLoader = ({classProps = "dynamic-text"}) => {
         d="M69 153.99l187 110 187-110m-187 310v-200"
       ></motion.path>
     </motion.svg>
-  );
-};
+  )
+}
 
-export default BoxLoader;
+export default BoxLoader

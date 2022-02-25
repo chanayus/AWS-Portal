@@ -1,56 +1,58 @@
-import { useEffect, useState } from "react";
-import { deleteResources } from "../../hooks/deleteResources";
-import Image from "../main/Image";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import tw from "twin.macro";
-import Loader from "../loader/Loader";
+import { useEffect, useState } from "react"
+import { deleteResources } from "../../hooks/deleteResources"
+import Image from "../main/Image"
+import { motion } from "framer-motion"
+import styled from "styled-components"
+import tw from "twin.macro"
+import Loader from "../loader/Loader"
 
 const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resources }) => {
-  const [comfirmText, setConfirmText] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [comfirmText, setConfirmText] = useState("")
+  const [loading, setLoading] = useState(false)
   const [confrimData, setConfrimData] = useState([])
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden"
     return () => {
-      document.body.style.overflow = "initial";
-    };
-  }, []);
+      document.body.style.overflow = "initial"
+    }
+  }, [])
 
   useEffect(() => {
     console.log(confrimData)
   }, [confrimData])
 
-  const operationCallback = ({data, status}) => {
-    setLoading(false);
-    if (status === 200){
+  const operationCallback = ({ data, status }) => {
+    setLoading(false)
+    if (status === 200) {
       const confrimResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
       setConfrimData(confrimResourcesARN)
     }
-  };
+  }
 
   const removeDisplayResourcesHandle = () => {
     setModalVisible(false)
-    setResources(resources.filter((item) => !confrimData.includes(item.ResourceARN)));
+    setResources(resources.filter((item) => !confrimData.includes(item.ResourceARN)))
   }
 
   const operationHandle = () => {
     if (type === "delete") {
-      setLoading(true);
-      deleteResources(selectedData, operationCallback);
+      setLoading(true)
+      deleteResources(selectedData, operationCallback)
     } else {
-      console.log("stop resources");
+      console.log("stop resources")
     }
-  };
+  }
 
   const modalContent = {
     headerTitle: type === "stop" ? "ยืนยันการหยุด Resources" : "ยืนยันการลบ Resources",
     title:
-      type === "stop" ? `คุณแน่ใจหรือไม่ที่จะทำการหยุดการทำงานของ Resource ทั้ง ${selectedData.length} รายการดังนี้` : `คุณแน่ใจหรือไม่ที่จะทำการลบ Resource ทั้ง ${selectedData.length} รายการดังนี้`,
+      type === "stop"
+        ? `คุณแน่ใจหรือไม่ที่จะทำการหยุดการทำงานของ Resource ทั้ง ${selectedData.length} รายการดังนี้`
+        : `คุณแน่ใจหรือไม่ที่จะทำการลบ Resource ทั้ง ${selectedData.length} รายการดังนี้`,
     buttonTitle: type === "stop" ? `หยุดทั้ง ${selectedData.length} รายการ` : `ลบทั้ง ${selectedData.length} รายการ`,
     loadingText: type === "stop" ? "กำลังหยุด resource" : "กำลังลบ resource",
-  };
+  }
 
   return (
     <motion.div
@@ -76,7 +78,13 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
             {selectedData.map((value, index) => (
               <div className="dynamic-text flex justify-between py-2 md:py-1 items-center border-b border-gray-600 border-opacity-40" key={index}>
                 <div className="flex items-center sm:flex-col sm:items-start">
-                  <Image classProps="w-7 md:w-6 mr-2 sm:mb-1 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} width={"24px"} height={"24px"} alt="service-icon-mobile" />
+                  <Image
+                    classProps="w-7 md:w-6 mr-2 sm:mb-1 rounded"
+                    src={`/images/resourceIcon/${value.serviceName}.png`}
+                    width={"24px"}
+                    height={"24px"}
+                    alt="service-icon-mobile"
+                  />
                   <div>
                     <p className="font-semibold capitalize"> {value.serviceName}</p>
                     <p> {value.resourceType}</p>
@@ -117,15 +125,19 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
             <button className="px-5 py-2 rounded duration-200 dynamic-text" onClick={() => removeDisplayResourcesHandle()}>
               ยกเลิก
             </button>
-            <button disabled={comfirmText === type ? false : true} className="bg-red-500 sm:px-4 px-5 py-2 ml-4 rounded duration-200 hover:bg-red-600 text-white" onClick={() => operationHandle()}>
+            <button
+              disabled={comfirmText === type ? false : true}
+              className="bg-red-500 sm:px-4 px-5 py-2 ml-4 rounded duration-200 hover:bg-red-600 text-white"
+              onClick={() => operationHandle()}
+            >
               {modalContent.buttonTitle}
             </button>
           </div>
         )}
       </Modal>
     </motion.div>
-  );
-};
+  )
+}
 
 const Modal = styled(motion.div)`
   max-width: 650px;
@@ -150,6 +162,6 @@ const Modal = styled(motion.div)`
   h2 {
     ${tw`sm:text-base`}
   }
-`;
+`
 
-export default ConfrimModal;
+export default ConfrimModal

@@ -1,32 +1,32 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { CheckBox, TableWrapper } from "../../styles/styleComponents";
-import { HiArrowDown, HiArrowUp } from "react-icons/hi";
-import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"
+import { CheckBox, TableWrapper } from "../../styles/styleComponents"
+import { HiArrowDown, HiArrowUp } from "react-icons/hi"
+import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle"
+import { useEffect, useState } from "react"
 
-import { FaCheck } from "react-icons/fa";
-import Image from "../main/Image";
-import { IoCubeOutline } from "react-icons/io5";
-import dayjs from "dayjs";
-import dynamic from "next/dynamic";
-import useForceUpdate from "use-force-update";
-import { useMediaQuery } from "react-responsive";
-import { useRouter } from "next/router";
-import { useSorting } from "../../hooks/useSorting";
+import { FaCheck } from "react-icons/fa"
+import Image from "../main/Image"
+import { IoCubeOutline } from "react-icons/io5"
+import dayjs from "dayjs"
+import dynamic from "next/dynamic"
+import useForceUpdate from "use-force-update"
+import { useMediaQuery } from "react-responsive"
+import { useRouter } from "next/router"
+import { useSorting } from "../../hooks/useSorting"
 
-const ResouceTableMobile = dynamic(import("./ResourceTableMobile"));
-const ResourcesSelected = dynamic(import("../resource/ResourcesSelected"));
+const ResouceTableMobile = dynamic(import("./ResourceTableMobile"))
+const ResourcesSelected = dynamic(import("../resource/ResourcesSelected"))
 
 const ResourceTable = ({ resources, setResources }) => {
-  const forceUpdate = useForceUpdate();
-  const router = useRouter();
-  const { pathname } = router;
-  const isServicePage = pathname === "/resources/[serviceName]";
-  const [isSelectAll, setIsSelectAll] = useState(false);
+  const forceUpdate = useForceUpdate()
+  const router = useRouter()
+  const { pathname } = router
+  const isServicePage = pathname === "/resources/[serviceName]"
+  const [isSelectAll, setIsSelectAll] = useState(false)
 
-  const isMobileScreen = useMediaQuery({ query: "(max-width: 640px)" });
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 640px)" })
 
-  const [displayResouces, setDisplayResources] = useState([...resources]); // for display resources data
+  const [displayResouces, setDisplayResources] = useState([...resources]) // for display resources data
 
   const [sortData, setSortData] = useState({
     resource: "default",
@@ -34,34 +34,34 @@ const ResourceTable = ({ resources, setResources }) => {
     createdAt: "default",
     owner: "default",
     resourceId: "default",
-  });
+  })
 
   useEffect(() => {
-    const sort = Object.keys(sortData).find((key) => sortData[key] !== "default");
+    const sort = Object.keys(sortData).find((key) => sortData[key] !== "default")
     if (sort) {
-      setDisplayResources(useSorting([...resources], sort, sortData[sort]));
+      setDisplayResources(useSorting([...resources], sort, sortData[sort]))
     } else {
-      setDisplayResources([...resources]);
+      setDisplayResources([...resources])
     }
-  }, [resources]);
+  }, [resources])
 
   const sortingHandle = (sortKey, sortValue) => {
     const nextValue = {
       default: "first",
       first: "last",
       last: "default",
-    };
+    }
     const reset = {
       resource: "default",
       region: "default",
       createdAt: "default",
       owner: "default",
       resourceId: "default",
-    };
-    setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]));
-    setSortData({ ...reset, [sortKey]: nextValue[sortValue] });
-    forceUpdate();
-  };
+    }
+    setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]))
+    setSortData({ ...reset, [sortKey]: nextValue[sortValue] })
+    forceUpdate()
+  }
 
   // Animation
   const arrowUpVariant = {
@@ -73,7 +73,7 @@ const ResourceTable = ({ resources, setResources }) => {
       y: 0,
       opacity: 1,
     },
-  };
+  }
 
   const arrowDownVariant = {
     hidden: {
@@ -84,7 +84,7 @@ const ResourceTable = ({ resources, setResources }) => {
       y: 0,
       opacity: 1,
     },
-  };
+  }
 
   const arrowHandle = (status) => {
     return status === "first" ? (
@@ -97,13 +97,18 @@ const ResourceTable = ({ resources, setResources }) => {
       </motion.div>
     ) : (
       <div className="w-4 h-4"></div>
-    );
-  };
+    )
+  }
   return (
     <>
       <AnimatePresence>
         {displayResouces.filter((value) => value.isChoose).length === 0 ? null : (
-          <ResourcesSelected setResources={setResources} resources={resources} selectedData={displayResouces.filter((value) => value.isChoose)} setDisplayResources={setDisplayResources}/>
+          <ResourcesSelected
+            setResources={setResources}
+            resources={resources}
+            selectedData={displayResouces.filter((value) => value.isChoose)}
+            setDisplayResources={setDisplayResources}
+          />
         )}
       </AnimatePresence>
 
@@ -129,7 +134,10 @@ const ResourceTable = ({ resources, setResources }) => {
               <thead className="sm:hidden">
                 <tr>
                   <th className="w-2">
-                    <CheckBox className={`${isSelectAll ? "checked" : null}`} onClick={() => chooseAllHandle(displayResouces, setDisplayResources, isSelectAll, setIsSelectAll)}>
+                    <CheckBox
+                      className={`${isSelectAll ? "checked" : null}`}
+                      onClick={() => chooseAllHandle(displayResouces, setDisplayResources, isSelectAll, setIsSelectAll)}
+                    >
                       {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
                     </CheckBox>
                   </th>
@@ -179,7 +187,10 @@ const ResourceTable = ({ resources, setResources }) => {
                 <tr className="hidden sm:block">
                   <td>
                     <div className="flex justify-start mx-0">
-                      <CheckBox className={`${isSelectAll ? "checked" : null} m-0`} onClick={() => chooseAllHandle(displayResouces, setDisplayResources, isSelectAll, setIsSelectAll)}>
+                      <CheckBox
+                        className={`${isSelectAll ? "checked" : null} m-0`}
+                        onClick={() => chooseAllHandle(displayResouces, setDisplayResources, isSelectAll, setIsSelectAll)}
+                      >
                         {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
                       </CheckBox>
                       <p className="ml-2">เลือกทั้งหมด</p>
@@ -190,28 +201,50 @@ const ResourceTable = ({ resources, setResources }) => {
                   return (
                     <tr key={index} className={`${value.isChoose ? "selected" : null}`}>
                       <td className="sm:hidden">
-                        <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResouces, setDisplayResources)}>
+                        <CheckBox
+                          className={`${value.isChoose ? "checked" : null}`}
+                          onClick={() => chooseHandle(value, displayResouces, setDisplayResources)}
+                        >
                           {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
                         </CheckBox>
                       </td>
                       {isMobileScreen ? (
-                        <ResouceTableMobile value={value} isServicePage={isServicePage} displayResouces={displayResouces} setDisplayResources={setDisplayResources} />
+                        <ResouceTableMobile
+                          value={value}
+                          isServicePage={isServicePage}
+                          displayResouces={displayResouces}
+                          setDisplayResources={setDisplayResources}
+                        />
                       ) : (
                         <>
                           <td className="sm:hidden">
                             <div className="flex items-center">
-                              <Image classProps="w-9 rounded" src={`/images/resourceIcon/${value.serviceName}.png`} width="36px" height="36px" alt="service-icon" />
+                              <Image
+                                classProps="w-9 rounded"
+                                src={`/images/resourceIcon/${value.serviceName}.png`}
+                                width="36px"
+                                height="36px"
+                                alt="service-icon"
+                              />
                               <div className="flex flex-col overflow-hidden  ml-2">
                                 {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
-                                {isServicePage && value.serviceName === value.resourceType ? <p className="text-left font-medium truncate">{value.serviceName}</p> : null}
+                                {isServicePage && value.serviceName === value.resourceType ? (
+                                  <p className="text-left font-medium truncate">{value.serviceName}</p>
+                                ) : null}
                                 {value.serviceName === value.resourceType ? null : (
-                                  <p className={`max-w-18 text-left break-all ${isServicePage ? "dynamic-text" : " text-gray-500"}`}>{`${value.resourceType}`}</p>
+                                  <p
+                                    className={`max-w-18 text-left break-all ${isServicePage ? "dynamic-text" : " text-gray-500"}`}
+                                  >{`${value.resourceType}`}</p>
                                 )}
                               </div>
                             </div>
                           </td>
                           <td className="sm:hidden">{value.region}</td>
-                          <td className="sm:hidden">{dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}</td>
+                          <td className="sm:hidden">
+                            {dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date"
+                              ? "-"
+                              : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}
+                          </td>
                           <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
                           <td className="sm:hidden pl-1 w-52 lg:w-32">
                             <p className="w-52 lg:w-32 break-all mr-0">{`${value.resourceId}`}</p>
@@ -219,7 +252,7 @@ const ResourceTable = ({ resources, setResources }) => {
                         </>
                       )}
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
             </table>
@@ -227,7 +260,7 @@ const ResourceTable = ({ resources, setResources }) => {
         )}
       </AnimatePresence>
     </>
-  );
-};
+  )
+}
 
-export default ResourceTable;
+export default ResourceTable

@@ -1,13 +1,13 @@
-import { AiOutlineDelete, AiOutlinePause } from "react-icons/ai";
-import { AnimatePresence, motion } from "framer-motion";
+import { AiOutlineDelete, AiOutlinePause } from "react-icons/ai"
+import { AnimatePresence, motion } from "framer-motion"
 
-import ConfrimModal from "./ConfrimModal";
-import { useState } from "react";
+import ConfrimModal from "./ConfrimModal"
+import { useState } from "react"
 
 const ResourcesSelected = (props) => {
   const { setResources, selectedData, resources } = props
-  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [isStopModalVisible, setStopModalVisible] = useState(false);
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false)
+  const [isStopModalVisible, setStopModalVisible] = useState(false)
 
   return (
     <>
@@ -35,7 +35,7 @@ const ResourcesSelected = (props) => {
         {isStopModalVisible && <ConfrimModal type="stop" {...props} setModalVisible={setStopModalVisible} />}
       </AnimatePresence>
     </>
-  );
-};
+  )
+}
 
-export default ResourcesSelected;
+export default ResourcesSelected

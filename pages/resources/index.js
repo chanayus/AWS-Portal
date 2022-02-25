@@ -1,43 +1,48 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { FaList, FaTh } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"
+import { FaList, FaTh } from "react-icons/fa"
+import { useEffect, useState } from "react"
 
-import Breadcrumb from "../../components/main/Breadcrumb";
-import FilterResources from "../../components/resource/FilterResources";
-import PageLoader from "../../components/loader/PageLoader";
-import dynamic from "next/dynamic";
-import { useFetch } from "../../hooks/useFetch";
-import { useFilter } from "../../hooks/useFilter";
-import { useRouter } from "next/router";
+import Breadcrumb from "../../components/main/Breadcrumb"
+import FilterResources from "../../components/resource/FilterResources"
+import PageLoader from "../../components/loader/PageLoader"
+import dynamic from "next/dynamic"
+import { useFetch } from "../../hooks/useFetch"
+import { useFilter } from "../../hooks/useFilter"
+import { useRouter } from "next/router"
 
-const SearchInput = dynamic(import("../../components/input/SearchInput"));
-const ResourceTable = dynamic(import("../../components/table/ResourceTable"));
-const CardSection = dynamic(import("../../components/resource/CardSection"));
+const SearchInput = dynamic(import("../../components/input/SearchInput"))
+const ResourceTable = dynamic(import("../../components/table/ResourceTable"))
+const CardSection = dynamic(import("../../components/resource/CardSection"))
 
 const Resource = () => {
-  const router = useRouter();
-  const { display, type } = router.query;
-  const [resources, setResources] = useState([]);
-  const { loading, data } = useFetch("/api/resources", setResources, true);
-  const [displayType, setDisplayType] = useState("");
+  const router = useRouter()
+  const { display, type } = router.query
+  const [resources, setResources] = useState([])
+  const { loading, data } = useFetch("/api/resources", setResources, true)
+  const [displayType, setDisplayType] = useState("")
 
-  const [filterData, setFilterData] = useState({ resource: [], region: [], owner: [], searchText: "" });
+  const [filterData, setFilterData] = useState({
+    resource: [],
+    region: [],
+    owner: [],
+    searchText: "",
+  })
 
   useEffect(() => {
-    loading ? null : setDisplayType(display);
-  }, [loading]);
+    loading ? null : setDisplayType(display)
+  }, [loading])
 
   // FOR TABLE SECTION
   useEffect(() => {
-    useFilter(data, setResources, filterData);
-  }, [filterData]);
+    useFilter(data, setResources, filterData)
+  }, [filterData])
 
   const filterHandle = (textValue) => {
-    setFilterData({ ...filterData, searchText: textValue });
-  };
+    setFilterData({ ...filterData, searchText: textValue })
+  }
 
   if (loading) {
-    return <PageLoader />;
+    return <PageLoader />
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
@@ -69,8 +74,8 @@ const Resource = () => {
           )}
         </AnimatePresence>
       </motion.div>
-    );
+    )
   }
-};
+}
 
-export default Resource;
+export default Resource

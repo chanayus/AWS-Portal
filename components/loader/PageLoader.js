@@ -1,4 +1,4 @@
-import BoxLoader from "./BoxLoader";
+import BoxLoader from "./BoxLoader"
 
 const PageLoader = () => {
   return (
@@ -8,7 +8,7 @@ const PageLoader = () => {
         <h2 className="font-light text-xl">Loading</h2>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PageLoader;
+export default PageLoader

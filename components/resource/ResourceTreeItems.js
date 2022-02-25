@@ -1,14 +1,14 @@
-import { HiChevronDown, HiChevronRight } from "react-icons/hi";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "../main/Image";
-import { useState } from "react";
+import { HiChevronDown, HiChevronRight } from "react-icons/hi"
+import { motion, AnimatePresence } from "framer-motion"
+import Image from "../main/Image"
+import { useState } from "react"
 
 const ResourceTreeItems = ({ item }) => {
-  const [showChildren, setShowChilden] = useState(false);
+  const [showChildren, setShowChilden] = useState(false)
 
   const handleClick = () => {
-    setShowChilden(!showChildren);
-  };
+    setShowChilden(!showChildren)
+  }
 
   return (
     <>
@@ -42,7 +42,7 @@ const ResourceTreeItems = ({ item }) => {
           ))}
       </AnimatePresence>
     </>
-  );
-};
+  )
+}
 
-export default ResourceTreeItems;
+export default ResourceTreeItems

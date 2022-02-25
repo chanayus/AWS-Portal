@@ -1,4 +1,4 @@
-import { TableWrapper } from "../../styles/styleComponents";
+import { TableWrapper } from "../../styles/styleComponents"
 
 const SkeletonTable = () => {
   return (
@@ -48,7 +48,7 @@ const SkeletonTable = () => {
         </table>
       </TableWrapper>
     </>
-  );
-};
+  )
+}
 
-export default SkeletonTable;
+export default SkeletonTable

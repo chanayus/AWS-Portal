@@ -1,21 +1,20 @@
-
 export const chooseHandle = (item, data, setState) => {
-    setState(
+  setState(
     data.map((value) => {
       if (item.resourceId === value.resourceId) {
-        value.isChoose = !value.isChoose;
+        value.isChoose = !value.isChoose
       }
-      return value;
+      return value
     })
-  );
-};
+  )
+}
 
-export const chooseAllHandle = (data, setState ,isSelectAll, setIsSelectAll) => {
-    setState(
+export const chooseAllHandle = (data, setState, isSelectAll, setIsSelectAll) => {
+  setState(
     data.map((value) => {
-      value.isChoose = isSelectAll ? false : true;
-      return value;
+      value.isChoose = isSelectAll ? false : true
+      return value
     })
-  );
-  setIsSelectAll(!isSelectAll);
-};
+  )
+  setIsSelectAll(!isSelectAll)
+}

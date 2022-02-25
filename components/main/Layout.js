@@ -1,16 +1,16 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion"
 
-import Head from "next/head";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { useRouter } from "next/router";
+import Head from "next/head"
+import Navbar from "./Navbar"
+import Sidebar from "./Sidebar"
+import styled from "styled-components"
+import tw from "twin.macro"
+import { useRouter } from "next/router"
 
 const Layout = ({ children }) => {
-  const router = useRouter();
-  const excludePath = ["/login", "/_error"];
-  const isHidden = excludePath?.find((value) => value === router.pathname);
+  const router = useRouter()
+  const excludePath = ["/login", "/_error"]
+  const isHidden = excludePath?.find((value) => value === router.pathname)
 
   return (
     <>
@@ -29,7 +29,14 @@ const Layout = ({ children }) => {
         </AnimatePresence>
         <AnimatePresence exitBeforeEnter>
           {isHidden ? (
-            <motion.div className="w-full" exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key="exclude-path">
+            <motion.div
+              className="w-full"
+              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+              key="exclude-path"
+            >
               <>{children}</>
             </motion.div>
           ) : (
@@ -40,8 +47,8 @@ const Layout = ({ children }) => {
         </AnimatePresence>
       </div>
     </>
-  );
-};
+  )
+}
 
 const Content = styled(motion.div)`
   margin-left: clamp(85px, 10vw, 240px);
@@ -50,5 +57,5 @@ const Content = styled(motion.div)`
   @media(max-width: 960px) {
     ${tw`mx-0 px-3`}
   }
-`;
-export default Layout;
+`
+export default Layout

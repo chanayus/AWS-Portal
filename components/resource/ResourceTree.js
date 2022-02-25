@@ -1,16 +1,16 @@
-import ResourceTreeItems from "./ResourceTreeItems";
-import { useFetch } from "../../hooks/useFetch";
-import BoxLoader from "../loader/BoxLoader";
+import ResourceTreeItems from "./ResourceTreeItems"
+import { useFetch } from "../../hooks/useFetch"
+import BoxLoader from "../loader/BoxLoader"
 
 const ResourceTree = () => {
-  const { loading, data } = useFetch("/api/used", () => {}, false);
+  const { loading, data } = useFetch("/api/used", () => {}, false)
 
   if (loading) {
     return (
       <div className="flex justify-center mt-28 items-center">
         <BoxLoader />
       </div>
-    );
+    )
   } else {
     return (
       <div>
@@ -20,8 +20,8 @@ const ResourceTree = () => {
           </div>
         ))}
       </div>
-    );
+    )
   }
-};
+}
 
-export default ResourceTree;
+export default ResourceTree

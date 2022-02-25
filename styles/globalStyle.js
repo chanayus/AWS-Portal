@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import { keyframes } from "styled-components";
-import tw from "twin.macro";
+import { createGlobalStyle } from "styled-components"
+import { keyframes } from "styled-components"
+import tw from "twin.macro"
 
 const skeletonAnim = keyframes`
   0% {
@@ -12,7 +12,7 @@ const skeletonAnim = keyframes`
   100% {
     opacity: 1;
   }
-`;
+`
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -158,4 +158,4 @@ export const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar-thumb:hover {
     background: #555; 
     }
-`;
+`

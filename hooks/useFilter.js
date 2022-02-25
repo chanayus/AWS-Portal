@@ -1,33 +1,32 @@
-const dataFilter = (resource, value) =>{
-  return !resource.length ? true : resource.includes(value);
+const dataFilter = (resource, value) => {
+  return !resource.length ? true : resource.includes(value)
 }
-
 
 export const useTextFilter = (data, condition) => {
   condition = condition.toLowerCase()
   console.log(condition, data)
-  if(condition === ""){
+  if (condition === "") {
     return data
-  }
-  else{
+  } else {
     return data.filter((value) => {
       value.owner ??= ""
-      return value.resourceId.toLowerCase().includes(condition) || 
-      value.serviceName.toLowerCase().includes(condition) || 
-      value.region.toLowerCase().includes(condition) ||
-      value.resourceType.toLowerCase().includes(condition) ||
-      value.owner.toLowerCase().includes(condition)
+      return (
+        value.resourceId.toLowerCase().includes(condition) ||
+        value.serviceName.toLowerCase().includes(condition) ||
+        value.region.toLowerCase().includes(condition) ||
+        value.resourceType.toLowerCase().includes(condition) ||
+        value.owner.toLowerCase().includes(condition)
+      )
     })
   }
 }
 
-
-export const useFilter = (data, setState, filterData) =>{
-    const {resource, region, owner, searchText} = filterData
-    const filtered = data.filter((value) => dataFilter(resource,value.resourceType))
+export const useFilter = (data, setState, filterData) => {
+  const { resource, region, owner, searchText } = filterData
+  const filtered = data
+    .filter((value) => dataFilter(resource, value.resourceType))
     .filter((value) => dataFilter(region, value.region))
     .filter((value) => dataFilter(owner, value.owner))
-  
-    setState(useTextFilter(filtered, searchText))
-}
 
+  setState(useTextFilter(filtered, searchText))
+}

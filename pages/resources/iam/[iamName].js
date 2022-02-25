@@ -1,26 +1,26 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"
+import { useEffect, useState } from "react"
 
-import { HiUser } from "react-icons/hi";
-import PageLoader from "../../../components/loader/PageLoader";
-import dynamic from "next/dynamic";
-import { useFetch } from "../../../hooks/useFetch";
-import { useRouter } from "next/router";
-import { useTextFilter } from "../../../hooks/useFilter";
+import { HiUser } from "react-icons/hi"
+import PageLoader from "../../../components/loader/PageLoader"
+import dynamic from "next/dynamic"
+import { useFetch } from "../../../hooks/useFetch"
+import { useRouter } from "next/router"
+import { useTextFilter } from "../../../hooks/useFilter"
 
-const SearchInput = dynamic(import("../../../components/input/SearchInput"));
-const ResourceTable = dynamic(import("../../../components/table/ResourceTable"));
-const Breadcrumb = dynamic(import("../../../components/main/Breadcrumb"));
+const SearchInput = dynamic(import("../../../components/input/SearchInput"))
+const ResourceTable = dynamic(import("../../../components/table/ResourceTable"))
+const Breadcrumb = dynamic(import("../../../components/main/Breadcrumb"))
 
 const SpecificResource = () => {
-  const router = useRouter();
-  const [resources, setResources] = useState([]);
-  const { iamName } = router.query;
-  const { loading, data } = useFetch("/api/resources", setResources, true);
+  const router = useRouter()
+  const [resources, setResources] = useState([])
+  const { iamName } = router.query
+  const { loading, data } = useFetch("/api/resources", setResources, true)
 
   useEffect(() => {
-    setResources(data.filter((value) => value.owner === iamName));
-  }, [data]);
+    setResources(data.filter((value) => value.owner === iamName))
+  }, [data])
 
   const resourceFilter = (inputValue) => {
     const allData = data.filter((value) => value.owner === iamName)
@@ -28,9 +28,7 @@ const SpecificResource = () => {
   }
 
   if (loading) {
-    return (
-      <PageLoader/>
-    );
+    return <PageLoader />
   } else {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
@@ -42,7 +40,7 @@ const SpecificResource = () => {
           <h1 className="ml-3 capitalize">{iamName !== "-" ? iamName : "ไม่มีการระบุ IAM"}</h1>
         </div>
         <div className="mt-10">
-          <SearchInput setState={resourceFilter}/>
+          <SearchInput setState={resourceFilter} />
         </div>
         <AnimatePresence exitBeforeEnter>
           <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} key={"table"}>
@@ -50,8 +48,8 @@ const SpecificResource = () => {
           </motion.div>
         </AnimatePresence>
       </motion.div>
-    );
+    )
   }
-};
+}
 
-export default SpecificResource;
+export default SpecificResource

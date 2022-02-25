@@ -1,15 +1,14 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { HiOutlineBell, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
+import { AnimatePresence, motion } from "framer-motion"
+import { HiOutlineBell, HiOutlineMoon, HiOutlineSun } from "react-icons/hi"
 
-import Link from "next/link";
-import { SetThemeContext } from "../../pages/_app";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { useContext } from "react";
+import Link from "next/link"
+import { SetThemeContext } from "../../pages/_app"
+import styled from "styled-components"
+import tw from "twin.macro"
+import { useContext } from "react"
 
 const Navbar = () => {
-
-  const { currentTheme, themeHandle } = useContext(SetThemeContext);
+  const { currentTheme, themeHandle } = useContext(SetThemeContext)
   // const navRef = useRef();
 
   // const router = useRouter();
@@ -33,7 +32,7 @@ const Navbar = () => {
   // }, [lastScroll]);
 
   return (
-    <Container exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="navbar" >
+    <Container exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }} key="navbar">
       <div className="hidden md:block w-44 navbar-logo">
         <Link href="/">
           <a>
@@ -42,7 +41,11 @@ const Navbar = () => {
         </Link>
       </div>
       <Menu>
-        <button className="mx-6 sm:mx-4 darkmode-toggle" onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")} aria-label="darkmode-toggle">
+        <button
+          className="mx-6 sm:mx-4 darkmode-toggle"
+          onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}
+          aria-label="darkmode-toggle"
+        >
           <AnimatePresence exitBeforeEnter>
             {currentTheme === "light" ? (
               <motion.div initial={{ scale: 0 }} animate={{ rotate: 360, scale: 1 }} key="dark">
@@ -61,8 +64,8 @@ const Navbar = () => {
         </button>
       </Menu>
     </Container>
-  );
-};
+  )
+}
 
 const Container = styled(motion.div)`
   ${tw`flex fixed w-full top-0 items-center justify-end overflow-hidden py-3 pr-12 pl-14 xl:pl-3 2xl:pr-5 duration-200 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2`}
@@ -76,13 +79,13 @@ const Container = styled(motion.div)`
       height: 35px;
     }
   }
-`;
+`
 
 const Menu = styled.div`
   ${tw`flex justify-start items-center py-1`}
   button {
     ${tw`flex items-center`}
- }
+  }
   .notification-button {
     position: relative;
     .notification-badge {
@@ -95,6 +98,6 @@ const Menu = styled.div`
       color: #fff;
     }
   }
-`;
+`
 
-export default Navbar;
+export default Navbar

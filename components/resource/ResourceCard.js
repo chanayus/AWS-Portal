@@ -1,36 +1,43 @@
-import { HiGlobe, HiUser } from "react-icons/hi";
+import { HiGlobe, HiUser } from "react-icons/hi"
 
-import Image from "../main/Image";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import tw from "twin.macro";
+import Image from "../main/Image"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import styled from "styled-components"
+import tw from "twin.macro"
 
 const ResourceType = ({ title, totalResource, totalRegion, type }) => {
   const subTypeCondition = {
     service: "region",
     region: "IAM User",
     iam: "region",
-  };
+  }
 
   const linkCondition = {
     service: { as: `/resources/${title}`, href: "/resources/[serviceName]" },
-    region: { as: `/resources/region/${title}`, href: "/resources/region/[regionName]" },
+    region: {
+      as: `/resources/region/${title}`,
+      href: "/resources/region/[regionName]",
+    },
     iam: { as: `/resources/iam/${title}`, href: "/resources/iam/[iamName]" },
-  };
+  }
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 },
     transition: { duration: 0.35 },
-  };
+  }
   return (
     <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]} scroll={false}>
       <Card variants={item} whileHover={{ scale: 0.965 }} key={type}>
         {type === "service" ? (
           <Image src={`/images/resourceIcon/${title}.png`} width="56px" height="56px" alt="service-card-icon" />
         ) : (
-          <div className={`${type === "iam" ? "from-rose-600 to-rose-500" : "from-green-600 to-green-500"} absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}>
-            {type === "iam" ? <HiUser color="#fcfcfc" size="2.5rem"/> : <HiGlobe color="#fcfcfc" size="2.5rem"/>}
+          <div
+            className={`${
+              type === "iam" ? "from-rose-600 to-rose-500" : "from-green-600 to-green-500"
+            } absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}
+          >
+            {type === "iam" ? <HiUser color="#fcfcfc" size="2.5rem" /> : <HiGlobe color="#fcfcfc" size="2.5rem" />}
           </div>
         )}
         <div className="flex justify-between items-center w-full">
@@ -43,8 +50,8 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
         </h2>
       </Card>
     </Link>
-  );
-};
+  )
+}
 
 const Card = styled(motion.a)`
   ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end shadow-md rounded-xl md:px-3 sm:pb-6`}
@@ -67,6 +74,6 @@ const Card = styled(motion.a)`
       line-height: 1;
     }
   }
-`;
+`
 
-export default ResourceType;
+export default ResourceType

@@ -1,24 +1,24 @@
-import { AnimatePresence, motion } from "framer-motion";
-import tw, { styled } from "twin.macro";
-import { useContext, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"
+import tw, { styled } from "twin.macro"
+import { useContext, useState } from "react"
 
-import BoxLoader from "../components/loader/BoxLoader";
-import Logo from "../components/icon/Logo";
-import LogoNoText from "../components/icon/LogoNoText";
-import { SetUserContext } from "./_app";
-import TextInput from "../components/input/TextInput";
-import { useRouter } from "next/router";
+import BoxLoader from "../components/loader/BoxLoader"
+import Logo from "../components/icon/Logo"
+import LogoNoText from "../components/icon/LogoNoText"
+import { SetUserContext } from "./_app"
+import TextInput from "../components/input/TextInput"
+import { useRouter } from "next/router"
 
 const Login = () => {
-  const [record, setRecord] = useState({});
-  const router = useRouter();
-  const { user, userHandle } = useContext(SetUserContext);
-  const [loading, setLoading] = useState(false);
+  const [record, setRecord] = useState({})
+  const router = useRouter()
+  const { user, userHandle } = useContext(SetUserContext)
+  const [loading, setLoading] = useState(false)
 
   const changeRecord = (e) => {
-    const { name, value } = e?.target;
-    setRecord({ ...record, [name]: value });
-  };
+    const { name, value } = e?.target
+    setRecord({ ...record, [name]: value })
+  }
 
   const icon = {
     hidden: {
@@ -29,14 +29,14 @@ const Login = () => {
       pathLength: 1,
       opacity: 1,
     },
-  };
+  }
   const loginHandler = async () => {
     if (!(record?.username && record?.password)) {
-      return false;
+      return false
     }
 
-    setLoading(true);
-    let abortController = new AbortController();
+    setLoading(true)
+    let abortController = new AbortController()
     const response = await fetch("/api/login", {
       signal: abortController.signal,
       method: "POST",
@@ -44,24 +44,29 @@ const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(record),
-    });
-    const data = await response.json();
+    })
+    const data = await response.json()
     console.log(response.status)
-    if(response.status === 200){
-      userHandle({ user: data?.login?.user });
-      router.replace("/");  
-    }
-    else{
-      setLoading(false);
+    if (response.status === 200) {
+      userHandle({ user: data?.login?.user })
+      router.replace("/")
+    } else {
+      setLoading(false)
       console.log("Adsasd")
     }
-  };
+  }
 
   return (
     <>
       <AnimatePresence>
         {loading && (
-          <motion.div className="fixed w-full h-full flex justify-center items-center z-50" exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.175 }}>
+          <motion.div
+            className="fixed w-full h-full flex justify-center items-center z-50"
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.175 }}
+          >
             <div className="w-50 h-50 p-3 rounded-full bg-white">
               <BoxLoader classProps={"text-black"} />
             </div>
@@ -82,8 +87,24 @@ const Login = () => {
             </div>
 
             <div className="form-group">
-              <TextInput type="text" name="username" id="" required={true} title="Username" value={record?.username ?? ""} setValueHandler={changeRecord} />
-              <TextInput type="password" name="password" id="" required={true} title="Password" value={record?.password ?? ""} setValueHandler={changeRecord} />
+              <TextInput
+                type="text"
+                name="username"
+                id=""
+                required={true}
+                title="Username"
+                value={record?.username ?? ""}
+                setValueHandler={changeRecord}
+              />
+              <TextInput
+                type="password"
+                name="password"
+                id=""
+                required={true}
+                title="Password"
+                value={record?.password ?? ""}
+                setValueHandler={changeRecord}
+              />
             </div>
             <div className="button-group">
               <a onClick={loginHandler}>เข้าสู่ระบบ</a>
@@ -93,14 +114,14 @@ const Login = () => {
         </FlexBox>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
 
 const Container = styled.div`
   ${tw`flex justify-around relative items-center w-full h-screen duration-200 bg-gradient-to-tr from-black via-gray-900 to-indigo-900`}
-`;
+`
 
 const FlexBox = styled.div`
   ${tw`flex justify-around w-full duration-200`}
@@ -108,14 +129,14 @@ const FlexBox = styled.div`
   @media (max-width: 960px) {
     ${tw`justify-center w-full duration-200 h-screen`}
   }
-`;
+`
 
 const LogoWrapper = styled.div`
   ${tw`flex items-center justify-center md:hidden ml-3`}
   svg {
     width: clamp(320px, 25vw, 450px);
   }
-`;
+`
 
 const LoginForm = styled.form`
   ${tw`flex flex-col justify-between ml-24 w-full duration-200 bg-white px-8 py-12 md:py-0`}
@@ -157,4 +178,4 @@ const LoginForm = styled.form`
       ${tw`min-w-max ml-16 xs:mt-0 md:ml-0`}
     }
   }
-`;
+`

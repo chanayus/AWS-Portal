@@ -1,35 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-import { IoChevronForward } from "react-icons/io5";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { IoChevronForward } from "react-icons/io5"
+import Link from "next/link"
+import { useRouter } from "next/router"
 
 const Breadcrumb = () => {
-  let fullPath = "/";
+  let fullPath = "/"
 
   const pathCondition = {
     "/resources/region": "/resources?type=region",
     "/resources/iam": "/resources?type=iam",
-  };
-  const router = useRouter();
-  const { asPath } = router;
+  }
+  const router = useRouter()
+  const { asPath } = router
   const buffer = []
-  const [path, setPath] = useState([]);
+  const [path, setPath] = useState([])
 
   useEffect(() => {
     asPath.split("/").map((value, index) => {
-      const obj = {};
-      fullPath = index > 1 ? fullPath + "/" + value : fullPath + value;
-      obj.pathName = pathCondition[fullPath] ?? fullPath;
+      const obj = {}
+      fullPath = index > 1 ? fullPath + "/" + value : fullPath + value
+      obj.pathName = pathCondition[fullPath] ?? fullPath
       if (value.indexOf("?") >= 0) {
-        obj.displayLink = value.slice(0, value.indexOf("?"));
+        obj.displayLink = value.slice(0, value.indexOf("?"))
       } else {
-        obj.displayLink = value;
+        obj.displayLink = value
       }
       buffer.push(obj)
       setPath(buffer)
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <div className="flex items-center mb-4">
@@ -42,7 +42,7 @@ const Breadcrumb = () => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Breadcrumb;
+export default Breadcrumb
