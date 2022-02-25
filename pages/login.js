@@ -79,7 +79,7 @@ const Login = () => {
               </div>
               <h1 className="text-black md:text-white text-5xl sm:text-3xl font-bold md:ml-3">เข้าสู่ระบบ</h1>
             </div>
-            {error && <div className="border border-red-600 bg-red-300 p-2 pl-4 rounded-md text-red-600">{error}</div>}
+            {error && <div className="border border-red-600 bg-red-200 p-2 pl-4 rounded-md text-red-600">{error}</div>}
             <div className="form-group">
               <TextInput
                 type="text"
