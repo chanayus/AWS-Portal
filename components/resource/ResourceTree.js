@@ -1,6 +1,6 @@
+import BoxLoader from "../loader/BoxLoader"
 import ResourceTreeItems from "./ResourceTreeItems"
 import { useFetch } from "../../hooks/useFetch"
-import BoxLoader from "../loader/BoxLoader"
 
 const ResourceTree = () => {
   const { loading, data } = useFetch("/api/used", () => {}, false)
@@ -14,7 +14,7 @@ const ResourceTree = () => {
   } else {
     return (
       <div>
-        {(data ?? []).map((item, index) => (
+        {(data ?? []).map((item) => (
           <div className="mb-12" key={item.resourceId}>
             <ResourceTreeItems item={item} />
           </div>

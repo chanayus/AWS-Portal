@@ -21,6 +21,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
     },
     iam: { as: `/resources/iam/${title}`, href: "/resources/iam/[iamName]" },
   }
+
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 },
