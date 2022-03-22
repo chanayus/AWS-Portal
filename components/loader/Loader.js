@@ -1,8 +1,8 @@
 import { keyframes } from "styled-components"
 import styled from "styled-components"
 
-const Loader = () => {
-  return <Load />
+const Loader = ({ size = 38 }) => {
+  return <Load size={size} />
 }
 
 const rotate = keyframes`
@@ -11,8 +11,8 @@ const rotate = keyframes`
 `
 
 const Load = styled.div`
-  width: 38px;
-  height: 38px;
+  width: ${(props) => `${props.size}px`};
+  height: ${(props) => `${props.size}px`};
   border: 4px ${(props) => props.theme.textColor} solid;
   border-top: 4px ${(props) => props.theme.bodyColor} solid;
   border-radius: 50%;

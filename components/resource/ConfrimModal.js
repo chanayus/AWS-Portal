@@ -14,14 +14,14 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
   const [confrimData, setConfrimData] = useState([])
 
   const operationCallback = ({ data, status }) => {
-    setLoading(false)
     if (status === 200) {
       const confrimResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
       setConfrimData(confrimResourcesARN)
     }
+    setLoading(false)
   }
 
-  const removeDisplayResourcesHandle = () => {
+  const removeDisplayResources = () => {
     setModalVisible(false)
     setResources(resources.filter((item) => !confrimData.includes(item.ResourceARN)))
   }
@@ -45,7 +45,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
   useEffect(() => {
     if (confrimData.length) {
       const closeModal = setTimeout(() => {
-        removeDisplayResourcesHandle()
+        removeDisplayResources()
       }, 2000)
       return () => {
         clearTimeout(closeModal)
@@ -104,6 +104,16 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
                     <p className="max-w-xs"> {value.resourceId}</p>
                     <p className="text-gray-400"> {value.owner}</p>
                   </div>
+                  {loading && !confrimData.includes(value.resourceARN) && (
+                    <div className="ml-3">
+                      <Loader size={22} />
+                    </div>
+                  )}
+                  {confrimData.includes(value.ResourceARN) && (
+                    <div className="w-6 h-6 p-0 m-0 ml-3 bg-green-600 flex rounded-full justify-center items-center">
+                      <HiCheck color="#FFF" size="1.25rem" />
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -122,7 +132,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
                 />
               </div>
               <div className="flex justify-end md:mt-3 mt-4">
-                <button className="px-5 py-2 rounded duration-200 dynamic-text" onClick={() => removeDisplayResourcesHandle()}>
+                <button className="px-5 py-2 rounded duration-200 dynamic-text" onClick={() => removeDisplayResources()}>
                   ยกเลิก
                 </button>
                 <button

@@ -23,13 +23,13 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
   }
 
   const item = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 10, opacity: 0 },
     visible: { y: 0, opacity: 1 },
     transition: { duration: 0.35 },
   }
   return (
     <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]} scroll={false}>
-      <Card variants={item} whileHover={{ scale: 0.965 }} key={type}>
+      <Card whileHover={{ x: 5 }} variants={item} key={type}>
         {type === "service" ? (
           <Image src={`/images/resourceIcon/${title}.png`} width="56px" height="56px" alt="service-card-icon" />
         ) : (
@@ -55,7 +55,7 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
 }
 
 const Card = styled(motion.a)`
-  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end shadow-md rounded-xl md:px-3 sm:pb-6`}
+  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end shadow-md rounded-xl md:px-3 sm:pb-6 translate-y-0`}
   width: 400px;
   max-width: 100%;
   height: 140px;

@@ -4,7 +4,6 @@ const dataFilter = (resource, value) => {
 
 export const useTextFilter = (data, condition) => {
   condition = condition.toLowerCase()
-  console.log(condition, data)
   if (condition === "") {
     return data
   } else {
