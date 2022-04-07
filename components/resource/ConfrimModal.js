@@ -12,13 +12,19 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
   const [comfirmText, setConfirmText] = useState("")
   const [loading, setLoading] = useState(false)
   const [confrimData, setConfrimData] = useState([])
+  const [deleteResourcesCount, setDeleteResourcesCount] = useState(0)
 
   const operationCallback = ({ data, status }) => {
+    console.log(deleteResourcesCount)
     if (status === 200) {
       const confrimResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
-      setConfrimData(confrimResourcesARN)
+      if (confrimResourcesARN)
+        setConfrimData([...confrimData, ...confrimResourcesARN])
     }
-    setLoading(false)
+    if (deleteResourcesCount+1 >= selectedData.length){
+      setLoading(false)
+    }
+    setDeleteResourcesCount(deleteResourcesCount+1)
   }
 
   const removeDisplayResources = () => {
@@ -29,7 +35,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
   const operationHandle = () => {
     if (type === "delete") {
       setLoading(true)
-      deleteResources(selectedData, operationCallback)
+      deleteResources(selectedData.slice(0, 1), operationCallback)
     } else {
       console.log("stop resources")
     }
@@ -52,6 +58,13 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
       }
     }
   }, [confrimData])
+
+  useEffect(() => {
+    // console.log(selectedData.slice(deleteResourcesCount, deleteResourcesCount+1))
+    if (deleteResourcesCount > 0 && deleteResourcesCount <= selectedData.length){
+      deleteResources(selectedData.slice(deleteResourcesCount, deleteResourcesCount+1), operationCallback)
+    }
+  }, [deleteResourcesCount])
 
   const modalContent = {
     headerTitle: type === "stop" ? "ยืนยันการหยุด Resources" : "ยืนยันการลบ Resources",
