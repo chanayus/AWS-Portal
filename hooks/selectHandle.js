@@ -9,10 +9,12 @@ export const chooseHandle = (item, data, setState) => {
   )
 }
 
-export const chooseAllHandle = (data, setState, isSelectAll, setIsSelectAll) => {
+export const chooseAllHandle = (data, setState, isSelectAll, setIsSelectAll, includeList = []) => {
   setState(
     data.map((value) => {
-      value.isChoose = isSelectAll ? false : true
+      if (includeList.includes(value.resourceType ?? "undefined")) {
+        value.isChoose = isSelectAll ? false : true
+      }
       return value
     })
   )

@@ -18,13 +18,12 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
     console.log(deleteResourcesCount)
     if (status === 200) {
       const confrimResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
-      if (confrimResourcesARN)
-        setConfrimData([...confrimData, ...confrimResourcesARN])
+      if (confrimResourcesARN) setConfrimData([...confrimData, ...confrimResourcesARN])
     }
-    if (deleteResourcesCount+1 >= selectedData.length){
+    if (deleteResourcesCount + 1 >= selectedData.length) {
       setLoading(false)
     }
-    setDeleteResourcesCount(deleteResourcesCount+1)
+    setDeleteResourcesCount(deleteResourcesCount + 1)
   }
 
   const removeDisplayResources = () => {
@@ -61,8 +60,8 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
 
   useEffect(() => {
     // console.log(selectedData.slice(deleteResourcesCount, deleteResourcesCount+1))
-    if (deleteResourcesCount > 0 && deleteResourcesCount <= selectedData.length){
-      deleteResources(selectedData.slice(deleteResourcesCount, deleteResourcesCount+1), operationCallback)
+    if (deleteResourcesCount > 0 && deleteResourcesCount <= selectedData.length) {
+      deleteResources(selectedData.slice(deleteResourcesCount, deleteResourcesCount + 1), operationCallback)
     }
   }, [deleteResourcesCount])
 
@@ -91,12 +90,14 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
         transition={{ duration: 0.3 }}
         className="flex flex-col items-between rounded-2xl p-10 shadow lg:mx-4 lg:px-4 lg:py-4"
       >
+        {/* Header */}
         <div className="h-fit mb-2">
           <h2 className="text-xl font-bold mb-2 md:text-lg md:mb-1">{modalContent.headerTitle}</h2>
           <p>{modalContent.title}</p>
         </div>
+        {/* Each Resource List */}
         <div className="h-full overflow-hidden flex flex-col items-between">
-          <div className="resource-list flex-grow-2 overflow-y-scroll px-3 my-2 sm:px-1 overflow-x-hidden">
+          <div className="resource-list flex-1 overflow-y-scroll px-3 my-2 sm:px-1 overflow-x-hidden">
             {selectedData.map((value, index) => (
               <div className="dynamic-text flex justify-between py-2 md:py-1 items-center border-b border-gray-600 border-opacity-40" key={index}>
                 <div className="flex items-center sm:flex-col sm:items-start">
@@ -131,6 +132,8 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
               </div>
             ))}
           </div>
+
+          {/* Footer */}
           {!loading && confrimData <= 0 && (
             <div className="p-1">
               <p className="my-2">{`พิมพ์ ${type} เพื่อดำเนินการต่อ`}</p>

@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { CheckBox, TableWrapper } from "../../styles/styleComponents"
-import { HiArrowDown, HiArrowUp } from "react-icons/hi"
+import { HiArrowDown, HiArrowUp, HiOutlineExclamationCircle, HiOutlineTrash, HiX } from "react-icons/hi"
 import { chooseAllHandle, chooseHandle } from "../../hooks/selectHandle"
 import { useEffect, useState } from "react"
 
@@ -9,16 +9,19 @@ import Image from "../main/Image"
 import { IoCubeOutline } from "react-icons/io5"
 import dayjs from "dayjs"
 import dynamic from "next/dynamic"
+import { useFetch } from "../../hooks/useFetch"
 import useForceUpdate from "use-force-update"
 import { useMediaQuery } from "react-responsive"
 import { useRouter } from "next/router"
 import { useSorting } from "../../hooks/useSorting"
 
-const ResouceTableMobile = dynamic(import("./ResourceTableMobile"))
+const ResourceTableMobile = dynamic(import("./ResourceTableMobile"))
 const ResourcesSelected = dynamic(import("../resource/ResourcesSelected"))
 
 const ResourceTable = ({ resources, setResources }) => {
   const forceUpdate = useForceUpdate()
+  const { loading, data: deleteAble } = useFetch("/api/deleteable", () => {}, false)
+
   const router = useRouter()
   const { pathname } = router
   const isServicePage = pathname === "/resources/[serviceName]"
@@ -26,24 +29,29 @@ const ResourceTable = ({ resources, setResources }) => {
 
   const isMobileScreen = useMediaQuery({ query: "(max-width: 640px)" })
 
-  const [displayResouces, setDisplayResources] = useState([...resources]) // for display resources data
+  const [displayResources, setDisplayResources] = useState([...resources]) // for display resources data
 
-  const [sortData, setSortData] = useState({
+  const [selectDelete, setSelectDelete] = useState(false)
+
+  const defaultSort = {
     resource: "default",
     region: "default",
     createdAt: "default",
     owner: "default",
     resourceId: "default",
-  })
+  }
+
+  const [sortData, setSortData] = useState(defaultSort)
 
   useEffect(() => {
     const sort = Object.keys(sortData).find((key) => sortData[key] !== "default")
-    if (sort) {
-      setDisplayResources(useSorting([...resources], sort, sortData[sort]))
-    } else {
-      setDisplayResources([...resources])
-    }
+    sort ? setDisplayResources(useSorting([...resources], sort, sortData[sort])) : setDisplayResources([...resources])
   }, [resources])
+
+  const toggleSelectDelete = (toggle) => {
+    !toggle && chooseAllHandle(displayResources, setDisplayResources, true, setIsSelectAll)
+    setSelectDelete(toggle)
+  }
 
   const sortingHandle = (sortKey, sortValue) => {
     const nextValue = {
@@ -51,72 +59,83 @@ const ResourceTable = ({ resources, setResources }) => {
       first: "last",
       last: "default",
     }
-    const reset = {
-      resource: "default",
-      region: "default",
-      createdAt: "default",
-      owner: "default",
-      resourceId: "default",
-    }
     setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]))
-    setSortData({ ...reset, [sortKey]: nextValue[sortValue] })
+    setSortData({ ...defaultSort, [sortKey]: nextValue[sortValue] })
     forceUpdate()
   }
 
-  // Animation
-  const arrowUpVariant = {
-    hidden: {
-      y: 10,
-      opacity: 0,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  }
-
-  const arrowDownVariant = {
-    hidden: {
-      y: -10,
-      opacity: 0,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  }
-
   const arrowHandle = (status) => {
-    return status === "first" ? (
-      <motion.div variants={arrowUpVariant} initial={"hidden"} animate={"visible"} exit={"hidden"} key={"up"} transition={{ duration: 0.125 }}>
-        <HiArrowUp />
-      </motion.div>
-    ) : status === "last" ? (
-      <motion.div variants={arrowDownVariant} initial={"hidden"} animate={"visible"} exit={"hidden"} key={"down"} transition={{ duration: 0.125 }}>
-        <HiArrowDown />
-      </motion.div>
-    ) : (
-      <div className="w-4 h-4"></div>
-    )
+    if (status === "first") {
+      return (
+        <motion.div
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 10, opacity: 0 }}
+          transition={{ duration: 0.125 }}
+          key={"first"}
+        >
+          <HiArrowUp />
+        </motion.div>
+      )
+    } else if (status === "last") {
+      return (
+        <motion.div
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -10, opacity: 0 }}
+          transition={{ duration: 0.125 }}
+          key={"last"}
+        >
+          <HiArrowDown />
+        </motion.div>
+      )
+    } else {
+      return <div className="w-4 h-4"></div>
+    }
   }
+
+  const tableHeadData = [
+    { title: "Resource", function: () => sortingHandle("resource", sortData.resource), sort: sortData.resource },
+    { title: "Region", function: () => sortingHandle("region", sortData.region), sort: sortData.region },
+    { title: "สร้างเมื่อ", function: () => sortingHandle("createdAt", sortData.createdAt), sort: sortData.createdAt },
+    { title: "สร้างโดย", function: () => sortingHandle("owner", sortData.owner), sort: sortData.owner },
+    { title: "Resource id", function: () => sortingHandle("resourceId", sortData.resourceId), sort: sortData.resourceId },
+  ]
+
   return (
     <>
       <AnimatePresence>
-        {displayResouces.filter((value) => value.isChoose).length === 0 ? null : (
+        {selectDelete && (
           <ResourcesSelected
             setResources={setResources}
             resources={resources}
-            selectedData={displayResouces.filter((value) => value.isChoose)}
+            selectedData={displayResources.filter((value) => value.isChoose)}
             setDisplayResources={setDisplayResources}
           />
         )}
       </AnimatePresence>
+      <button
+        className={`p-0 min-w-[3.5rem] w-fit h-14 bg-rose-700 rounded-full flex items-center text-lg fixed z-10
+          bottom-[25px] md:bottom-[75px] sm:hidden right-[20px] duration-300 ${selectDelete && "translate-y-[-75px]"}
+        `}
+        onClick={() => toggleSelectDelete(!selectDelete)}
+      >
+        {selectDelete ? (
+          <div className="px-3 flex items-center">
+            <HiX size="1.75rem" className="text-white" />
+            <p className="text-lg text-white">ยกเลิก</p>
+          </div>
+        ) : (
+          <HiOutlineTrash size="1.75rem" className="mx-auto text-white" />
+        )}
+      </button>
 
-      <div className="mt-6 mb-3 flex justify-start">
-        <p className="opacity-80">ผลการค้นหา {displayResouces.length} รายการ</p>
+      <div className="mt-6 mb-3 flex justify-between items-center">
+        <p className="opacity-80">ผลการค้นหา {displayResources.length} รายการ</p>
       </div>
       <AnimatePresence exitBeforeEnter>
-        {displayResouces.length === 0 ? (
+        {/* Resource Not Found Text */}
+        {displayResources.length === 0 ? (
           <motion.div
             className="w-full flex flex-col items-center opacity-50"
             exit={{ opacity: 0 }}
@@ -129,67 +148,47 @@ const ResourceTable = ({ resources, setResources }) => {
             <h2 className="text-2xl font-light">ไม่พบข้อมูล Resource</h2>
           </motion.div>
         ) : (
-          <TableWrapper exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={"resorce-table"}>
+          // Table
+          <TableWrapper exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} key={"resource-table"}>
             <table>
               <thead className="sm:hidden">
+                {/* Choose All CheckBox */}
                 <tr>
-                  <th className="w-2">
-                    <CheckBox
-                      className={`${isSelectAll ? "checked" : null}`}
-                      onClick={() => chooseAllHandle(displayResouces, setDisplayResources, isSelectAll, setIsSelectAll)}
-                    >
-                      {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
-                    </CheckBox>
-                  </th>
-                  <th width="20%">
-                    <div className="flex items-center">
-                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("resource", sortData.resource)}>
-                        Resource
-                      </p>
-                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.resource)}</AnimatePresence>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="flex items-center">
-                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("region", sortData.region)}>
-                        Region
-                      </p>
-                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.region)}</AnimatePresence>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="flex items-center">
-                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("createdAt", sortData.createdAt)}>
-                        สร้างเมื่อ
-                      </p>
-                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.createdAt)}</AnimatePresence>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="flex items-center">
-                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("owner", sortData.owner)}>
-                        สร้างโดย
-                      </p>
-                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.owner)}</AnimatePresence>
-                    </div>
-                  </th>
-                  <th className="pl-1">
-                    <div className="flex items-center">
-                      <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("resourceId", sortData.resourceId)}>
-                        Resource id
-                      </p>
-                      <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.resourceId)}</AnimatePresence>
-                    </div>
-                  </th>
+                  {selectDelete && (
+                    <motion.th className="w-2" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+                      <CheckBox
+                        className={`${isSelectAll ? "checked" : null}`}
+                        onClick={() =>
+                          chooseAllHandle(displayResources, setDisplayResources, isSelectAll, setIsSelectAll, deleteAble.deleteAbleResourcesType)
+                        }
+                      >
+                        {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
+                      </CheckBox>
+                    </motion.th>
+                  )}
+                  {/* Loop Table Header Data */}
+                  {tableHeadData.map((item, index) => (
+                    <motion.th width={index === 0 ? "20%" : "auto"} className={`${item.title === "Resource id" && "pl-1"}`} key={index}>
+                      <div className="flex items-center">
+                        <p className="cursor-pointer w-min select-none mr-1" onClick={item.function}>
+                          {item.title}
+                        </p>
+                        <AnimatePresence exitBeforeEnter>{arrowHandle(item.sort)}</AnimatePresence>
+                      </div>
+                    </motion.th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
+                {/* Select All for Mobile */}
                 <tr className="hidden sm:block">
                   <td>
                     <div className="flex justify-start mx-0">
                       <CheckBox
                         className={`${isSelectAll ? "checked" : null} m-0`}
-                        onClick={() => chooseAllHandle(displayResouces, setDisplayResources, isSelectAll, setIsSelectAll)}
+                        onClick={() =>
+                          chooseAllHandle(displayResources, setDisplayResources, isSelectAll, setIsSelectAll, deleteAble.deleteAbleResourcesType)
+                        }
                       >
                         {isSelectAll ? <FaCheck color="white" size="0.75rem" /> : null}
                       </CheckBox>
@@ -197,27 +196,42 @@ const ResourceTable = ({ resources, setResources }) => {
                     </div>
                   </td>
                 </tr>
-                {displayResouces.map((value, index) => {
+                {displayResources.map((value, index) => {
+                 const canDelete = deleteAble?.deleteAbleResourcesType?.includes(value.resourceType)
                   return (
-                    <tr key={index} className={`${value.isChoose ? "selected" : null}`}>
-                      <td className="sm:hidden">
-                        <CheckBox
-                          className={`${value.isChoose ? "checked" : null}`}
-                          onClick={() => chooseHandle(value, displayResouces, setDisplayResources)}
-                        >
-                          {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
-                        </CheckBox>
-                      </td>
+                    // CheckBok each of item
+                    <tr
+                      key={index}
+                      className={`${value.isChoose ? "selected" : null} ${
+                        !canDelete && selectDelete ? "opacity-30" : "opacity-100"
+                      }`}
+                    >
+                      {selectDelete && (
+                        <motion.td className="sm:hidden" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+                          {deleteAble.deleteAbleResourcesType.includes(value.resourceType) ? (
+                            <CheckBox
+                              className={`${value.isChoose ? "checked" : null}`}
+                              onClick={() => chooseHandle(value, displayResources, setDisplayResources)}
+                            >
+                              {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
+                            </CheckBox>
+                          ) : (
+                            <HiOutlineExclamationCircle size="1.5rem" color="rgba(255,255,25,0.75)" />
+                          )}
+                        </motion.td>
+                      )}
+                      {/*  Mobile Table */}
                       {isMobileScreen ? (
-                        <ResouceTableMobile
+                        <ResourceTableMobile
                           value={value}
                           isServicePage={isServicePage}
-                          displayResouces={displayResouces}
+                          displayResources={displayResources}
                           setDisplayResources={setDisplayResources}
                         />
                       ) : (
+                        // Table content for Desktop
                         <>
-                          <td className="sm:hidden">
+                          <motion.td className="sm:hidden">
                             <div className="flex items-center">
                               <Image
                                 classProps="w-9 rounded"
@@ -227,28 +241,28 @@ const ResourceTable = ({ resources, setResources }) => {
                                 alt="service-icon"
                               />
                               <div className="flex flex-col overflow-hidden  ml-2">
-                                {isServicePage ? null : <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
-                                {isServicePage && value.serviceName === value.resourceType ? (
+                                {!isServicePage && <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
+                                {isServicePage && value.serviceName === value.resourceType && (
                                   <p className="text-left font-medium truncate">{value.serviceName}</p>
-                                ) : null}
-                                {value.serviceName === value.resourceType ? null : (
+                                )}
+                                {value.serviceName !== value.resourceType && (
                                   <p
                                     className={`max-w-18 text-left break-all ${isServicePage ? "dynamic-text" : " text-gray-500"}`}
                                   >{`${value.resourceType}`}</p>
                                 )}
                               </div>
                             </div>
-                          </td>
-                          <td className="sm:hidden">{value.region}</td>
-                          <td className="sm:hidden">
+                          </motion.td>
+                          <motion.td className="sm:hidden">{value.region}</motion.td>
+                          <motion.td className="sm:hidden">
                             {dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date"
                               ? "-"
                               : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}
-                          </td>
-                          <td className="sm:hidden">{value.owner ? value.owner : "-"}</td>
-                          <td className="sm:hidden pl-1 w-52 lg:w-32">
+                          </motion.td>
+                          <motion.td className="sm:hidden">{value.owner ? value.owner : "-"}</motion.td>
+                          <motion.td className="sm:hidden pl-1 w-52 lg:w-32">
                             <p className="w-52 lg:w-32 break-all mr-0">{`${value.resourceId}`}</p>
-                          </td>
+                          </motion.td>
                         </>
                       )}
                     </tr>

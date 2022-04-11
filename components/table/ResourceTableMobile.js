@@ -1,10 +1,10 @@
-import Image from "../main/Image"
 import { CheckBox } from "../../styles/styleComponents"
-import { chooseHandle } from "../../hooks/selectHandle"
 import { FaCheck } from "react-icons/fa"
+import Image from "../main/Image"
+import { chooseHandle } from "../../hooks/selectHandle"
 import dayjs from "dayjs"
 
-const ResourceTableMobile = ({ value, isServicePage, displayResouces, setDisplayResources }) => {
+const ResourceTableMobile = ({ value, isServicePage, displayResources, setDisplayResources }) => {
   return (
     <td className="hidden sm:block pt-3 px-3">
       <div className="hidden sm:flex justify-between items-center my-1 pb-1">
@@ -22,7 +22,7 @@ const ResourceTableMobile = ({ value, isServicePage, displayResouces, setDisplay
           </div>
         </div>
         <div>
-          <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResouces, setDisplayResources)}>
+          <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResources, setDisplayResources)}>
             {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
           </CheckBox>
         </div>
