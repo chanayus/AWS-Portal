@@ -49,7 +49,7 @@ const ResourceTable = ({ resources, setResources }) => {
   }, [resources])
 
   const toggleSelectDelete = (toggle) => {
-    !toggle && chooseAllHandle(displayResources, setDisplayResources, true, setIsSelectAll)
+    !toggle && chooseAllHandle(displayResources, setDisplayResources, true, setIsSelectAll, deleteAble.deleteAbleResourcesType)
     setSelectDelete(toggle)
   }
 
@@ -116,7 +116,7 @@ const ResourceTable = ({ resources, setResources }) => {
       </AnimatePresence>
       <button
         className={`p-0 min-w-[3.5rem] w-fit h-14 bg-rose-700 rounded-full flex items-center text-lg fixed z-10
-          bottom-[25px] md:bottom-[75px] sm:hidden right-[20px] duration-300 ${selectDelete && "translate-y-[-75px]"}
+          bottom-[25px] md:bottom-[75px] sm:hidden right-[20px] duration-200 ${selectDelete && "translate-y-[-65px]"}
         `}
         onClick={() => toggleSelectDelete(!selectDelete)}
       >
@@ -203,7 +203,7 @@ const ResourceTable = ({ resources, setResources }) => {
                     <tr
                       key={index}
                       className={`${value.isChoose ? "selected" : null} ${
-                        !canDelete && selectDelete ? "opacity-30" : "opacity-100"
+                        !canDelete && selectDelete ? "opacity-40" : "opacity-100"
                       }`}
                     >
                       {selectDelete && (
@@ -216,7 +216,7 @@ const ResourceTable = ({ resources, setResources }) => {
                               {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
                             </CheckBox>
                           ) : (
-                            <HiOutlineExclamationCircle size="1.5rem" color="rgba(255,255,25,0.75)" />
+                            <HiOutlineExclamationCircle size="1.5rem" color="rgba(255,25,25,1)" />
                           )}
                         </motion.td>
                       )}

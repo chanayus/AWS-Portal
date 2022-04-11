@@ -21,7 +21,7 @@ const ResourcesSelected = (props) => {
       >
         <AnimatePresence exitBeforeEnter>
           {selectedData.length === 0 ? (
-            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} className="py-2" key={"no-select"}>
+            <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }} className="py-1" key={"no-select"}>
               โปรดทำการเลือก Resource ที่ต้องการลบ
             </motion.div>
           ) : (
@@ -39,7 +39,7 @@ const ResourcesSelected = (props) => {
                   <AiOutlinePause />
                   หยุด
                 </button> */}
-                <button onClick={() => setDeleteModalVisible(true)} className="bg-white text-black px-3 py-2 rounded flex items-center">
+                <button onClick={() => setDeleteModalVisible(true)} className="bg-white text-black px-3 py-1 rounded flex items-center">
                   <AiOutlineDelete />
                   ลบ
                 </button>
