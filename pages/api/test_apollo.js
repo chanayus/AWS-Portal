@@ -15,7 +15,7 @@ const handler = async (req, res) => {
       `,
     })
     res.status(200).json(data)
-  } catch (e) {
+  } catch (err) {
     res.status(400).json(err)
   }
 }
