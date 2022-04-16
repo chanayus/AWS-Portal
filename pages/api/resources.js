@@ -21,6 +21,7 @@ export default async function handler(req, res) {
                 Key
                 Value
               }
+              resourceId
             }
             ap_southeast_1 {
               ResourceARN
@@ -28,6 +29,7 @@ export default async function handler(req, res) {
                 Key
                 Value
               }
+              resourceId
             }
           }
         }
@@ -48,11 +50,12 @@ export default async function handler(req, res) {
       "us-east-1": resourcesTagging.us_east_1,
       "ap-southeast-1": resourcesTagging.ap_southeast_1
     }
+    res.json(newResourcesTagging)
 
     // const fetch = require("node-fetch")
     // const request = await fetch(`${process.env.GET_RESOURCES_END_POINT}/get-resources/`)
     // const dataJson = await request.json()
-    res.json(newResourcesTagging)
+    // res.json(dataJson)
   } catch (err){
     res.status(400).json(err)
   }
