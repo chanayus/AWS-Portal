@@ -26,7 +26,7 @@ const Breadcrumb = () => {
       } else {
         obj.displayLink = value
       }
-      buffer.push(obj)
+      obj.displayLink !== "detail" && buffer.push(obj)
       setPath(buffer)
     })
   }, [])
