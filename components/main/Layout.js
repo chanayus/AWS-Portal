@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 
 const Layout = ({ children }) => {
   const router = useRouter()
-  const excludePath = ["/login", "/_error"]
+  const excludePath = ["/login", "/_error", "/404"]
   const isHidden = excludePath?.find((value) => value === router.pathname)
 
   return (

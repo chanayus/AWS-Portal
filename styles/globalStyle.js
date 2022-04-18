@@ -132,8 +132,14 @@ export const GlobalStyle = createGlobalStyle`
     .dynamic-bg{
         background:  ${(props) => props.theme.subColor};
     }
+    .dynamic-bg-invert{
+        background: ${(props) => (props.theme.themeName === "dark" ? "#e1e1e1" : "#2a2a2a")};
+    }
     .dynamic-text{
         color:  ${(props) => props.theme.textColor};
+    }
+    .dynamic-text-invert{
+        color:  ${(props) => (props.theme.themeName === "dark" ? "#2a2a2a" : "#e1e1e1")};
     }
     .skeleton{
         background: ${(props) => (props.theme.themeName === "dark" ? "#555" : "#ccc")};

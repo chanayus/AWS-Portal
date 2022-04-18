@@ -14,7 +14,7 @@ const Login = () => {
   const router = useRouter()
   const { user, userHandle } = useContext(SetUserContext)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("");
+  const [error, setError] = useState("")
 
   const changeRecord = (e) => {
     const { name, value } = e?.target
@@ -79,8 +79,18 @@ const Login = () => {
               </div>
               <h1 className="text-black md:text-white text-5xl sm:text-3xl font-bold md:ml-3">เข้าสู่ระบบ</h1>
             </div>
-            {error && <div className="border border-red-600 bg-red-200 p-2 pl-4 rounded-md text-red-600">{error}</div>}
-            <div className="form-group">
+            {error && (
+              <motion.div
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="border border-red-600 bg-red-200 p-2 pl-4 rounded-md text-red-600"
+              >
+                {error}
+              </motion.div>
+            )}
+            <motion.div layout className="form-group">
               <TextInput
                 type="text"
                 name="username"
@@ -99,7 +109,7 @@ const Login = () => {
                 value={record?.password ?? ""}
                 setValueHandler={changeRecord}
               />
-            </div>
+            </motion.div>
             <div className="button-group">
               <a onClick={loginHandler}>เข้าสู่ระบบ</a>
               <a href="">ลืมรหัสผ่าน ?</a>
@@ -159,6 +169,7 @@ const LoginForm = styled.form`
   .button-group {
     ${tw`flex items-center flex-wrap gap-y-7 md:justify-around`}
     a:first-child {
+      ${tw`rounded-sm`}
       flex: 1;
       max-width: 250px;
       min-width: 250px;
