@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import styled from "styled-components"
 import tw from "twin.macro"
 
-const ResourceType = ({ title, totalResource, totalRegion, type }) => {
+const ResourceType = ({ title, totalResource, totalRegion, type, index }) => {
   const subTypeCondition = {
     service: "region",
     region: "IAM User",
@@ -15,21 +15,20 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
 
   const linkCondition = {
     service: { as: `/resources/${title}`, href: "/resources/[serviceName]" },
-    region: {
-      as: `/resources/region/${title}`,
-      href: "/resources/region/[regionName]",
-    },
+    region: { as: `/resources/region/${title}`, href: "/resources/region/[regionName]" },
     iam: { as: `/resources/iam/${title}`, href: "/resources/iam/[iamName]" },
   }
 
-  const item = {
-    hidden: { y: 10, opacity: 0 },
-    visible: { y: 0, opacity: 1 },
-    transition: { duration: 0.35 },
-  }
   return (
     <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]} scroll={false}>
-      <Card whileHover={{ x: 5 }} variants={item} key={type}>
+      <Card
+        whileHover={{ y: 5, transition: { duration: 0.2 } }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        key={type+index}
+      >
         {type === "service" ? (
           <Image src={`/images/resourceIcon/${title}.png`} width="56px" height="56px" alt="service-card-icon" />
         ) : (
@@ -55,12 +54,13 @@ const ResourceType = ({ title, totalResource, totalRegion, type }) => {
 }
 
 const Card = styled(motion.a)`
-  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end shadow-md rounded-xl md:px-3 sm:pb-6 translate-y-0`}
+  ${tw`flex px-5 pt-2 pb-5 relative flex-col justify-end shadow-md rounded-xl md:px-3 sm:pb-6`}
   width: 400px;
   max-width: 100%;
   height: 140px;
   background: ${(props) => props.theme.subColor};
   cursor: pointer;
+
   img {
     ${tw`absolute w-14 -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 `}
   }

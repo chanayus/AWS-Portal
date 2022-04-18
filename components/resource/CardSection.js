@@ -1,4 +1,4 @@
-import { AnimateSharedLayout, motion } from "framer-motion"
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion"
 import { FaList, FaTh } from "react-icons/fa"
 import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi"
 
@@ -31,16 +31,8 @@ const CardSection = ({ data, setDisplayType, type }) => {
   }
 
   const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0,
-        delayChildren: 0.05,
-        staggerChildren: 0.075,
-      },
-    },
+    hidden: { opacity: 1 },
+    visible: { opacity: 1 },
   }
 
   return (
@@ -89,27 +81,25 @@ const CardSection = ({ data, setDisplayType, type }) => {
           </button>
         </div>
       </div>
-      <motion.div
-        className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 md:grid-cols-2 md:gap-x-4"
-        variants={container}
-        initial="hidden"
-        animate="visible"
-      >
-        {getUniqueData(data, typeCondition[cardType]).map((value, index) => (
-          <ResourceCard
-            key={index}
-            title={value}
-            type={cardType}
-            totalResource={data.filter((resource) => resource[typeCondition[cardType]] === value).length}
-            totalRegion={
-              getUniqueData(
-                data.filter((resource) => resource[typeCondition[cardType]] === value),
-                [subTypeCondition[cardType]]
-              ).length
-            }
-          />
-        ))}
-      </motion.div>
+      <div className="mt-12 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 md:grid-cols-2 md:gap-x-4">
+        <AnimatePresence exitBeforeEnter>
+          {getUniqueData(data, typeCondition[cardType]).map((value, index) => (
+            <ResourceCard
+              key={index}
+              title={value}
+              type={cardType}
+              index={index}
+              totalResource={data.filter((resource) => resource[typeCondition[cardType]] === value).length}
+              totalRegion={
+                getUniqueData(
+                  data.filter((resource) => resource[typeCondition[cardType]] === value),
+                  [subTypeCondition[cardType]]
+                ).length
+              }
+            />
+          ))}
+        </AnimatePresence>
+      </div>
     </>
   )
 }
