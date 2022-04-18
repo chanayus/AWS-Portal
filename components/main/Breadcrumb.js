@@ -36,7 +36,9 @@ const Breadcrumb = () => {
       {path.map((value, index) => (
         <div className="flex items-center dynamic-text" key={index}>
           <Link href={`${value.pathName}`}>
-            <a className={`capitalize ${index === path.length - 1 ? null : "opacity-70"}`}>{value.displayLink === "" ? "home" : value.displayLink}</a>
+            <a className={`max-w-[22.5vw] truncate  capitalize ${index === path.length - 1 ? null : "opacity-70"}`}>
+              {value.displayLink === "" ? "home" : value.displayLink}
+            </a>
           </Link>
           {index === path.length - 1 ? null : <IoChevronForward size="1.1rem" className="opacity-70" style={{ margin: "0 8px" }} />}
         </div>

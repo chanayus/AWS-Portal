@@ -34,7 +34,7 @@ const ResourceTable = ({ resources, setResources }) => {
   const [selectDelete, setSelectDelete] = useState(false)
 
   const defaultSort = {
-    resource: "default",
+    resource: "first",
     region: "default",
     createdAt: "default",
     owner: "default",
@@ -59,8 +59,13 @@ const ResourceTable = ({ resources, setResources }) => {
       first: "last",
       last: "default",
     }
-    setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]))
-    setSortData({ ...defaultSort, [sortKey]: nextValue[sortValue] })
+    if (nextValue[sortValue] === "default") {
+      setSortData({ ...defaultSort, resource: "first" })
+      setDisplayResources(useSorting([...resources], "resource", "first"))
+    } else {
+      setSortData({ ...defaultSort, resource: "default", [sortKey]: nextValue[sortValue] })
+      setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]))
+    }
     forceUpdate()
   }
 
@@ -104,6 +109,7 @@ const ResourceTable = ({ resources, setResources }) => {
 
   return (
     <>
+      {/* Resource Selected popup */}
       <AnimatePresence>
         {selectDelete && (
           <ResourcesSelected
@@ -114,6 +120,8 @@ const ResourceTable = ({ resources, setResources }) => {
           />
         )}
       </AnimatePresence>
+
+      {/* Delete Button */}
       <button
         className={`p-0 min-w-[3.5rem] w-fit h-14 bg-rose-700 rounded-full flex items-center text-lg fixed z-10
           bottom-[25px] md:bottom-[75px] sm:hidden right-[20px] duration-200 ${selectDelete && "translate-y-[-65px]"}
@@ -197,15 +205,10 @@ const ResourceTable = ({ resources, setResources }) => {
                   </td>
                 </tr>
                 {displayResources.map((value, index) => {
-                 const canDelete = deleteAble?.deleteAbleResourcesType?.includes(value.resourceType)
+                  const canDelete = deleteAble?.deleteAbleResourcesType?.includes(value.resourceType)
                   return (
                     // CheckBok each of item
-                    <tr
-                      key={index}
-                      className={`${value.isChoose ? "selected" : null} ${
-                        !canDelete && selectDelete ? "opacity-40" : "opacity-100"
-                      }`}
-                    >
+                    <tr key={index} className={`${value.isChoose ? "selected" : null} ${!canDelete && selectDelete ? "opacity-40" : "opacity-100"}`}>
                       {selectDelete && (
                         <motion.td className="sm:hidden" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
                           {deleteAble.deleteAbleResourcesType.includes(value.resourceType) ? (
@@ -234,13 +237,17 @@ const ResourceTable = ({ resources, setResources }) => {
                           <motion.td className="sm:hidden">
                             <div className="flex items-center">
                               <Image
-                                classProps="w-9 rounded"
+                                classProps="w-9 rounded cursor-pointer"
                                 src={`/images/resourceIcon/${value.serviceName}.png`}
                                 width="36px"
                                 height="36px"
                                 alt="service-icon"
+                                clickFunc={() => router.push({ pathname: `resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
                               />
-                              <div className="flex flex-col overflow-hidden  ml-2">
+                              <div
+                                className="flex flex-col overflow-hidden cursor-pointer ml-2"
+                                onClick={() => router.push({ pathname: `resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
+                              >
                                 {!isServicePage && <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                                 {isServicePage && value.serviceName === value.resourceType && (
                                   <p className="text-left font-medium truncate">{value.serviceName}</p>
