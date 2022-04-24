@@ -1,5 +1,5 @@
 import { AnimateSharedLayout, motion } from "framer-motion"
-import { HiHome, HiOutlineHome, HiOutlineLogin, HiOutlineLogout, HiUser } from "react-icons/hi"
+import { HiCurrencyDollar, HiHome, HiOutlineCurrencyDollar, HiOutlineHome, HiOutlineLogin, HiOutlineLogout, HiUser } from "react-icons/hi"
 import { IoCube, IoCubeOutline } from "react-icons/io5"
 
 import Link from "next/link"
@@ -41,6 +41,13 @@ const Sidebar = () => {
               {router.asPath.includes("/resources") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
               {router.asPath.includes("/resources") ? <IoCube /> : <IoCubeOutline />}
               <p className="2xl:hidden">Resources</p>
+            </a>
+          </Link>
+          <Link href="/cost" scroll={false}>
+            <a aria-label="cost">
+              {router.asPath.includes("/cost") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
+              {router.asPath.includes("/cost") ? <HiCurrencyDollar /> : <HiOutlineCurrencyDollar />}
+              <p className="2xl:hidden">Cost</p>
             </a>
           </Link>
           <Link href="/login" scroll={false}>
