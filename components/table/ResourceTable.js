@@ -242,11 +242,11 @@ const ResourceTable = ({ resources, setResources }) => {
                                 width="36px"
                                 height="36px"
                                 alt="service-icon"
-                                clickFunc={() => router.push({ pathname: `resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
+                                clickFunc={() => router.push({ pathname: `/resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
                               />
                               <div
                                 className="flex flex-col overflow-hidden cursor-pointer ml-2"
-                                onClick={() => router.push({ pathname: `resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
+                                onClick={() => router.push({ pathname: `/resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
                               >
                                 {!isServicePage && <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                                 {isServicePage && value.serviceName === value.resourceType && (
