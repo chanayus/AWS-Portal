@@ -36,6 +36,7 @@ const ResourceTable = ({ resources, setResources }) => {
   const defaultSort = {
     resource: "first",
     region: "default",
+    Name: "default",
     createdAt: "default",
     owner: "default",
     resourceId: "default",
@@ -101,6 +102,7 @@ const ResourceTable = ({ resources, setResources }) => {
 
   const tableHeadData = [
     { title: "Resource", function: () => sortingHandle("resource", sortData.resource), sort: sortData.resource },
+    { title: "Name", function: () => sortingHandle("Name", sortData.Name), sort: sortData.Name },
     { title: "Region", function: () => sortingHandle("region", sortData.region), sort: sortData.region },
     { title: "สร้างเมื่อ", function: () => sortingHandle("createdAt", sortData.createdAt), sort: sortData.createdAt },
     { title: "สร้างโดย", function: () => sortingHandle("owner", sortData.owner), sort: sortData.owner },
@@ -176,7 +178,11 @@ const ResourceTable = ({ resources, setResources }) => {
                   )}
                   {/* Loop Table Header Data */}
                   {tableHeadData.map((item, index) => (
-                    <motion.th width={index === 0 ? "20%" : "auto"} className={`${item.title === "Resource id" && "pl-1"}`} key={index}>
+                    <motion.th
+                      width={index === 0 ? "20%" : "auto"}
+                      className={`${["Resource id", "Name"].includes(item.title) && "pl-1"}`}
+                      key={index}
+                    >
                       <div className="flex items-center">
                         <p className="cursor-pointer w-min select-none mr-1" onClick={item.function}>
                           {item.title}
@@ -260,13 +266,16 @@ const ResourceTable = ({ resources, setResources }) => {
                               </div>
                             </div>
                           </motion.td>
+                          <motion.td className="sm:hidden pl-1 w-40 lg:w-24">
+                            <p className="w-40 lg:w-24 break-all mr-0">{value.Name ?? "-"}</p>
+                          </motion.td>
                           <motion.td className="sm:hidden">{value.region}</motion.td>
                           <motion.td className="sm:hidden">
                             {dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date"
                               ? "-"
                               : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}
                           </motion.td>
-                          <motion.td className="sm:hidden">{value.owner ? value.owner : "-"}</motion.td>
+                          <motion.td className="sm:hidden">{value.owner ?? "-"}</motion.td>
                           <motion.td className="sm:hidden pl-1 w-52 lg:w-32">
                             <p className="w-52 lg:w-32 break-all mr-0">{`${value.resourceId}`}</p>
                           </motion.td>

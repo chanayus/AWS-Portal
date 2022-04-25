@@ -12,15 +12,17 @@ const nameSortLogic = (a, b) => {
 }
 
 const generalSort = (a, b, key) => {
+  const valueA = a[key] ?? "unknow"
+  const valueB = b[key] ?? "unknow"
   if (key === "owner") {
-    const validA = a[key] === "-" ? "unknow" : a[key].toLowerCase()
-    const validB = b[key] === "-" ? "unknow" : b[key].toLowerCase()
+    const validA = valueA === "-" ? "unknow" : a[key].toLowerCase()
+    const validB = valueB === "-" ? "unknow" : b[key].toLowerCase()
     return validA > validB ? 1 : validB > validA ? -1 : 0
   }
   if (key === "createdAt") {
     return b[key] - a[key]
   }
-  return a[key].toLowerCase() > b[key].toLowerCase() ? 1 : b[key].toLowerCase() > a[key].toLowerCase() ? -1 : 0
+  return valueA.toLowerCase() > valueB.toLowerCase() ? 1 : valueB.toLowerCase() > valueA.toLowerCase() ? -1 : 0
 }
 
 export const useSorting = (data, sortKey, sortValue) => {

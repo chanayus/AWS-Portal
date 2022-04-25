@@ -1,4 +1,4 @@
-const autoTagFormatter = (tagName, owner) => {
+export const autoTagFormatter = (tagName, owner) => {
   const valueCondition = ["cie21", "ict21"]
   if (valueCondition.includes(owner.slice(0, 5))) {
     return `${owner.slice(0, 5)}g${owner.slice(0, 7).substr(-1)}`
@@ -24,7 +24,7 @@ export const useFormat = (data) => {
     events: "eventbridge",
   }
   const allRegionCondition = ["cloudfront", "s3", "iam", "route53"]
-  const tagCondition = ["owner", "createdAt"]
+  const tagCondition = ["owner", "createdAt", "Name"]
   const manualTagCndition = ["cie21", "ict21"]
 
   /// loop in key
