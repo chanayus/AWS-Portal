@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Breadcrumb from "../../../components/main/Breadcrumb"
 import Image from "../../../components/main/Image"
 import PageLoader from "../../../components/loader/PageLoader"
+import dayjs from "dayjs"
 import { motion } from "framer-motion"
 import { useFetch } from "../../../hooks/useFetch"
 import { useRouter } from "next/router"
@@ -42,12 +43,18 @@ const ResourceDetail = () => {
             <p className="ml-2 capitalize w-[85%]"> {resource.serviceName}</p>
           </div>
           <div className="flex items-center my-3">
+            <p className="w-[10%] min-w-fit font-bold">Name </p>
+            <p className="ml-2 capitalize w-[85%]"> {resource.Name ?? "-"}</p>
+          </div>
+          <div className="flex items-center my-3">
             <p className="w-[10%] min-w-fit font-bold">Region </p>
             <p className="ml-2 capitalize w-[85%]"> {resource.region}</p>
           </div>
           <div className="flex items-center my-3">
             <p className="w-[10%] min-w-fit font-bold">สร้างเมื่อ </p>
-            <p className="ml-2 capitalize w-[85%]"> {resource.createdAt}</p>
+            <p className="ml-2 capitalize w-[85%]">
+              {dayjs(resource.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(resource.createdAt).format("D/MM/YYYY H:mm")}
+            </p>
           </div>
           <div className="flex items-center my-3">
             <p className="w-[10%] min-w-fit font-bold">สร้างโดย </p>
