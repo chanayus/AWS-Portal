@@ -65,7 +65,7 @@ export const GlobalStyle = createGlobalStyle`
                 top: 0;  
             }     
             position: sticky;
-            top: 60px;     
+            top: 70px;     
             z-index: 1;
             background: ${(props) => props.theme.tableHeader};
             white-space: nowrap;

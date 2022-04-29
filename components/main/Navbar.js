@@ -1,14 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { HiOutlineBell, HiOutlineMoon, HiOutlineSun } from "react-icons/hi"
+import { HiOutlineBell, HiOutlineMoon, HiOutlineSun, HiUser } from "react-icons/hi"
 
 import Link from "next/link"
 import { SetThemeContext } from "../../pages/_app"
+import { SetUserContext } from "../../pages/_app"
 import styled from "styled-components"
 import tw from "twin.macro"
 import { useContext } from "react"
 
 const Navbar = () => {
   const { currentTheme, themeHandle } = useContext(SetThemeContext)
+  const { user, getLocalUser } = useContext(SetUserContext)
   // const navRef = useRef();
 
   // const router = useRouter();
@@ -41,34 +43,45 @@ const Navbar = () => {
         </Link>
       </div>
       <Menu>
-        <button
-          className="mx-6 sm:mx-4 darkmode-toggle"
-          onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}
-          aria-label="darkmode-toggle"
-        >
-          <AnimatePresence exitBeforeEnter>
-            {currentTheme === "light" ? (
-              <motion.div initial={{ scale: 0 }} animate={{ rotate: 360, scale: 1 }} key="dark">
-                <HiOutlineMoon size="1.75rem" />
-              </motion.div>
-            ) : (
-              <motion.div initial={{ scale: 0 }} animate={{ rotate: 180, scale: 1 }} key="light">
-                <HiOutlineSun size="1.75rem" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </button>
-        <button className="notification-button" aria-label="notofication-button">
-          <HiOutlineBell size="1.75rem" />
-          <div className="notification-badge"></div>
-        </button>
+        <div className="flex items-center">
+          <div className="flex items-center md:hidden dynamic-bg py-1 px-4 rounded-md">
+            <div className="2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-500 to-blue-400 rounded-full text-gray-500 w-8 h-8 flex justify-center items-center">
+              <HiUser size="1.5rem" color="#FFF" />
+            </div>
+            <div className="truncate">
+              <p className="ml-2 w-fit text-white 2xl:hidden leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
+              <p className="ml-2 w-fit text-gray-400 2xl:hidden">Admin</p>
+            </div>
+          </div>
+          <button
+            className="mx-6 sm:mx-4 darkmode-toggle"
+            onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}
+            aria-label="darkmode-toggle"
+          >
+            <AnimatePresence exitBeforeEnter>
+              {currentTheme === "light" ? (
+                <motion.div initial={{ scale: 0 }} animate={{ rotate: 360, scale: 1 }} key="dark">
+                  <HiOutlineMoon size="1.75rem" />
+                </motion.div>
+              ) : (
+                <motion.div initial={{ scale: 0 }} animate={{ rotate: 180, scale: 1 }} key="light">
+                  <HiOutlineSun size="1.75rem" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+          <button className="notification-button" aria-label="notofication-button">
+            <HiOutlineBell size="1.75rem" />
+            <div className="notification-badge"></div>
+          </button>
+        </div>
       </Menu>
     </Container>
   )
 }
 
 const Container = styled(motion.div)`
-  ${tw`flex fixed w-full top-0 items-center justify-end overflow-hidden py-3 pr-12 pl-14 xl:pl-3 2xl:pr-5 duration-200 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2`}
+  ${tw`flex fixed w-full top-0 items-center justify-between  overflow-hidden pt-3 pb-2 pr-12 xl:pl-3 2xl:pr-5 duration-200 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2`}
   color: ${(props) => props.theme.textColor};
   background: ${(props) => props.theme.bodyColor};
   @media (max-width: 960px) {
@@ -82,10 +95,9 @@ const Container = styled(motion.div)`
 `
 
 const Menu = styled.div`
-  ${tw`flex justify-start items-center py-1`}
-  button {
-    ${tw`flex items-center`}
-  }
+  ${tw`flex  items-center w-full justify-end`}
+  padding-left: clamp(85px, 11.5vw, 260px);
+
   .notification-button {
     position: relative;
     .notification-badge {
