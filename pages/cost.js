@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from "framer-motion"
+import { HiArrowDown, HiArrowUp } from "react-icons/hi"
 import { useEffect, useState } from "react"
 
 import Breadcrumb from "../components/main/Breadcrumb"
@@ -5,15 +7,30 @@ import Image from "../components/main/Image"
 import PageLoader from "../components/loader/PageLoader"
 import { TableWrapper } from "../styles/styleComponents"
 import dayjs from "dayjs"
-import { motion } from "framer-motion"
 import styled from "styled-components"
 import tw from "twin.macro"
 import { useFetch } from "../hooks/useFetch"
+import useForceUpdate from "use-force-update"
+import { useSorting } from "../hooks/useSorting"
 
 const Cost = () => {
+  const forceUpdate = useForceUpdate()
   const [cost, setCost] = useState([])
   const [totalCost, setTotalCost] = useState(0)
   const { loading, data } = useFetch("/api/get_cost", () => {}, false)
+  const defaultSort = {
+    serviceType: "first",
+    resourceId: "default",
+    netCost: "default",
+    owner: "default",
+  }
+
+  const [sortData, setSortData] = useState(defaultSort)
+
+  useEffect(() => {
+    const sort = Object.keys(sortData).find((key) => sortData[key] !== "default")
+    sort ? setCost(useSorting([...cost], sort, sortData[sort])) : setCost([...cost])
+  }, [data])
 
   useEffect(() => {
     if (data.netResourcesCost) {
@@ -25,6 +42,52 @@ const Cost = () => {
       )
     }
   }, [data])
+
+  const sortingHandle = (sortKey, sortValue) => {
+    const nextValue = {
+      default: "first",
+      first: "last",
+      last: "default",
+    }
+    if (nextValue[sortValue] === "default") {
+      setSortData({ ...defaultSort, serviceType: "first" })
+      setCost(useSorting([...cost], "serviceType", "first"))
+    } else {
+      setSortData({ ...defaultSort, serviceType: "default", [sortKey]: nextValue[sortValue] })
+      setCost(useSorting([...cost], sortKey, nextValue[sortValue]))
+    }
+    forceUpdate()
+  }
+
+  const arrowHandle = (status) => {
+    if (status === "first") {
+      return (
+        <motion.div
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 10, opacity: 0 }}
+          transition={{ duration: 0.125 }}
+          key={"first"}
+        >
+          <HiArrowUp />
+        </motion.div>
+      )
+    } else if (status === "last") {
+      return (
+        <motion.div
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -10, opacity: 0 }}
+          transition={{ duration: 0.125 }}
+          key={"last"}
+        >
+          <HiArrowDown />
+        </motion.div>
+      )
+    } else {
+      return <div className="w-4 h-4"></div>
+    }
+  }
 
   if (loading) {
     return <PageLoader />
@@ -61,10 +124,38 @@ const Cost = () => {
           <table>
             <thead className="sm:hidden">
               <tr>
-                <th>Service Type</th>
-                <th>Resource id</th>
-                <th>ค่าใช้จ่ายรวม</th>
-                <th>สร้างโดย</th>
+                <th>
+                  <div className="flex items-center">
+                    <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("serviceType", sortData.serviceType)}>
+                      Service Type
+                    </p>
+                    <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.serviceType)}</AnimatePresence>
+                  </div>
+                </th>
+                <th>
+                  <div className="flex items-center">
+                    <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("resourceId", sortData.resourceId)}>
+                      Resource id
+                    </p>
+                    <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.resourceId)}</AnimatePresence>
+                  </div>
+                </th>
+                <th>
+                  <div className="flex items-center">
+                    <p className="cursor-pointer w-min select-none mr-1" onClick={() => sortingHandle("netCost", sortData.netCost)}>
+                      ค่าใช้จ่ายรวม
+                    </p>
+                    <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.netCost)}</AnimatePresence>
+                  </div>
+                </th>
+                <th>
+                  <div className="flex items-center">
+                    <p className="cursor-pointer w-min select-none mr-1">
+                      สร้างโดย
+                    </p>
+                    {/* <AnimatePresence exitBeforeEnter>{arrowHandle(sortData.owner)}</AnimatePresence> */}
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -77,26 +168,24 @@ const Cost = () => {
                   <td className="sm:hidden">{`${item.netCost.toFixed(4)} USD`}</td>
                   <td className="sm:hidden">{item.owner ?? "-"}</td>
 
-                  {/* <td className="hidden sm:block pt-3 px-3 w-full">
+                  <td className="hidden sm:block pt-3 px-3 w-full">
                     <div className="hidden sm:flex w-full justify-between my-2 pt-1">
-                      <b>Type</b>
-                      <p className="text-right">{value.resourceType}</p>
+                      <b>Resource Type</b>
+                      <p className="text-right">{item.serviceType}</p>
                     </div>
                     <div className="hidden sm:flex w-full justify-between my-2 pt-1">
-                      <b>Name</b>
-                      <p className="text-right">{value.Name ?? "-"}</p>
+                      <b>Resource id</b>
+                      <p className="text-right truncate">{item.resourceId.split(":").slice(-1)[0].split("/").slice(-1)[0]}</p>
                     </div>
                     <div className="hidden sm:flex w-full justify-between my-2 pt-1">
-                      <b>สร้างเมื่อ</b>
-                      <p className="text-right">
-                        {dayjs(value.createdAt).format("D/MM/YYYY H:mm") === "Invalid Date" ? "-" : dayjs(value.createdAt).format("D/MM/YYYY H:mm")}
-                      </p>
+                      <b>ค่าใช้จ่ายรวม</b>
+                      <p className="text-right">{`${item.netCost.toFixed(4)} USD`}</p>
                     </div>
                     <div className="hidden sm:flex w-full justify-between my-2 pt-1">
                       <b>สร้างโดย</b>
-                      <p className="text-right">{value.owner}</p>
+                      <p className="text-right">{item.owner ?? "-"}</p>
                     </div>
-                  </td> */}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -108,7 +197,7 @@ const Cost = () => {
 }
 
 const DataCard = styled(motion.div)`
-  ${tw`flex justify-center flex-col rounded-2xl px-8 relative overflow-hidden duration-300 shadow-lg hover:shadow-xl`}
+  ${tw`flex justify-center flex-col rounded-2xl px-8 relative overflow-hidden duration-300 shadow-lg`}
   background: ${(props) => props.theme.subColor};
   height: 140px;
   svg {

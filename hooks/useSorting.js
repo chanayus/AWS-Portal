@@ -25,18 +25,28 @@ const generalSort = (a, b, key) => {
   return valueA.toLowerCase() > valueB.toLowerCase() ? 1 : valueB.toLowerCase() > valueA.toLowerCase() ? -1 : 0
 }
 
+const numberSort = (a, b, key) => {
+  return a[key] - b[key]
+}
+
 export const useSorting = (data, sortKey, sortValue) => {
   if (sortValue === "default") {
     return data
   } else if (sortValue === "first") {
     if (sortKey === "resource") {
       return data.sort((a, b) => nameSortLogic(a, b))
+    }
+    if (sortKey === "netCost") {
+      return data.sort((a, b) => numberSort(a, b, sortKey)).reverse()
     } else {
       return data.sort((a, b) => generalSort(a, b, sortKey))
     }
   } else if (sortValue === "last") {
     if (sortKey === "resource") {
       return data.sort((a, b) => nameSortLogic(a, b)).reverse()
+    }
+    if (sortKey === "netCost") {
+      return data.sort((a, b) => numberSort(a, b, sortKey))
     } else {
       return data.sort((a, b) => generalSort(a, b, sortKey)).reverse()
     }
