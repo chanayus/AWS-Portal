@@ -26,11 +26,8 @@ const ResourceTable = ({ resources, setResources }) => {
   const { pathname } = router
   const isServicePage = pathname === "/resources/[serviceName]"
   const [isSelectAll, setIsSelectAll] = useState(false)
-
   const isMobileScreen = useMediaQuery({ query: "(max-width: 640px)" })
-
   const [displayResources, setDisplayResources] = useState([...resources]) // for display resources data
-
   const [selectDelete, setSelectDelete] = useState(false)
 
   const defaultSort = {

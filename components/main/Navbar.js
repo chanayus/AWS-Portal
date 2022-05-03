@@ -51,8 +51,8 @@ const Navbar = () => {
                 <HiUser size="1.5rem" color="#FFF" />
               </div>
               <div className="truncate">
-                <p className="ml-2 w-fit text-white 2xl:hidden leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
-                <p className="ml-2 w-fit text-gray-400 2xl:hidden">Admin</p>
+                <p className="ml-2 w-fit text-white leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
+                <p className="ml-2 w-fit text-gray-400 ">Admin</p>
               </div>
             </div>
           )}
@@ -109,6 +109,7 @@ const Navbar = () => {
 const Container = styled(motion.div)`
   ${tw`flex fixed w-full top-0 items-center justify-between pt-3 pb-2 pr-12 xl:pl-3 2xl:pr-5 duration-200 z-40 md:justify-between md:fixed md:top-0 md:w-full md:pl-4 sm:py-2`}
   color: ${(props) => props.theme.textColor};
+  min-height: 70px;
   background: ${(props) => props.theme.bodyColor};
   @media (max-width: 960px) {
     background: ${(props) => props.theme.subColor};

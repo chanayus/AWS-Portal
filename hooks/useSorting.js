@@ -11,6 +11,7 @@ const nameSortLogic = (a, b) => {
   return 0
 }
 
+// for Date and Other
 const generalSort = (a, b, key) => {
   const valueA = a[key] ?? "unknow"
   const valueB = b[key] ?? "unknow"
@@ -26,7 +27,7 @@ const generalSort = (a, b, key) => {
 }
 
 const numberSort = (a, b, key) => {
-  return a[key] - b[key]
+  return b[key] - a[key]
 }
 
 export const useSorting = (data, sortKey, sortValue) => {
@@ -37,8 +38,9 @@ export const useSorting = (data, sortKey, sortValue) => {
       return data.sort((a, b) => nameSortLogic(a, b))
     }
     if (sortKey === "netCost") {
-      return data.sort((a, b) => numberSort(a, b, sortKey)).reverse()
-    } else {
+      return data.sort((a, b) => numberSort(a, b, sortKey))
+    } 
+    else {
       return data.sort((a, b) => generalSort(a, b, sortKey))
     }
   } else if (sortValue === "last") {
@@ -46,8 +48,9 @@ export const useSorting = (data, sortKey, sortValue) => {
       return data.sort((a, b) => nameSortLogic(a, b)).reverse()
     }
     if (sortKey === "netCost") {
-      return data.sort((a, b) => numberSort(a, b, sortKey))
-    } else {
+      return data.sort((a, b) => numberSort(a, b, sortKey)).reverse()
+    } 
+    else {
       return data.sort((a, b) => generalSort(a, b, sortKey)).reverse()
     }
   }
