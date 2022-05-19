@@ -1,3 +1,5 @@
+import { HiGlobe, HiUser } from "react-icons/hi"
+
 import Image from "../main/Image"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -5,9 +7,16 @@ import styled from "styled-components"
 import tw from "twin.macro"
 
 const CostCard = ({ title, totalResource, totalPrice, type, index }) => {
-  const titleFormatted = title.replaceAll('Amazon', '').replaceAll('AWS', '').replaceAll('aws', '').toLowerCase()
-    return (
-    <Link href={"/cost/[serviceName]"} as={`/cost/${title}`} scroll={false}>
+  const titleFormatted = title.replaceAll("Amazon", "").replaceAll("AWS", "").replaceAll("aws", "").toLowerCase()
+
+  const linkCondition = {
+    service: { as: `/cost/${title}`, href: "/cost/[serviceName]" },
+    region: { as: `/cost/region/${title}`, href: "/cost/region/[regionName]" },
+    iam: { as: `/cost/iam/${title}`, href: "/cost/iam/[iamName]" },
+  }
+
+  return (
+    <Link href={linkCondition[type]["href"]} as={linkCondition[type]["as"]} scroll={false}>
       <Card
         whileHover={{ y: 5, transition: { duration: 0.2 } }}
         initial={{ opacity: 0 }}
@@ -16,12 +25,23 @@ const CostCard = ({ title, totalResource, totalPrice, type, index }) => {
         transition={{ duration: 0.3 }}
         key={type + index}
       >
-        <Image src={`/images/resourceIcon/${titleFormatted}.png`} width="56px" height="56px" alt="service-card-icon" />
+        {type === "service" ? (
+          <Image src={`/images/resourceIcon/${titleFormatted}.png`} width="56px" height="56px" alt="service-card-icon" />
+        ) : (
+          <div
+            className={`${
+              type === "iam" ? "from-rose-600 to-rose-500" : "from-green-600 to-green-500"
+            } absolute w-14 h-14 font-bold -top-6 rounded-md sm:left-3 sm:-top-5 sm:w-12 sm:h-12 bg-gradient-to-r flex items-center justify-center`}
+          >
+            {type === "iam" ? <HiUser color="#fcfcfc" size="2.5rem" /> : <HiGlobe color="#fcfcfc" size="2.5rem" />}
+          </div>
+        )}
+
         <div className="flex justify-between items-center w-full">
-          <h1 className={`service-name truncate`}>{titleFormatted}</h1>
+          <h1 className={`service-name truncate max-w-[13ch]`}>{titleFormatted}</h1>
           <h1 className="font-light text-2xl">
             {totalPrice.toFixed(2)}
-            <span className="ml-1 text-xl">usd</span>{" "}
+            <span className="ml-1 text-lg">USD</span>{" "}
           </h1>
         </div>
         <h2 className={`text-gray-500 mt-2 font-light`}>
@@ -46,7 +66,6 @@ const Card = styled(motion.a)`
   }
   h1 {
     color: ${(props) => props.theme.textColor};
-    margin-top: 7px;
     &.service-name {
       width: 75%;
       text-transform: capitalize;

@@ -1,17 +1,35 @@
+import { AnimateSharedLayout, motion } from "framer-motion"
+import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi"
 import { useEffect, useState } from "react"
 
 import Breadcrumb from "../../components/main/Breadcrumb"
 import CostCard from "../../components/cost/CostCard"
 import PageLoader from "../../components/loader/PageLoader"
 import { getUniqueData } from "../../hooks/getUniqueData"
-import { motion } from "framer-motion"
 import styled from "styled-components"
 import tw from "twin.macro"
 import { useFetch } from "../../hooks/useFetch"
+import { useRouter } from "next/router"
 
 const Cost = () => {
+  const router = useRouter()
   const [cost, setCost] = useState([])
+  const [cardType, setCardType] = useState("service")
   const { loading, data } = useFetch("/api/get_cost", () => {}, false)
+
+  const changeCardType = (value) => {
+    router.replace({
+      pathname: "/cost",
+      query: { type: value },
+    })
+    setCardType(value)
+  }
+
+  const typeCondition = {
+    service: "serviceType",
+    region: "region",
+    iam: "owner",
+  }
 
   useEffect(() => {
     if (data.netResourcesCost) {
@@ -25,11 +43,11 @@ const Cost = () => {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
-        <div className="flex items-center mb-8">
+        <div className="flex items-center mb-5">
           <h1 className="capitalize">ค่าใช้จ่าย</h1>
         </div>
 
-        <div className="flex ">
+        <div className="mb-5 ">
           <DataCard className="w-1/2 lg:w-full bg-gradient-to-bl from-stone-800 via-neutral-900 to-black">
             <div className="flex items-center justify-between">
               <h2 className="text-white">ค่าใช้จ่ายทั้งหมด</h2>
@@ -46,19 +64,44 @@ const Cost = () => {
             </div>
           </DataCard>
         </div>
+
+        <AnimateSharedLayout>
+          <div className="flex items-center w-fit md:w-full  font-light p-1 sm:mt-4 relative rounded-md shadow-sm dynamic-bg">
+            <button
+              className={`duration-200 flex font-light items-center justify-center relative z-10 min-w-[7rem] w-full sm:w-full h-9 ${
+                cardType === "service" ? "text-white" : null
+              }`}
+              onClick={() => changeCardType("service")}
+            >
+              <HiTerminal className="mr-1" size={"1.5rem"} />
+              Service
+              {cardType === "service" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
+            </button>
+            <button
+              className={`duration-200 flex font-light items-center justify-center relative z-10 min-w-[7rem] w-full sm:w-full h-9   ${
+                cardType === "region" ? "text-white" : null
+              }`}
+              onClick={() => changeCardType("region")}
+            >
+              <HiGlobe className="mr-1" size={"1.5rem"} />
+              Region
+              {cardType === "region" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
+            </button>
+          </div>
+        </AnimateSharedLayout>
         <div className="mt-14 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 md:grid-cols-2 md:gap-x-4">
-          {getUniqueData(cost, "serviceType").map((value, index) => (
+          {getUniqueData(cost, typeCondition[cardType]).map((value, index) => (
             <CostCard
               key={index}
               title={value}
-              type={"service"}
+              type={cardType}
               index={index}
               totalPrice={cost
-                .filter((item) => item["serviceType"] === value)
+                .filter((item) => item[typeCondition[cardType]] === value)
                 .reduce((accumulator, object) => {
                   return accumulator + object.netCost
                 }, 0)}
-              totalResource={cost.filter((item) => item["serviceType"] === value).length}
+              totalResource={cost.filter((item) => item[typeCondition[cardType]] === value).length}
             />
           ))}
         </div>

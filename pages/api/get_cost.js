@@ -11,6 +11,7 @@ const handler = async (req, res) => {
             netCost
             createdAt
             serviceType
+            region
           }
         }
       `,

@@ -10,6 +10,8 @@ const Breadcrumb = () => {
   const pathCondition = {
     "/resources/region": "/resources?type=region",
     "/resources/iam": "/resources?type=iam",
+    "/cost/region": "/cost?type=region",
+    "/cost/iam": "/cost?type=iam",
   }
   const router = useRouter()
   const { asPath } = router

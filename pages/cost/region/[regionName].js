@@ -1,25 +1,23 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { HiArrowDown, HiArrowUp } from "react-icons/hi"
+import { HiArrowDown, HiArrowUp, HiGlobe } from "react-icons/hi"
 import { useEffect, useState } from "react"
 
-import Breadcrumb from "../../components/main/Breadcrumb"
-import Image from "../../components/main/Image"
-import PageLoader from "../../components/loader/PageLoader"
-import { TableWrapper } from "../../styles/styleComponents"
+import Breadcrumb from "../../../components/main/Breadcrumb"
+import Image from "../../../components/main/Image"
+import PageLoader from "../../../components/loader/PageLoader"
+import { TableWrapper } from "../../../styles/styleComponents"
 import dayjs from "dayjs"
-import { useFetch } from "../../hooks/useFetch"
+import { useFetch } from "../../../hooks/useFetch"
 import useForceUpdate from "use-force-update"
 import { useRouter } from "next/router"
-import { useSorting } from "../../hooks/useSorting"
+import { useSorting } from "../../../hooks/useSorting"
 
 const CostDetail = () => {
   const forceUpdate = useForceUpdate()
   const router = useRouter()
   const [cost, setCost] = useState([])
-  const { serviceName } = router.query
+  const { regionName } = router.query
   const { loading, data } = useFetch("/api/get_cost", () => {}, false)
-
-  const titleFormatted = serviceName?.replaceAll("Amazon", "").replaceAll("AWS", "").replaceAll("aws", "").toLowerCase()
 
   const defaultSort = {
     serviceType: "first",
@@ -34,7 +32,7 @@ const CostDetail = () => {
     const sort = Object.keys(sortData).find((key) => sortData[key] !== "default")
     sort ? setCost(useSorting([...cost], sort, sortData[sort])) : setCost([...cost])
     if (data.netResourcesCost) {
-      setCost(data.netResourcesCost.filter((value) => value.resourceId && value.serviceType === serviceName))
+      setCost(data.netResourcesCost.filter((value) => value.resourceId && value.region === regionName))
     }
   }, [data])
 
@@ -91,8 +89,10 @@ const CostDetail = () => {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <Breadcrumb />
         <div className="flex items-center mb-12 mt-4">
-          <Image classProps="rounded" src={`/images/resourceIcon/${titleFormatted}.png`} alt="service-Img" width={48} height={48} />
-          <h1 className="capitalize ml-3">{titleFormatted}</h1>
+          <div className=" w-12 h-12 rounded-md font-bold bg-gradient-to-r from-green-600 to-green-500 flex items-center justify-center">
+            <HiGlobe color="#fcfcfc" size="2.2rem" />
+          </div>
+          <h1 className="capitalize ml-3">{regionName}</h1>
         </div>
         <TableWrapper className="mt-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
           <table>
@@ -143,8 +143,20 @@ const CostDetail = () => {
                 <tr key={index}>
                   <td className="sm:hidden w-[1%]">
                     <div className="flex items-center">
-                      <Image classProps="rounded" src={`/images/resourceIcon/${titleFormatted}.png`} alt="service-Img" width={32} height={32} />
-                      <p className="ml-2 capitalize">{titleFormatted}</p>
+                      <Image
+                        classProps="rounded"
+                        src={`/images/resourceIcon/${item.serviceType
+                          .replaceAll("Amazon", "")
+                          .replaceAll("AWS", "")
+                          .replaceAll("aws", "")
+                          .toLowerCase()}.png`}
+                        alt="service-Img"
+                        width={32}
+                        height={32}
+                      />
+                      <p className="ml-2 capitalize">
+                        {item.serviceType.replaceAll("Amazon", "").replaceAll("AWS", "").replaceAll("aws", "").toLowerCase()}
+                      </p>
                     </div>
                   </td>
                   <td className="sm:hidden max-w-[25ch] truncate">
