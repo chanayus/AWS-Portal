@@ -113,14 +113,6 @@ const Cost = () => {
 const DataCard = styled(motion.div)`
   ${tw`flex justify-center flex-col rounded-2xl px-8 md:px-4 relative overflow-hidden duration-300 shadow-lg`}
   height: 140px;
-  svg {
-    ${tw`absolute -bottom-4 -right-5 block xs:opacity-80 xs:-right-10 bg-red-900 p-4 rounded-2xl `}
-    background: ${(props) => props.color};
-    transform: rotate(-20deg);
-    font-size: clamp(4.75rem, 18vw, 5.75rem);
-    color: #fff;
-    z-index: 1;
-  }
   h2 {
     font-size: clamp(1.1rem, 1.25vw, 1.3rem);
     font-weight: 300;
