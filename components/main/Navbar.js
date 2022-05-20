@@ -75,7 +75,7 @@ const Navbar = () => {
           </button>
           <div className="relative  flex items-center">
             <button className="notification-button" aria-label="notofication-button" onClick={() => setShowNoti(!showNoti)}>
-              <HiOutlineBell size="1.75rem" />
+              <Bell size="1.75rem" fillBell={`${showNoti ? "transparent" : ""}`} />
               <div className="notification-badge"></div>
             </button>
             <AnimatePresence>
@@ -85,15 +85,15 @@ const Navbar = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.25 }}
-                  className="absolute w-[500px] h-[250px] rounded-md dynamic-bg shadow-lg top-[170%] z-50 right-[0%] overflow-hidden"
+                  className="absolute w-[500px] sm:w-[97vw] h-[250px] rounded-md dynamic-bg shadow-lg top-[170%] sm:top-[200%] z-50 right-[0%] sm:right-[-50%] overflow-hidden"
                 >
                   <div className="p-4">
                     <h2 className="text-left text-2xl font-bold">การแจ้งเตือน</h2>
                   </div>
                   <NotiContent className="dynamic-bg-main h-full">
-                    <div className="w-full py-2 px-4 border-t border-b border-zinc-300 ">
-                      <p className="text-left font-bold">มีการสร้าง vpc มากกว่า 1 จำนวนของ user: admin</p>
-                      <p className="text-left opacity-60">เมื่อ 15 นาทีที่แล้ว</p>
+                    <div className="w-full py-2 px-4">
+                      <p className="text-left font-semibold">มีการสร้าง vpc มากกว่า 1 จำนวนของ user: admin</p>
+                      <p className="text-left opacity-60 font-light">เมื่อ 15 นาทีที่แล้ว</p>
                     </div>
                   </NotiContent>
                 </motion.div>
@@ -140,7 +140,12 @@ const Menu = styled.div`
 `
 
 const NotiContent = styled.div`
-  background: ${(props) => props.theme.tableHeader};
+  background: ${(props) => props.theme.themeName === "dark" ? "#212121" : "#f0f0f0"};
+`
+
+const Bell = styled(HiOutlineBell)`
+  fill: ${props => props.fillBell !== "transparent" ? "transparent": props.theme.textColor};
+
 `
 
 export default Navbar

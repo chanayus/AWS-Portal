@@ -122,8 +122,8 @@ const ResourceTable = ({ resources, setResources }) => {
 
       {/* Delete Button */}
       <button
-        className={`p-0 min-w-[3.5rem] w-fit h-14 bg-rose-700 rounded-full flex items-center text-lg fixed z-10
-          bottom-[25px] md:bottom-[75px] sm:hidden right-[20px] duration-200 ${selectDelete && "translate-y-[-65px]"}
+        className={`p-0 min-w-[3.5rem] w-fit h-14 bg-rose-700 rounded-full flex items-center text-lg fixed z-40
+          bottom-[25px] md:bottom-[75px] right-[20px] duration-200 ${selectDelete && "translate-y-[-65px]"}
         `}
         onClick={() => toggleSelectDelete(!selectDelete)}
       >
@@ -192,7 +192,7 @@ const ResourceTable = ({ resources, setResources }) => {
               </thead>
               <tbody>
                 {/* Select All for Mobile */}
-                <tr className="hidden sm:block">
+                <tr className={`${!selectDelete ? "hidden" : "hidden sm:block"}`}>
                   <td>
                     <div className="flex justify-start mx-0">
                       <CheckBox
@@ -233,6 +233,7 @@ const ResourceTable = ({ resources, setResources }) => {
                           isServicePage={isServicePage}
                           displayResources={displayResources}
                           setDisplayResources={setDisplayResources}
+                          selectDelete={selectDelete}
                         />
                       ) : (
                         // Table content for Desktop

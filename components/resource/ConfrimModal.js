@@ -9,16 +9,16 @@ import styled from "styled-components"
 import tw from "twin.macro"
 
 const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resources }) => {
-  const [comfirmText, setConfirmText] = useState("")
+  const [confirmText, setConfirmText] = useState("")
   const [loading, setLoading] = useState(false)
-  const [confrimData, setConfrimData] = useState([])
+  const [confirmData, setConfirmData] = useState([])
   const [deleteResourcesCount, setDeleteResourcesCount] = useState(0)
 
   const operationCallback = ({ data, status }) => {
     console.log(deleteResourcesCount)
     if (status === 200) {
-      const confrimResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
-      if (confrimResourcesARN) setConfrimData([...confrimData, ...confrimResourcesARN])
+      const confirmResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
+      if (confirmResourcesARN) setConfirmData([...confirmData, ...confirmResourcesARN])
     }
     if (deleteResourcesCount + 1 >= selectedData.length) {
       setLoading(false)
@@ -28,7 +28,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
 
   const removeDisplayResources = () => {
     setModalVisible(false)
-    setResources(resources.filter((item) => !confrimData.includes(item.ResourceARN)))
+    setResources(resources.filter((item) => !confirmData.includes(item.ResourceARN)))
   }
 
   const operationHandle = () => {
@@ -48,7 +48,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
   }, [])
 
   useEffect(() => {
-    if (confrimData.length) {
+    if (confirmData.length) {
       const closeModal = setTimeout(() => {
         removeDisplayResources()
       }, 2000)
@@ -56,7 +56,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
         clearTimeout(closeModal)
       }
     }
-  }, [confrimData])
+  }, [confirmData])
 
   useEffect(() => {
     // console.log(selectedData.slice(deleteResourcesCount, deleteResourcesCount+1))
@@ -118,12 +118,12 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
                     <p className="max-w-xs"> {value.resourceId}</p>
                     <p className="text-gray-400"> {value.owner}</p>
                   </div>
-                  {loading && !confrimData.includes(value.resourceARN) && (
+                  {loading && !confirmData.includes(value.resourceARN) && (
                     <div className="ml-3">
                       <Loader size={22} />
                     </div>
                   )}
-                  {confrimData.includes(value.ResourceARN) && (
+                  {confirmData.includes(value.ResourceARN) && (
                     <div className="w-6 h-6 p-0 m-0 ml-3 bg-green-600 flex rounded-full justify-center items-center">
                       <HiCheck color="#FFF" size="1.25rem" />
                     </div>
@@ -134,7 +134,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
           </div>
 
           {/* Footer */}
-          {!loading && confrimData <= 0 && (
+          {!loading && confirmData <= 0 && (
             <div className="p-1">
               <p className="my-2">{`พิมพ์ ${type} เพื่อดำเนินการต่อ`}</p>
               <div className="flex items-center dynamic-bg rounded-md w-full md:w-full  border border-gray-600 border-opacity-40 relative">
@@ -152,7 +152,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
                   ยกเลิก
                 </button>
                 <button
-                  disabled={comfirmText === type ? false : true}
+                  disabled={confirmText === type ? false : true}
                   className="bg-red-500 sm:px-4 px-5 py-2 ml-4 rounded duration-200 hover:bg-red-600 text-white"
                   onClick={() => operationHandle()}
                 >
@@ -168,7 +168,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
             <p className="mt-2">{modalContent.loadingText}</p>
           </div>
         )}
-        {confrimData.length > 0 && (
+        {confirmData.length > 0 && (
           <div className=" flex flex-col justify-center items-center">
             <div className="w-11 h-11 p-0 m-0 bg-green-600 flex rounded-full justify-center items-center">
               <HiCheck color="#FFF" size="2rem" />

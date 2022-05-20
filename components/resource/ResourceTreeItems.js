@@ -10,7 +10,6 @@ const ResourceTreeItems = ({ item }) => {
   const associations = item.associations ? item.associations : []
 
   const handleClick = () => {
-    console.log("Asddd")
     setShowChilden(!showChildren)
   }
 

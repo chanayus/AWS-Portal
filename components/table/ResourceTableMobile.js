@@ -4,7 +4,7 @@ import Image from "../main/Image"
 import { chooseHandle } from "../../hooks/selectHandle"
 import dayjs from "dayjs"
 
-const ResourceTableMobile = ({ value, isServicePage, displayResources, setDisplayResources }) => {
+const ResourceTableMobile = ({ value, isServicePage, displayResources, setDisplayResources, selectDelete }) => {
   return (
     <td className="hidden sm:block pt-3 px-3">
       <div className="hidden sm:flex justify-between items-center my-1 pb-1">
@@ -21,7 +21,7 @@ const ResourceTableMobile = ({ value, isServicePage, displayResources, setDispla
             {value.serviceName === value.resourceType ? null : <p>{value.resourceType}</p>}
           </div>
         </div>
-        <div>
+        <div className={`${!selectDelete ? "hidden" : ""}`}>
           <CheckBox className={`${value.isChoose ? "checked" : null}`} onClick={() => chooseHandle(value, displayResources, setDisplayResources)}>
             {value.isChoose ? <FaCheck color="white" size="0.75rem" /> : null}
           </CheckBox>

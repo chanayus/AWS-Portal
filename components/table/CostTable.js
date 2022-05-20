@@ -148,7 +148,7 @@ const CostTable = ({ data, title = "" }) => {
                   </div>
                   <div className="hidden sm:flex w-full justify-between my-2 pt-1">
                     <b>Resource id</b>
-                    <p className="text-right truncate">{item.resourceId.split(":").slice(-1)[0].split("/").slice(-1)[0]}</p>
+                    <p className="text-right truncate max-w-[25ch] sm:max-w-[15ch]">{item.resourceId.split(":").slice(-1)[0].split("/").slice(-1)[0]}</p>
                   </div>
                   <div className="hidden sm:flex w-full justify-between my-2 pt-1">
                     <b>ค่าใช้จ่ายรวม</b>

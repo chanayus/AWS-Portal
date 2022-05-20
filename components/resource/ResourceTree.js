@@ -27,10 +27,6 @@ const ResourceTree = () => {
     }
   }, [data])
 
-  useEffect(() => {
-    console.log(unUsed)
-  }, [unUsed])
-
   if (loading) {
     return (
       <div className="flex justify-center mt-28 items-center">

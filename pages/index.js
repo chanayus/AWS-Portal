@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import Image from "../components/main/Image"
 import Link from "next/link"
 import Loader from "../components/loader/Loader"
+import { RiMoneyDollarCircleFill } from "react-icons/ri"
 import SkeletonTable from "../components/loader/SkeletonTable"
 import { TableWrapper } from "../styles/styleComponents"
 import dayjs from "dayjs"
@@ -18,12 +19,26 @@ import { useRouter } from "next/router"
 
 const Index = () => {
   const { loading, data: resources } = useFetch("/api/resources", () => {}, false)
+  const { loading: costLoading, data: cost } = useFetch("/api/get_cost", () => {}, false)
   const [dataFormatted, setDataFormatted] = useState([])
+  const [totalPrice, setTotalPrice] = useState(0)
+
   const router = useRouter()
 
   useEffect(() => {
     loading ? null : setDataFormatted(useFormat(resources))
   }, [loading])
+
+  useEffect(() => {
+    setTotalPrice(
+      cost.netResourcesCost
+        ?.filter((value) => value.resourceId)
+        .reduce((accumulator, object) => {
+          return accumulator + object.netCost
+        }, 0)
+        .toFixed(4)
+    )
+  }, [costLoading])
 
   const resourcesToday = dataFormatted.filter((value) => dayjs(value.createdAt).format("DD/MM/YYYY") === dayjs().format("DD/MM/YYYY")).length
 
@@ -75,48 +90,61 @@ const Index = () => {
           </Link>
         ))}
       </div>
-      <div className="flex justify-between mt-16 gap-10 lg:flex-col">
+      <div className="flex justify-between mt-10 gap-10 lg:flex-col">
         <div className="flex-1">
-          {loading ? (
-            <SkeletonTable />
-          ) : (
-            <>
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
-                <button
-                  className="text-white bg-black px-3 py-2 rounded md:text-xs"
-                  onClick={() => {
-                    router.push({
-                      pathname: "/resources",
-                      query: { display: "card", type: "region" },
-                    })
-                  }}
-                >
-                  ดูทั้งหมด
-                </button>
+          <Link href={"/cost"}>
+            <DataCard color={"#8453bb"} whileHover={{ y: 5 }} transition={{ duration: 0.1 }}>
+              <RiMoneyDollarCircleFill className="mr-4" />
+              <div>
+                <h2>จำนวนค่าใช้จ่าย</h2>
+                <h1>
+                  {costLoading ? <Loader /> : totalPrice} {!costLoading && <span className="text-2xl opacity-70">USD</span>}
+                </h1>
               </div>
-              <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-                <table>
-                  <thead className="non-sticky">
-                    <tr>
-                      <th>Region</th>
-                      <th>จำนวน Resource</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getUniqueData(dataFormatted, "region")
-                      .slice(0, 3)
-                      .map((value, index) => (
-                        <tr key={index}>
-                          <td>{value}</td>
-                          <td>{dataFormatted.filter((item) => item.region === value).length}</td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </TableWrapper>
-            </>
-          )}
+            </DataCard>
+          </Link>
+          <div className="mt-10">
+            {loading ? (
+              <SkeletonTable />
+            ) : (
+              <>
+                <div className="flex justify-between items-center ">
+                  <h2 className="text-xl md:text-lg">Resource ในแต่ละ Region</h2>
+                  <button
+                    className="text-white bg-black px-3 py-2 rounded md:text-xs"
+                    onClick={() => {
+                      router.push({
+                        pathname: "/resources",
+                        query: { display: "card", type: "region" },
+                      })
+                    }}
+                  >
+                    ดูทั้งหมด
+                  </button>
+                </div>
+                <TableWrapper className="mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+                  <table>
+                    <thead className="non-sticky">
+                      <tr>
+                        <th>Region</th>
+                        <th>จำนวน Resource</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getUniqueData(dataFormatted, "region")
+                        .slice(0, 3)
+                        .map((value, index) => (
+                          <tr key={index}>
+                            <td>{value}</td>
+                            <td>{dataFormatted.filter((item) => item.region === value).length}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </TableWrapper>
+              </>
+            )}
+          </div>
         </div>
         <div className="flex-1 lg:mt-5">
           {loading ? (
