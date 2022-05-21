@@ -112,7 +112,7 @@ const Login = () => {
             </motion.div>
             <div className="button-group">
               <a onClick={loginHandler}>เข้าสู่ระบบ</a>
-              <a href="">ลืมรหัสผ่าน ?</a>
+              {/* <a href="">ลืมรหัสผ่าน ?</a> */}
             </div>
           </LoginForm>
         </FlexBox>
@@ -124,7 +124,9 @@ const Login = () => {
 export default Login
 
 const Container = styled.div`
-  ${tw`flex justify-around relative items-center w-full h-screen duration-200 bg-gradient-to-tr from-black via-gray-900 to-indigo-900`}
+  ${tw`flex justify-around relative items-center w-full h-screen duration-200`}
+  background: rgb(0,0,0);
+  background: linear-gradient(25deg, rgba(0, 0, 0, 1) 0%, rgba(40, 40, 40, 1) 100%);
 `
 
 const FlexBox = styled.div`
@@ -171,7 +173,7 @@ const LoginForm = styled.form`
     a:first-child {
       ${tw`rounded-sm`}
       flex: 1;
-      max-width: 250px;
+      /* max-width: 250px; */
       min-width: 250px;
       padding: 10px 30px;
       background: ${(props) => props.theme.blue};
@@ -179,8 +181,8 @@ const LoginForm = styled.form`
       text-align: center;
       cursor: pointer;
     }
-    a:last-child {
+    /* a:last-child {
       ${tw`min-w-max ml-16 xs:mt-0 md:ml-0`}
-    }
+    } */
   }
 `
