@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react"
+
 import fetch from "isomorphic-unfetch"
-import { useEffect } from "react"
 import { useFormat } from "./useFormat"
 import { useStateIfMounted } from "use-state-if-mounted"
 

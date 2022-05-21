@@ -7,19 +7,20 @@ import { SetThemeContext } from "../../pages/_app"
 import { SetUserContext } from "../../pages/_app"
 import styled from "styled-components"
 import tw from "twin.macro"
-import { useFetch } from "../../hooks/useFetch"
 import { useRouter } from "next/router"
 
 const Navbar = () => {
   const router = useRouter()
-  const { loading, data } = useFetch("/api/get_notification", () => {}, false)
+  const [notification, setNotification] = useState()
   const [showNoti, setShowNoti] = useState(false)
   const { currentTheme, themeHandle } = useContext(SetThemeContext)
   const { user, getLocalUser } = useContext(SetUserContext)
 
-  useEffect(() => {
-    console.log(data)
-  }, [router, loading])
+  useEffect(async () => {
+    const response = await fetch("/api/get_notification")
+    const data = await response.json()
+    setNotification(data.notification)
+  }, [router])
   // const navRef = useRef();
 
   // const router = useRouter();
@@ -98,7 +99,7 @@ const Navbar = () => {
                   <div className="p-4">
                     <h2 className="text-left text-2xl font-bold">การแจ้งเตือน</h2>
                   </div>
-                  {data.notification.map((item, index) => (
+                  {notification.map((item, index) => (
                     <NotiContent className="dynamic-bg-main h-full" key={index}>
                       <div className="w-full py-2 px-4">
                         <p className="text-left font-semibold">{item.description}</p>
