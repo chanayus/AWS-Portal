@@ -1,17 +1,25 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { HiOutlineBell, HiOutlineMoon, HiOutlineSun, HiUser } from "react-icons/hi"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import Link from "next/link"
 import { SetThemeContext } from "../../pages/_app"
 import { SetUserContext } from "../../pages/_app"
 import styled from "styled-components"
 import tw from "twin.macro"
+import { useFetch } from "../../hooks/useFetch"
+import { useRouter } from "next/router"
 
 const Navbar = () => {
+  const router = useRouter()
+  const { loading, data } = useFetch("/api/get_notification", () => {}, false)
   const [showNoti, setShowNoti] = useState(false)
   const { currentTheme, themeHandle } = useContext(SetThemeContext)
   const { user, getLocalUser } = useContext(SetUserContext)
+
+  useEffect(() => {
+    console.log(data)
+  }, [router, loading])
   // const navRef = useRef();
 
   // const router = useRouter();
@@ -90,12 +98,14 @@ const Navbar = () => {
                   <div className="p-4">
                     <h2 className="text-left text-2xl font-bold">การแจ้งเตือน</h2>
                   </div>
-                  <NotiContent className="dynamic-bg-main h-full">
-                    <div className="w-full py-2 px-4">
-                      <p className="text-left font-semibold">มีการสร้าง vpc มากกว่า 1 จำนวนของ user: admin</p>
-                      <p className="text-left opacity-60 font-light">เมื่อ 15 นาทีที่แล้ว</p>
-                    </div>
-                  </NotiContent>
+                  {data.notification.map((item, index) => (
+                    <NotiContent className="dynamic-bg-main h-full" key={index}>
+                      <div className="w-full py-2 px-4">
+                        <p className="text-left font-semibold">{item.description}</p>
+                        <p className="text-left opacity-60 font-light">จาก {item.owner.username}</p>
+                      </div>
+                    </NotiContent>
+                  ))}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -140,12 +150,11 @@ const Menu = styled.div`
 `
 
 const NotiContent = styled.div`
-  background: ${(props) => props.theme.themeName === "dark" ? "#212121" : "#f0f0f0"};
+  background: ${(props) => (props.theme.themeName === "dark" ? "#212121" : "#f0f0f0")};
 `
 
 const Bell = styled(HiOutlineBell)`
-  fill: ${props => props.fillBell !== "transparent" ? "transparent": props.theme.textColor};
-
+  fill: ${(props) => (props.fillBell !== "transparent" ? "transparent" : props.theme.textColor)};
 `
 
 export default Navbar
