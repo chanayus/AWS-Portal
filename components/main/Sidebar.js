@@ -47,7 +47,7 @@ const Sidebar = () => {
             <a aria-label="cost">
               {router.asPath.includes("/cost") ? <Hilight layoutId="sidebar-hilight" className="sidebar-hilight" /> : null}
               {router.asPath.includes("/cost") ? <HiCurrencyDollar /> : <HiOutlineCurrencyDollar />}
-              <p className="2xl:hidden">Cost</p>
+              <p className="2xl:hidden">ค่าใช้จ่าย</p>
             </a>
           </Link>
           <Link href="/login" scroll={false}>
