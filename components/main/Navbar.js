@@ -21,6 +21,10 @@ const Navbar = () => {
     const data = await response.json()
     setNotification(data.notification)
   }, [router])
+
+  // useEffect(() => {
+  //   console.log(user)
+  // }, [user])
   // const navRef = useRef();
 
   // const router = useRouter();
@@ -61,7 +65,9 @@ const Navbar = () => {
               </div>
               <div className="truncate">
                 <p className="ml-2 w-fit text-white leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
-                <p className="ml-2 w-fit text-gray-400 ">Admin</p>
+                {user.user.isAdmin
+                  && <p className="ml-2 w-fit text-gray-400 ">Admin</p>
+                }
               </div>
             </div>
           )}
@@ -82,36 +88,38 @@ const Navbar = () => {
               )}
             </AnimatePresence>
           </button>
-          <div className="relative  flex items-center">
-            <button className="notification-button" aria-label="notofication-button" onClick={() => setShowNoti(!showNoti)}>
-              <Bell size="1.75rem" fillBell={`${showNoti ? "transparent" : ""}`} />
-              {notification?.length > 0 && <div className="notification-badge"></div>}
-            </button>
-            <AnimatePresence>
-              {showNoti && (
-                <motion.div
-                  exit={{ opacity: 0 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.25 }}
-                  className="absolute w-[500px] sm:w-[97vw] h-[250px] rounded-md dynamic-bg shadow-lg top-[170%] sm:top-[200%] z-50 right-[0%] sm:right-[-50%] overflow-hidden"
-                >
-                  <div className="p-4">
-                    <h2 className="text-left text-2xl font-bold">การแจ้งเตือน</h2>
-                  </div>
-                  {notification.map((item, index) => (
-                    <NotiContent className="dynamic-bg-main h-full" key={index}>
-                      <div className="w-full py-2 px-4">
-                        <p className="text-left font-semibold">{item.description}</p>
-                        <p className="text-left opacity-60 font-light">จาก {item.owner.username}</p>
-                      </div>
-                    </NotiContent>
-                  ))}
-                  {notification?.length === 0 && <div className="text-center opacity-60 text-lg mt-2">ไม่มีการแจ้งตือน</div>}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          {user.user.isAdmin &&
+            <div className="relative  flex items-center">
+              <button className="notification-button" aria-label="notofication-button" onClick={() => setShowNoti(!showNoti)}>
+                <Bell size="1.75rem" fillBell={`${showNoti ? "transparent" : ""}`} />
+                {notification?.length > 0 && <div className="notification-badge"></div>}
+              </button>
+              <AnimatePresence>
+                {showNoti && (
+                  <motion.div
+                    exit={{ opacity: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.25 }}
+                    className="absolute w-[500px] sm:w-[97vw] h-[250px] rounded-md dynamic-bg shadow-lg top-[170%] sm:top-[200%] z-50 right-[0%] sm:right-[-50%] overflow-hidden"
+                  >
+                    <div className="p-4">
+                      <h2 className="text-left text-2xl font-bold">การแจ้งเตือน</h2>
+                    </div>
+                    {notification.map((item, index) => (
+                      <NotiContent className="dynamic-bg-main h-full" key={index}>
+                        <div className="w-full py-2 px-4">
+                          <p className="text-left font-semibold">{item.description}</p>
+                          <p className="text-left opacity-60 font-light">จาก {item.owner.username}</p>
+                        </div>
+                      </NotiContent>
+                    ))}
+                    {notification?.length === 0 && <div className="text-center opacity-60 text-lg mt-2">ไม่มีการแจ้งตือน</div>}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          }
         </div>
       </Menu>
     </Container>

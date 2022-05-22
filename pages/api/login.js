@@ -23,6 +23,7 @@ const handler = async (req, res) => {
             user {
               _id
               username
+              isAdmin
             }
           }
         }
