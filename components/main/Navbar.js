@@ -65,14 +65,12 @@ const Navbar = () => {
               </div>
               <div className="truncate">
                 <p className="ml-2 w-fit text-white leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
-                {user.user.isAdmin
-                  && <p className="ml-2 w-fit text-gray-400 ">Admin</p>
-                }
+                <p className="ml-2 w-fit text-gray-400 ">{user.user.isAdmin ? "Admin" : "Student"}</p>
               </div>
             </div>
           )}
           <button
-            className="mx-6 sm:mx-4 darkmode-toggle"
+            className={`${user.user.isAdmin ? "mx-6 sm:mx-4" : "ml-4"} darkmode-toggle`}
             onClick={() => themeHandle(currentTheme === "light" ? "dark" : "light")}
             aria-label="darkmode-toggle"
           >
@@ -88,7 +86,7 @@ const Navbar = () => {
               )}
             </AnimatePresence>
           </button>
-          {user.user.isAdmin &&
+          {user.user.isAdmin && (
             <div className="relative  flex items-center">
               <button className="notification-button" aria-label="notofication-button" onClick={() => setShowNoti(!showNoti)}>
                 <Bell size="1.75rem" fillBell={`${showNoti ? "transparent" : ""}`} />
@@ -119,7 +117,7 @@ const Navbar = () => {
                 )}
               </AnimatePresence>
             </div>
-          }
+          )}
         </div>
       </Menu>
     </Container>
