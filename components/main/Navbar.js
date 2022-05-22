@@ -107,7 +107,7 @@ const Navbar = () => {
                       </div>
                     </NotiContent>
                   ))}
-                   {notification?.length === 0 && <div className="text-center opacity-60 text-lg mt-2">ไม่มีการแจ้งตือน</div>}
+                  {notification?.length === 0 && <div className="text-center opacity-60 text-lg mt-2">ไม่มีการแจ้งตือน</div>}
                 </motion.div>
               )}
             </AnimatePresence>
