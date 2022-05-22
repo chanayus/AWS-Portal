@@ -1,4 +1,5 @@
 import client from "../../context/apollo-client"
+import { getToken } from "../../hooks/getToken"
 import { gql } from "@apollo/client"
 
 const handler = async (req, res) => {
@@ -12,9 +13,21 @@ const handler = async (req, res) => {
             createdAt
             serviceType
             region
+            owner
+            usage {
+              usageType
+              cost
+              usageAmount
+              usageDescription
+            }
           }
         }
       `,
+      context: {
+        headers: {
+          authorization: `Bearer ${getToken(req)}`,
+        },
+      },
     })
     res.status(200).json(data)
   } catch (e) {

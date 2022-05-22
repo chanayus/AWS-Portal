@@ -132,6 +132,9 @@ export const GlobalStyle = createGlobalStyle`
     .dynamic-bg{
         background:  ${(props) => props.theme.subColor};
     }
+    .dynamic-bg-secondary{
+        background: ${(props) => (props.theme.themeName === "light" ? "#e3e3e3" : "#232323")};
+    }
     .dynamic-bg-invert{
         background: ${(props) => (props.theme.themeName === "dark" ? "#e1e1e1" : "#2a2a2a")};
     }

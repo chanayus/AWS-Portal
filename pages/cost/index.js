@@ -1,35 +1,18 @@
-import { AnimateSharedLayout, motion } from "framer-motion"
-import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi"
 import { useEffect, useState } from "react"
 
 import Breadcrumb from "../../components/main/Breadcrumb"
-import CostCard from "../../components/cost/CostCard"
+import CardSection from "../../layout/cost/CardSection"
 import PageLoader from "../../components/loader/PageLoader"
-import { getUniqueData } from "../../hooks/getUniqueData"
+import TableSection from "../../layout/cost/TableSection"
+import { motion } from "framer-motion"
 import styled from "styled-components"
 import tw from "twin.macro"
 import { useFetch } from "../../hooks/useFetch"
-import { useRouter } from "next/router"
 
 const Cost = () => {
-  const router = useRouter()
   const [cost, setCost] = useState([])
-  const [cardType, setCardType] = useState("service")
+  const [displayType, setDisplayType] = useState("card")
   const { loading, data } = useFetch("/api/get_cost", () => {}, false)
-
-  const changeCardType = (value) => {
-    router.replace({
-      pathname: "/cost",
-      query: { type: value },
-    })
-    setCardType(value)
-  }
-
-  const typeCondition = {
-    service: "serviceType",
-    region: "region",
-    iam: "owner",
-  }
 
   useEffect(() => {
     if (data.netResourcesCost) {
@@ -65,46 +48,11 @@ const Cost = () => {
           </DataCard>
         </div>
 
-        <AnimateSharedLayout>
-          <div className="flex items-center w-fit md:w-full  font-light p-1 sm:mt-4 relative rounded-md shadow-sm dynamic-bg">
-            <button
-              className={`duration-200 flex font-light items-center justify-center relative z-10 min-w-[7rem] w-full sm:w-full h-9 ${
-                cardType === "service" ? "text-white" : null
-              }`}
-              onClick={() => changeCardType("service")}
-            >
-              <HiTerminal className="mr-1" size={"1.5rem"} />
-              Service
-              {cardType === "service" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
-            </button>
-            <button
-              className={`duration-200 flex font-light items-center justify-center relative z-10 min-w-[7rem] w-full sm:w-full h-9   ${
-                cardType === "region" ? "text-white" : null
-              }`}
-              onClick={() => changeCardType("region")}
-            >
-              <HiGlobe className="mr-1" size={"1.5rem"} />
-              Region
-              {cardType === "region" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
-            </button>
-          </div>
-        </AnimateSharedLayout>
-        <div className="mt-14 grid grid-cols-3 justify-items-center gap-y-16 gap-x-8 md:grid-cols-2 md:gap-x-4">
-          {getUniqueData(cost, typeCondition[cardType]).map((value, index) => (
-            <CostCard
-              key={index}
-              title={value}
-              type={cardType}
-              index={index}
-              totalPrice={cost
-                .filter((item) => item[typeCondition[cardType]] === value)
-                .reduce((accumulator, object) => {
-                  return accumulator + object.netCost
-                }, 0)}
-              totalResource={cost.filter((item) => item[typeCondition[cardType]] === value).length}
-            />
-          ))}
-        </div>
+        {displayType === "card" ? (
+          <CardSection cost={cost} setDisplayType={setDisplayType} />
+        ) : (
+          <TableSection cost={cost} setDisplayType={setDisplayType} />
+        )}
       </motion.div>
     )
   }
