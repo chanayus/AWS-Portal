@@ -85,7 +85,7 @@ const Navbar = () => {
           <div className="relative  flex items-center">
             <button className="notification-button" aria-label="notofication-button" onClick={() => setShowNoti(!showNoti)}>
               <Bell size="1.75rem" fillBell={`${showNoti ? "transparent" : ""}`} />
-              <div className="notification-badge"></div>
+              {notification?.length > 0 && <div className="notification-badge"></div>}
             </button>
             <AnimatePresence>
               {showNoti && (
@@ -107,6 +107,7 @@ const Navbar = () => {
                       </div>
                     </NotiContent>
                   ))}
+                   {notification?.length === 0 && <div className="text-center opacity-60 text-lg mt-2">ไม่มีการแจ้งตือน</div>}
                 </motion.div>
               )}
             </AnimatePresence>

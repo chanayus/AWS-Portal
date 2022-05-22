@@ -28,6 +28,7 @@ const handler = async (req, res) => {
           authorization: `Bearer ${getToken(req)}`,
         },
       },
+      fetchPolicy: "network-only"
     })
     res.status(200).json(data)
   } catch (e) {

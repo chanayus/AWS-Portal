@@ -14,6 +14,7 @@ const handler = async (req, res) => {
           }
         }
       `,
+      fetchPolicy: "network-only"
     })
     res.status(200).json(data)
   } catch (e) {
