@@ -33,7 +33,7 @@ const CardSection = ({ cost, setDisplayType }) => {
               className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 md:w-full h-9 ${
                 cardType === "service" ? "text-white" : null
               }`}
-              onClick={() => changeCardType("service")}
+              onClick={() => setCardType("service")}
             >
               <HiTerminal className="mr-1" size={"1.5rem"} />
               Service
@@ -43,7 +43,7 @@ const CardSection = ({ cost, setDisplayType }) => {
               className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 md:w-full h-9 mx-3  ${
                 cardType === "region" ? "text-white" : null
               }`}
-              onClick={() => changeCardType("region")}
+              onClick={() => setCardType("region")}
             >
               <HiGlobe className="mr-1" size={"1.5rem"} />
               Region
@@ -53,7 +53,7 @@ const CardSection = ({ cost, setDisplayType }) => {
               className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 md:w-full h-9 ${
                 cardType === "iam" ? "text-white" : null
               }`}
-              onClick={() => changeCardType("iam")}
+              onClick={() => setCardType("iam")}
             >
               <HiUser className="mr-1" size={"1.5rem"} />
               IAM
