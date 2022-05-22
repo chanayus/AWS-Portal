@@ -211,11 +211,7 @@ const ResourceTable = ({ resources, setResources }) => {
                   const canDelete = deleteAble?.deleteAbleResourcesType?.includes(value.resourceType)
                   return (
                     // CheckBok each of item
-                    <tr
-                      key={index}
-                      className={`cursor-pointer ${value.isChoose ? "selected" : null} ${!canDelete && selectDelete ? "opacity-40" : "opacity-100"}`}
-                      onClick={() => router.push({ pathname: `/resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
-                    >
+                    <tr key={index} className={` ${value.isChoose ? "selected" : null} ${!canDelete && selectDelete ? "opacity-40" : "opacity-100"}`}>
                       {selectDelete && (
                         <motion.td className="sm:hidden" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
                           {deleteAble.deleteAbleResourcesType.includes(value.resourceType) ? (
@@ -250,8 +246,12 @@ const ResourceTable = ({ resources, setResources }) => {
                                 width="36px"
                                 height="36px"
                                 alt="service-icon"
+                                clickFunc={() => router.push({ pathname: `/resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
                               />
-                              <div className="flex flex-col overflow-hidden cursor-pointer ml-2">
+                              <div
+                                className="flex flex-col overflow-hidden cursor-pointer ml-2"
+                                onClick={() => router.push({ pathname: `/resources/detail/[arn]`, query: { arn: value.ResourceARN } })}
+                              >
                                 {!isServicePage && <p className="text-left font-medium truncate capitalize">{value.serviceName}</p>}
                                 {isServicePage && value.serviceName === value.resourceType && (
                                   <p className="text-left font-medium truncate">{value.serviceName}</p>
