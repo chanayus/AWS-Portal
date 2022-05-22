@@ -4,23 +4,24 @@ import { HiGlobe, HiTerminal, HiUser } from "react-icons/hi"
 
 import CostCard from "../../components/cost/CostCard"
 import { getUniqueData } from "../../hooks/getUniqueData"
+import { useRouter } from "next/router"
 import { useState } from "react"
 
 const CardSection = ({ cost, setDisplayType }) => {
   const [cardType, setCardType] = useState("service")
-
+  const router = useRouter()
   const typeCondition = {
     service: "serviceType",
     region: "region",
     iam: "owner",
   }
 
-  const changeCardType = (value) => {
-    // router.replace({
-    //   pathname: "/cost",
-    //   query: { type: value },
-    // })
-    setCardType(value)
+  const changeDisplayType = (value) => {
+    router.replace({
+      pathname: "/cost",
+      query: { display: value },
+    })
+    setDisplayType(value)
   }
 
   return (
@@ -29,7 +30,7 @@ const CardSection = ({ cost, setDisplayType }) => {
         <AnimateSharedLayout>
           <div className="flex items-center font-light p-1 sm:mt-4 relative rounded-md shadow-sm dynamic-bg">
             <button
-              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${
+              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 md:w-full h-9 ${
                 cardType === "service" ? "text-white" : null
               }`}
               onClick={() => changeCardType("service")}
@@ -39,7 +40,7 @@ const CardSection = ({ cost, setDisplayType }) => {
               {cardType === "service" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
             </button>
             <button
-              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 mx-3  ${
+              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 md:w-full h-9 mx-3  ${
                 cardType === "region" ? "text-white" : null
               }`}
               onClick={() => changeCardType("region")}
@@ -49,7 +50,7 @@ const CardSection = ({ cost, setDisplayType }) => {
               {cardType === "region" ? <motion.div className="highlight" layoutId="highlight" transition={{ duration: 0.25 }} /> : null}
             </button>
             <button
-              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 sm:w-full h-9 ${
+              className={`duration-200 flex font-light items-center justify-center relative z-10 w-24 md:w-full h-9 ${
                 cardType === "iam" ? "text-white" : null
               }`}
               onClick={() => changeCardType("iam")}
@@ -63,10 +64,10 @@ const CardSection = ({ cost, setDisplayType }) => {
 
         <div className="flex md:flex-col-reverse justify-between">
           <div className="flex md:mb-3 md:justify-end ">
-            <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("table")}>
+            <button className="w-10 h-10 dynamic-bg shadow-sm rounded" onClick={() => changeDisplayType("table")}>
               <FaList size="1.4rem" color="#bdbdbd" className="mx-auto" />
             </button>
-            <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => setDisplayType("card")}>
+            <button className="w-10 h-10 ml-3 dynamic-bg shadow-sm rounded" onClick={() => changeDisplayType("card")}>
               <FaTh size="1.4rem" color="#468ffd" className="mx-auto" />
             </button>
           </div>

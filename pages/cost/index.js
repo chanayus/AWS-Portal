@@ -8,10 +8,13 @@ import { motion } from "framer-motion"
 import styled from "styled-components"
 import tw from "twin.macro"
 import { useFetch } from "../../hooks/useFetch"
+import { useRouter } from "next/router"
 
 const Cost = () => {
+  const router = useRouter()
   const [cost, setCost] = useState([])
-  const [displayType, setDisplayType] = useState("card")
+  const { display } = router.query
+  const [displayType, setDisplayType] = useState(display ?? "card")
   const { loading, data } = useFetch("/api/get_cost", () => {}, false)
 
   useEffect(() => {

@@ -16,7 +16,8 @@ const CostDetail = () => {
 
   useEffect(() => {
     if (data.netResourcesCost) {
-      setCost(data.netResourcesCost.filter((value) => value.resourceId && value.owner === iamName))
+      data.netResourcesCost.filter((value) => console.log(value.owner, iamName))
+      setCost(data.netResourcesCost.filter((value) => value.resourceId && (value.owner ?? "null") === iamName))
     }
   }, [data])
 
@@ -30,7 +31,7 @@ const CostDetail = () => {
           <div className=" w-12 h-12 rounded-md font-bold bg-gradient-to-r from-rose-600 to-rose-500 flex items-center justify-center">
             <HiGlobe color="#fcfcfc" size="2.2rem" />
           </div>
-          <h1 className="capitalize ml-3">{iamName}</h1>
+          <h1 className="capitalize ml-3">{iamName === "null" ? "ไม่มีการระบุ" : iamName}</h1>
         </div>
         <CostTable data={cost} title={""} />
       </motion.div>

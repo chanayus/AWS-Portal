@@ -7,7 +7,7 @@ import styled from "styled-components"
 import tw from "twin.macro"
 
 const CostCard = ({ title, totalResource, totalPrice, type, index }) => {
-  const titleFormatted = title.replaceAll("Amazon", "").replaceAll("AWS", "").replaceAll("aws", "").toLowerCase()
+  const titleFormatted = title?.replaceAll("Amazon", "").replaceAll("AWS", "").replaceAll("aws", "").toLowerCase()
 
   const linkCondition = {
     service: { as: `/cost/${title}`, href: "/cost/[serviceName]" },
@@ -38,7 +38,7 @@ const CostCard = ({ title, totalResource, totalPrice, type, index }) => {
         )}
 
         <div className="flex justify-between items-center w-full">
-          <h1 className={`service-name truncate max-w-[13ch]`}>{titleFormatted}</h1>
+          <h1 className={`service-name truncate max-w-[13ch]`}>{titleFormatted ?? "ไม่มีการระบุ"}</h1>
           <h1 className="font-light text-2xl">
             {totalPrice.toFixed(2)}
             <span className="ml-1 text-lg">USD</span>{" "}
