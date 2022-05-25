@@ -3,12 +3,13 @@ import "tailwindcss/tailwind.css"
 
 import { dark, light } from "../styles/theme"
 import { useEffect, useState } from "react"
-import fetch from "isomorphic-unfetch"
 
 import { GlobalStyle } from "../styles/globalStyle"
+import Head from "next/head"
 import Layout from "../components/main/Layout"
 import React from "react"
 import { ThemeProvider } from "styled-components"
+import fetch from "isomorphic-unfetch"
 import storage from "local-storage-fallback"
 
 const SetThemeContext = React.createContext()
@@ -67,6 +68,22 @@ function MyApp({ Component, pageProps, router }) {
       <SetThemeContext.Provider value={{ currentTheme, themeHandle }}>
         <SetUserContext.Provider value={{ user, userHandle, getLocalUser }}>
           <ThemeProvider theme={currentTheme === "light" ? light : dark}>
+            <Head>
+              <meta
+                property="og:description"
+                key="description"
+                content="Web Application for Resource Management and Cost Monitoring in AWS"
+              />
+              <meta property="og:title" content="AWS Portal" />
+              <meta property="og:image" key="image" content="https://aws-portal.vercel.app/img_meta.jpg" />
+              <meta property="og:image:type" content="image/jpg" />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="630" />
+              <meta name="twitter:title" content="AWS Portal" />
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:image" content="https://aws-portal.vercel.app/img_meta.jpg" />
+              <meta name="twitter:description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
+            </Head>
             <GlobalStyle />
             <Layout>
               <Component {...pageProps} />
