@@ -9,7 +9,7 @@ export const chooseHandle = (item, data, setState) => {
   )
 }
 
-export const chooseAllHandle = (data, setState, isSelectAll, setIsSelectAll, includeList = []) => {
+export const chooseAllHandle = (data, setState, isSelectAll, setIsSelectAll, includeList = [], unusedResources = []) => {
   setState(
     data.map((value) => {
       if (includeList.includes(value.resourceType ?? "undefined")) {
