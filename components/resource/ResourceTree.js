@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 
 import BoxLoader from "../loader/BoxLoader"
 import ResourceTable from "../table/ResourceTable"
@@ -7,10 +7,17 @@ import { TableWrapper } from "../../styles/styleComponents"
 import { autoTagFormatter } from "../../hooks/useFormat"
 import dayjs from "dayjs"
 import { useFetch } from "../../hooks/useFetch"
+import { SetUserContext } from '../../pages/_app'
 
 const ResourceTree = () => {
-  const { loading, data } = useFetch("/api/used", () => {}, false)
+  const [used, setUsed] = useState([])
   const [unUsed, setUnUsed] = useState([])
+  const { loading, data } = useFetch("/api/used", () => {}, false)
+  const { user, getLocalUser } = useContext(SetUserContext)
+
+  const mapFilterData = (json) => {
+
+  }
 
   useEffect(() => {
     if (data.length !== 0) {
@@ -25,7 +32,22 @@ const ResourceTree = () => {
           }
         })
       })
-      setUnUsed(data.unusedResources)
+      console.log(data.usedResources)
+      if (!user.user.isAdmin){
+        const usedResources = data.usedResources.filter((value) => {
+          let isOwner = value.Tags.some(tag => tag.Value === user.user.username)
+          return isOwner > 0
+        })
+        const unusedResources = data.unusedResources.filter((value) => {
+          return value.owner === user.user.username
+        })
+        setUsed(usedResources)
+        setUnUsed(unusedResources)
+      }
+      else{
+        setUsed(data.usedResources)
+        setUnUsed(data.unusedResources)
+      }
     }
   }, [data])
 
@@ -43,7 +65,7 @@ const ResourceTree = () => {
             <h2 className="text-2xl whitespace-nowrap mr-3">Used Resources</h2>
             <div className="w-full h-[2px] dynamic-bg-invert"></div>
           </div>
-          {(data.usedResources ?? []).map((item) => (
+          {(used ?? []).map((item) => (
             <div className="mb-12" key={item.resourceId}>
               <ResourceTreeItems item={item} />
             </div>
