@@ -16,8 +16,8 @@ const generalSort = (a, b, key) => {
   const valueA = a[key] ?? "unknow"
   const valueB = b[key] ?? "unknow"
   if (key === "owner") {
-    const validA = valueA === "-" ? "unknow" : a[key].toLowerCase()
-    const validB = valueB === "-" ? "unknow" : b[key].toLowerCase()
+    const validA = valueA === "-" ? "unknow" : valueA.toLowerCase()
+    const validB = valueB === "-" ? "unknow" : valueB.toLowerCase()
     return validA > validB ? 1 : validB > validA ? -1 : 0
   }
   if (key === "createdAt") {
