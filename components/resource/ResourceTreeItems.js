@@ -42,11 +42,11 @@ const ResourceTreeItems = ({ item }) => {
               {value.resourceType}
             </div>
           ))}
-          {!item.children && (
+          {/* {!item.children && (
             <button className={`ml-2 bg-rose-700 p-2 rounded  `}>
               <HiOutlineTrash size="1.75rem" className="mx-auto text-white" onClick={() => console.log("Asd")} />
             </button>
-          )}
+          )} */}
         </div>
       </motion.div>
       <AnimatePresence>
