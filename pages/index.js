@@ -2,7 +2,6 @@ import { FaGlobeAmericas, FaUserAlt } from "react-icons/fa"
 import { IoCube, IoSparkles } from "react-icons/io5"
 import { useEffect, useState } from "react"
 
-import Head from "next/head"
 import Image from "../components/main/Image"
 import Link from "next/link"
 import Loader from "../components/loader/Loader"
@@ -76,20 +75,6 @@ const Index = () => {
   ]
   return (
     <>
-      <Head>
-        <title>AWS Portal</title>
-        <meta property="og:description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
-        <meta property="og:title" content="AWS Portal" />
-        <meta property="og:image" content="https://aws-portal.vercel.app/img_meta.jpg" />
-        <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:title" content="AWS Portal" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://aws-portal.vercel.app/img_meta.jpg" />
-        <meta name="twitter:description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      </Head>
       <h1>Dashboard</h1>
       <div className="grid grid-cols-4 gap-8  xl:gap-3 lg:grid-cols-2 mt-6">
         {cardlist.map((value, index) => (
