@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
 
-import Head from "next/head"
 import Logo from "../icon/Logo"
 import Navbar from "./Navbar"
 import { SetUserContext } from "../../pages/_app"
@@ -18,10 +17,6 @@ const Layout = ({ children }) => {
   const isLogin = !user.user._id === "1"
   return (
     <>
-      <Head>
-        <title>AWS Portal</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      </Head>
       <div className="flex">
         <AnimatePresence exitBeforeEnter>
           {!isHidden && isLogin && (

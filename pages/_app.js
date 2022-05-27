@@ -69,11 +69,8 @@ function MyApp({ Component, pageProps, router }) {
         <SetUserContext.Provider value={{ user, userHandle, getLocalUser }}>
           <ThemeProvider theme={currentTheme === "light" ? light : dark}>
             <Head>
-              <meta
-                property="og:description"
-                key="description"
-                content="Web Application for Resource Management and Cost Monitoring in AWS"
-              />
+              <title>AWS Portal</title>
+              <meta property="og:description" key="description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
               <meta property="og:title" content="AWS Portal" />
               <meta property="og:image" key="image" content="https://aws-portal.vercel.app/img_meta.jpg" />
               <meta property="og:image:type" content="image/jpg" />
@@ -83,6 +80,7 @@ function MyApp({ Component, pageProps, router }) {
               <meta name="twitter:card" content="summary_large_image" />
               <meta name="twitter:image" content="https://aws-portal.vercel.app/img_meta.jpg" />
               <meta name="twitter:description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             </Head>
             <GlobalStyle />
             <Layout>
