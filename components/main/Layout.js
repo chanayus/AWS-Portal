@@ -1,17 +1,21 @@
 import { AnimatePresence, motion } from "framer-motion"
 
 import Head from "next/head"
+import Logo from "../icon/Logo"
 import Navbar from "./Navbar"
+import { SetUserContext } from "../../pages/_app"
 import Sidebar from "./Sidebar"
 import styled from "styled-components"
 import tw from "twin.macro"
+import { useContext } from "react"
 import { useRouter } from "next/router"
 
 const Layout = ({ children }) => {
   const router = useRouter()
+  const { user, getLocalUser } = useContext(SetUserContext)
   const excludePath = ["/login", "/_error", "/404"]
   const isHidden = excludePath?.find((value) => value === router.pathname)
-
+  const isLogin = !user.user._id === "1"
   return (
     <>
       <Head>
@@ -20,7 +24,7 @@ const Layout = ({ children }) => {
       </Head>
       <div className="flex">
         <AnimatePresence exitBeforeEnter>
-          {isHidden ? null : (
+          {!isHidden && isLogin && (
             <>
               <Sidebar key="sidebar" />
               <Navbar key="navbar" />
@@ -41,7 +45,39 @@ const Layout = ({ children }) => {
             </motion.div>
           ) : (
             <Content exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.175 }} key={router.pathname}>
-              <div className="relative min-h-full mt-24 pb-24 ">{children}</div>
+              <div className="relative min-h-full mt-24 pb-24 ">
+                {isLogin ? (
+                  children
+                ) : (
+                  <Login className="fixed w-screen h-screen z-[99999] top-0 left-0 ">
+                    <div className="w-full h-full backdrop-blur-md bg-black/60 flex justify-center items-center flex-col">
+                      <motion.div
+                        initial={{ y: 50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.15 }}
+                        className="w-[30rem] md:w-[65%]"
+                      ></motion.div>
+                      <motion.div
+                        initial={{ y: 50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.15 }}
+                        className="w-[30rem] md:w-[65%]"
+                      >
+                        <Logo />
+                      </motion.div>
+                      <motion.button
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                        className="mt-6 dynamic-bg-invert dynamic-text-invert py-3 px-8 rounded font-bold"
+                        onClick={() => router.replace("/login")}
+                      >
+                        เข้าสู่ระบบ
+                      </motion.button>
+                    </div>
+                  </Login>
+                )}
+              </div>
             </Content>
           )}
         </AnimatePresence>
@@ -57,5 +93,11 @@ const Content = styled(motion.div)`
   @media(max-width: 960px) {
     ${tw`mx-0 px-3`}
   }
+`
+
+const Login = styled.div`
+  background-image: url("https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 export default Layout

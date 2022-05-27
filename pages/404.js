@@ -14,7 +14,7 @@ const Page404 = () => {
         </div>
         <p className=" font-[100] text-[1.75rem]">Page Not Found</p>
         <button className="mt-6 dynamic-bg-invert dynamic-text-invert py-4 px-6 rounded" onClick={() => router.replace("/")}>
-          Back to home
+          กลับสู่หน้าหลัก
         </button>
       </div>
     </div>
