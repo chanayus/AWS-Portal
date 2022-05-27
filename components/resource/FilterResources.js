@@ -49,8 +49,8 @@ const Filter = ({ filterData, setFilterData, allData }) => {
 
   // Animation varinats
   const variants = {
-    visible: { opacity: 1 },
-    hidden: { opacity: 0 },
+    visible: { opacity: 1, scale: 1 },
+    hidden: { opacity: 0, scale: 0 },
   }
 
   // Filter Tag Styles
@@ -147,47 +147,53 @@ const Filter = ({ filterData, setFilterData, allData }) => {
         ) : null}
       </AnimatePresence>
 
-      {Object.keys(filterData).map((keyItem) => {
-        return (
-          keyItem !== "searchText" &&
-          filterData[keyItem].map((filterItem, index) => (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={variants}
-              key={index}
-              className={`rounded-md ${FilterTheme[keyItem].bgColor} ${FilterTheme[keyItem].borderColor} border w-max py-1 px-2 mr-2 mb-2 flex justify-between items-center`}
-            >
-              <p className={`${FilterTheme[keyItem].textColor} mr-2`}>{filterItem}</p>
-              <button
-                onClick={() => removeFilter(keyItem, filterItem)}
-                className={`${FilterTheme[keyItem].butonText} ${FilterTheme[keyItem].buttonColor} rounded-full w-4 h-4 flex items-center justify-center`}
+      <AnimatePresence>
+        {Object.keys(filterData).map((keyItem) => {
+          return (
+            keyItem !== "searchText" &&
+            filterData[keyItem].map((filterItem, index) => (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                layout={true}
+                variants={variants}
+                key={index}
+                className={`rounded-md ${FilterTheme[keyItem].bgColor} ${FilterTheme[keyItem].borderColor} border w-max py-1 px-2 mr-2 mb-2 flex justify-between items-center`}
               >
-                <HiOutlineX size="1rem" />
-              </button>
-            </motion.div>
-          ))
-        )
-      })}
-      {(filterData["resource"].length > 0 || filterData["region"].length > 0 || filterData["owner"].length > 0) && (
-        <motion.button
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-          className={`rounded-md w-max py-1 bg-blue-600 border border-blue-400 px-2 mr-2 mb-2 flex justify-between items-center`}
-          onClick={() =>
-            setFilterData({
-              ...filterData,
-              resource: [],
-              region: [],
-              owner: [],
-            })
-          }
-        >
-          <AiOutlineClear size="1.25rem" className="mr-1" />
-          ล้าง
-        </motion.button>
-      )}
+                <p className={`${FilterTheme[keyItem].textColor} mr-2`}>{filterItem}</p>
+                <button
+                  onClick={() => removeFilter(keyItem, filterItem)}
+                  className={`${FilterTheme[keyItem].butonText} ${FilterTheme[keyItem].buttonColor} rounded-full w-4 h-4 flex items-center justify-center`}
+                >
+                  <HiOutlineX size="1rem" />
+                </button>
+              </motion.div>
+            ))
+          )
+        })}
+        {(filterData["resource"].length > 0 || filterData["region"].length > 0 || filterData["owner"].length > 0) && (
+          <motion.button
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            layout={true}
+            variants={variants}
+            className={`rounded-md w-max py-1 bg-blue-600 border border-blue-400 px-2 mr-2 mb-2 flex justify-between items-center`}
+            onClick={() =>
+              setFilterData({
+                ...filterData,
+                resource: [],
+                region: [],
+                owner: [],
+              })
+            }
+          >
+            <AiOutlineClear size="1.25rem" className="mr-1" />
+            ล้าง
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

@@ -104,14 +104,20 @@ const Navbar = () => {
                     <div className="p-4">
                       <h2 className="text-left text-2xl font-bold">การแจ้งเตือน</h2>
                     </div>
-                    {notification.map((item, index) => (
-                      <NotiContent className="dynamic-bg-main h-full" key={index}>
-                        <div className="w-full py-2 px-4">
-                          <p className="text-left font-semibold">{item.description}</p>
-                          <p className="text-left opacity-60 font-light">จาก {item.owner.username}</p>
-                        </div>
-                      </NotiContent>
-                    ))}
+                    <div className="w-full h-full dynamic-bg-main overflow-y-scroll">
+                      {notification.map((item, index) => (
+                        <>
+                          <NotiContent className="flex items-center pr-3 justify-between h-fit " key={index}>
+                            <div className="w-full py-2 px-4">
+                              <p className="text-left font-semibold">{item.description}</p>
+                              <p className="text-left opacity-60 font-light">จาก {item.owner.username}</p>
+                            </div>
+                            <div className="bg-rose-500 w-3 h-3 rounded-full"></div>
+                          </NotiContent>
+
+                        </>
+                      ))}
+                    </div>
                     {notification?.length === 0 && <div className="text-center opacity-60 text-lg mt-2">ไม่มีการแจ้งตือน</div>}
                   </motion.div>
                 )}

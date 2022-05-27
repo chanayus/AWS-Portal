@@ -68,7 +68,7 @@ const Index = () => {
     },
     {
       color: "#778bf0",
-      url: "/resources?display=table",
+      url: "/resources?display=table&sort=latest",
       title: "Resource ใหม่ในวันนี้",
       value: resourcesToday,
       icon: <IoSparkles className="mr-4" />,

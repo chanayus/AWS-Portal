@@ -1,6 +1,6 @@
+import { HiCheck, HiX } from "react-icons/hi"
 import { useEffect, useState } from "react"
 
-import { HiCheck } from "react-icons/hi"
 import Image from "../main/Image"
 import Loader from "../loader/Loader"
 import { deleteResources } from "../../hooks/deleteResources"
@@ -10,25 +10,31 @@ import tw from "twin.macro"
 
 const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resources }) => {
   const [confirmText, setConfirmText] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [confirmData, setConfirmData] = useState([])
+
+  const [loading, setLoading] = useState(false) // กำลังทำการลบอยู่หรือไม่
+  const [error, setError] = useState(false) // การลบทั้งหมด Error หรือไม่
+  const [finished, setFinished] = useState(false) // การลบเสร็จสิ้นหรือยัง
+
+  const [deletedList, setDeleteList] = useState([]) // List resourceARN ที่ลบสำเร็จ
   const [deleteResourcesCount, setDeleteResourcesCount] = useState(0)
 
   const operationCallback = ({ data, status }) => {
-    console.log(deleteResourcesCount)
     if (status === 200) {
-      const confirmResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
-      if (confirmResourcesARN) setConfirmData([...confirmData, ...confirmResourcesARN])
+      const successResourcesARN = data.deleteEC2Resources.success.map((item) => item.resourceARN)
+      successResourcesARN && setDeleteList([...deletedList, ...successResourcesARN])
     }
+    // เงื่อนไงถ้าสั่งลบครบทุก resource แล้วให้ setLoad = false
     if (deleteResourcesCount + 1 >= selectedData.length) {
       setLoading(false)
+      setFinished(true)
+      deleteResourcesCount + 1 >= selectedData.length && deletedList.length === 0 && setError(true)
     }
     setDeleteResourcesCount(deleteResourcesCount + 1)
   }
 
   const removeDisplayResources = () => {
     setModalVisible(false)
-    setResources(resources.filter((item) => !confirmData.includes(item.ResourceARN)))
+    setResources(resources.filter((item) => !deletedList.includes(item.ResourceARN)))
   }
 
   const operationHandle = () => {
@@ -48,7 +54,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
   }, [])
 
   useEffect(() => {
-    if (confirmData.length) {
+    if (finished) {
       const closeModal = setTimeout(() => {
         removeDisplayResources()
       }, 2000)
@@ -56,10 +62,9 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
         clearTimeout(closeModal)
       }
     }
-  }, [confirmData])
+  }, [finished])
 
   useEffect(() => {
-    // console.log(selectedData.slice(deleteResourcesCount, deleteResourcesCount+1))
     if (deleteResourcesCount > 0 && deleteResourcesCount <= selectedData.length) {
       deleteResources(selectedData.slice(deleteResourcesCount, deleteResourcesCount + 1), operationCallback)
     }
@@ -118,14 +123,19 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
                     <p className="max-w-xs"> {value.resourceId}</p>
                     <p className="text-gray-400"> {value.owner}</p>
                   </div>
-                  {loading && !confirmData.includes(value.resourceARN) && (
+                  {loading && !deletedList.includes(value.resourceARN) && (
                     <div className="ml-3">
                       <Loader size={22} />
                     </div>
                   )}
-                  {confirmData.includes(value.ResourceARN) && (
+                  {!loading && deleteResourcesCount > 1 && deletedList.includes(value.ResourceARN) && (
                     <div className="w-6 h-6 p-0 m-0 ml-3 bg-green-600 flex rounded-full justify-center items-center">
                       <HiCheck color="#FFF" size="1.25rem" />
+                    </div>
+                  )}
+                  {!loading && deleteResourcesCount > 1 && !deletedList.includes(value.ResourceARN) && (
+                    <div className="w-6 h-6 p-0 m-0 ml-3 bg-rose-600 flex rounded-full justify-center items-center">
+                      <HiX color="#FFF" size="1.25rem" />
                     </div>
                   )}
                 </div>
@@ -134,7 +144,7 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
           </div>
 
           {/* Footer */}
-          {!loading && confirmData <= 0 && (
+          {!loading && !error && deletedList <= 0 && (
             <div className="p-1">
               <p className="my-2">{`พิมพ์ ${type} เพื่อดำเนินการต่อ`}</p>
               <div className="flex items-center dynamic-bg rounded-md w-full md:w-full  border border-gray-600 border-opacity-40 relative">
@@ -168,12 +178,20 @@ const ConfrimModal = ({ setModalVisible, type, selectedData, setResources, resou
             <p className="mt-2">{modalContent.loadingText}</p>
           </div>
         )}
-        {confirmData.length > 0 && (
+        {!loading && deletedList.length > 0 && (
           <div className=" flex flex-col justify-center items-center">
             <div className="w-11 h-11 p-0 m-0 bg-green-600 flex rounded-full justify-center items-center">
               <HiCheck color="#FFF" size="2rem" />
             </div>
             <p className="mt-2">ลบ resources สำเร็จ</p>
+          </div>
+        )}
+        {!loading && error && deletedList.length === 0 && (
+          <div className=" flex flex-col justify-center items-center">
+            <div className="w-11 h-11 p-0 m-0 bg-rose-600 flex rounded-full justify-center items-center">
+              <HiX color="#FFF" size="2rem" />
+            </div>
+            <p className="mt-2">การลบ resources ล้มเหลว</p>
           </div>
         )}
       </Modal>

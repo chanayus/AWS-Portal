@@ -23,7 +23,8 @@ const ResourceTable = ({ resources, setResources }) => {
   const { loading, data: deleteAble } = useFetch("/api/deleteable", () => {}, false)
 
   const router = useRouter()
-  const { pathname } = router
+  const { pathname, query } = router
+
   const isServicePage = pathname === "/resources/[serviceName]"
   const [isSelectAll, setIsSelectAll] = useState(false)
   const isMobileScreen = useMediaQuery({ query: "(max-width: 640px)" })
@@ -31,10 +32,10 @@ const ResourceTable = ({ resources, setResources }) => {
   const [selectDelete, setSelectDelete] = useState(false)
 
   const defaultSort = {
-    resource: "first",
+    resource: query.sort === "latest" ? "default" : "first",
     region: "default",
     Name: "default",
-    createdAt: "default",
+    createdAt: query.sort === "latest" ? "first" : "default",
     owner: "default",
     resourceId: "default",
   }
@@ -57,11 +58,16 @@ const ResourceTable = ({ resources, setResources }) => {
       first: "last",
       last: "default",
     }
+    console.log(sortData)
     if (nextValue[sortValue] === "default") {
-      setSortData({ ...defaultSort, resource: "first" })
-      setDisplayResources(useSorting([...resources], "resource", "first"))
+      setSortData(query.sort === "latest" ? { ...defaultSort, createdAt: "first" } : { ...defaultSort, resource: "first" })
+      setDisplayResources(useSorting([...resources], query.sort === "latest" ? "createAt" : "resource", "first"))
     } else {
-      setSortData({ ...defaultSort, resource: "default", [sortKey]: nextValue[sortValue] })
+      setSortData(
+        query.sort === "latest"
+          ? { ...defaultSort, createdAt: "default", [sortKey]: nextValue[sortValue] }
+          : { ...defaultSort, resource: "default", [sortKey]: nextValue[sortValue] }
+      )
       setDisplayResources(useSorting([...resources], sortKey, nextValue[sortValue]))
     }
     forceUpdate()
