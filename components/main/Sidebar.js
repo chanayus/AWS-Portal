@@ -50,7 +50,7 @@ const Sidebar = () => {
               <p className="2xl:hidden">ค่าใช้จ่าย</p>
             </a>
           </Link>
-          <Link href="/login" scroll={false}>
+          <Link href="/api/logout" scroll={false}>
             <a aria-label="signout">
               <HiOutlineLogout />
               <p className="2xl:hidden">ออกจากระบบ</p>
