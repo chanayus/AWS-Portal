@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
 
-import Head from "next/head"
 import Logo from "../icon/Logo"
 import Navbar from "./Navbar"
 import { SetUserContext } from "../../pages/_app"
@@ -18,21 +17,6 @@ const Layout = ({ children }) => {
   const isLogin = !user.user._id === "1"
   return (
     <>
-      <Head>
-        <title>AWS Portal</title>
-        <meta property="og:description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
-        <meta property="og:title" content="AWS Portal" />
-        <meta property="og:image" content="https://aws-portal.vercel.app/img_meta.jpg" />
-        <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:title" content="AWS Portal" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://aws-portal.vercel.app/img_meta.jpg" />
-        <meta name="twitter:description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      </Head>
-
       <div className="flex">
         <AnimatePresence exitBeforeEnter>
           {!isHidden && isLogin && (
