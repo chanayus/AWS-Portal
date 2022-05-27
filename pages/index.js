@@ -33,7 +33,7 @@ const Index = () => {
 
   useEffect(() => {
     if (user.user._id === "1") {
-      router.replace("/login", "/", { shallow: false, scroll: false })
+      router.replace("/login", "/", { shallow: true, scroll: false })
     }
   }, [])
 
