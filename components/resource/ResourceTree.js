@@ -10,9 +10,9 @@ import { useFetch } from "../../hooks/useFetch"
 import { SetUserContext } from '../../pages/_app'
 
 const ResourceTree = () => {
+  const { loading, data } = useFetch("/api/used", () => {}, false)
   const [used, setUsed] = useState([])
   const [unUsed, setUnUsed] = useState([])
-  const { loading, data } = useFetch("/api/used", () => {}, false)
   const { user, getLocalUser } = useContext(SetUserContext)
 
   const mapFilterData = (json) => {
