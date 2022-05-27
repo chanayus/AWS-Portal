@@ -7,6 +7,7 @@ export const TableWrapper = styled(motion.div)`
     ${tw`p-6 rounded-md md:flex-none md:w-full md:px-4 md:p-5 duration-100`}
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
   /* border: 1px solid rgba(95, 95, 95, 0.35); */
+  ${tw`shadow-sm`}
   border-bottom: none;
 `
 

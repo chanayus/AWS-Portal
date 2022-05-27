@@ -59,9 +59,9 @@ const Navbar = () => {
       <Menu>
         <div className="flex items-center">
           {!["1", "2"].includes(user.user._id) && (
-            <div className="flex items-center md:hidden dynamic-bg py-1 px-4 rounded-md">
+            <div className="flex items-center md:hidden dynamic-bg py-1 px-4 rounded-md shadow">
               <div className="2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-700 to-blue-500 rounded-full text-gray-500 w-8 h-8 relative">
-                <h2 className="text-center text-xl">{user.user.username.charAt(0)}</h2>
+                <h2 className="text-center text-white text-xl">{user.user.username.charAt(0)}</h2>
               </div>
               <div className="truncate">
                 <p className="ml-2 w-fit text-white leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
