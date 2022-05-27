@@ -60,8 +60,8 @@ const Navbar = () => {
         <div className="flex items-center">
           {!["1", "2"].includes(user.user._id) && (
             <div className="flex items-center md:hidden dynamic-bg py-1 px-4 rounded-md">
-              <div className="2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-500 to-blue-400 rounded-full text-gray-500 w-8 h-8 flex justify-center items-center">
-                <HiUser size="1.5rem" color="#FFF" />
+              <div className="2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-700 to-blue-500 rounded-full text-gray-500 w-8 h-8 relative">
+                <h2 className="text-center text-xl">{user.user.username.charAt(0)}</h2>
               </div>
               <div className="truncate">
                 <p className="ml-2 w-fit text-white leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
@@ -90,7 +90,13 @@ const Navbar = () => {
             <div className="relative  flex items-center">
               <button className="notification-button" aria-label="notofication-button" onClick={() => setShowNoti(!showNoti)}>
                 <Bell size="1.75rem" fillBell={`${showNoti ? "transparent" : ""}`} />
-                {notification?.length > 0 && <div className="notification-badge"></div>}
+                {notification?.length > 0 && (
+                  <motion.div
+                    animate={{ scale: [1, 0.75, 1] }}
+                    transition={{ scale: { repeat: Infinity, repeatType: "reverse", duration: 2.5 } }}
+                    className="notification-badge"
+                  ></motion.div>
+                )}
               </button>
               <AnimatePresence>
                 {showNoti && (
@@ -107,14 +113,13 @@ const Navbar = () => {
                     <div className="w-full h-full dynamic-bg-main overflow-y-scroll">
                       {notification.map((item, index) => (
                         <>
-                          <NotiContent className="flex items-center pr-3 justify-between h-fit " key={index}>
+                          <NotiContent className="flex items-center pr-3 justify-between h-fit" key={index}>
                             <div className="w-full py-2 px-4">
                               <p className="text-left font-semibold">{item.description}</p>
                               <p className="text-left opacity-60 font-light">จาก {item.owner.username}</p>
                             </div>
                             <div className="bg-rose-500 w-3 h-3 rounded-full"></div>
                           </NotiContent>
-
                         </>
                       ))}
                     </div>

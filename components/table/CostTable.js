@@ -131,7 +131,9 @@ const CostTable = ({ data, title = "" }) => {
                 <tr
                   key={index}
                   className="cursor-pointer"
-                  onClick={() => router.push({ pathname: `/cost/detail/[resourceId]`, query: { resourceId: item.resourceId } }, undefined, { scroll: false })}
+                  onClick={() =>
+                    router.push({ pathname: `/cost/detail/[resourceId]`, query: { resourceId: item.resourceId } }, undefined, { scroll: false })
+                  }
                 >
                   <td className="sm:hidden w-[1%] ">
                     <div className="flex items-center">
@@ -148,7 +150,9 @@ const CostTable = ({ data, title = "" }) => {
                   <td className="sm:hidden max-w-[25ch] truncate">
                     <p className="truncate">{item.resourceId.split(":").slice(-1)[0].split("/").slice(-1)[0]}</p>
                   </td>
-                  <td className="sm:hidden">{`${item.netCost.toFixed(4)} USD`}</td>
+                  <td className="sm:hidden">{`${
+                    item.netCost.toFixed(4) < 0.0001 && item.netCost.toFixed(4) !== 0 && "< "
+                  }${item.netCost.toFixed(4)} USD`}</td>
                   <td className="sm:hidden">{item.region ?? "-"}</td>
                   <td className="sm:hidden">{item.owner ?? "-"}</td>
 

@@ -40,6 +40,7 @@ const CostCard = ({ title, totalResource, totalPrice, type, index }) => {
         <div className="flex justify-between items-center w-full">
           <h1 className={`service-name truncate max-w-[13ch]`}>{titleFormatted ?? "ไม่มีการระบุ"}</h1>
           <h1 className="font-light text-2xl">
+            {totalPrice < 0.01 && totalPrice !== 0 && "< "}
             {totalPrice.toFixed(2)}
             <span className="ml-1 text-lg">USD</span>{" "}
           </h1>
