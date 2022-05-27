@@ -70,9 +70,9 @@ function MyApp({ Component, pageProps, router }) {
           <ThemeProvider theme={currentTheme === "light" ? light : dark}>
             <Head>
               <title>AWS Portal</title>
-              <meta property="og:description" key="description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
+              <meta property="og:description" content="Web Application for Resource Management and Cost Monitoring in AWS" />
               <meta property="og:title" content="AWS Portal" />
-              <meta property="og:image" key="image" content="https://aws-portal.vercel.app/img_meta.jpg" />
+              <meta property="og:image" content="https://aws-portal.vercel.app/img_meta.jpg" />
               <meta property="og:image:type" content="image/jpg" />
               <meta property="og:image:width" content="1200" />
               <meta property="og:image:height" content="630" />
