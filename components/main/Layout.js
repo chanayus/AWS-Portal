@@ -14,7 +14,8 @@ const Layout = ({ children }) => {
   const { user, getLocalUser } = useContext(SetUserContext)
   const excludePath = ["/login", "/_error", "/404"]
   const isHidden = excludePath?.find((value) => value === router.pathname)
-  const isLogin = !user.user._id === "1"
+  const isLogin = !["1", "2"].includes(user.user._id) && user.user._id
+  console.log(user.user._id)
   return (
     <>
       <div className="flex">
