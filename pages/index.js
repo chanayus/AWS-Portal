@@ -1,11 +1,12 @@
 import { FaGlobeAmericas, FaUserAlt } from "react-icons/fa"
 import { IoCube, IoSparkles } from "react-icons/io5"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import Image from "../components/main/Image"
 import Link from "next/link"
 import Loader from "../components/loader/Loader"
 import { RiMoneyDollarCircleFill } from "react-icons/ri"
+import { SetUserContext } from "./_app"
 import SkeletonTable from "../components/loader/SkeletonTable"
 import { TableWrapper } from "../styles/styleComponents"
 import dayjs from "dayjs"
@@ -18,6 +19,7 @@ import { useFormat } from "../hooks/useFormat"
 import { useRouter } from "next/router"
 
 const Index = () => {
+  const { user, getLocalUser } = useContext(SetUserContext)
   const { loading, data: resources } = useFetch("/api/resources", () => {}, false)
   const { loading: costLoading, data: cost } = useFetch("/api/get_cost", () => {}, false)
   const [dataFormatted, setDataFormatted] = useState([])
@@ -28,6 +30,12 @@ const Index = () => {
   useEffect(() => {
     loading ? null : setDataFormatted(useFormat(resources))
   }, [loading])
+
+  useEffect(() => {
+    if (user.user._id === "1") {
+      router.replace("/login", "/", { shallow: false, scroll: false })
+    }
+  }, [])
 
   useEffect(() => {
     setTotalPrice(

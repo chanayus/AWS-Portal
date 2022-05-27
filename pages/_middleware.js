@@ -14,6 +14,8 @@ export const middleware = (req, res) => {
           return NextResponse.next()
       else if (req.nextUrl.pathname.includes('.jpg'))
           return NextResponse.next()
+      else  if (req.nextUrl.pathname === '/')
+          return NextResponse.next()
       else
           return NextResponse.redirect(`${req.nextUrl.origin}/login`)
   }

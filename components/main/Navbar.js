@@ -17,9 +17,14 @@ const Navbar = () => {
   const { user, getLocalUser } = useContext(SetUserContext)
 
   useEffect(async () => {
-    const response = await fetch("/api/get_notification")
-    const data = await response.json()
-    setNotification(data.notification)
+    if (user.user._id !== "1" && router.pathname !== "/login") {
+      const response = await fetch("/api/get_notification")
+      const data = await response.json()
+      setNotification(data.notification)
+      console.log(router);
+    }
+
+    return () => setNotification(undefined)
   }, [router])
 
   // useEffect(() => {
