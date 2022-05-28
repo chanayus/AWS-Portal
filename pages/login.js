@@ -67,7 +67,7 @@ const Login = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <Container>
+      <Container onKeyDown={(e) => e.key === "Enter" && loginHandler()}>
         <FlexBox>
           <LogoWrapper>
             <Logo />

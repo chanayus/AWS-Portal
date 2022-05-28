@@ -59,12 +59,12 @@ const Navbar = () => {
       <Menu>
         <div className="flex items-center">
           {!["1", "2"].includes(user.user._id) && (
-            <div className="flex items-center md:hidden dynamic-bg py-1 px-4 rounded-md shadow">
+            <div className="flex items-center  dynamic-bg py-1 px-4 rounded-md shadow md:shadow-none md:px-1">
               <div className="2xl:mx-auto bg-gradient-to-r flex-shrink-0 from-blue-700 to-blue-500 rounded-full text-gray-500 w-8 h-8 relative">
                 <h2 className="text-center text-white text-xl">{user.user.username.charAt(0)}</h2>
               </div>
-              <div className="truncate">
-                <p className="ml-2 w-fit text-white leading-5 text-sm truncate dynamic-text">{user.user.username}</p>
+              <div className="truncate sm:hidden">
+                <p className="ml-2 w-fit text-white leading-5 text-sm truncate dynamic-text ">{user.user.username}</p>
                 <p className="ml-2 w-fit text-gray-400 ">{user.user.isAdmin ? "Admin" : "Student"}</p>
               </div>
             </div>
@@ -151,7 +151,7 @@ const Container = styled(motion.div)`
 `
 
 const Menu = styled.div`
-  ${tw`flex items-center w-full justify-end`}
+  ${tw`flex items-center w-full justify-end md:pl-0`}
   padding-left: clamp(85px, 11.5vw, 260px);
 
   .notification-button {
