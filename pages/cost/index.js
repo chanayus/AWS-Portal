@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 import Breadcrumb from "../../components/main/Breadcrumb"
 import CardSection from "../../layout/cost/CardSection"
+import { HiOutlineExclamationCircle } from "react-icons/hi"
 import PageLoader from "../../components/loader/PageLoader"
 import TableSection from "../../layout/cost/TableSection"
 import { motion } from "framer-motion"
@@ -15,7 +16,7 @@ const Cost = () => {
   const [cost, setCost] = useState([])
   const { display } = router.query
   const [displayType, setDisplayType] = useState(display ?? "card")
-  const { loading, data } = useFetch("/api/get_cost", () => {}, false)
+  const { loading, data, error } = useFetch("/api/get_cost", () => {}, false)
 
   useEffect(() => {
     if (data.netResourcesCost) {
@@ -55,6 +56,12 @@ const Cost = () => {
           <CardSection cost={cost} setDisplayType={setDisplayType} />
         ) : (
           <TableSection cost={cost} setDisplayType={setDisplayType} />
+        )}
+        {error && (
+          <div className="flex flex-col justify-center items-center w-full dynamic-text mt-10">
+            <HiOutlineExclamationCircle size="4rem" />
+            <p className="text-xl font-[300]">ไม่พบข้อมูล</p>
+          </div>
         )}
       </motion.div>
     )

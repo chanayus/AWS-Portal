@@ -1,0 +1,1087 @@
+{
+  "PaginationToken": {
+    "us_east_1": "test",
+    "ap_southeast_1": "test"
+  },
+  "us_east_1": [
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:network-insights-path/nip-08c0aa3c5ff53d604",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "SSH ECS Instances"
+        }
+      ],
+      "resourceId": "nip-08c0aa3c5ff53d604",
+      "resourceType": "network-insights-path"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:instance/i-0e9ad06003d68c488",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "aws:autoscaling:groupName",
+          "Value": "production_auto_scaling_group"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T10:51:20Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "i-0e9ad06003d68c488",
+      "resourceType": "instance"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:instance/i-0cc978499714a5ccd",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "aws:autoscaling:groupName",
+          "Value": "backend-test_asg"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "i-0cc978499714a5ccd",
+      "resourceType": "instance"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:instance/i-0a46e71476fcdaab3",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "aws:autoscaling:groupName",
+          "Value": "backend-test_asg"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "i-0a46e71476fcdaab3",
+      "resourceType": "instance"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:instance/i-0253f3fd1774d2b2e",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "aws:autoscaling:groupName",
+          "Value": "backend-test_asg"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "i-0253f3fd1774d2b2e",
+      "resourceType": "instance"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:instance/i-00b8a841234ed571d",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "aws:autoscaling:groupName",
+          "Value": "production_auto_scaling_group"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T10:51:20Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "i-00b8a841234ed571d",
+      "resourceType": "instance"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:instance/i-025f93f30140ce8b0",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "aws:autoscaling:groupName",
+          "Value": "backend-test_asg"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "i-025f93f30140ce8b0",
+      "resourceType": "instance"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:snapshot/snap-01b0b7a2f09a31948",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-frontend"
+        }
+      ],
+      "resourceId": "snap-01b0b7a2f09a31948",
+      "resourceType": "snapshot"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:snapshot/snap-01a9c5cc2d381c54a",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-backend"
+        }
+      ],
+      "resourceId": "snap-01a9c5cc2d381c54a",
+      "resourceType": "snapshot"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:key-pair/key-05d517d06fd4a0f53",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_proj2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:17:41Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2OBV4XQ35J"
+        }
+      ],
+      "resourceId": "key-05d517d06fd4a0f53",
+      "resourceType": "key-pair"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:elastic-ip/eipalloc-03f30e24ec3ee9f54",
+      "Tags": [],
+      "resourceId": "eipalloc-03f30e24ec3ee9f54",
+      "resourceType": "elastic-ip"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:elastic-ip/eipalloc-01fd70e74741c6fab",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-03-17T04:31:44Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "eipalloc-01fd70e74741c6fab",
+      "resourceType": "elastic-ip"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:elastic-ip/eipalloc-01b35f270cdce3d60",
+      "Tags": [],
+      "resourceId": "eipalloc-01b35f270cdce3d60",
+      "resourceType": "elastic-ip"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:elastic-ip/eipalloc-0da6fc897d07b86a9",
+      "Tags": [],
+      "resourceId": "eipalloc-0da6fc897d07b86a9",
+      "resourceType": "elastic-ip"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:volume/vol-0ad48df61f2df5300",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "vol-0ad48df61f2df5300",
+      "resourceType": "volume"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:volume/vol-093498edcb6e20751",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T10:51:20Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "vol-093498edcb6e20751",
+      "resourceType": "volume"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:volume/vol-0c9aacfa84c84fdfd",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "vol-0c9aacfa84c84fdfd",
+      "resourceType": "volume"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:network-interface/eni-01d1b57fb668e02d0",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "eni-01d1b57fb668e02d0",
+      "resourceType": "network-interface"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:network-interface/eni-0e2e462e58a62d53f",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "eni-0e2e462e58a62d53f",
+      "resourceType": "network-interface"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:network-interface/eni-0d72220bc4124b8a4",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T10:51:20Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "eni-0d72220bc4124b8a4",
+      "resourceType": "network-interface"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:network-interface/eni-015e6d0d79ec60233",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T10:51:20Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "eni-015e6d0d79ec60233",
+      "resourceType": "network-interface"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:network-interface/eni-0e4cb374cd281953a",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "eni-0e4cb374cd281953a",
+      "resourceType": "network-interface"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:network-interface/eni-0e4b27c9a536e572a",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:21:55Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        }
+      ],
+      "resourceId": "eni-0e4b27c9a536e572a",
+      "resourceType": "network-interface"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:natgateway/nat-0840d7405e2948a7c",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "etl_developer_01"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-30T09:35:49Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2GQOBJFHM6"
+        },
+        {
+          "Key": "Name",
+          "Value": "etl-nat"
+        }
+      ],
+      "resourceId": "nat-0840d7405e2948a7c",
+      "resourceType": "natgateway"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:natgateway/nat-0765a4d1e927842f0",
+      "Tags": [],
+      "resourceId": "nat-0765a4d1e927842f0",
+      "resourceType": "natgateway"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:natgateway/nat-037224cc58aa04887",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-nat-gw"
+        }
+      ],
+      "resourceId": "nat-037224cc58aa04887",
+      "resourceType": "natgateway"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:security-group/sg-0aa2469792fb4ab99",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-vpc-default-sg"
+        }
+      ],
+      "resourceId": "sg-0aa2469792fb4ab99",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:security-group/sg-0f981ea37c3ea218c",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-vpc-default-sg"
+        }
+      ],
+      "resourceId": "sg-0f981ea37c3ea218c",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:security-group/sg-07f10838bed9112c3",
+      "Tags": [],
+      "resourceId": "sg-07f10838bed9112c3",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:security-group/sg-02d1e0855850b1544",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-vpc-default-sg"
+        }
+      ],
+      "resourceId": "sg-02d1e0855850b1544",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:security-group/sg-07fcb8be9c9583b15",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-vpc-default-sg"
+        }
+      ],
+      "resourceId": "sg-07fcb8be9c9583b15",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:security-group/sg-07c619dc04073418e",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-vpc-default-sg"
+        }
+      ],
+      "resourceId": "sg-07c619dc04073418e",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:internet-gateway/igw-06b013986d8ee0437",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "policy-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-11-11T04:03:11Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2A7V2ES3JO"
+        }
+      ],
+      "resourceId": "igw-06b013986d8ee0437",
+      "resourceType": "internet-gateway"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:internet-gateway/igw-072ee76c7f6c8cad0",
+      "Tags": [],
+      "resourceId": "igw-072ee76c7f6c8cad0",
+      "resourceType": "internet-gateway"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:internet-gateway/igw-0511f134d0a683e2b",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-igw"
+        }
+      ],
+      "resourceId": "igw-0511f134d0a683e2b",
+      "resourceType": "internet-gateway"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:subnet/subnet-03d14f384ef4150af",
+      "Tags": [],
+      "resourceId": "subnet-03d14f384ef4150af",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:subnet/subnet-0c8494bd96a5a794a",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-private-subnet-2"
+        }
+      ],
+      "resourceId": "subnet-0c8494bd96a5a794a",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:subnet/subnet-09f8f11b994739165",
+      "Tags": [],
+      "resourceId": "subnet-09f8f11b994739165",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:subnet/subnet-026fa3c45ecae732e",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-private-subnet-1"
+        }
+      ],
+      "resourceId": "subnet-026fa3c45ecae732e",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:subnet/subnet-0bf2900a165a43a4e",
+      "Tags": [],
+      "resourceId": "subnet-0bf2900a165a43a4e",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:subnet/subnet-0ac72ee0a9b6d83b8",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-public-subnet-1"
+        }
+      ],
+      "resourceId": "subnet-0ac72ee0a9b6d83b8",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:subnet/subnet-02ed7d08e7bfe9bad",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-public-subnet-2"
+        }
+      ],
+      "resourceId": "subnet-02ed7d08e7bfe9bad",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:route-table/rtb-0b6045395bd0abe60",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "policy-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-11-11T04:03:09Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2A7V2ES3JO"
+        }
+      ],
+      "resourceId": "rtb-0b6045395bd0abe60",
+      "resourceType": "route-table"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:route-table/rtb-0abc9928493cb6909",
+      "Tags": [],
+      "resourceId": "rtb-0abc9928493cb6909",
+      "resourceType": "route-table"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:route-table/rtb-05fd5d246edca6ab5",
+      "Tags": [],
+      "resourceId": "rtb-05fd5d246edca6ab5",
+      "resourceType": "route-table"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:route-table/rtb-0ae56a928401bb759",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-public-route-table"
+        }
+      ],
+      "resourceId": "rtb-0ae56a928401bb759",
+      "resourceType": "route-table"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:route-table/rtb-0e5d6f2555844ee46",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-private-route-table"
+        }
+      ],
+      "resourceId": "rtb-0e5d6f2555844ee46",
+      "resourceType": "route-table"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:vpc/vpc-03bb37b2da9dd9515",
+      "Tags": [],
+      "resourceId": "vpc-03bb37b2da9dd9515",
+      "resourceType": "vpc"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:vpc/vpc-0988445af7fc08d0d",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "etl-vpc"
+        }
+      ],
+      "resourceId": "vpc-0988445af7fc08d0d",
+      "resourceType": "vpc"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:us-east-1:443907866868:vpc/vpc-0556876e539a4c145",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "default"
+        }
+      ],
+      "resourceId": "vpc-0556876e539a4c145",
+      "resourceType": "vpc"
+    }
+  ],
+  "ap_southeast_1": [
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:instance/i-0a6ad01d90def7875",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "Ubuntu_Pkt_test"
+        }
+      ],
+      "resourceId": "i-0a6ad01d90def7875",
+      "resourceType": "instance"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:image/ami-03d3fdac2e168264c",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-12-19T17:59:13Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "ami-03d3fdac2e168264c",
+      "resourceType": "image"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:image/ami-0995c54b991a25455",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-01-25T10:48:32Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "ami-0995c54b991a25455",
+      "resourceType": "image"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:image/ami-04449b92730b1628b",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-11-07T10:51:23Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "ami-04449b92730b1628b",
+      "resourceType": "image"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:key-pair/key-0d7c1bf580d9f06f4",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-12-10T09:35:05Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "key-0d7c1bf580d9f06f4",
+      "resourceType": "key-pair"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:key-pair/key-055dc931fa73b516a",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "lapas"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-01-07T08:40:59Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NECV2P6YW"
+        }
+      ],
+      "resourceId": "key-055dc931fa73b516a",
+      "resourceType": "key-pair"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:key-pair/key-03a30ba05def8c252",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-12-10T09:34:54Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "key-03a30ba05def8c252",
+      "resourceType": "key-pair"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:volume/vol-043a657d07c496087",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "Ubuntu_Pkt_test"
+        }
+      ],
+      "resourceId": "vol-043a657d07c496087",
+      "resourceType": "volume"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:network-interface/eni-09f0613c72686e02e",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "Ubuntu_Pkt_test"
+        }
+      ],
+      "resourceId": "eni-09f0613c72686e02e",
+      "resourceType": "network-interface"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:security-group/sg-0ca8cb5bfb22e49b1",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-11-07T10:55:34Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "sg-0ca8cb5bfb22e49b1",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:security-group/sg-0d2f89fb4725ebb8c",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-11-07T10:02:24Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "sg-0d2f89fb4725ebb8c",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:security-group/sg-0751fcfc7f5fdc30d",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-01-19T17:52:42Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        }
+      ],
+      "resourceId": "sg-0751fcfc7f5fdc30d",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:security-group/sg-00d284c2d0bfecc0f",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2021-12-19T18:22:58Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "public- instance"
+        }
+      ],
+      "resourceId": "sg-00d284c2d0bfecc0f",
+      "resourceType": "security-group"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:internet-gateway/igw-06d1968eb96669ce4",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "rep-igw"
+        }
+      ],
+      "resourceId": "igw-06d1968eb96669ce4",
+      "resourceType": "internet-gateway"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:subnet/subnet-0a1e40773e0446455",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-05-19T15:29:31Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "test1-public-subnet"
+        }
+      ],
+      "resourceId": "subnet-0a1e40773e0446455",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:subnet/subnet-0576300afce8638ea",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "rep-public-subnet"
+        }
+      ],
+      "resourceId": "subnet-0576300afce8638ea",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:subnet/subnet-021849869efb6b62a",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-26T07:48:17Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "private-subnet"
+        }
+      ],
+      "resourceId": "subnet-021849869efb6b62a",
+      "resourceType": "subnet"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:network-acl/acl-0c009e8721c4cea0f",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-25T04:16:38Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "test1"
+        }
+      ],
+      "resourceId": "acl-0c009e8721c4cea0f",
+      "resourceType": "network-acl"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:route-table/rtb-04c5abe12819794a2",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-04-25T04:14:19Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "private-route"
+        }
+      ],
+      "resourceId": "rtb-04c5abe12819794a2",
+      "resourceType": "route-table"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:vpc/vpc-0849cdb48097c8a23",
+      "Tags": [
+        {
+          "Key": "cie2021",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "createdAt",
+          "Value": "2022-05-19T08:24:37Z"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "test1"
+        }
+      ],
+      "resourceId": "vpc-0849cdb48097c8a23",
+      "resourceType": "vpc"
+    },
+    {
+      "ResourceARN": "arn:aws:ec2:ap-southeast-1:443907866868:vpc/vpc-0cb9b356304a0d0bd",
+      "Tags": [
+        {
+          "Key": "owner",
+          "Value": "resource-project2021"
+        },
+        {
+          "Key": "PrincipalId",
+          "Value": "AIDAWOWXYQD2NMB3AT7MV"
+        },
+        {
+          "Key": "Name",
+          "Value": "resource-project-vpc"
+        }
+      ],
+      "resourceId": "vpc-0cb9b356304a0d0bd",
+      "resourceType": "vpc"
+    }
+  ]
+}

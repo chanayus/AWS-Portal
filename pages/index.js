@@ -98,7 +98,9 @@ const Index = () => {
               <div>
                 <h2>จำนวนค่าใช้จ่าย</h2>
                 <h1>
-                  {costLoading ? <Loader /> : totalPrice} {!costLoading && <span className="text-2xl opacity-70">USD</span>}
+                  {costLoading ? <Loader /> : totalPrice}
+                  {!totalPrice && "- "}
+                  {!costLoading && <span className="text-2xl opacity-70">USD</span>}
                 </h1>
               </div>
             </DataCard>
