@@ -18,7 +18,7 @@ import { useFormat } from "../hooks/useFormat"
 import { useRouter } from "next/router"
 
 const Index = () => {
-  const { loading, data: resources } = useFetch("/api/resources", () => {}, false)
+  const { loading, data: resources, error } = useFetch("/api/resources", () => {}, false)
   const { loading: costLoading, data: cost } = useFetch("/api/get_cost", () => {}, false)
   const [dataFormatted, setDataFormatted] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
@@ -99,7 +99,7 @@ const Index = () => {
                 <h2>จำนวนค่าใช้จ่าย</h2>
                 <h1>
                   {costLoading ? <Loader /> : totalPrice}
-                  {!totalPrice && "- "}
+                  {error && "- "}
                   {!costLoading && <span className="text-2xl opacity-70">USD</span>}
                 </h1>
               </div>
